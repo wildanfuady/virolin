@@ -170,13 +170,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ url('reports/trafik') }}" class="nav-link">
+                  <a href="{{ url('report/trafik') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Trafik</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('reports/share') }}" class="nav-link">
+                  <a href="{{ url('report/share') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Share</p>
                   </a>

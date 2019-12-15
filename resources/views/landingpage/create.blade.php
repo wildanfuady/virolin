@@ -99,9 +99,7 @@
                   <div class="tab-pane" id="tab_2">
                     <div class="row">
                       <div class="col-md-12">
-                      {{ Form::label('lp_header_title', 'Layout') }}
-                          <br>
-                        <div class="row">
+                        <!-- <div class="row">
                           <div class="col-md-2 mb-3">
                               <div class="icheck-success d-inline">
                                   {{ Form::radio('lp_header_layout', 1, false, ['id' => 'radioSuccess1']) }}
@@ -118,6 +116,13 @@
                                   </label>
                               </div>
                           </div>
+                        </div> -->
+
+                        <div class="form-group">
+
+                          {{ Form::label('lp_header_image', 'Background') }}
+                          {{ Form::file('lp_header_image', ['class' => 'form-control']) }}
+                        
                         </div>
 
                         <div class="form-group">
@@ -138,7 +143,17 @@
                     </div>
                   </div>
                   <div class="tab-pane" id="tab_3">
-                    Halaman Gambar / Video
+
+                    <div class="form-group">
+                      {{ Form::label('lp_image_video_primary', 'Image / Video Primary') }}
+                      {{ Form::file('lp_image_video_primary', ['class' => 'form-control']) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('lp_image_paralax', 'Image Paralax') }}
+                      {{ Form::file('lp_image_paralax', ['class' => 'form-control']) }}
+                    </div>
+                    
                   </div>
                   <div class="tab-pane" id="tab_4">
                   
