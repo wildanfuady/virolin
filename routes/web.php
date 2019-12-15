@@ -18,6 +18,7 @@ Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
 
+    Route::get('/dashboard', 'DashboardController@dashboard');
     Route::get('/home', 'DashboardController@index');
     
     // Module Customer Admin
@@ -79,6 +80,14 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('landingpage/create-step-3','LandingpageController@create_step_3');
     Route::post('landingpage/act-create-step-3','LandingpageController@act_create_step_3');
+
+    Route::resource('reports','ReportController');
+    Route::get('report/trafik','ReportController@trafik');
+    Route::get('report/share','ReportController@share');
+    Route::get('report/destroy/{id}','ReportController@destroy');
+
+    Route::resource('testimonials','TestimonialController');
+    Route::get('testimonial/destroy/{id}','TestimonialController@destroy');
 
     Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
     Route::resource('/usersubscribers','User\SubscribersController');

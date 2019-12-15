@@ -19,6 +19,26 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard.home');
+        $user_id = Auth::user()->id;
+
+        $data['total_subscribers'] = \App\Subscribers::where('user_id', $user_id)
+            ->count();
+        
+        $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
+            ->join('products', 'products.id', '=', 'users.product_id')
+            ->where('user_id', $user_id)->first();
+
+        $data['total_landingpage'] = \App\Landingpage::where('user_id', $user_id)->count();
+        
+        if (Auth::check() && Auth::user()->level == 'admin') {
+            return $this->dashboard();
+        } else {
+            return view('dashboard.home', $data);
+        }
+    }
+
+    public function dashboard()
+    {
+        return view('dashboard.dashboard');
     }
 }

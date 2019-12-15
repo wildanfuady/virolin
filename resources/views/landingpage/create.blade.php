@@ -141,7 +141,22 @@
                     Halaman Gambar / Video
                   </div>
                   <div class="tab-pane" id="tab_4">
-                    Halaman CTA
+                  
+                    <div class="form-group">
+                      {{ Form::label('cta_title', 'Title') }}
+                      {{ Form::text('cta_title', 'Langsung Saja, Download Sekarang untuk Mendapatkan Ebooknya', ['class' => 'form-control', 'placeholder' => 'Enter CTA title']) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('cta_button_name', 'Name Button') }}
+                      {{ Form::text('cta_button_name', 'Download Sekarang', ['class' => 'form-control', 'placeholder' => 'Enter CTA Button Name']) }}
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('cta_button_link', 'Link Button') }}
+                      {{ Form::text('cta_button_link', 'https://situs-anda.com', ['class' => 'form-control', 'placeholder' => 'Enter CTA Button Link']) }}
+                    </div>
+
                   </div>
                   <div class="tab-pane" id="tab_5">
                     Halaman Page Fold
@@ -150,13 +165,56 @@
                     Halaman Link
                   </div>
                   <div class="tab-pane" id="tab_7">
-                    Halaman Deskripsi
+                    
+                    <div class="form-group">
+                      {{ Form::label('lp_description', 'Description') }}
+                      {{ Form::textarea('lp_description', '<h3 style="text-align: center; "><b>TELAH HADIR</b></h3><p style="text-align: center; ">Ebook <b>SEO Digital </b>merupakan satu-satunya ebook yang mengajarkan ilmu SEO dengan <b>detail, lengkap dan mudah dipraktikkan</b>. Banyak orang yang telah membaca ebook ini dan <b>mendapatkan dampak positif</b> atas kemajuan trafik blog / toko onlinya. Sekarang Giliran Anda!</p>', ['class' => 'form-control', 'placeholder' => 'Enter Description Content', 'id' => 'description']) }}
+                    </div>
+
                   </div>
                   <div class="tab-pane" id="tab_8">
-                    Halaman Testimoni
+                    
+                    <div class="form-group">
+
+                      {{ Form::label('testimoni_1', 'Testimoni 1') }}
+                      {{ Form::select('testimoni_1', $testimoni, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+
+                    </div>
+
+                    <div class="form-group">
+                    
+                      {{ Form::label('testimoni_2', 'Testimoni 2') }}
+                      {{ Form::select('testimoni_2', $testimoni, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+
+                    </div>
+
+                    <div class="form-group">
+                    
+                      {{ Form::label('testimoni_3', 'Testimoni 3') }}
+                      {{ Form::select('testimoni_3', $testimoni, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+
+                    </div>
+
                   </div>
                   <div class="tab-pane" id="tab_9">
-                    Halaman Trust Element
+                    
+                    <div class="form-group">
+                      {{ Form::label('trust_title', 'Trust Title') }}
+                      {{ Form::text('trust_title', 'Ups! Jangan buru-buru download', ['class' => 'form-control', 'placeholder' => 'Enter trust title']) }}
+                    </div>
+
+                    <div class="form-group">
+                      
+                      {{ Form::label('trust_image', 'Image') }}
+                      {{ Form::file('trust_image', ['class' => 'form-control']) }}
+
+                    </div>
+
+                    <div class="form-group">
+                      {{ Form::label('trust_content', 'Content') }}
+                      {{ Form::textarea('trust_content', '<h3><b>Inilah Alasan Mengapa Anda Perlu Download Ebook Ini:</b></h3><ul><li>Ditulis oleh praktisi berpengalaman lebih dari 10 tahun</li><li>Bahasa mudah dipraktikkan dan terbukti menghasilkan</li><li>Tidak dijual di toko manapun</li><li>Dicetak terbatas</li></ul>', ['class' => 'form-control', 'placeholder' => 'Enter trust content', 'id' => 'trust']) }}
+                    </div>
+
                   </div>
                   <!-- /.tab-pane -->
                 </div>
@@ -173,5 +231,17 @@
         </div>
     </div>
 </div>
+
+<script>
+  $(function () {
+    //Add text editor
+    $('#trust').summernote({
+        height: 200
+    });
+    $('#description').summernote({
+        height: 200
+    })
+  });
+</script>
 
 @endsection

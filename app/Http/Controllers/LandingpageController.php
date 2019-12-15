@@ -59,6 +59,7 @@ class LandingpageController extends Controller
         $data['list_sub'] = ListSubscriber::where('list_sub_status', 'Active')->pluck('list_sub_name', 'list_sub_id');
         $data['form'] = Form::where('form_status', 'Active')->pluck('form_title', 'form_id');
         $data['auto'] = Autoresponder::where('auto_status', 'Active')->pluck('auto_title', 'auto_id');
+        $data['testimoni'] = \App\Testimonial::where('testimoni_status', 'Active')->pluck('testimoni_who', 'testimoni_id');
         return view('landingpage.create', $data);
     }
 
@@ -80,6 +81,19 @@ class LandingpageController extends Controller
             'lp_header_layout' => 'required',
             'lp_header_title' => 'required',
             'lp_header_content' => 'required',
+            'lp_header_background' => 'required',
+            'lp_image_video_primary' => 'required',
+            'lp_paralax_cta' => 'required',
+            'lp_description' => 'required',
+            'testimoni_1' => 'required',
+            'testimoni_2' => 'required',
+            'testimoni_3' => 'required',
+            'trust_title' => 'required',
+            'trust_image' => 'required',
+            'trust_content' => 'required',
+            'cta_title' => 'required',
+            'cta_button_name' => 'required',
+            'cta_button_link' => 'required'
         ]);
 
         $createID = Landingpage::latest('lp_id')->first();
