@@ -45,6 +45,16 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{ $msg }}
                 </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-11">
+                        <div class="form-group">
+                            {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari judul group ...', 'id' => 'search']) }}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_id">
                         <thead>
@@ -58,10 +68,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no = 1; @endphp
                             @foreach ($mysubscribers as $item)
                             <tr>
-                                <td class="text-center">{{$no++}}</td>
+                                <td class="text-center">{{++$i}}</td>
                                 <td>{{ $item->list_sub_name }}</td>
                                 <td>
                                 <?php
@@ -89,10 +98,34 @@
                         </tbody>
                     </table>
                 </div>
-                {{ $mysubscribers->links() }}
+                {{ $mysubscribers->appends($_GET)->links() }}
             </div>
         </div>
     </div>
 </div>
+
+<script>
+
+    $(document).ready(function() {
+
+        $("#search").keypress(function(event){
+            if(event.keyCode == 13) { // kode enter
+                filter();
+            }
+        });
+
+        $("#btn-search").click(function(event){
+            filter();
+        });
+
+        var filter = function(){
+            var keyword = $("#search").val();
+            console.log(keyword);
+
+            window.location.replace("{{ url('mysubscribers') }}?keyword=" + keyword);
+        }
+    });
+
+</script>
 
 @endsection

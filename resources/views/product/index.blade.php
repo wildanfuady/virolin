@@ -117,6 +117,6 @@
         }
     });
 
-    </script>
+</script>
 
 @endsection

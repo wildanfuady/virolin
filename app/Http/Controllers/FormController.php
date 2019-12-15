@@ -17,11 +17,32 @@ class FormController extends Controller
         $this->middleware('permission:form-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->query('keyword');
+        $paginate = 10;
         $user_id = Auth::user()->id;
-        $data['form'] = Form::where('user_id', $user_id)->get();
-        return view('form.index', $data);
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['form_title', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['form_hp', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['form_address', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $data['form'] = Form::where('user_id', $user_id)
+            ->paginate($paginate);
+        } else {
+            $data['form'] = Form::where('user_id', $user_id)
+            ->where($where)
+            ->orWhere($orwhere)
+            ->paginate($paginate);
+        }
+        $data['keyword'] = $keyword;
+        
+        return view('form.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);;
     }
 
     /**

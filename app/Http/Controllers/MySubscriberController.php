@@ -25,7 +25,7 @@ class MySubscriberController extends Controller
         $where = [];
 
         if(!empty($keyword)) {
-            $where[] = ['subscriber_name', 'LIKE', "%{$keyword}%"];
+            $where[] = ['list_sub_name', 'LIKE', "%{$keyword}%"];
         }
 
         // Set User ID

@@ -45,6 +45,16 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{ $msg }}
                 </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-11">
+                        <div class="form-group">
+                            {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari judul form ...', 'id' => 'search']) }}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_id">
                         <thead>
@@ -59,10 +69,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no = 1; @endphp
                             @foreach ($form as $item)
                             <tr>
-                                <td class="text-center">{{$no++}}</td>
+                                <td class="text-center">{{++$i}}</td>
                                 <td>{{ $item->form_title }}</td>
                                 <td>{{ $item->form_status }}</td>
                                 <td>{{ $item->form_hp }}</td>
@@ -84,37 +93,33 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $form->appends($_GET)->links() }}
             </div>
         </div>
     </div>
 </div>
+<script>
 
-@foreach($form as $item)
-<!-- Modal Delete -->
-<div class="modal" id="modalDelete-{{ $item->form_id }}">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    $(document).ready(function() {
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title"><i class="far fa-trash-alt"></i> Delete Form</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+        $("#search").keypress(function(event){
+            if(event.keyCode == 13) { // kode enter
+                filter();
+            }
+        });
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        Apakah Anda yakin ingin menghapus form <b>{{ $item->form_title }}</b> ini?
-      </div>
+        $("#btn-search").click(function(event){
+            filter();
+        });
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <a href="{{ url('form/delete/'.$item->form_id) }}" class="btn btn-default">Delete</a>
-      </div>
+        var filter = function(){
+            var keyword = $("#search").val();
+            console.log(keyword);
 
-    </div>
-  </div>
-</div>
-@endforeach
+            window.location.replace("{{ url('forms') }}?keyword=" + keyword);
+        }
+    });
+
+</script>
 
 @endsection

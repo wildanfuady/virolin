@@ -17,11 +17,31 @@ class AutoresponderController extends Controller
         $this->middleware('permission:autoresponder-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->query('keyword');
+        $paginate = 10;
         $user_id = Auth::user()->id;
-        $data['auto'] = Autoresponder::where('user_id', $user_id)->get();
-        return view('autoresponder.index', $data);
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['auto_title', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['auto_content', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $data['auto'] = Autoresponder::where('user_id', $user_id)
+                ->paginate($paginate);
+        } else {
+            $data['auto'] = Autoresponder::where('user_id', $user_id)
+            ->where($where)
+            ->orWhere($orwhere)
+            ->paginate($paginate);
+        }
+        $data['keyword'] = $keyword;
+        
+        return view('autoresponder.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);;
     }
 
     /**

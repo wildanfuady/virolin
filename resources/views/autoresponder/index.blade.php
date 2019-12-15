@@ -45,6 +45,16 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{ $msg }}
                 </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-11">
+                        <div class="form-group">
+                            {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari judul autoresponder ...', 'id' => 'search']) }}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_id">
                         <thead>
@@ -57,10 +67,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no = 1; @endphp
                             @foreach ($auto as $item)
                             <tr>
-                                <td class="text-center">{{$no++}}</td>
+                                <td class="text-center">{{++$i}}</td>
                                 <td>{{ $item->auto_title }}</td>
                                 <td>{{ $item->auto_status }}</td>
                                 <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
@@ -80,37 +89,34 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $auto->appends($_GET)->links() }}
             </div>
         </div>
     </div>
 </div>
+<script>
 
-@foreach($auto as $item)
-<!-- Modal Delete -->
-<div class="modal" id="modalDelete-{{ $item->auto_id }}">
-  <div class="modal-dialog">
-    <div class="modal-content">
+    $(document).ready(function() {
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title"><i class="far fa-trash-alt"></i> Delete Autoresponder</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+        $("#search").keypress(function(event){
+            if(event.keyCode == 13) { // kode enter
+                filter();
+            }
+        });
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        Apakah Anda yakin ingin menghapus autoresponder <b>{{ $item->auto_title }}</b> ini?
-      </div>
+        $("#btn-search").click(function(event){
+            filter();
+        });
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <a href="{{ url('autoresponder/delete/'.$item->auto_id) }}" class="btn btn-default">Delete</a>
-      </div>
+        var filter = function(){
+            var keyword = $("#search").val();
+            console.log(keyword);
 
-    </div>
-  </div>
-</div>
-@endforeach
+            window.location.replace("{{ url('autoresponders') }}?keyword=" + keyword);
+        }
+    });
+
+</script>
+
 
 @endsection

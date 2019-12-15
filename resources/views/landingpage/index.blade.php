@@ -45,6 +45,16 @@
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                     {{ $msg }}
                 </div>
+                <div class="row mt-3 mb-3">
+                    <div class="col-md-11">
+                        <div class="form-group">
+                            {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari judul landingpage ...', 'id' => 'search']) }}
+                        </div>
+                    </div>
+                    <div class="col-md-1">
+                        <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_id">
                         <thead>
@@ -57,10 +67,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @php $no = 1; @endphp
                             @foreach ($lp as $item)
                             <tr>
-                                <td class="text-center">{{$no++}}</td>
+                                <td class="text-center">{{++$i}}</td>
                                 <td>{{ $item->lp_name }}</td>
                                 <td>{{ $item->created_at }}</td>
                                 <td>{{ $item->lp_status }}</td>
@@ -80,37 +89,34 @@
                         </tbody>
                     </table>
                 </div>
+                {{ $lp->appends($_GET)->links() }}
             </div>
         </div>
     </div>
 </div>
 
-@foreach($lp as $data)
-<!-- Modal Delete -->
-<div class="modal" id="modalDelete{{ $data->lp_id}}">
-  <div class="modal-dialog">
-    <div class="modal-content">
+<script>
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title"><i class="far fa-trash-alt"></i> Delete Subscriber</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+    $(document).ready(function() {
 
-      <!-- Modal body -->
-      <div class="modal-body">
-        Apakah Anda yakin ingin menghapus landing page <b>{{ $data->lp_name }}?</b>
-      </div>
+        $("#search").keypress(function(event){
+            if(event.keyCode == 13) { // kode enter
+                filter();
+            }
+        });
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <a href="{{ url('c/landingpage/delete/'.$data->lp_id) }}" class="btn btn-default">Delete</a>
-      </div>
+        $("#btn-search").click(function(event){
+            filter();
+        });
 
-    </div>
-  </div>
-</div>
-@endforeach
+        var filter = function(){
+            var keyword = $("#search").val();
+            console.log(keyword);
+
+            window.location.replace("{{ url('landingpages') }}?keyword=" + keyword);
+        }
+    });
+
+</script>
 
 @endsection

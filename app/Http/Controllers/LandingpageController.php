@@ -21,11 +21,31 @@ class LandingpageController extends Controller
         $this->middleware('permission:landingpage-delete', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $keyword = $request->query('keyword');
+        $paginate = 10;
         $user_id = Auth::user()->id;
-        $data['lp'] = Landingpage::where('user_id', $user_id)->get();
-        return view('landingpage.index', $data);
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['lp_name', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['lp_slug', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $data['lp'] = Landingpage::where('user_id', $user_id)
+                ->paginate($paginate);
+        } else {
+            $data['lp'] = Landingpage::where('user_id', $user_id)
+            ->where($where)
+            ->orWhere($orwhere)
+            ->paginate($paginate);
+        }
+        $data['keyword'] = $keyword;
+        
+        return view('landingpage.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);;
     }
 
     /**
