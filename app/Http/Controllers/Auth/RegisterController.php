@@ -10,6 +10,9 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
+use App\Products;
+use App\Banks;
 
 class RegisterController extends Controller
 {
@@ -43,6 +46,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        $products = DB::table('products')->get();
+        $banks = DB::table('banks')->get();
+        return view('auth.register',['products' => $products, 'banks' => $banks]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -57,6 +67,7 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'product_id' => ['required','string'],
             'bank_id' => ['required','string'],
+            'invoice' => ['required','string'],
         ]);
     }
 
@@ -68,6 +79,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // var_dump($data);die();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -81,6 +93,7 @@ class RegisterController extends Controller
             'order_status' => 'Pending',
             'order_payment' => $data['bank_id'],
             'user_id' => $user->id,
+            'invoice' => $data['invoice'],
         ]);
         
         return $user;
