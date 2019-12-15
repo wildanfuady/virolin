@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class AutoresponderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:autoresponder-list|autoresponder-create|autoresponder-edit|autoresponder-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:autoresponder-create', ['only' => ['create','store']]);
+        $this->middleware('permission:autoresponder-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:autoresponder-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -38,6 +42,12 @@ class AutoresponderController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'auto_title' => 'required|min:5|max:50|string',
+            'auto_status' => 'required',
+            'auto_content' => 'required|string',
+        ]);
+
         $user_id = Auth::user()->id;
 
         $auto = new Autoresponder;
@@ -90,6 +100,12 @@ class AutoresponderController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'auto_title' => 'required|min:5|max:50|string',
+            'auto_status' => 'required',
+            'auto_content' => 'required|string',
+        ]);
+
         $auto = Autoresponder::find($id);
         $auto->auto_title = $request->auto_title;
         $auto->auto_status = $request->auto_status;

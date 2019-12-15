@@ -102,7 +102,10 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::where('users.id', $id)->first();
+        $products = \App\Products::pluck('product_name', 'id');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.show', compact('products', 'roles', 'user'));
     }
 
     /**
@@ -128,6 +131,13 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'name' => 'required|min:5|max:50|string',
+            'email' => 'required|email',
+            'product_id' => 'required|numeric',
+            'status' => 'required|string',
+        ]);
+
         $user = \App\User::find($id);
         $user->name = $request->get('name');
         $user->email = $request->get('email');
@@ -137,7 +147,7 @@ class UsersController extends Controller
         if(!empty($request->input('roles'))){
             $user->assignRole($request->input('roles'));
         }
-        return redirect()->route('users.index')->with('success','Updated Promo Successfully');
+        return redirect()->route('users.index')->with('info','Updated Promo Successfully');
     }
 
     /**

@@ -9,11 +9,15 @@ use App\Subscribers;
 
 class MySubscriberController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:mysubscriber-list|mysubscriber-create|mysubscriber-edit|mysubscriber-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:mysubscriber-create', ['only' => ['create','store']]);
+        $this->middleware('permission:mysubscriber-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:mysubscriber-delete', ['only' => ['destroy']]);
+    }
+
     public function index(Request $request)
     {
         $paginate = 10;
@@ -57,6 +61,15 @@ class MySubscriberController extends Controller
 
     public function store_subscriber(Request $request, $id)
     {
+        $this->validate($request,[
+            'sub_name' => 'required',
+            'sub_email' => 'required|email',
+            'sub_hp' => 'required|numeric',
+            'sub_alamat' => 'required|string',
+            'sub_status' => 'required|string',
+            'sub_lp' => 'required|string',
+        ]);
+
         $user_id = Auth::user()->id;
         $new_subscriber = new \App\Subscribers;
         $new_subscriber->subscriber_name = $request->sub_name;
@@ -77,6 +90,11 @@ class MySubscriberController extends Controller
 
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'group_name' => 'required|min:5|max:50|string',
+            'group_status' => 'required',
+        ]);
+
         $user_id = Auth::user()->id;
         $list = new \App\ListSubscriber;
         $list->list_sub_name = $request->group_name;
@@ -112,7 +130,8 @@ class MySubscriberController extends Controller
      */
     public function edit($id)
     {
-        //
+        $list = \App\ListSubscriber::where('list_sub_id',$id)->first();
+        return view('mysubscriber.edit', compact('list'));
     }
 
     /**
@@ -124,7 +143,21 @@ class MySubscriberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'group_name' => 'required|min:5|max:50|string',
+            'group_status' => 'required',
+        ]);
+
+        $user_id = Auth::user()->id;
+        $list = \App\ListSubscriber::where('list_sub_id', $id)->first();
+        $list->list_sub_name = $request->group_name;
+        $list->list_sub_status = $request->group_status;
+        $list->user_id = $user_id;
+        $simpan = $list->save();
+
+        if($simpan){
+            return redirect()->route('mysubscribers.index')->with('info', 'Updated List Subscriber Successfully');
+        }
     }
 
     /**
@@ -135,6 +168,10 @@ class MySubscriberController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $list = \App\ListSubscriber::find($id);
+        $hapus = $list->delete();
+        if($hapus){
+            return redirect()->route('mysubscribers.index')->with('warning', 'Deleted List Subscriber Successfully');
+        }
     }
 }

@@ -44,53 +44,28 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
-            'bank_name' => 'required|string',
-            'bank_code' => 'required|numeric',
-            'bank_status' => 'required',
-            'bank_nasabah' => 'required',
-            'bank_number' => 'required|numeric',
-            'bank_image' => 'required|mimes:jpeg,jpg,png|max:1000'
-        ];
+        $this->validate($request,[
+            'promo_title' => 'required|string',
+            'promo_status' => 'required',
+            'promo_start' => 'required',
+            'promo_end' => 'required',
+            'promo_content' => 'required'
+        ]);
 
-        $message = [
-            'bank_name.required' => 'Nama Bank wajib diisi!',
-            'bank_name.string' => 'Nama Bank hanya bolek kombinasi huruf dan angka!',
-            'bank_code.required' => 'Kode Bank wajib diisi!',
-            'bank_code.numeric' => 'Kode Bank hanya boleh diisi angka!',
-            'bank_nasabah.required' => 'Kode Produk wajib diisi!',
-            'bank_status.required' => 'Status Produk wajib diisi!',
-            'bank_number.required' => 'Kategori Produk wajib diisi!',
-            'bank_number.numeric' => 'Kode Bank hanya boleh diisi angka!',
-            'bank_image.required' => 'Logo Bank wajib diisi!',
-            'bank_image.mimes' => 'Logo Bank hanya boleh berformat jpeg, jpg, dan png!',
-            'bank_image.max' => 'Logo Bank maksimal 1 mb!'
-        ];
+        $image = $request->file('bank_image')
+                ->store('banks', 'public');
 
-        $validator = Validator::make($request->all(), $rules, $message);
+        $bank = new \App\Banks;
+        $bank->bank_name = $request->input('bank_name');
+        $bank->bank_code = $request->input('bank_code');
+        $bank->bank_nasabah = $request->input('bank_nasabah');
+        $bank->bank_number = $request->input('bank_number');
+        $bank->bank_status = $request->input('bank_status');
+        $bank->bank_image = $image;
+        $simpan = $bank->save();
 
-        if($validator->fails()){
-            return redirect(route('banks.create'))
-                    ->withErrors($validator)
-                    ->withInput($request->all());
-        } else {
-
-            $image = $request->file('bank_image')
-                    ->store('banks', 'public');
-
-            $bank = new \App\Banks;
-            $bank->bank_name = $request->input('bank_name');
-            $bank->bank_code = $request->input('bank_code');
-            $bank->bank_nasabah = $request->input('bank_nasabah');
-            $bank->bank_number = $request->input('bank_number');
-            $bank->bank_status = $request->input('bank_status');
-            $bank->bank_image = $image;
-            $simpan = $bank->save();
-
-            if($simpan){
-                return redirect(route('banks.index'))->with('success', 'Created Bank Successfully');
-            }
-
+        if($simpan){
+            return redirect(route('banks.index'))->with('success', 'Created Bank Successfully');
         }
     }
 
@@ -128,57 +103,33 @@ class BankController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'bank_name' => 'required|string',
-            'bank_code' => 'required|numeric',
-            'bank_status' => 'required',
-            'bank_nasabah' => 'required',
-            'bank_number' => 'required|numeric',
-            'bank_image' => 'mimes:jpeg.jpg,png|max:1000'
-        ];
+        $this->validate($request,[
+            'promo_title' => 'required|string',
+            'promo_status' => 'required',
+            'promo_start' => 'required',
+            'promo_end' => 'required',
+            'promo_content' => 'required'
+        ]);
 
-        $message = [
-            'bank_name.required' => 'Nama Bank wajib diisi!',
-            'bank_name.string' => 'Nama Bank hanya bolek kombinasi huruf dan angka!',
-            'bank_code.required' => 'Kode Bank wajib diisi!',
-            'bank_code.numeric' => 'Kode Bank hanya boleh diisi angka!',
-            'bank_nasabah.required' => 'Nama Nasabah wajib diisi!',
-            'bank_status.required' => 'Status Produk wajib diisi!',
-            'bank_number.required' => 'Kode Bank Produk wajib diisi!',
-            'bank_number.numeric' => 'Kode Bank hanya boleh diisi angka!',
-            'bank_image.mimes' => 'Logo Bank hanya boleh berformat jpeg, jpg, dan png!',
-            'bank_image.max' => 'Logo Bank maksimal 1 mb!'
-        ];
+        $bank = \App\Banks::find($id);
 
-        $validator = Validator::make($request->all(), $rules, $message);
+        if($request->file('bank_image') != null)
+        {
+            $image = $request->file('bank_image')
+                ->store('banks', 'public');
+            $bank->bank_image = $image;
+        } 
 
-        if($validator->fails()){
-            return redirect(route('banks.edit', $id))
-                    ->withErrors($validator)
-                    ->withInput($request->all());
-        } else {
+        
+        $bank->bank_name = $request->input('bank_name');
+        $bank->bank_code = $request->input('bank_code');
+        $bank->bank_nasabah = $request->input('bank_nasabah');
+        $bank->bank_number = $request->input('bank_number');
+        $bank->bank_status = $request->input('bank_status');
+        $simpan = $bank->save();
 
-            $bank = \App\Banks::find($id);
-
-            if($request->file('bank_image') != null)
-            {
-                $image = $request->file('bank_image')
-                    ->store('banks', 'public');
-                $bank->bank_image = $image;
-            } 
-
-            
-            $bank->bank_name = $request->input('bank_name');
-            $bank->bank_code = $request->input('bank_code');
-            $bank->bank_nasabah = $request->input('bank_nasabah');
-            $bank->bank_number = $request->input('bank_number');
-            $bank->bank_status = $request->input('bank_status');
-            $simpan = $bank->save();
-
-            if($simpan){
-                return redirect(route('banks.index'))->with('info', 'Updated Bank Successfully');
-            }
-
+        if($simpan){
+            return redirect(route('banks.index'))->with('info', 'Updated Bank Successfully');
         }
     }
 

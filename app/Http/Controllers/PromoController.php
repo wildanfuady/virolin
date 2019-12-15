@@ -59,47 +59,27 @@ class PromoController extends Controller
      */
     public function store(Request $request)
     {
-        $rules = [
+        $this->validate($request,[
             'promo_title' => 'required|string',
             'promo_status' => 'required',
             'promo_start' => 'required',
             'promo_end' => 'required',
             'promo_content' => 'required'
-        ];
+        ]);
+        $judul = $request->input('promo_title');
+        $lower = strtolower($judul);
+        $slug = str_replace(" ", "-", $lower);
+        $promo = new Promo;
+        $promo->promo_title = $request->input('promo_title');
+        $promo->promo_slug = $slug;
+        $promo->promo_status = $request->input('promo_status');
+        $promo->promo_start = $request->input('promo_start');
+        $promo->promo_end = $request->input('promo_end');
+        $promo->promo_content = nl2br($request->input('promo_content'));
+        $insert = $promo->save();
 
-        $messages = [
-            'promo_title.required' => 'Judul tidak boleh kosong',
-            'promo_title.string' => 'Judul harus huruf dan angka',
-            'promo_status.required' => 'Status tidak boleh kosong',
-            'promo_title.alpa_num' => 'Judul hanya boleh diisi dengan huruf dan angka',
-            'promo_start.required' => 'Tanggal mulai tidak boleh kosong',
-            'promo_end.required' => 'Tanggal berakhir tidak boleh kosong',
-            'promo_content.required' => 'Konten promo tidak boleh kosong'
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()){
-            return redirect(url('promo/create'))
-                    ->withErrors($validator)
-                    ->withInput($request->all());
-        } else {
-
-            $judul = $request->input('promo_title');
-            $lower = strtolower($judul);
-            $slug = str_replace(" ", "-", $lower);
-            $promo = new Promo;
-            $promo->promo_title = $request->input('promo_title');
-            $promo->promo_slug = $slug;
-            $promo->promo_status = $request->input('promo_status');
-            $promo->promo_start = $request->input('promo_start');
-            $promo->promo_end = $request->input('promo_end');
-            $promo->promo_content = nl2br($request->input('promo_content'));
-            $insert = $promo->save();
-
-            if($insert){
-                return redirect(url('promos'))->with('success', 'Created Promo Successfully');
-            }
+        if($insert){
+            return redirect(url('promos'))->with('success', 'Created Promo Successfully');
         }
     }
 
@@ -136,50 +116,30 @@ class PromoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
+        $this->validate($request,[
             'promo_title' => 'required|string',
             'promo_status' => 'required',
             'promo_start' => 'required',
             'promo_end' => 'required',
             'promo_content' => 'required'
-        ];
+        ]);
 
-        $messages = [
-            'promo_title.required' => 'Judul tidak boleh kosong',
-            'promo_title.string' => 'Judul harus huruf dan angka',
-            'promo_status.required' => 'Status tidak boleh kosong',
-            'promo_title.alpa_num' => 'Judul hanya boleh diisi dengan huruf dan angka',
-            'promo_start.required' => 'Tanggal mulai tidak boleh kosong',
-            'promo_end.required' => 'Tanggal berakhir tidak boleh kosong',
-            'promo_content.required' => 'Konten promo tidak boleh kosong'
-        ];
+        $judul = $request->input('promo_title');
+        $lower = strtolower($judul);
+        $slug = str_replace(" ", "-", $lower);
+        $promo = Promo::find($id);
+        $promo->promo_title = $request->input('promo_title');
+        $promo->promo_slug = $slug;
+        $promo->promo_status = $request->input('promo_status');
+        $promo->promo_start = $request->input('promo_start');
+        $promo->promo_end = $request->input('promo_end');
+        $promo->promo_content = nl2br($request->input('promo_content'));
+        $update = $promo->save();
 
-        $validator = Validator::make($request->all(), $rules, $messages);
-
-        if($validator->fails()){
-            return redirect(url('promo/edit/'.$id))
-                    ->withErrors($validator)
-                    ->withInput($request->all());
-        } else {
-
-            $judul = $request->input('promo_title');
-            $lower = strtolower($judul);
-            $slug = str_replace(" ", "-", $lower);
-            $promo = Promo::find($id);
-            $promo->promo_title = $request->input('promo_title');
-            $promo->promo_slug = $slug;
-            $promo->promo_status = $request->input('promo_status');
-            $promo->promo_start = $request->input('promo_start');
-            $promo->promo_end = $request->input('promo_end');
-            $promo->promo_content = nl2br($request->input('promo_content'));
-            $update = $promo->save();
-
-            if($update){
-                return redirect(url('promos'))->with('info', 'Updated Promo Successfully');
-            }
+        if($update){
+            return redirect(url('promos'))->with('info', 'Updated Promo Successfully');
         }
     }
-
     /**
      * Remove the specified resource from storage.
      *

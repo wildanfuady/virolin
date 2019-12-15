@@ -21,10 +21,15 @@
         <div class="card">
         {{ Form::model($promo, ['method' => 'PATCH','route' => ['promos.update', $promo->promo_id], 'files' => 'TRUE']) }}
             <div class="card-body">
-                @if(!empty($errors->all()))
-                <div class="alert alert-danger">
-                    {{ Html::ul($errors->all())}}
-                </div>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
                 @endif
                 <div class="row">
                     <div class="col-lg-6">

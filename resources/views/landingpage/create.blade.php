@@ -38,6 +38,16 @@
               </div><!-- /.card-header -->
               {{ Form::open(['route' => 'landingpages.store', 'files' => true]) }}
               <div class="card-body">
+                @if (count($errors) > 0)
+                  <div class="alert alert-danger">
+                      <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                      <ul>
+                      @foreach ($errors->all() as $error)
+                          <li>{{ $error }}</li>
+                      @endforeach
+                      </ul>
+                  </div>
+                @endif
                 <div class="tab-content">
                   <div class="tab-pane active" id="tab_1">
                     <div class="row">

@@ -21,12 +21,21 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-                    {{ Form::open(['url' => 'list-subscriber/update/'.$list->list_sub_id]) }}
+                    {{ Form::model($list, ['method' => 'PATCH','route' => ['mysubscribers.update', $list->list_sub_id]]) }}
                     <div class="card-header">
                         Edit a List Subscriber
                     </div>
                     <div class="card-body">
-
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                        @endif
                         <div class="form-group">
                             {{ Form::label('group_name', 'Group Name') }}
                             {{ Form::text('group_name', $list->list_sub_name, ['class' => 'form-control', 'placeholder' => 'Enter Group Name']) }}

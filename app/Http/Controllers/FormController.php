@@ -8,11 +8,15 @@ use Illuminate\Support\Facades\Auth;
 
 class FormController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:form-list|form-create|form-edit|form-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:form-create', ['only' => ['create','store']]);
+        $this->middleware('permission:form-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:form-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -38,6 +42,12 @@ class FormController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request,[
+            'form_title' => 'required|min:5|max:50|string',
+            'form_status' => 'required',
+        ]);
+
         $user_id = Auth::user()->id;
 
         $form = new Form;
@@ -91,6 +101,11 @@ class FormController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'form_title' => 'required|min:5|max:50|string',
+            'form_status' => 'required',
+        ]);
+
         $form = Form::find($id);
         $form->form_title = $request->form_title;
         $form->form_status = $request->form_status;

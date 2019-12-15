@@ -23,19 +23,19 @@
                 <div class="card">
                     {{ Form::open(['url' => 'mysubscriber/new/store/'.$id]) }}
                     <div class="card-header">
-                        Create New Subscriber
+                        Edit Subscriber
                     </div>
                     <div class="card-body">
-                    @if (count($errors) > 0)
-                        <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                            <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                        @endif
 
                         {{ Form::hidden('id', $id, ['class'=>'form-control']) }}
                         
@@ -74,7 +74,7 @@
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
-                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                        <button type="submit" class="btn btn-primary float-right">Update</button>
                     </div>
                     {{ Form::close() }}
                 </div>

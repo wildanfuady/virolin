@@ -19,57 +19,39 @@
 <div class="content">
     <div class="container-fluid">
         <div class="card">
-            {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
             <div class="card-header">
-                Create Customer
+                Show User
             </div>
             <div class="card-body">
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
             
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
-                        {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Nama User']) }}
+                        {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Nama User', 'disabled']) }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                    {{ Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email']) }}
+                    {{ Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email', 'disabled']) }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Produk</label>
                     <div class="col-sm-10">
-                        {{ Form::select('product_id', $products, $user->product_id, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                        {{ Form::select('product_id', $products, $user->product_id, ['class' => 'form-control', 'placeholder' => 'Choose One', 'disabled']) }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Status</label>
                     <div class="col-sm-10">
-                        {{ Form::select('status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $user->status, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}  
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Role</label>
-                    <div class="col-sm-10">
-                        {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                        {{ Form::select('status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $user->status, ['class' => 'form-control', 'placeholder' => 'Choose One', 'disabled']) }}  
                     </div>
                 </div>
                 
             </div>
             <div class="card-footer">
                 <a href="{{ route('users.index') }}" class="btn btn-outline-info">Back</a>
-                <button type="submit" class="btn btn-primary float-right">Update</button>
             </div>
             </form>
         </div>

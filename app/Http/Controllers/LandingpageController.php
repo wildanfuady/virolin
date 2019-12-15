@@ -12,11 +12,15 @@ use Session;
 
 class LandingpageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:landingpage-list|landingpage-create|landingpage-edit|landingpage-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:landingpage-create', ['only' => ['create','store']]);
+        $this->middleware('permission:landingpage-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:landingpage-delete', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -46,6 +50,18 @@ class LandingpageController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request,[
+            'lp_title' => 'required',
+            'lp_slug' => 'required',
+            'lp_status' => 'required',
+            'list_sub_id' => 'required',
+            'form_id' => 'required',
+            'auto_id' => 'required',
+            'lp_header_layout' => 'required',
+            'lp_header_title' => 'required',
+            'lp_header_content' => 'required',
+        ]);
+
         $createID = Landingpage::latest('lp_id')->first();
         if(!empty($createID)){
             $id = $createID->lp_id + 1;

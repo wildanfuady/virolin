@@ -66,9 +66,9 @@
                                 <td>{{ date('d-m-Y H:i:s', strtotime($item->created_at)) }}</td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a class="btn btn-primary btn-sm" href="{{ route('autoresponders.show',$item->auto_id) }}"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-info btn-sm" href="{{ route('autoresponders.show',$item->auto_id) }}"><i class="fa fa-eye"></i></a>
                                         @can('autoresponder-edit')
-                                        <a class="btn btn-success btn-sm" href="{{ route('autoresponders.edit',$item->auto_id) }}"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-primary btn-sm" href="{{ route('autoresponders.edit',$item->auto_id) }}"><i class="fa fa-edit"></i></a>
                                         @endcan
                                         @can('autoresponder-delete')
                                         <a class="btn btn-danger btn-sm" href="{{ url('autoresponders/destroy/'.$item->auto_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
