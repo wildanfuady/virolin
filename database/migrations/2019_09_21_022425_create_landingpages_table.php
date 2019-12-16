@@ -22,11 +22,12 @@ class CreateLandingpagesTable extends Migration
             $table->bigInteger('list_sub_id');
             $table->bigInteger('form_id');
             $table->bigInteger('autoresponder_id');
-            $table->string('lp_header_layout');
+            $table->string('lp_header_image');
             $table->string('lp_header_title');
             $table->text('lp_header_content');
             $table->string('lp_header_background');
             $table->string('lp_image_video_primary');
+            $table->string('lp_image_video_opening');
             $table->string('lp_paralax_cta');
             $table->text('lp_description');
             $table->integer('testimoni_1');
