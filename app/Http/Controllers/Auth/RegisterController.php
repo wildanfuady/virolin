@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use App\Products;
 use App\Banks;
+use App\Notifications\CustomVerifyEmail;
 
 class RegisterController extends Controller
 {
@@ -95,7 +96,10 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'invoice' => $data['invoice'],
         ]);
-        
+        // var_dump($user->id);die();
+        $users['user'] = $user;
+        // var_dump($users);
+        $user->notify(new CustomVerifyEmail($user));
         return $user;
     }
 
