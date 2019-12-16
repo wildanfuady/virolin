@@ -17,3 +17,7 @@
     RewriteRule ^ server.php
 
 </IfModule>
+RewriteCond %{HTTP_HOST} ^virolin\.ilmucoding\.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.virolin\.ilmucoding\.com$
+RewriteRule ^/?$ "https\:\/\/virolin\.ilmucoding\.com" [R=301,L]
+

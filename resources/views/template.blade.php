@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="utf-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Administrator Virolin</title>
@@ -21,7 +21,29 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
   <!-- jQuery -->
   <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-app.js"></script>
 
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBkLk-oStWR3E54rogucSsaKf4D68UcTMo",
+    authDomain: "virolin-8f637.firebaseapp.com",
+    databaseURL: "https://virolin-8f637.firebaseio.com",
+    projectId: "virolin-8f637",
+    storageBucket: "virolin-8f637.appspot.com",
+    messagingSenderId: "198243091529",
+    appId: "1:198243091529:web:647c90e45c2a8af5cfeb98",
+    measurementId: "G-G2MET94PYY"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
