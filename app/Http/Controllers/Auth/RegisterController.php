@@ -87,7 +87,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'product_id' => $data['product_id']
         ]);
-
+        \Auth::loginUsingId($user->id);
         $user->userData = Order::create([
             'product_id' => $data['product_id'],
             'order_end' => Carbon::now()->add(2, 'day'),
@@ -99,7 +99,7 @@ class RegisterController extends Controller
         // var_dump($user->id);die();
         $users['user'] = $user;
         // var_dump($users);
-        $user->notify(new CustomVerifyEmail($user));
+        // $user->notify(new CustomVerifyEmail($user));
         return $user;
     }
 

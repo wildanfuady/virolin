@@ -39,9 +39,15 @@
 
 @endforeach
 
-<?php 
-    $user = Auth::user()['name']; 
-    $user_id = Auth::user()['id'];
+<?php
+    // var_dump($data['name']);die();
+    if(Auth::user()['id'] == null){
+        $user = $user->name;
+        $user_id = $user->id;
+    }else{
+        $user = Auth::user()['name']; 
+        $user_id = Auth::user()['id'];
+    }
     $product = \App\Order::with(['user','product','bank'])->where('user_id', $user_id)->first();
     // die($user_id);
     $kd_unik = rand(100, 999);
