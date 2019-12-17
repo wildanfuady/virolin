@@ -290,7 +290,9 @@
         $(".order").click(function () {
             for (i = 0; i < products.length; i++) {
                 if($(this).val() === products[i][0]){
-                    $('.db').text(products[i][2]);
+                    dbFormat = (Math.round(products[i][2] * 100) / 100000).toFixed(3);
+                    console.log(dbFormat);
+                    $('.db').text(dbFormat);
                     $('.harga-text').text(formatter.format(products[i][3]));
                     randomA = Math.floor(Math.random() * (99999 - 10000));
                     randomB = Math.floor(Math.random() * (999 - 101));
