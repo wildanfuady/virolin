@@ -8,9 +8,10 @@ class Products extends Model
 {
     //
     protected $table = "products";
+    protected $primaryKey = "product_id";
     
     protected $fillable = [
-        'product_name', 'product_desc', 'product_max_db', 'product_status','product_price'
+        'product_id','product_name', 'product_desc', 'product_max_db', 'product_status','product_price'
     ];
 
     public function order()
