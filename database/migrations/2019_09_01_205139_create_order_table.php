@@ -22,6 +22,7 @@ class CreateOrderTable extends Migration
             $table->string('order_status');
             $table->string('order_payment');
             $table->integer('user_id');
+            $table->integer('kode_unik');
             $table->timestamps();
         });
     }

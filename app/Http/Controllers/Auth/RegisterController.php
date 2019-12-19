@@ -80,7 +80,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // var_dump($data);die();
+        $kode_unik = rand(100, 999);
+        // var_dump($kode_unik);die();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -95,6 +96,7 @@ class RegisterController extends Controller
             'order_payment' => $data['bank_id'],
             'user_id' => $user->id,
             'invoice' => $data['invoice'],
+            'kode_unik' => $kode_unik,
         ]);
         // var_dump($user->id);die();
         $users['user'] = $user;

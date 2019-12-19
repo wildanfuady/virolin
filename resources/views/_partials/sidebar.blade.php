@@ -41,15 +41,19 @@
                   <p>Dashboard</p>
               </a>
             </li>
-            @if(Auth::user()->status == "Valid" || Auth::user()->status == "valid")
+            @if(empty(Auth::user()->id))
               <!-- Null -->
             @else
-            <li class="nav-item has-treeview">
-              <a href="{{ url('konfirmasi-pembayaran') }}" class="nav-link">
-                  <i class="nav-icon fas fa-money-bill-alt"></i>
-                  <p>Konfirmasi Pembayaran</p>
-              </a>
-            </li>
+              @if(Auth::user()->status == "valid" || Auth::user()->status == "Valid")
+                <?= null ?>
+              @else
+                <li class="nav-item has-treeview">
+                  <a href="{{ url('konfirmasi-pembayaran') }}" class="nav-link">
+                      <i class="nav-icon fas fa-money-bill-alt"></i>
+                      <p>Konfirmasi Pembayaran</p>
+                  </a>
+                </li>
+              @endif
             @endif
             @can('role-list')
             <li class="nav-item">

@@ -19,10 +19,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <div class="callout callout-info">
-                    <h5><i class="fas fa-info"></i> Note:</h5>
-                    This page has been enhanced for printing. Click the print button at the bottom of the invoice to test.
-                </div>
 
                 <!-- Main content -->
                 <div class="invoice p-3 mb-3">
@@ -98,12 +94,18 @@
                     <div class="row">
                     <!-- accepted payments column -->
                     <div class="col-6">
-                        <p class="lead">Payment Methods:</p>
-                        <img src="{{ asset('storage/'.$detail_order->bank->bank_image) }}" alt="{{ $detail_order->bank->bank_name }}">
-
-                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                        Silahkan transfer sesuai dengan jumlah yang tertera plus 3 digit kode unik agar proses aktivasi berjalan dengan cepat.
-                        </p>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="lead">Payment Methods:</p>
+                            <img src="{{ asset('storage/'.$detail_order->bank->bank_image) }}" alt="{{ $detail_order->bank->bank_name }}" class="img-fluid float-left" style="width:30%">
+                            <span class="text-muted well well-sm shadow-none">{{ "(".$detail_order->bank->bank_code.") ".$detail_order->bank->bank_number }}<br>an. Wildan Fuady</span>
+                        </div>
+                        <div class="col-12">
+                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                            Silahkan transfer sesuai dengan jumlah yang tertera plus <strong>3 digit kode unik</strong> agar proses aktivasi berjalan dengan cepat.
+                            </p>
+                        </div>
+                    </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-6">
@@ -113,19 +115,15 @@
                         <table class="table">
                             <tr>
                             <th style="width:50%">Subtotal:</th>
-                            <td>$250.30</td>
+                            <td>{{ "Rp. ".number_format($detail_order->product->product_price) }}</td>
                             </tr>
                             <tr>
-                            <th>Tax (9.3%)</th>
-                            <td>$10.34</td>
-                            </tr>
-                            <tr>
-                            <th>Shipping:</th>
-                            <td>$5.80</td>
+                            <th>Kode Unik</th>
+                            <td>{{ "Rp. ".number_format($detail_order->kode_unik) }}</td>
                             </tr>
                             <tr>
                             <th>Total:</th>
-                            <td>$265.24</td>
+                            <td>{{ "Rp. ".number_format($detail_order->product->product_price + $detail_order->kode_unik) }}</td>
                             </tr>
                         </table>
                         </div>

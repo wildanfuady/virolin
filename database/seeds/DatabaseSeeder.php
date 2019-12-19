@@ -64,19 +64,10 @@ class DatabaseSeeder extends Seeder
             'bank_nasabah' => 'Wildan Fuady',
             'bank_number' => '543434343',
             'bank_status' => 'Valid',
-            'bank_image' => 'mandiri.png',
+            'bank_image' => 'banks/mandiri.png',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        DB::table('products')->insert([
-            'product_name' => 'Trial', 
-            'product_desc' => 'Lorem ipsum', 
-            'product_max_db' => '1000', 
-            'product_status' => 'Valid',
-            'product_price' => '0',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-            ]);
         DB::table('products')->insert([
             'product_name' => 'Pro 1', 
             'product_desc' => 'Lorem ipsum', 

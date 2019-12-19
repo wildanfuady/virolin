@@ -24,16 +24,6 @@
                 Konfirmasi Pembayaran
             </div>
             <div class="card-body">
-                @if (count($errors) > 0)
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                        <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
                 <?php
                     if($msg_success = Session::get('success')){
                         $class = "alert alert-success alert-dismissable";
@@ -54,6 +44,16 @@
                     <h5><i class="icon fas fa-info"></i> Detail Pembayaran</h5>
                     Anda dapat melihat detail pembayaran <a href="{{ url('payment/detail/'.Auth::user()->id) }}">di sini</a>.
                 </div>
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                        </ul>
+                    </div>
+                @endif
                 <div class="row">
                     <div class="col-lg-6">
 
@@ -95,7 +95,7 @@
 
             </div>
             <div class="card-footer d-flex justify-content-center">
-                <a href="{{ url('promos') }}" class="btn btn-outline-info">Back</a>
+                <a href="{{ url('home') }}" class="btn btn-outline-info">Back</a>
                 &nbsp;
                 <button type="submit" class="btn btn-primary">Kirim</button>
             </div>
