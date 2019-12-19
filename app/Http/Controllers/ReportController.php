@@ -33,9 +33,14 @@ class ReportController extends Controller
         return view('report.promo');
     }
 
-    public function pengunjung()
+    public function trafik()
     {
-        return view('report.pengunjung');
+        return view('report.trafik');
+    }
+
+    public function share()
+    {
+        return view('report.share');
     }
 
     public function user()

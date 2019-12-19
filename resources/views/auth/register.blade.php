@@ -182,6 +182,12 @@
                                     <p class="harga harga-text">Harga</p>
                                 </div>
                             </div>
+                            <br/>
+                            <h2 class="product-plan">
+                                <i class="fa fa-check-circle icon-fa" aria-hidden="true"></i>
+                                No. Invoice anda: #<span class="invoice">Invoice</span>
+                                <input type="hidden" name="invoice" id="invoice">
+                            </h2>
                             <hr>
                             <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio itaque recusandae
                                 inventore quos quasi consectetur eum ex cupiditate doloribus id.</p>
@@ -275,11 +281,23 @@
             @endforeach
         ];
 
+        const formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 2
+        });
+
         $(".order").click(function () {
             for (i = 0; i < products.length; i++) {
                 if($(this).val() === products[i][0]){
                     $('.db').text(products[i][2]);
-                    $('.harga-text').text(products[i][3]);
+                    $('.harga-text').text(formatter.format(products[i][3]));
+                    randomA = Math.floor(Math.random() * (99999 - 10000));
+                    randomB = Math.floor(Math.random() * (999 - 101));
+                    randomC = Math.floor(Math.random() * (999 - 101));
+                    invoice = randomA + randomB + randomC;
+                    $('.invoice').text(invoice);
+                    $('#invoice').val(invoice);
                 }
             }
         });

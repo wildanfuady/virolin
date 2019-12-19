@@ -20,7 +20,7 @@ class Admin
             return $next($request);
         }
         elseif (Auth::check() && Auth::user()->level == 'user') {
-            return redirect('/user.subscribers');
+            return redirect('/home');
         }
     }
 }

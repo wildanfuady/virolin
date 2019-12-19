@@ -52,7 +52,8 @@
 
 | Name          | Value         |
 | ------------- |:-------------:|
-| Nama Produk       |{{$product->product->product_name}}|    
+| Nama Produk       |{{$product->product->product_name}}|   
+| No Invoice        |{{$product->invoice}}|    
 | Jumlah            |1|    
 | Harga             |{{$product->product->product_price}}|    
 | Kode Unik         |{{$kd_unik}}|    

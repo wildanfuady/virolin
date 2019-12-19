@@ -1,6 +1,10 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="index3.html" class="brand-link">
+  @if(Auth::user()->level == "admin")
+    <a href="{{ url('dashboard') }}" class="brand-link">
+  @else
+    <a href="{{ url('home') }}" class="brand-link">
+  @endif
         <img src="{{ url('template/dist/img/noimage.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8" width="100px" height="100px">
         <span class="brand-text font-weight-light">Virol<b>in</b></span>
@@ -12,7 +16,7 @@
             <img src="{{ url('template/dist/img/noimage.png') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+            <a href="#" class="d-block">@if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif</a>
         </div>
         </div>
 
@@ -21,7 +25,11 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Kosong -->
             <li class="nav-item has-treeview">
+              @if(Auth::user()->level == "admin")
+              <a href="{{ url('dashboard') }}" class="nav-link">
+              @else
               <a href="{{ url('home') }}" class="nav-link">
+              @endif
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
               </a>
@@ -143,6 +151,14 @@
               </a>
             </li>
             @endcan
+            @can('testimonial-list')
+            <li class="nav-item">
+              <a href="{{ route('testimonials.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-bullhorn"></i>
+                  <p>Manage Testimonial</p>
+              </a>
+            </li>
+            @endcan
             @can('report-user')
             <li class="nav-item has-treeview">
               <a href="#" class="nav-link">
@@ -154,13 +170,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ url('reports/trafik') }}" class="nav-link">
+                  <a href="{{ url('report/trafik') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Trafik</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ url('reports/share') }}" class="nav-link">
+                  <a href="{{ url('report/share') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Share</p>
                   </a>
@@ -168,6 +184,7 @@
               </ul>
             </li>
             @endcan
+            @can('transaction-list')
             <li class="nav-item has-treeview">
               <a href="{{ url('transaction') }}" class="nav-link">
                 <i class="nav-icon fa fa-money-bill-alt"></i>
@@ -176,6 +193,7 @@
                 </p>
               </a>
             </li>
+            @endcan
             <li class="nav-header">ACCOUNT</li>
             <li class="nav-item">
                 <a href="{{ route('settings.index') }}" class="nav-link">
