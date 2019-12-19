@@ -6,7 +6,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Administrator Virolin</title>
   <!-- Favicon -->
-  <link rel="icon" href="{{ asset('storage/identifity/favicon.png') }}">
+  <link rel="icon" href="{{ asset('image/favicon-virolin.png') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="{{ asset('template/plugins/summernote/summernote-bs4.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css') }}">
+  <!-- Midtrans -->
+  <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
   <!-- jQuery -->
   <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
   <style>

@@ -2,13 +2,13 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     @can('dashboard-admin')
     <a href="{{ url('dashboard') }}" class="brand-link">
-        <img src="{{ url('template/dist/img/noimage.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('image/sidebar-virolin.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8" width="100px" height="100px">
         <span class="brand-text font-weight-light">Virol<b>in</b></span>
     </a>
     @endcan
     <a href="{{ url('home') }}" class="brand-link">
-        <img src="{{ url('template/dist/img/noimage.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('image/sidebar-virolin.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8" width="100px" height="100px">
         <span class="brand-text font-weight-light">Virol<b>in</b></span>
     </a>

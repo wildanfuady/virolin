@@ -272,7 +272,7 @@
 
         var products = [
             @foreach ($products as $item)
-                [ "{{ $item->product_id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}", "{{ $item->product_desc }}" ], 
+                [ "{{ $item->product_id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}", "{{ $item->product_desc }}" ],
             @endforeach
         ];
 
@@ -288,7 +288,6 @@
                     dbFormat = (Math.round(products[i][2] * 100) / 100000).toFixed(3);
                     console.log(dbFormat);
                     $('.db').text(dbFormat);
-                    $('.desc-product').text(products[i][4]);
                     $('.harga-text').text(formatter.format(products[i][3]));
                     randomA = Math.floor(Math.random() * (99999 - 10000));
                     randomB = Math.floor(Math.random() * (999 - 101));
