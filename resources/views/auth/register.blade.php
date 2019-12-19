@@ -32,10 +32,9 @@
                                 <div class="content-title" style="margin-bottom:33px;">Order </div>
                                 <ul>
                                     @foreach($products as $item)
-                                        <li class="order-check radio-border">
-                                        <input type="radio" class="order" id="{{$item->id}}-option"
-                                    value="{{$item->id}}" name="product_id">
-                                    <label for="{{$item->id}}-option">{{$item->product_name}}</label>
+                                    <li class="order-check radio-border">
+                                        <input type="radio" class="order" id="{{$item->product_id}}-option" value="{{$item->product_id}}" name="product_id">
+                                        <label for="{{$item->product_id}}-option">{{$item->product_name}}</label>
 
                                     <div class="check">
                                         <div class="inside"></div>
@@ -277,7 +276,7 @@
 
         var products = [
             @foreach ($products as $item)
-                [ "{{ $item->id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}" ], 
+                [ "{{ $item->product_id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}" ], 
             @endforeach
         ];
 

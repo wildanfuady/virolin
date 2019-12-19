@@ -176,6 +176,8 @@ class DatabaseSeeder extends Seeder
             'report-user',
             'setting-user',
             'order-user',
+            'dashboard-admin',
+            'dashboard-user',
          ];
  
  

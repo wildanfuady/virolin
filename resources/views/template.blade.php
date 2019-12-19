@@ -5,23 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Administrator Virolin</title>
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('template/plugins/summernote/summernote-bs4.css') }}">
   <!-- Favicon -->
   <link rel="icon" href="{{ asset('storage/identifity/favicon.png') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('template/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css') }}">
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="{{ asset('template/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('template/plugins/summernote/summernote-bs4.css') }}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css') }}">
   <!-- jQuery -->
   <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
-
+  <style>
+    .border-none{
+      border-top: 0;
+      border-right: 0;
+      border-left: 0;
+      border-radius: 0;
+    }
+  </style>
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">

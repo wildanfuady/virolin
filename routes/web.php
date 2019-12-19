@@ -20,6 +20,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/dashboard', 'DashboardController@dashboard');
     Route::get('/home', 'DashboardController@index');
+
+    // Konfirmasi Pembayaran
+    Route::get('/konfirmasi-pembayaran', 'PaymentController@showConfirmationPaymentForm');
+    Route::post('/konfirmasi-pembayaran/store', 'PaymentController@confirmationPayment');
+    Route::get('/payment/detail/{id}', 'PaymentController@paymentDetail');
     
     // Module Customer Admin
     Route::resource('users','UsersController');

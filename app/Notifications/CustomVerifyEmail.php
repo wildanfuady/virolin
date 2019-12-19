@@ -58,7 +58,7 @@ class CustomVerifyEmail extends Notification
         $user_id = Auth::user()['id'];
         $product_id = Auth::user()['product_id'];
         $order = \App\Order::with(['user','product','bank'])->where('user_id', $user_id)->first();
-        $product = \App\Products::where('id', $product_id)->first();
+        $product = \App\Products::where('product_id', $product_id)->first();
 
         // die($user);
         // $order = $product['order_id'];

@@ -73,9 +73,9 @@
                             <td>{{ $product->product_status }}</td>
                             <td style="text-align:center">
                             <div class="btn-group">
-                                <a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-info btn-sm" href="{{ route('products.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
                                 @can('products-edit')
-                                <a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
                                 @endcan
                                 @can('products-delete')
                                 <a class="btn btn-danger btn-sm" href="{{ url('products/destroy/'.$product->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
