@@ -1,11 +1,14 @@
 
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  @if(Auth::user()->level == "admin")
+    @can('dashboard-admin')
     <a href="{{ url('dashboard') }}" class="brand-link">
-  @else
+        <img src="{{ asset('image/sidebar-virolin.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8" width="100px" height="100px">
+        <span class="brand-text font-weight-light">Virol<b>in</b></span>
+    </a>
+    @endcan
     <a href="{{ url('home') }}" class="brand-link">
-  @endif
-        <img src="{{ url('template/dist/img/noimage.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+        <img src="{{ asset('image/sidebar-virolin.jpg') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
             style="opacity: .8" width="100px" height="100px">
         <span class="brand-text font-weight-light">Virol<b>in</b></span>
     </a>
@@ -24,16 +27,34 @@
         
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Kosong -->
+            @can('dashboard-admin')
             <li class="nav-item has-treeview">
-              @if(Auth::user()->level == "admin")
               <a href="{{ url('dashboard') }}" class="nav-link">
-              @else
-              <a href="{{ url('home') }}" class="nav-link">
-              @endif
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>Dashboard</p>
               </a>
             </li>
+            @endcan
+            <li class="nav-item has-treeview">
+              <a href="{{ url('home') }}" class="nav-link">
+                  <i class="nav-icon fas fa-tachometer-alt"></i>
+                  <p>Dashboard</p>
+              </a>
+            </li>
+            @if(empty(Auth::user()->id))
+              <!-- Null -->
+            @else
+              @if(Auth::user()->status == "valid" || Auth::user()->status == "Valid")
+                <?= null ?>
+              @else
+                <li class="nav-item has-treeview">
+                  <a href="{{ url('konfirmasi-pembayaran') }}" class="nav-link">
+                      <i class="nav-icon fas fa-money-bill-alt"></i>
+                      <p>Konfirmasi Pembayaran</p>
+                  </a>
+                </li>
+              @endif
+            @endif
             @can('role-list')
             <li class="nav-item">
               <a href="{{ route('roles.index') }}" class="nav-link">
@@ -179,6 +200,12 @@
                   <a href="{{ url('report/share') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Share</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="{{ url('report/order') }}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Order</p>
                   </a>
                 </li>
               </ul>

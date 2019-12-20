@@ -80,7 +80,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        $data['product'] = \App\Products::find($id);
+        $data['product'] = \App\Products::where('product_id', $id)->first();
         return view('product.show', $data);
     }
 
@@ -92,7 +92,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $data['product'] = \App\Products::find($id);
+        $data['product'] = \App\Products::where('product_id', $id)->first();
         return view('product.edit', $data);
     }
 
@@ -113,7 +113,7 @@ class ProductController extends Controller
             'product_desc' => 'required|string'
         ]);
 
-        $product = Products::find($id);
+        $product = Products::where('product_id', $id)->first();
         $product->product_name = $request->product_name;
         $product->product_max_db = $request->product_max_db;
         $product->product_price = $request->product_price;
@@ -132,7 +132,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $products = Products::find($id);
+        $products = Products::where('product_id', $id)->first();
         $products->delete();
         return redirect()->route('products.index')->with('warning','Deleted Product Successfully');
     }

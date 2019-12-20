@@ -103,7 +103,7 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::where('users.id', $id)->first();
-        $products = \App\Products::pluck('product_name', 'id');
+        $products = \App\Products::pluck('product_name', 'product_id');
         $roles = Role::pluck('name','name')->all();
         return view('users.show', compact('products', 'roles', 'user'));
     }
@@ -117,7 +117,7 @@ class UsersController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $products = \App\Products::pluck('product_name', 'id');
+        $products = \App\Products::pluck('product_name', 'product_id');
         $roles = Role::pluck('name','name')->all();
         return view('users.edit', compact('products', 'roles', 'user'));
     }

@@ -39,13 +39,23 @@
 
 @endforeach
 
-<?php 
-    $user = Auth::user()['name']; 
-    $user_id = Auth::user()['id'];
+<?php
+    // var_dump($data['name']);die();
+    if(Auth::user()['id'] == null){
+        $user = $user->name;
+        $user_id = $user->id;
+    }else{
+        $user = Auth::user()['name']; 
+        $user_id = Auth::user()['id'];
+    }
     $product = \App\Order::with(['user','product','bank'])->where('user_id', $user_id)->first();
     // die($user_id);
     $kd_unik = rand(100, 999);
-    $total = $kd_unik + $product->product->product_price;
+    if($product->kode_unik == 0){
+        $product->kode_unik = $kd_unik;
+        $product->save();
+    } 
+    $total = $product->kode_unik + $product->product->product_price;
 ?>    
 
 @component('mail::table')
@@ -55,9 +65,9 @@
 | Nama Produk       |{{$product->product->product_name}}|   
 | No Invoice        |{{$product->invoice}}|    
 | Jumlah            |1|    
-| Harga             |{{$product->product->product_price}}|    
-| Kode Unik         |{{$kd_unik}}|    
-| Total             |{{$total}}|    
+| Harga             |{{ "Rp. ".number_format($product->product->product_price) }}|    
+| Kode Unik         |{{$product->kode_unik}}|    
+| Total             |{{ "Rp. ".number_format($total) }}|    
 | Pilihan Bank      |{{$product->bank->bank_name}}|    
 | No Rek            |{{$product->bank->bank_number}}|    
 | an. Nama          |{{$product->bank->bank_nasabah}}|    

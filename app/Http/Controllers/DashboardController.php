@@ -25,7 +25,7 @@ class DashboardController extends Controller
             ->count();
         
         $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
-            ->join('products', 'products.id', '=', 'users.product_id')
+            ->join('products', 'products.product_id', '=', 'users.product_id')
             ->where('user_id', $user_id)->first();
 
         $data['total_landingpage'] = \App\Landingpage::where('user_id', $user_id)->count();

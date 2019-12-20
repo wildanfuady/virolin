@@ -120,8 +120,9 @@
 
                         <div class="form-group">
 
-                          {{ Form::label('lp_header_image', 'Background') }}
-                          {{ Form::file('lp_header_image', ['class' => 'form-control']) }}
+                          {{ Form::label('lp_header_background', 'Background') }}
+                          <br>
+                          {{ Form::color('lp_header_background', '', ['type' =>'color']) }}
                         
                         </div>
 

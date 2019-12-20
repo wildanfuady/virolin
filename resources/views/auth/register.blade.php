@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2 class="judul">Register</h2>
+<h2 class="judul">REGISTER</h2>
 <div class="container">
     <div class="card" style="width:80%;margin:auto;padding-top: 2%">
 
@@ -10,13 +10,13 @@
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
                     <li class="active"><a href="#step-1">
-                            <p class="list-group-item-text"><b>(1)</b> Frist step description</p>
+                            <p class="list-group-item-text"><b>(1)</b> Choose Product</p>
                         </a></li>
                     <li class="disabled"><a href="#step-2">
-                            <p class="list-group-item-text"><b>(2)</b> Second step description</p>
+                            <p class="list-group-item-text"><b>(2)</b> Account & Payments</p>
                         </a></li>
                     <li class="disabled"><a href="#step-3">
-                            <p class="list-group-item-text"><b>(3)</b> Third step description</p>
+                            <p class="list-group-item-text"><b>(3)</b> Confirmation</p>
                         </a></li>
                 </ul>
             </div>
@@ -32,10 +32,9 @@
                                 <div class="content-title" style="margin-bottom:33px;">Order </div>
                                 <ul>
                                     @foreach($products as $item)
-                                        <li class="order-check radio-border">
-                                        <input type="radio" class="order" id="{{$item->id}}-option"
-                                    value="{{$item->id}}" name="product_id">
-                                    <label for="{{$item->id}}-option">{{$item->product_name}}</label>
+                                    <li class="order-check radio-border">
+                                        <input type="radio" class="order" id="{{$item->product_id}}-option" value="{{$item->product_id}}" name="product_id">
+                                        <label for="{{$item->product_id}}-option">{{$item->product_name}}</label>
 
                                     <div class="check">
                                         <div class="inside"></div>
@@ -52,9 +51,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos deleniti sint molestiae
-                                    exercitationem porro eum dolore, quidem tempore natus repudiandae maxime eius
-                                    dolorem adipisci quos, et aperiam, ratione laudantium aut!</p>
+                                <p>Jumlah maksimal database yang akan Anda dapatkan bergantung pilihan produk yang Anda pilih. <a href="#">Pelajari Dulu</a>.</p>
                             </div>
                             <div class="col-md-5">
                                 <div class="content-title">Harga </div>
@@ -64,9 +61,7 @@
                                     </div>
                                 </div>
                                 <hr>
-                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Rerum ratione nostrum totam
-                                    ipsa odit tempora repellendus, mollitia quod nam veritatis consequuntur, accusamus
-                                    qui dolorem ipsum excepturi voluptas. Quaerat, obcaecati id?</p>
+                                <p>Harga yang kami tawarkan adalah harga terbaik saat ini dibandingkan yang lainnya. Produk yang Anda pilih akan mempengaruhi harga yang tertera. <a href="#">Pelajari Dulu</a>.</p>
                             </div>
                             {{-- </div> --}}
                         </div>
@@ -151,7 +146,7 @@
                                     <input type="radio" class="bank" id="{{$itemBank->id}}-bank"
                                         value="{{$itemBank->id}}" name="bank_id">
                                     <label for="{{$itemBank->id}}-bank">{{$itemBank->bank_name}}</label>
-                                    <img src="{{ asset('image/'.$itemBank->bank_image) }}" class="img img-bank-{{Str::lower($itemBank->bank_name)}}" alt="">
+                                    <img src="{{ asset('storage/'.$itemBank->bank_image) }}" class="img img-bank-{{Str::lower($itemBank->bank_name)}}" alt="">
 
                                     <div class="check">
                                     </div>
@@ -175,7 +170,7 @@
                             <div class="content-title" style="margin-bottom:15px;">Pilihan Anda</div>
                             <h2 class="product-plan">
                                 <i class="fa fa-check-circle icon-fa" aria-hidden="true"></i>
-                                <span class="db">Jumlah DB</span>
+                                Jumlah Database: <span class="db"></span>
                             </h2>
                             <div class="card text-white bg-primary">
                                 <div class="card-body">
@@ -185,12 +180,12 @@
                             <br/>
                             <h2 class="product-plan">
                                 <i class="fa fa-check-circle icon-fa" aria-hidden="true"></i>
-                                No. Invoice anda: #<span class="invoice">Invoice</span>
+                                Invoice: #<span class="invoice">Invoice</span>
                                 <input type="hidden" name="invoice" id="invoice">
                             </h2>
                             <hr>
-                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio itaque recusandae
-                                inventore quos quasi consectetur eum ex cupiditate doloribus id.</p>
+                            <!-- <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio itaque recusandae
+                                inventore quos quasi consectetur eum ex cupiditate doloribus id.</p> -->
                         </div>
                         <div class="col-md-7">
                             <div class="warning-box">
@@ -201,7 +196,7 @@
                                 <i class="fa fa-exclamation-circle icon"></i>
                                 <p>
                                     Dengan mendaftar, Anda setuju dengan
-                                    <a href="#">Syarat, Ketentuan, Kebijakan dari ShareWA & Kebijakan Privasi</a>
+                                    <a href="#">Syarat, Ketentuan, Kebijakan dari Virolin & Kebijakan Privasi</a>
                                 </p>
                             </div>
                         </div>
@@ -277,7 +272,7 @@
 
         var products = [
             @foreach ($products as $item)
-                [ "{{ $item->id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}" ], 
+                [ "{{ $item->product_id }}", "{{ $item->product_name }}", "{{ $item->product_max_db }}", "{{ $item->product_price }}", "{{ $item->product_desc }}" ], 
             @endforeach
         ];
 
@@ -290,7 +285,10 @@
         $(".order").click(function () {
             for (i = 0; i < products.length; i++) {
                 if($(this).val() === products[i][0]){
-                    $('.db').text(products[i][2]);
+                    dbFormat = (Math.round(products[i][2] * 100) / 100000).toFixed(3);
+                    console.log(dbFormat);
+                    $('.db').text(dbFormat);
+                    $('.desc-product').text(products[i][4]);
                     $('.harga-text').text(formatter.format(products[i][3]));
                     randomA = Math.floor(Math.random() * (99999 - 10000));
                     randomB = Math.floor(Math.random() * (999 - 101));

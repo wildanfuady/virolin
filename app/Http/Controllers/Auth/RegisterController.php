@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
 use App\Products;
 use App\Banks;
+use App\Notifications\CustomVerifyEmail;
 
 class RegisterController extends Controller
 {
@@ -79,14 +80,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // var_dump($data);die();
+        $kode_unik = rand(100, 999);
+        // var_dump($kode_unik);die();
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'product_id' => $data['product_id']
         ]);
-
+        \Auth::loginUsingId($user->id);
         $user->userData = Order::create([
             'product_id' => $data['product_id'],
             'order_end' => Carbon::now()->add(2, 'day'),
@@ -94,8 +96,12 @@ class RegisterController extends Controller
             'order_payment' => $data['bank_id'],
             'user_id' => $user->id,
             'invoice' => $data['invoice'],
+            'kode_unik' => $kode_unik,
         ]);
-        
+        // var_dump($user->id);die();
+        $users['user'] = $user;
+        // var_dump($users);
+        // $user->notify(new CustomVerifyEmail($user));
         return $user;
     }
 

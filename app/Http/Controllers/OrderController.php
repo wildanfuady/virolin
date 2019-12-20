@@ -5,42 +5,47 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('admin');
+        $this->middleware('permission:orders-list|orders-create|orders-edit|orders-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:orders-create', ['only' => ['create','store']]);
+        $this->middleware('permission:orders-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:orders-delete', ['only' => ['destroy']]);
+    }
     public function index(Request $request)
     {
-        $product = $request->query('product');
-        $keyword = $request->query('keyword');
+        $keyword = $request->query('invoice');
         $paginate = 10;
         $where = [];
 
         if(!empty($keyword)) {
-            $where[] = ['order_invoice', 'LIKE', "%{$keyword}%"];
+            $where[] = ['invoice', 'LIKE', "%{$keyword}%"];
         }
 
-        if(!empty($product)) {
-            $where[] = ['product_id', $product];
-        }
-
-        $sql = "orders.id as order_id, orders.*, products.id as product_id, products.*, users.id as user_id, users.*";
+        $sql = "orders.id as order_id, orders.*, products.product_id as product_id, products.*, users.id as user_id, users.*";
 
         if(empty($keyword) && empty($product)) {
-            $orders = \App\Order::join('products', 'orders.product_id', '=', 'products.id')
+            $orders = \App\Order::join('products', 'orders.product_id', '=', 'products.product_id')
                 ->join('banks', 'orders.order_payment', '=', 'banks.id')
                 ->join('users', 'orders.user_id', '=', 'users.id')
                 ->selectRaw($sql)
                 ->paginate($paginate);
         }
         else {
-            $orders = \App\Order::join('products', 'orders.product_id', '=', 'products.id')
+            $orders = \App\Order::join('products', 'orders.product_id', '=', 'products.product_id')
                 ->join('banks', 'orders.order_payment', '=', 'banks.id')
                 ->join('users', 'orders.user_id', '=', 'users.id')
                 ->selectRaw($sql)
                 ->where($where)
                 ->paginate($paginate);
         }
-        return view('orders.index', compact('orders', 'keyword', 'product'));
+        return view('orders.index', compact('orders', 'keyword'));
     }
 
     public function warning()

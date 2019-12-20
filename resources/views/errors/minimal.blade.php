@@ -58,5 +58,8 @@
                 @yield('message')
             </div>
         </div>
+        <div class="flex-center position-ref full-height">
+            Silahkan login kembali
+        </div>
     </body>
 </html>

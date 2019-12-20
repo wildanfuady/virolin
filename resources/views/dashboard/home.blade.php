@@ -23,6 +23,7 @@
 <section class="content">
   <div class="container-fluid">
     <!-- Small boxes (Stat box) -->
+    @if(Auth::user()->status == "valid" || Auth::user()->status == "Valid")
     <div class="row">
       <div class="col-lg-3 col-6">
         <!-- small box -->
@@ -184,6 +185,26 @@
       </section>
       <!-- right col -->
     </div>
+    @else
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="alert alert-info alert-dismissible">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <h5>Selamat datang di Virolin</h5>
+              Dapatkan akses premium mendapatkan calon pembeli dalam satu website
+            </div>
+            Kini Anda akan segera menikmati semua fasilitas Virolin setelah melakukan 2 hal, yaitu:
+            <ol>
+              <li>Konfirmasi Pembayaran - <a href="{{ url('konfirmasi-pembayaran') }}">Konfirmasi Sekarang</a></li>
+              <li>Lengkapi Profile Anda - <a href="{{ url('setting') }}">Klik Di sini</a></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    @endif
     <!-- /.row (main row) -->
   </div><!-- /.container-fluid -->
 </section>

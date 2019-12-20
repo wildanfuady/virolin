@@ -14,7 +14,7 @@
                         </div>
                     @endif
 
-                    Silahkan cek email Anda dan lakukan verifikasi akun untuk melanjutkan register.
+                    Silahkan cek <b>Inbox / Spam</b> email Anda dan lakukan verifikasi akun untuk melanjutkan register.
                     Jika Anda belum mendapatkan email dari kami, <a href="{{ route('verification.resend') }}">klik di sini</a>.
                 </div>
             </div>
