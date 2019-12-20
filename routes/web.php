@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('reports/promo','ReportController@promo');
     Route::get('reports/user','ReportController@user');
 
-    Route::resource('settings','SettingController');
-    Route::get('settings/destroy/{id}','SettingController@destroy');
+    Route::resource('setting','SettingController');
+    Route::get('setting/destroy/{id}','SettingController@destroy');
     Route::get('payment/count_payment','PaymentController@countPayment');
     Route::resource('payment','PaymentController');
     
@@ -103,6 +103,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reports','ReportController');
     Route::get('report/trafik','ReportController@trafik');
     Route::get('report/share','ReportController@share');
+    Route::get('report/order','ReportController@order');
     Route::get('report/destroy/{id}','ReportController@destroy');
 
     Route::resource('testimonials','TestimonialController');

@@ -86,7 +86,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'product_id' => $data['product_id']
+            'product_id' => $data['product_id'],
+            'level' => 'user'
         ]);
         \Auth::loginUsingId($user->id);
         $user->userData = Order::create([
