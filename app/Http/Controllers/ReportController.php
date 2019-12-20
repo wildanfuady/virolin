@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use CekLog;
 
 class ReportController extends Controller
 {
@@ -20,7 +19,9 @@ class ReportController extends Controller
 
     public function order()
     {
-        return view('report.order');
+        $user_id = Auth::user()->id;
+        $data['order'] = \App\Order::with(['product'])->where('user_id', $user_id)->first();
+        return view('report.order', $data);
     }
 
     public function penjualan()

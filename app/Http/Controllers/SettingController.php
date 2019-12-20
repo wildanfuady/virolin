@@ -14,7 +14,9 @@ class SettingController extends Controller
      */
     public function index()
     {
-        return view('setting.index');
+        $user_id = Auth::user()->id;
+        $data['account'] = \App\User::with(['product'])->where('id', $user_id)->first();
+        return view('setting.index', $data);
     }
 
     /**

@@ -231,7 +231,7 @@
             @endcan
             <li class="nav-header">ACCOUNT</li>
             <li class="nav-item">
-                <a href="{{ route('settings.index') }}" class="nav-link">
+                <a href="{{ route('setting.index') }}" class="nav-link">
                   <i class="nav-icon far fa-circle text-secondary"></i>
                   <p class="text">Setting</p>
                 </a>
