@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+// use Input;
+use App\Veritrans\Veritrans;
 class PaymentController extends Controller
 {
     public function __construct()
@@ -15,6 +16,7 @@ class PaymentController extends Controller
         $this->middleware('permission:payments-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:payments-delete', ['only' => ['destroy']]);
     }
+
     public function showConfirmationPaymentForm()
     {
         $banks = \App\Banks::where('bank_status', 'Valid')->pluck('bank_name', 'id');
@@ -41,6 +43,7 @@ class PaymentController extends Controller
             return redirect()->back()->with('error', 'Invoice yang Anda masukan tidak terdaftar di database kami atau invoice Anda sudah expired.');
         
         } else {
+            $user_id = Auth::user()->id;
 
             $payment = new \App\Payment;
             $payment->payment_invoice = $request->invoice;
@@ -48,6 +51,8 @@ class PaymentController extends Controller
             $payment->payment_to_bank = $request->bank;
             $payment->payment_total_transfer = $request->jumlah_transfer;
             $payment->payment_tanggal_transfer = $request->tanggal_transfer;
+            $payment->user_id = $user_id;
+            $payment->payment_status = "Pending";
 
             if(!empty($request->bukti_transfer)){
                 $image = $request->bukti_transfer
@@ -68,10 +73,64 @@ class PaymentController extends Controller
         $data['detail_order'] = \App\Order::with(['user', 'product', 'bank'])->where('user_id', $id)->first();
         return view('payment.payment_detail', $data);
     }
-    
-    public function index()
+
+    public function countPayment()
     {
-        return view('payment.index');
+        // $id = Input::get("id");
+        // $sql = "SUM(payment_status) as total";
+        $payment = \App\Payment::where('payment_status', 'Pending')->count();
+        // $total = 
+        $data = $payment;
+        echo json_encode($data);
+        // echo "A";
+    }
+    
+    public function index(Request $request)
+    {
+        $paginate = 10;
+        $keyword = $request->query('keyword');
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['payment_invoice', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['payment_pengirim', 'LIKE', "%{$keyword}%"];
+        }
+        if(empty($keyword)) {
+            $data['payments'] = \App\Payment::orderBy('created_at', 'desc')->paginate($paginate);
+        }
+        else {
+            $data['payments'] = \App\Payment::orderBy('created_at', 'desc')->where($where)->orWhere($orwhere)->paginate($paginate);
+        }
+        $data['keyword'] = $keyword;
+        return view('payment.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);
+    }
+
+    public function show($id)
+    {
+        $data['payment'] = \App\Payment::with(['bank'])->where('payment_id', $id)->first();
+        return view('payment.show', $data);
+    }
+
+    public function edit($id)
+    {
+        $data['payment'] = \App\Payment::with(['bank'])->where('payment_id', $id)->first();
+        return view('payment.edit', $data);
+    }
+
+    public function update(Request $request, $id){
+        $this->validate($request,[
+            'status' => 'required',
+        ]);
+
+        $payment = \App\Payment::where('payment_id', $id)->first();
+        $payment->payment_status = $request->status;
+        $ubah = $payment->save();
+
+        if($ubah){
+            return redirect()->route('payment.index')->with('info', 'Updated Payment Successfully.');
+        }
+
     }
     
     public function confirmation()

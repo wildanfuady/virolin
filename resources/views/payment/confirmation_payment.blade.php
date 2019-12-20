@@ -42,7 +42,7 @@
                 </div>
                 <div class="alert alert-info alert-dismissible">
                     <h5><i class="icon fas fa-info"></i> Detail Pembayaran</h5>
-                    Anda dapat melihat detail pembayaran <a href="{{ url('payment/detail/'.Auth::user()->id) }}">di sini</a>.
+                    Anda dapat melihat detail pembayaran <a href="{{ url('payment/detail/'.Auth::user()->id) }}">di sini</a> atau gunakan <a href="#" id="payment-gateway" class="alert-link">payment gateway</a> untuk aktivasi otomatis. 
                 </div>
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -54,9 +54,10 @@
                         </ul>
                     </div>
                 @endif
+                    
                 <div class="row">
                     <div class="col-lg-6">
-
+                        {{ Form::hidden('id', Auth::user()->id, ['id' => 'user_id']) }}
                         <div class="form-group">
                             {{ Form::label('invoice', 'Invoice') }}
                             {{ Form::number('invoice', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Invoice']) }}
@@ -104,4 +105,48 @@
     </div>
 </div>
 
+<script>
+    $('#payment-gateway').click(function (event) {
+      event.preventDefault();
+      $(this).attr("disabled", "disabled");
+      var user_id = 
+    $.ajax({
+      
+      url: './snaptoken',
+      cache: false,
+      success: function(data) {
+        //location = data;
+        console.log('token = '+data);
+        
+        var resultType = document.getElementById('result-type');
+        var resultData = document.getElementById('result-data');
+        function changeResult(type,data){
+          $("#result-type").val(type);
+          $("#result-data").val(JSON.stringify(data));
+          //resultType.innerHTML = type;
+          //resultData.innerHTML = JSON.stringify(data);
+        }
+        snap.pay(data, {
+          
+          onSuccess: function(result){
+            changeResult('success', result);
+            console.log(result.status_message);
+            console.log(result);
+            $("#payment-form").submit();
+          },
+          onPending: function(result){
+            changeResult('pending', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
+          },
+          onError: function(result){
+            changeResult('error', result);
+            console.log(result.status_message);
+            $("#payment-form").submit();
+          }
+        });
+      }
+    });
+  });
+  </script>
 @endsection

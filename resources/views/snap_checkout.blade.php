@@ -1,9 +1,7 @@
 <html>
 <title>Checkout</title>
   <head>
-    <script type="text/javascript"
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
-            data-client-key="<CLIENT-KEY>"></script>
+  <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   </head>
   <body>
@@ -16,8 +14,7 @@
     </form>
     
     <button id="pay-button">Pay!</button>
-    <script type="text/javascript">
-  
+    <script>
     $('#pay-button').click(function (event) {
       event.preventDefault();
       $(this).attr("disabled", "disabled");
@@ -26,22 +23,18 @@
       
       url: './snaptoken',
       cache: false,
-
       success: function(data) {
         //location = data;
-
         console.log('token = '+data);
         
         var resultType = document.getElementById('result-type');
         var resultData = document.getElementById('result-data');
-
         function changeResult(type,data){
           $("#result-type").val(type);
           $("#result-data").val(JSON.stringify(data));
           //resultType.innerHTML = type;
           //resultData.innerHTML = JSON.stringify(data);
         }
-
         snap.pay(data, {
           
           onSuccess: function(result){
@@ -64,9 +57,7 @@
       }
     });
   });
-
   </script>
-
 
 </body>
 </html>

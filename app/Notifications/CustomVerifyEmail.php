@@ -68,9 +68,9 @@ class CustomVerifyEmail extends Notification
         }
 
         return (new MailMessage)
-            ->subject(Lang::getFromJson('Selangkah Lagi, Ayo Aktivasi Akun Anda!'))
+            ->subject(Lang::getFromJson('Form Virolin: Selangkah Lagi, Ayo Aktivasi Akun Anda!'))
             ->greeting(Lang::getFromJson('Hallo '.$user))
-            ->line(Lang::getFromJson('Terima kasih sudah mendaftar. Hanya tinggal dua langkah lagi untuk bisa menikmati fitur-fitur ShareWA.'))
+            ->line(Lang::getFromJson('Terima kasih sudah mendaftar. Hanya tinggal dua langkah lagi untuk bisa menikmati fitur-fitur Virolin.'))
             ->action(Lang::getFromJson('Aktivasi Sekarang'), $verificationUrl)
             ->line(Lang::getFromJson('Adapun rincian produk yang Anda pesan adalah sebagai berikut:'));
     }

@@ -18,10 +18,10 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => 'Admin', 
-            'email' => 'admin@gmail.com', 
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 
-            'email_verified_at' => now(), 
+            'name' => 'Admin',
+            'email' => 'admin@gmail.com',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
+            'email_verified_at' => now(),
             'status' => 'Valid',
             'level' => 'admin',
             'remember_token' => Str::random(10),
@@ -69,27 +69,27 @@ class DatabaseSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
         DB::table('products')->insert([
-            'product_name' => 'Pro 1', 
-            'product_desc' => 'Lorem ipsum', 
-            'product_max_db' => '3000', 
+            'product_name' => 'Pro 1',
+            'product_desc' => 'Lorem ipsum',
+            'product_max_db' => '3000',
             'product_status' => 'Valid',
             'product_price' => '100000',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         DB::table('products')->insert([
-            'product_name' => 'Pro 2', 
-            'product_desc' => 'Lorem ipsum', 
-            'product_max_db' => '5000', 
+            'product_name' => 'Pro 2',
+            'product_desc' => 'Lorem ipsum',
+            'product_max_db' => '5000',
             'product_status' => 'Valid',
             'product_price' => '150000',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         DB::table('products')->insert([
-            'product_name' => 'Pro 3', 
-            'product_desc' => 'Lorem ipsum', 
-            'product_max_db' => '10000', 
+            'product_name' => 'Pro 3',
+            'product_desc' => 'Lorem ipsum',
+            'product_max_db' => '10000',
             'product_status' => 'Valid',
             'product_price' => '250000',
             'created_at' => Carbon::now(),
@@ -170,8 +170,8 @@ class DatabaseSeeder extends Seeder
             'dashboard-admin',
             'dashboard-user',
          ];
- 
- 
+
+
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }

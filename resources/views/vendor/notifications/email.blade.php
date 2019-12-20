@@ -78,7 +78,7 @@ Mohon ditransfer sejumlah Rp. {{ number_format($total) }} ,- sebelum {{ date('d-
 
 Setelah melakukan transfer, Anda bisa melakukan konfirmasi pembayaran melalui tombol di bawah ini:
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/konfirmasi-pembayaran', 'color' => $color])
+@component('mail::button', ['url' => 'https://virolin.ilmucoding.com/konfirmasi-pembayaran', 'color' => $color])
 Konfirmasi Pembayaran
 @endcomponent
 

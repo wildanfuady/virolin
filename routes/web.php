@@ -14,6 +14,12 @@
 Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/kirimemail','KirimEmailController@index');
+
+Route::post('notification/handling', 'SnapController@notification')->name('notification.handling');
+Route::post('payment/finish', 'SnapController@finish')->name('payment.finish');
+Route::post('payment/unfinish', 'SnapController@unfinish')->name('payment.unfinish');
+Route::post('payment/unfinish', 'SnapController@error')->name('payment.error');
+
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
@@ -25,6 +31,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/konfirmasi-pembayaran', 'PaymentController@showConfirmationPaymentForm');
     Route::post('/konfirmasi-pembayaran/store', 'PaymentController@confirmationPayment');
     Route::get('/payment/detail/{id}', 'PaymentController@paymentDetail');
+    
+    // Midtrans
+	Route::get('snap', 'SnapController@snap');
+	Route::get('snaptoken', 'SnapController@token');
     
     // Module Customer Admin
     Route::resource('users','UsersController');
@@ -58,6 +68,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('settings','SettingController');
     Route::get('settings/destroy/{id}','SettingController@destroy');
+    Route::get('payment/count_payment','PaymentController@countPayment');
+    Route::resource('payment','PaymentController');
+    
+    Route::get('payment/destroy/{id}','PaymentController@destroy');
     
     // Module User 
     Route::resource('landingpages','LandingpageController');

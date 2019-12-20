@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Veritrans\Midtrans;
+use App\Veritrans\Veritrans;
 
 class SnapController extends Controller
 {
     public function __construct()
     {   
-        Midtrans::$serverKey = 'your server key';
-        //set is production to true for production mode
-        Midtrans::$isProduction = false;
+        Midtrans::$serverKey = config('services.midtrans.serverKey');
+        Midtrans::$isProduction = config('services.midtrans.isProduction');
+        Veritrans::$serverKey = config('services.midtrans.serverKey');
+        Veritrans::$isProduction = config('services.midtrans.isProduction');
+        //Midtrans::$isSanitized = config('services.midtrans.isSanitized');
+        //Midtrans::$is3ds = config('services.midtrans.is3ds');
     }
 
     public function snap()
@@ -23,58 +28,58 @@ class SnapController extends Controller
 
     public function token() 
     {
-        error_log('masuk ke snap token dri ajax');
+        error_log(Veritrans::$isProduction);
         $midtrans = new Midtrans;
 
+        $user_id = Auth::user()->id;
+
+        $order = \App\Order::where('user_id', $user_id)->first();
+
+        $total = $order->kode_unik + $order->product->product_price;
+        error_log($total);
         $transaction_details = array(
             'order_id'      => uniqid(),
-            'gross_amount'  => 200000
+            'gross_amount'  => $total
         );
 
         // Populate items
         $items = [
             array(
-                'id'        => 'item1',
-                'price'     => 100000,
+                'id'        => $order->product->product_id,
+                'price'     => $total,
                 'quantity'  => 1,
-                'name'      => 'Adidas f50'
+                'name'      => $order->product->product_name
             ),
-            array(
-                'id'        => 'item2',
-                'price'     => 50000,
-                'quantity'  => 2,
-                'name'      => 'Nike N90'
-            )
         ];
 
         // Populate customer's billing address
         $billing_address = array(
-            'first_name'    => "Andri",
-            'last_name'     => "Setiawan",
-            'address'       => "Karet Belakang 15A, Setiabudi.",
-            'city'          => "Jakarta",
-            'postal_code'   => "51161",
-            'phone'         => "081322311801",
+            'first_name'    => $order->user->name,
+            'last_name'     => "",
+            'address'       => "",
+            'city'          => "",
+            'postal_code'   => "",
+            'phone'         => "",
             'country_code'  => 'IDN'
             );
 
         // Populate customer's shipping address
         $shipping_address = array(
-            'first_name'    => "John",
-            'last_name'     => "Watson",
-            'address'       => "Bakerstreet 221B.",
-            'city'          => "Jakarta",
-            'postal_code'   => "51162",
-            'phone'         => "081322311801",
+            'first_name'    => $order->user->name,
+            'last_name'     => "",
+            'address'       => "",
+            'city'          => "",
+            'postal_code'   => "",
+            'phone'         => "",
             'country_code'  => 'IDN'
             );
 
         // Populate customer's Info
         $customer_details = array(
-            'first_name'      => "Andri",
-            'last_name'       => "Setiawan",
-            'email'           => "andrisetiawan@asdasd.com",
-            'phone'           => "081322311801",
+            'first_name'      => $order->user->name,
+            'last_name'       => "",
+            'email'           => $order->user->email,
+            'phone'           => "",
             'billing_address' => $billing_address,
             'shipping_address'=> $shipping_address
             );
@@ -98,6 +103,16 @@ class SnapController extends Controller
             'credit_card'        => $credit_card,
             'expiry'             => $custom_expiry
         );
+
+        $shipping_address = \App\ShippingAddress::create([
+            'order_id' => $order->id,
+            'first_name' => $order->user->name
+        ]);
+
+        $billing_address = \App\BillingAddress::create([
+            'order_id' => $order->id,
+            'first_name' => $order->user->name
+        ]);
     
         try
         {
@@ -115,16 +130,36 @@ class SnapController extends Controller
     {
         $result = $request->input('result_data');
         $result = json_decode($result);
-        echo $result->status_message . '<br>';
-        echo 'RESULT <br><pre>';
-        var_dump($result);
-        echo '</pre>' ;
+
+        if(!empty($result->order_id)) {
+            $order = \App\Order::with(['product', 'user'])->where('id', $result->order_id)->first();
+            // $plan = app('rinvex.subscriptions.plan')->find($order->plan_id);
+            /*echo $result->status_message . '<br>';
+            echo 'RESULT <br><pre>';
+            var_dump($result);
+            echo '</pre>' ;*/
+
+            return view('payment.finish', compact('result', 'order'));
+        }
+        else {
+            var_dump($result);
+        }
+    }
+
+    public function unfinish(Request $request)
+    {
+        echo 'unfinish';
+    }
+
+    public function error(Request $request)
+    {
+        echo 'error';
     }
 
     public function notification()
     {
         $midtrans = new Midtrans;
-        echo 'test notification handler';
+        // echo 'test notification handler';
         $json_result = file_get_contents('php://input');
         $result = json_decode($json_result);
 
