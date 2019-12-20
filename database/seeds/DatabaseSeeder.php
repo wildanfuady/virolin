@@ -5,7 +5,6 @@ use Illuminate\Database\Seeder;
 use App\Products;
 use App\Banks;
 use App\User;
-use DB;
 use App\Subscribers;
 use Spatie\Permission\Models\Permission;
 

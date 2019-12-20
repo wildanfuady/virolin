@@ -68,6 +68,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('settings','SettingController');
     Route::get('settings/destroy/{id}','SettingController@destroy');
+    Route::get('payment/count_payment','PaymentController@countPayment');
+    Route::resource('payment','PaymentController');
+    
+    Route::get('payment/destroy/{id}','PaymentController@destroy');
     
     // Module User 
     Route::resource('landingpages','LandingpageController');

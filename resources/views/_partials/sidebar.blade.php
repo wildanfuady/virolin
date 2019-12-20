@@ -95,6 +95,14 @@
               </a>
             </li>
             @endcan
+            @can('payments-list')
+            <li class="nav-item">
+              <a href="{{ route('payment.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-file-invoice-dollar"></i>
+                  <p>Manage Payment <span class="right badge badge-danger count_payment">New</span></p>
+              </a>
+            </li>
+            @endcan
             @can('products-list')
             <li class="nav-item">
               <a href="{{ route('products.index') }}" class="nav-link">
@@ -241,3 +249,17 @@
         </nav>
     </div>
 </aside>
+<script>
+$(document).ready(function() {
+  
+  // Get Jumlah Konfirmasi Pembayaran
+  $.ajax({
+    type : "GET",
+    url  : '/payment/count_payment',
+    dataType : "JSON",
+    success: function (data) {
+      $('.count_payment').html(data);
+    }
+  });
+});
+</script>
