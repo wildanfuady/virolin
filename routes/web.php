@@ -15,13 +15,14 @@ Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/kirimemail','KirimEmailController@index');
 
-Route::post('payment/finish', 'SnapController@finish')->name('payment.finish');
-Route::post('payment/unfinish', 'SnapController@unfinish')->name('payment.unfinish');
-Route::post('payment/error', 'SnapController@error')->name('payment.error');
+Route::post('finish', 'SnapController@finish')->name('payment.finish');
+Route::post('unfinish', 'SnapController@unfinish')->name('payment.unfinish');
+Route::post('error', 'SnapController@error')->name('payment.error');
 
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('finish', 'SnapController@finish')->name('finish');
 
     Route::get('/dashboard', 'DashboardController@dashboard');
     Route::get('/home', 'DashboardController@index');

@@ -42,7 +42,7 @@
                                     <td>{{ $row->product->product_name }}</td>
                                     <td>{{ $row->order_date }}</td>
                                     <td>{{ $row->order_end }}</td>
-                                    <td>{{ $row->order_ }}</td>
+                                    <td>{{ $row->order_status }}</td>
                                 </tr>
                                 @endforeach
                             </table>
