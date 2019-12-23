@@ -15,6 +15,11 @@ class SettingController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
+        $data['total_subscribers'] = \App\Subscribers::where('user_id', $user_id)
+            ->count();
+
+        $data['total_landingpage'] = \App\Landingpage::where('user_id', $user_id)->count();
+
         $data['account'] = \App\User::with(['product'])->where('id', $user_id)->first();
         return view('setting.index', $data);
     }

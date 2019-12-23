@@ -35,10 +35,10 @@
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                        <b>Subscriber</b> <a class="float-right">1,322</a>
+                        <b>Subscriber</b> <a class="float-right">{{ $total_subscribers }}</a>
                         </li>
                         <li class="list-group-item">
-                        <b>Landingpage</b> <a class="float-right">543</a>
+                        <b>Landingpage</b> <a class="float-right">{{ $total_landingpage }}</a>
                         </li>
                     </ul>
 
@@ -67,17 +67,17 @@
                                     <td>{{ number_format($account->product->product_max_db) }}</td>
                                 </tr>
                                 <tr>
-                                    <th width="23%">Status Produk</th>
-                                    <td width="10px" class="text-center">:</td>
-                                    <td>{{ $account->product->product_status }}</td>
-                                </tr>
-                                <tr>
                                     <th width="23%">Harga Produk</th>
                                     <td width="10px" class="text-center">:</td>
                                     <td>{{ "Rp. ".number_format($account->product->product_price) }}</td>
                                 </tr>
                                 <tr>
-                                    <th></th>
+                                    <th width="23%">Status User</th>
+                                    <td width="10px" class="text-center">:</td>
+                                    <td>{{ $account->status }}</td>
+                                </tr>
+                                <tr>
+                                  <th></th>
                                     <td></td>
                                     <td></td>
                                 </tr>

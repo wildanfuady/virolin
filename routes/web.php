@@ -111,4 +111,6 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
     Route::resource('/usersubscribers','User\SubscribersController');
+
+    Route::get('promo/fetchpromo','DashboardController@fecth_promo');
 });

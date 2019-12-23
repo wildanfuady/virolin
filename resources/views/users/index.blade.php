@@ -83,7 +83,7 @@
                                 </td>
                                 <td> {{$item->email}} </td>
                                 <td> {{$item->status}} </td>
-                                <td> {{$item->masa_aktif}} </td>
+                                <td> {{ date('d-m-Y', strtotime($item->masa_aktif)) }} </td>
                                 <td>
                                     @php
                                         $expired = strtotime($date_expired);

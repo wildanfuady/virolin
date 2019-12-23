@@ -41,4 +41,14 @@ class DashboardController extends Controller
     {
         return view('dashboard.dashboard');
     }
+
+    
+    public function fecth_promo()
+    {
+        // Fetch all records
+        $promo['data'] = \App\Promo::orderBy('created_at', 'desc')->limit(5)->get();
+
+        echo json_encode($promo);
+        exit;
+    }
 }

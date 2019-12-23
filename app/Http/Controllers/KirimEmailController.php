@@ -11,9 +11,11 @@ class KirimEmailController extends Controller
     public function index(){
 		$nama = "Contoh Nama";
 		$website = "Contoh Website";
-		Mail::to("narulhidayah9923@gmail.com")->send(new KirimEmail($nama, $website));
+		$kirim = Mail::to("wildanfuady@gmail.com")->send(new KirimEmail($nama, $website));
  
-		return "Email telah dikirim";
+		if($kirim){
+			return "Email telah dikirim";
+		}
  
 	}
 }

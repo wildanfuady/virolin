@@ -133,6 +133,7 @@ class SnapController extends Controller
 
         if(!empty($result->order_id)) {
             $order = \App\Order::with(['product', 'user'])->where('id', $result->order_id)->first();
+            // Update status order
             // $plan = app('rinvex.subscriptions.plan')->find($order->plan_id);
             /*echo $result->status_message . '<br>';
             echo 'RESULT <br><pre>';

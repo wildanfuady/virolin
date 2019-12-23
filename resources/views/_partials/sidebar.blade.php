@@ -99,7 +99,7 @@
             <li class="nav-item">
               <a href="{{ route('payment.index') }}" class="nav-link">
                   <i class="nav-icon fas fa-file-invoice-dollar"></i>
-                  <p>Manage Payment <span class="right badge badge-danger count_payment">New</span></p>
+                  <p>Manage Payment <span class="right badge badge-danger count_payment">0</span></p>
               </a>
             </li>
             @endcan

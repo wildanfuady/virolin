@@ -60,6 +60,23 @@
                     </div>
                 </div>
                 <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">Ubah Masa Aktif</label>
+                    <div class="col-sm-10">
+                        <div class="icheck-success d-inline">
+                            {{ Form::radio('masa_aktif', 'Tidak', false, array('class' => 'name', 'id' => "radioSuccess1", 'checked')) }}
+                            <label for="radioSuccess1">
+                                Tidak
+                            </label>
+                        </div>
+                        <div class="icheck-success d-inline">
+                            {{ Form::radio('masa_aktif', 'Ya', false, array('class' => 'name', 'id' => "radioSuccess2")) }}
+                            <label for="radioSuccess2">
+                                Ya
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-2 col-form-label">Role</label>
                     <div class="col-sm-10">
                         {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}

@@ -136,6 +136,7 @@ class UsersController extends Controller
             'email' => 'required|email',
             'product_id' => 'required|numeric',
             'status' => 'required|string',
+            'masa_aktif' => 'required',
         ]);
 
         $user = \App\User::find($id);
@@ -143,6 +144,11 @@ class UsersController extends Controller
         $user->email = $request->get('email');
         $user->status = $request->get('status');
         $user->product_id = $request->get('product_id');
+
+        if($request->get('masa_aktif') == "Ya"){
+            $user->masa_aktif = Carbon::now()->add(365, 'days');
+        }
+        
         $user->save();
         if(!empty($request->input('roles'))){
             $user->assignRole($request->input('roles'));
