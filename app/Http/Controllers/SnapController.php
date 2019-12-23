@@ -140,7 +140,16 @@ class SnapController extends Controller
 
     public function finish()
     {
-        return view('payment.finish');
+        if(Auth::user() != null)
+        {
+          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->get();
+          return view('payment.finish',compact('order'));
+        }
+        else
+        {
+          abort(404);
+        }
+        
     }
 
     public function unfinish(Request $request)
