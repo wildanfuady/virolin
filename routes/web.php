@@ -15,9 +15,9 @@ Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/kirimemail','KirimEmailController@index');
 
-Route::get('payment/finish', 'SnapController@finish')->name('payment.finish');
-Route::get('payment/unfinish', 'SnapController@unfinish')->name('payment.unfinish');
-Route::get('payment/error', 'SnapController@error')->name('payment.error');
+Route::post('payment/finish', 'SnapController@finish')->name('payment.finish');
+Route::post('payment/unfinish', 'SnapController@unfinish')->name('payment.unfinish');
+Route::post('payment/error', 'SnapController@error')->name('payment.error');
 
 Auth::routes(['verify' => true]);
 
