@@ -9,16 +9,27 @@ use App\Http\Controllers\Controller;
 use App\Veritrans\Midtrans;
 use App\Veritrans\Veritrans;
 
+use Veritrans_Config;
+use Veritrans_Snap;
+use Veritrans_Notification;
+
 class SnapController extends Controller
 {
-    public function __construct()
+    protected $request;
+    public function __construct(Request $request)
     {   
+        $this->request = $request;
+
         Midtrans::$serverKey = config('services.midtrans.serverKey');
         Midtrans::$isProduction = config('services.midtrans.isProduction');
         Veritrans::$serverKey = config('services.midtrans.serverKey');
         Veritrans::$isProduction = config('services.midtrans.isProduction');
         //Midtrans::$isSanitized = config('services.midtrans.isSanitized');
         //Midtrans::$is3ds = config('services.midtrans.is3ds');
+        Veritrans_Config::$serverKey = config('services.midtrans.serverKey');
+        Veritrans_Config::$isProduction = config('services.midtrans.isProduction');
+        Veritrans_Config::$isSanitized = config('services.midtrans.isSanitized');
+        Veritrans_Config::$is3ds = config('services.midtrans.is3ds');
     }
 
     public function snap()
@@ -37,8 +48,9 @@ class SnapController extends Controller
 
         $total = $order->kode_unik + $order->product->product_price;
         error_log($total);
+
         $transaction_details = array(
-            'order_id'      => uniqid(),
+            'order_id'      => $order->invoice,
             'gross_amount'  => $total
         );
 
@@ -156,18 +168,72 @@ class SnapController extends Controller
         echo 'error';
     }
 
-    public function notification()
+    public function notification(Request $request)
     {
-        $midtrans = new Midtrans;
-        // echo 'test notification handler';
-        $json_result = file_get_contents('php://input');
-        $result = json_decode($json_result);
+       $notif = new Veritrans_Notification();
+       \DB::transaction(function() use($notif) {
+ 
+          $transaction      = $notif->transaction_status;
+          $type             = $notif->payment_type;
+          $orderId          = $notif->order_id;
+          $fraud            = $notif->fraud_status;
+          $data             = \App\Order::where('invoice',$orderId)->first();
+          $user             = \App\User::findOrFail($data->user_id);
 
-        if($result){
-        $notif = $midtrans->status($result->order_id);
-        }
+          if ($transaction == 'capture') 
+          {
+            if ($type == 'credit_card') 
+            {
+              if($fraud == 'challenge')
+              {
+                $data->setPending();
+              }
+              else 
+              {
+                $user->setSuccess($user);
+                $data->setSuccess();
+              }
+            }
+          } 
+          elseif ($transaction == 'settlement') 
+          {
+                $user->setSuccess($user);
+                $data->setSuccess();
+          } 
+          elseif($transaction == 'pending')
+          {
+                $data->setPending();
+          } 
+          elseif ($transaction == 'deny') 
+          {
+                $data->setFailed();
+          } 
+          elseif ($transaction == 'expire') 
+          {
+                $data->setExpired();
+          } 
+          elseif ($transaction == 'cancel') 
+          {
+                $data->setFailed();
+          }
+ 
+        });
+ 
+        return;
+    }
 
-        error_log(print_r($result,TRUE));
+    // public function notification()
+    // {
+        // $midtrans = new Midtrans;
+        // // echo 'test notification handler';
+        // $json_result = file_get_contents('php://input');
+        // $result = json_decode($json_result);
+
+        // if($result){
+        // $notif = $midtrans->status($result->order_id);
+        // }
+
+        // error_log(print_r($result,TRUE));
 
         /*
         $transaction = $notif->transaction_status;
@@ -202,5 +268,5 @@ class SnapController extends Controller
           echo "Payment using " . $type . " for transaction order_id: " . $order_id . " is denied.";
         }*/
    
-    }
+    // }
 }    
