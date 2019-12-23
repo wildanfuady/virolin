@@ -138,24 +138,10 @@ class SnapController extends Controller
         }
     }
 
-    public function finish(Request $request)
+    public function finish()
     {
-        $result = $request->input('result_data');
-        $result = json_decode($result);
-
-        if(!empty($result->order_id)) {
-            $order = \App\Order::with(['product', 'user'])->where('id', $result->order_id)->first();
-            // $plan = app('rinvex.subscriptions.plan')->find($order->plan_id);
-            /*echo $result->status_message . '<br>';
-            echo 'RESULT <br><pre>';
-            var_dump($result);
-            echo '</pre>' ;*/
-
-            return view('payment.finish', compact('result', 'order'));
-        }
-        else {
-            var_dump($result);
-        }
+        $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->get();
+        return view('payment.finish',compact('order'));
     }
 
     public function unfinish(Request $request)
