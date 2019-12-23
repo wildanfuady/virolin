@@ -112,3 +112,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
     Route::resource('/usersubscribers','User\SubscribersController');
 });
+
+Route::get('/cache/clear',function(){
+    $exitCode1  = Artisan::call('config:cache');
+    $exitCode2  = Artisan::call('route:clear');
+    $exitCode3  = Artisan::call('view:clear');
+    return 'sukses';
+});
