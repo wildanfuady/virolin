@@ -114,7 +114,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $modelHasRole = DB::table('model_has_roles')
                         ->insert([
                             'role_id'    => 2,
-                            'model_type' => '\App\User',
+                            'model_type' => 'App\User',
                             'model_id'   => $user->id
                         ]);
     }
