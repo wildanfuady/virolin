@@ -19,8 +19,16 @@ class PaymentController extends Controller
 
     public function showConfirmationPaymentForm()
     {
-        $banks = \App\Banks::where('bank_status', 'Valid')->pluck('bank_name', 'id');
-        return view('payment.confirmation_payment', compact('banks'));
+        if(Auth::user()->status == "valid")
+        {
+            return redirect()->route('finish');
+        } 
+        else
+        {
+            $banks = \App\Banks::where('bank_status', 'Valid')->pluck('bank_name', 'id');
+            return view('payment.confirmation_payment', compact('banks'));
+        }
+        
     }
 
     public function confirmationPayment(Request $request)
