@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
-<head>
-  <meta charset="utf-8">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Administrator Virolin</title>
@@ -20,7 +20,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('template/dist/css/adminlte.min.css') }}">
   <!-- Midtrans -->
-  <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+  <script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
   <!-- jQuery -->
   <script src="{{ asset('template/plugins/jquery/jquery.min.js') }}"></script>
   <style>

@@ -15,14 +15,14 @@ Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
 Route::get('/kirimemail','KirimEmailController@index');
 
-Route::post('notification/handling', 'SnapController@notification')->name('notification.handling');
-Route::post('payment/finish', 'SnapController@finish')->name('payment.finish');
-Route::post('payment/unfinish', 'SnapController@unfinish')->name('payment.unfinish');
-Route::post('payment/unfinish', 'SnapController@error')->name('payment.error');
+Route::post('finish', 'SnapController@finish')->name('payment.finish');
+Route::post('unfinish', 'SnapController@unfinish')->name('payment.unfinish');
+Route::post('error', 'SnapController@error')->name('payment.error');
 
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('finish', 'SnapController@finish')->name('finish');
 
     Route::get('/dashboard', 'DashboardController@dashboard');
     Route::get('/home', 'DashboardController@index');
@@ -113,4 +113,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/usersubscribers','User\SubscribersController');
 
     Route::get('promo/fetchpromo','DashboardController@fecth_promo');
+});
+
+Route::get('/cache/clear',function(){
+    $exitCode1  = Artisan::call('config:cache');
+    $exitCode2  = Artisan::call('route:clear');
+    $exitCode3  = Artisan::call('view:clear');
+    return 'sukses';
 });

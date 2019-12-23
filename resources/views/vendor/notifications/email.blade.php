@@ -41,13 +41,8 @@
 
 <?php
     // var_dump($data['name']);die();
-    if(Auth::user()['id'] == null){
-        $user = $user->name;
-        $user_id = $user->id;
-    }else{
-        $user = Auth::user()['name']; 
-        $user_id = Auth::user()['id'];
-    }
+    $user = Auth::user()['name']; 
+    $user_id = Auth::user()['id'];
     $product = \App\Order::with(['user','product','bank'])->where('user_id', $user_id)->first();
     // die($user_id);
     $kd_unik = rand(100, 999);
@@ -78,7 +73,7 @@ Mohon ditransfer sejumlah Rp. {{ number_format($total) }} ,- sebelum {{ date('d-
 
 Setelah melakukan transfer, Anda bisa melakukan konfirmasi pembayaran melalui tombol di bawah ini:
 
-@component('mail::button', ['url' => 'http://127.0.0.1:8000/konfirmasi-pembayaran', 'color' => $color])
+@component('mail::button', ['url' => 'https://virolin.ilmucoding.com/konfirmasi-pembayaran', 'color' => $color])
 Konfirmasi Pembayaran
 @endcomponent
 

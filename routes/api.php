@@ -17,6 +17,9 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 
+// 
+Route::post('notification/handling', 'SnapController@notification');
+
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 Route::post('logout', 'AuthController@logout');

@@ -30,4 +30,28 @@ class Order extends Model
     {
         return $this->belongsTo('App\Banks','order_payment');
     }
+
+    public function setPending()
+    {
+        $this->attributes['order_status'] = 'Pending';
+        self::save();
+    }
+ 
+    public function setSuccess()
+    {
+        $this->attributes['order_status'] = 'Success';
+        self::save();
+    }
+ 
+    public function setFailed()
+    {
+        $this->attributes['order_status'] = 'Failed';
+        self::save();
+    }
+ 
+    public function setExpired()
+    {
+        $this->attributes['order_status'] = 'Expired';
+        self::save();
+    }
 }

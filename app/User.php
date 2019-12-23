@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use App\Notifications\CustomVerifyEmail;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -101,5 +102,20 @@ class User extends Authenticatable implements MustVerifyEmail
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPasswordNotification($token));
+    }
+
+    public function setSuccess(User $user)
+    {
+        // set Status User Menjadi Valid
+        $this->attributes['status'] = 'valid';
+        self::save();
+        
+        // create data ModelHasRole
+        $modelHasRole = DB::table('model_has_roles')
+                        ->insert([
+                            'role_id'    => 2,
+                            'model_type' => 'App\User',
+                            'model_id'   => $user->id
+                        ]);
     }
 }
