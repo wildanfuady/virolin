@@ -19,9 +19,6 @@ use Illuminate\Http\Request;
 
 // 
 Route::post('notification/handling', 'SnapController@notification');
-Route::post('payment/finish', 'SnapController@finish');
-Route::post('payment/unfinish', 'SnapController@unfinish');
-Route::post('payment/error', 'SnapController@error');
 
 Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
