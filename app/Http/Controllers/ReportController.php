@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ReportController extends Controller
 {
@@ -46,7 +47,15 @@ class ReportController extends Controller
 
     public function user()
     {
-        return view('report.user');
+        $time_now = Carbon::now();
+        // Chart jumlah users
+        $data['total_users'] = \App\User::where('level','<>','admin')->count();
+        // Chart user aktif, kadaluarsa, non aktif
+        $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->count();
+        $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
+        $data['users_nonaktif'] = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
+
+        return view('report.user', $data);
     }
 
     /**
