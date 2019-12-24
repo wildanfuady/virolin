@@ -59,13 +59,15 @@
                                 <tr>
                                     <td>Payment Type</td>
                                     <td>:</td>
-                                    <td>{{ $order->transaction_id }}</td>
+                                    <td>{{ $order->payment_type }}</td>
                                 </tr>
-                                @if($order->payment_type == "echannel")
+                                @if($order->order_status == 'Waiting for payment')
                                 <tr>
                                     <td>Instruction</td>
                                     <td>:</td>
-                                    <td><a href="https://app.sandbox.midtrans.com/snap/v1/transactions/c12e1945-181c-4bdf-97a6-7bfee4aa8437/pdf" target="_blank">Lihat</a> </td>
+                                    <td>@if ($order->order_status == 'Waiting for payment')
+                    <button class="btn btn-success btn-sm" onclick="snap.pay('{{ $order->transaction_id }}')">Complete Payment</button>
+                    @endif</td>
                                 </tr>
                                 @endif
                             </table>

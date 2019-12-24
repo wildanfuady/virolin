@@ -139,6 +139,9 @@ class SnapController extends Controller
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
             //return redirect($vtweb_url);
+            $order->update([
+                'transaction_id' => $snap_token 
+            ]);
             echo $snap_token;
         } 
         catch (Exception $e) 
@@ -199,8 +202,7 @@ class SnapController extends Controller
           $user             = \App\User::findOrFail($data->user_id);
             
           $data->update([
-             'payment_type' => $notif->payment_type,
-             'transaction_id' => $notif->transaction_id
+             'payment_type' => $notif->payment_type
           ]);
           
           if ($transaction == 'capture') 
