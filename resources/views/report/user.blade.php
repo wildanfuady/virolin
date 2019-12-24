@@ -84,7 +84,14 @@
                                 <ul class="chart-legend clearfix">
                                     {{-- <li><i class="far fa-circle text-success"></i> Users Aktif: {{$users_aktif}}</li> --}}
                                     @foreach ($users_product as $productItem)
-                                        <li><i class=""></i> {{$productItem->product_name}} </li>
+                                        <li>
+                                            <i class=""></i> {{$productItem->product_name}} : 
+                                            @foreach ($users_product_count as $productItemCount)
+                                                @if ($productItem->product_id == $productItemCount->product_id)
+                                                    {{ $productItemCount->total }}
+                                                @endif
+                                            @endforeach
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>

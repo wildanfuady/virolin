@@ -53,14 +53,14 @@ class ReportController extends Controller
         }else{
             $data['users_db_name'] = \App\User::where('status','valid')->where('level','<>','admin')->where('product_id',$product)->get();
         }
-        
+
         $time_now = Carbon::now();
         // Chart jumlah users
         $data['total_users'] = \App\User::where('level','<>','admin')->count();
 
         // Chart user aktif, kadaluarsa, non aktif
-        $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->count();
-        $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
+        $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->where('masa_aktif','>=',$time_now)->count();
+        $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->where('status','valid')->count();
         $data['users_nonaktif'] = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
 
         // Chart user with db        
@@ -69,7 +69,7 @@ class ReportController extends Controller
 
         // Chart product users 
         $data['users_product'] = \App\Products::get();
-        $data['users_product_count'] = DB::table('users')->select(DB::raw('count(users.product_id) as total,users.product_id'))->groupBy('users.product_id')->join('products','products.product_id','=','users.product_id')->where('status','<>','admin')->get();
+        $data['users_product_count'] = DB::table('users')->select(DB::raw('count(users.product_id) as total,users.product_id'))->groupBy('users.product_id')->join('products','products.product_id','=','users.product_id')->where('level','<>','admin')->get();
 
         return view('report.user', $data);
     }
