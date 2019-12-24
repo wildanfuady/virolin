@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('reports/penjualan','ReportController@penjualan');
     Route::get('reports/promo','ReportController@promo');
     Route::get('reports/user','ReportController@user');
+    Route::get('reports/user/{id}','ReportController@user');
 
     Route::resource('setting','SettingController');
     Route::get('setting/destroy/{id}','SettingController@destroy');
