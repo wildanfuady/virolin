@@ -133,19 +133,19 @@
             console.log(result.status_message);
             console.log(result);
             $("#payment-form").submit();
-            location.reload();
+            // location.reload();
           },
           onPending: function(result){
             changeResult('pending', result);
             console.log(result.status_message);
             $("#payment-form").submit();
-            location.reload();
+            // location.reload();
           },
           onError: function(result){
             changeResult('error', result);
             console.log(result.status_message);
             $("#payment-form").submit();
-            location.reload();
+            // location.reload();
           }
         });
       }

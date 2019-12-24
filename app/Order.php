@@ -6,6 +6,8 @@ use App\User;
 use App\Products;
 use App\Banks;
 use Illuminate\Database\Eloquent\Model;
+use App\Mail\KirimEmailNotificationPayment;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
