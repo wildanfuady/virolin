@@ -110,31 +110,18 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>1</td>
-                    <td>Wildan Fuady</td>
-                    <td>11-12-2019 02:00</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>Khadijah Efrison</td>
-                    <td>11-12-2019 04:00</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>Muzhaffarurrahman</td>
-                    <td>12-12-2019 11:00</td>
-                  </tr>
-                  <tr>
-                    <td>4</td>
-                    <td>Wildan Fuady</td>
-                    <td>13-12-2019 14:00</td>
-                  </tr>
-                  <tr>
-                    <td>5</td>
-                    <td>Wildan Fuady</td>
-                    <td>14-12-2019 02:00</td>
-                  </tr>
+                  <?php
+                  $no = 1;
+                  foreach ($activity_log as $key) {
+                    ?>
+                    <tr>
+                      <td>{{$no++}}</td>
+                      <td>{{$key->subscriber_name}}</td>
+                      <td>{{$key->created_at}}</td>
+                    </tr>
+                    <?php
+                  }
+                  ?>
                 </tbody>
               </table>
             </div>
