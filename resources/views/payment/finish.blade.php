@@ -23,28 +23,51 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-12">
-                        <div class="table-responsive">
+                        <div class="table">
                             <table class="table table-hover">
-                                <tr class="bg-primary">
-                                    <td>No</td>
-                                    <td>Invoice</td>
-                                    <td>Product</td>
-                                    <td>Order Date</td>
-                                    <td>Order End</td>
-                                    <td>Order Status</td>
-                                </tr>
-
-                                <?php $no = 1; ?>
-                                @foreach($order as $row)
                                 <tr>
-                                    <td>{{ $no++ }}</td>
-                                    <td>{{ $row->invoice }}</td>
-                                    <td>{{ $row->product->product_name }}</td>
-                                    <td>{{ $row->order_date }}</td>
-                                    <td>{{ $row->order_end }}</td>
-                                    <td>{{ $row->order_status }}</td>
+                                    <td>Invoice No</td>
+                                    <td>:</td>
+                                    <td>{{ $order->invoice }}</td>
                                 </tr>
-                                @endforeach
+                                <tr>
+                                    <td>Product</td>
+                                    <td>:</td>
+                                    <td>{{ $order->product->product_name }}</td>
+                                </tr>
+                               <tr>
+                                    <td>Product Price</td>
+                                    <td>:</td>
+                                    <td>{{ number_format($order->product->product_price + $order->kode_unik) }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Order Date</td>
+                                    <td>:</td>
+                                                                       <td>{{ $order->order_date }}</td>
+
+                                </tr>
+                                <tr>
+                                    <td>Order End</td>
+                                    <td>:</td>
+                                    <td>{{ $order->order_end }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Order Status</td>
+                                    <td>:</td>
+                                    <td>{{ $order->order_status }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Payment Type</td>
+                                    <td>:</td>
+                                    <td>{{ $order->transaction_id }}</td>
+                                </tr>
+                                @if($order->payment_type == "echannel")
+                                <tr>
+                                    <td>Instruction</td>
+                                    <td>:</td>
+                                    <td><a href="https://app.sandbox.midtrans.com/snap/v1/transactions/c12e1945-181c-4bdf-97a6-7bfee4aa8437/pdf" target="_blank">Lihat</a> </td>
+                                </tr>
+                                @endif
                             </table>
                         </div>
                     </div>

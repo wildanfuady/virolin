@@ -111,11 +111,21 @@ class User extends Authenticatable implements MustVerifyEmail
         self::save();
         
         // create data ModelHasRole
-        $modelHasRole = DB::table('model_has_roles')
+        $cek = DB::table('model_has_roles')
+               ->where('role_id', 2)
+               ->where('model_type', 'App\User')
+               ->where('model_id', $user->id)
+               ->first();
+        
+        if($cek == null)
+        {
+            $modelHasRole = DB::table('model_has_roles')
                         ->insert([
                             'role_id'    => 2,
                             'model_type' => 'App\User',
                             'model_id'   => $user->id
                         ]);
+        }
+        
     }
 }

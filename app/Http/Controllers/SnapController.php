@@ -165,7 +165,7 @@ class SnapController extends Controller
         }
         if(Auth::user() != null)
         {
-          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->get();
+          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->first();
           return view('payment.finish',compact('order'));
 
         }
@@ -197,7 +197,12 @@ class SnapController extends Controller
           $fraud            = $notif->fraud_status;
           $data             = \App\Order::where('invoice',$orderId)->first();
           $user             = \App\User::findOrFail($data->user_id);
-
+            
+          $data->update([
+             'payment_type' => $notif->payment_type,
+             'transaction_id' => $notif->transaction_id
+          ]);
+          
           if ($transaction == 'capture') 
           {
             if ($type == 'credit_card') 
