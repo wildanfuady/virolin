@@ -116,7 +116,13 @@ class SnapController extends Controller
             'item_details'       => $items,
             'customer_details'   => $customer_details,
             'credit_card'        => $credit_card,
-            'expiry'             => $custom_expiry
+            'expiry'             => $custom_expiry,
+            'callbacks'         => array(
+                                    'finish' => 'https://virolin.ilmucoding.com/finish',
+                                    'unfinish' => 'https://virolin.ilmucoding.com/finish'
+                                    )
+    
+
         );
 
         $shipping_address = \App\ShippingAddress::create([
@@ -141,7 +147,7 @@ class SnapController extends Controller
         }
     }
 
-    public function finish()
+    public function finish(Request $request)
     {
         $result = $request->input('result_data');
         $result = json_decode($result);

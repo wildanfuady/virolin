@@ -29,22 +29,14 @@ class KirimEmailNotificationPayment extends Mailable
      */
     public function build()
     {
-        if($this->status == "Pending"){
-            return $this->from('tim@virolin.com')
-                ->view('email_pending')
-                ->with(
-                [
-                    'name' => $this->name,
-                    'status' => $this->status,
-                ]);
-        } else if($this->status == "Success"){
-            return $this->from('tim@virolin.com')
-                ->view('email_success')
-                ->with(
-                [
-                    'name' => $this->name,
-                    'status' => $this->status,
-                ]);
-        } else {}
+        
+        return $this->from('sharewa@loginbisnis.com')
+            ->view('email_success')
+            ->with(
+            [
+                'name' => $this->name,
+                'status' => $this->status,
+            ]);
+        
     }
 }
