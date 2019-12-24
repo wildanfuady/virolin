@@ -15,7 +15,7 @@ class Order extends Model
     protected $table = "orders";
     
     protected $fillable = [
-        'product_id', 'order_date', 'order_end', 'order_status', 'order_payment', 'user_id','invoice'
+        'product_id', 'order_date', 'order_end', 'order_status', 'order_payment', 'user_id','invoice','payment_type','transaction_id'
     ];
 
     public function user()
@@ -35,7 +35,7 @@ class Order extends Model
 
     public function setPending()
     {
-        $this->attributes['order_status'] = 'Pending';
+        $this->attributes['order_status'] = 'Waiting for payment';
         self::save();
     }
  

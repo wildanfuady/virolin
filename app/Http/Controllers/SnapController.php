@@ -139,6 +139,9 @@ class SnapController extends Controller
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
             //return redirect($vtweb_url);
+            $order->update([
+                'transaction_id' => $snap_token 
+            ]);
             echo $snap_token;
         } 
         catch (Exception $e) 
@@ -165,7 +168,7 @@ class SnapController extends Controller
         }
         if(Auth::user() != null)
         {
-          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->get();
+          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->first();
           return view('payment.finish',compact('order'));
 
         }
@@ -197,7 +200,11 @@ class SnapController extends Controller
           $fraud            = $notif->fraud_status;
           $data             = \App\Order::where('invoice',$orderId)->first();
           $user             = \App\User::findOrFail($data->user_id);
-
+            
+          $data->update([
+             'payment_type' => $notif->payment_type
+          ]);
+          
           if ($transaction == 'capture') 
           {
             if ($type == 'credit_card') 
