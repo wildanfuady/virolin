@@ -46,12 +46,23 @@ class ReportController extends Controller
         return view('report.share');
     }
 
-    public function user($product = null)
+    public function user(Request $request)
     {
-        if($product == null){
-            $data['users_db_name'] = \App\User::where('status','valid')->where('level','<>','admin')->get();
-        }else{
-            $data['users_db_name'] = \App\User::where('status','valid')->where('level','<>','admin')->where('product_id',$product)->get();
+        $paginate = 10;
+        $keyword = $request->query('keyword');
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['name', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['email', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $data['db_users'] = \App\User::with(['product'])->where('level','<>','admin')->paginate($paginate);
+        }
+        else {
+            $data['db_users'] = \App\User::with(['product'])->where('level','<>','admin')->where($where)->orWhere($orwhere)->paginate($paginate);
         }
 
         $time_now = Carbon::now();

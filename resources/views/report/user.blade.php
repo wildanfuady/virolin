@@ -116,29 +116,40 @@
                         </h3>
                     </div><!-- /.card-header -->
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="chart-responsive">
-                                    <canvas id="users-db-chart" height="250"></canvas>
-                                </div>
-                                <!-- ./chart-responsive -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <ul class="chart-legend clearfix">
-                                    {{-- <li><i class="far fa-circle text-success"></i> Users Aktif: {{$users_aktif}}</li>
-                                    <li><i class="far fa-circle text-info"></i> Users Kadaluarsa: {{$users_kadaluarsa}}
-                                    </li>
-                                    <li><i class="far fa-circle text-danger"></i> Users Nonaktif: {{$users_nonaktif}}
-                                    </li> --}}
-                                    @foreach ($users_db_name as $item)
-                                        <li><i class="far fa-circle text-success"></i>{{$item->name}}</li>
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr class="bg-info">
+                                        <th width="10px" style="text-align:center">No</th>
+                                        <th>Name</th>
+                                        <th>Total DB</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($db_users as $item)
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            <td>{{ $item->name }}</td>
+                                            <td>
+                                                @php
+                                                    $subscibe = \App\Subscribers::where('user_id', $item->id)->get();
+                                                    $subscibe_total = count($subscibe);
+                                                @endphp
+                                                {{ $subscibe_total }} of {{ $item->product->product_max_db }}
+                                            </td>
+                                        </tr>
                                     @endforeach
-                                </ul>
-                            </div>
-                            <!-- /.col -->
+                                </tbody>
+                            </table>
                         </div>
-                        <!-- /.row -->
+                        <div class="row float-right">
+                            <div class="col-md-12">
+                                {{ $db_users->links() }}
+                            </div>
+                        </div>
                     </div><!-- /.card-body -->
                 </div>
                 <!-- /.card -->
@@ -176,45 +187,6 @@ $(function(){
     // You can switch between pie and douhnut using the method below.
     var pieChart = new Chart(pieChartCanvas, {
       type: 'doughnut',
-      data: pieData,
-      options: pieOptions      
-    })
-
-    // use user db name
-    var name_users = @json($users_db_name);
-    var pieChartCanvas = $('#users-db-chart').get(0).getContext('2d')
-    var pieData        = {
-      labels: [
-        @foreach ($users_db_name as $item)
-            "{{ $item->name }}",
-        @endforeach
-      ],
-      datasets: [
-        {
-          data: [
-            @foreach ($users_db_name as $item)
-                @foreach ($users_db_count as $itemCount)
-                    @if($item->id  = $itemCount->user_id)
-                        "{{ $itemCount->total }}",
-                    @else
-                        "0",
-                    @endif
-                @endforeach
-            @endforeach
-          ],
-        //   backgroundColor : ['#00a65a', '#00c0ef', '#f56954'],
-        }
-      ]
-    }
-    var pieOptions     = {
-      legend: {
-        display: false
-      }
-    }
-    //Create pie or douhnut chart
-    // You can switch between pie and douhnut using the method below.
-    var pieChart = new Chart(pieChartCanvas, {
-      type: 'bar',
       data: pieData,
       options: pieOptions      
     })
