@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Report User</h1>
+                <h1 class="m-0 text-dark">Report User </h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -116,6 +116,16 @@
                         </h3>
                     </div><!-- /.card-header -->
                     <div class="card-body">
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-11">
+                                <div class="form-group">
+                                    {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari user ...', 'id' => 'search']) }}
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered">
                                 <thead>
@@ -162,6 +172,23 @@
 
 <script>
 $(function(){
+    // Search 
+    $("#search").keypress(function(event){
+        if(event.keyCode == 13) { // kode enter
+            filter();
+        }
+    });
+
+    $("#btn-search").click(function(event){
+        filter();
+    });
+
+    var filter = function(){
+        var keyword = $("#search").val();
+        console.log(keyword);
+
+        window.location.replace("{{ url('reports/user') }}?keyword=" + keyword);
+    }
     // users chart
 
     var pieChartCanvas = $('#users-chart').get(0).getContext('2d')
