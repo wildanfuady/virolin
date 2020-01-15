@@ -42,7 +42,7 @@ class FormController extends Controller
         }
         $data['keyword'] = $keyword;
         
-        return view('form.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);;
+        return view('form.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);
     }
 
     /**

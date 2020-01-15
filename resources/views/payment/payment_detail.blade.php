@@ -1,117 +1,80 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Invoice</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner pd-0-force mg-0-force ht-100vh bg-white">
+    <div class="row no-gutters pd-b-20 pd-t-15 wd-100p clearfix">
+        <!--================================-->
+        <!--  Invoice Start -->
+        <!--================================-->
+        <div class="card pd-20 wd-80p m-auto">
+            <h5 class="card-title bd-b pd-y-20">Invoice <a href="" class="tx-dark">#{{ $detail_order->invoice }}</a></h5>
+            <div class="card-body pd-0 printing-area">
+            <div class="row">
+                <div class="col-md-3">
+                    <address>
+                        <img src="{{ asset('template/metrical') }}/images/logo-virolin-sidebar.png" class="img-fluid" alt="logo"><br><br>
+                        <strong>Virolin.com</strong><br>
+                        Jl. Bahagia No. 34<br>
+                        Bandung, Jawa Barat<br>
+                        Phone: (0821) 12345678 <br>
+                        Email: cs@virolin.com
+                    </address>
+                </div>
+                <div class="col-md-3 ml-md-auto text-md-right">
+                    <h4 class="text-dark">To:</h4>
+                    <address>
+                        <strong>{{ $detail_order->user->name }}</strong><br>
+                        <abbr title="Email">E:</abbr> {{ $detail_order->user->email }}
+                    </address>
+                    <br><br>
+                    <span><strong>Invoice Date:</strong> {{ date('d-m-Y', strtotime($detail_order->order_date)) }}</span>
+                    <br>
+                    <span><strong>Expired Date:</strong> {{ date('d-m-Y', strtotime($detail_order->order_end)) }}</span>
+                    <br><br><br><br><br>
+                </div>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Invoice</li>
-                </ol>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Invoice</th>
+                            <th>Product</th>
+                            <th>Date</th>
+                            <th>Expired</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ $detail_order->invoice }}</td>
+                            <td>{{ $detail_order->product->product_name }}</td>
+                            <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_date)) }}</td>
+                            <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_end)) }}</td>
+                            <td>{{ $detail_order->order_status }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-        </div>
-    </div>
-</div>
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12">
-
-                <!-- Main content -->
-                <div class="invoice p-3 mb-3">
-                    <!-- title row -->
-                    <div class="row">
-                        <div class="col-12">
-                            <h4>
-                                <i class="fas fa-globe"></i> Virolin.com
-                                <small class="float-right">Date: {{ date('d-m-Y', strtotime($detail_order->order_date)) }}</small>
-                            </h4>
-                        </div>
-                        <!-- /.col -->
+            <br><br>
+            <div class="row">
+                <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h5>Notes:</h5>
+                        <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
+                        Silahkan transfer sesuai dengan jumlah yang tertera plus <strong>3 digit kode unik</strong> agar proses aktivasi berjalan dengan cepat.
+                        </p>
                     </div>
-                    <!-- info row -->
-                    <div class="row invoice-info">
-                        <div class="col-sm-4 invoice-col">
-                            From
-                            <address>
-                                <strong>Admin Virolin.com</strong><br>
-                                Jl. Bahagia No. 34<br>
-                                Bandung, Jawa Barat<br>
-                                Phone: (0821) 12345678 <br>
-                                Email: cs@virolin.com
-                            </address>
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-sm-4 invoice-col">
-                            To
-                            <address>
-                                <strong>{{ $detail_order->user->name }}</strong><br>
-                                Email: {{ $detail_order->user->email }}
-                            </address>
-                        </div>
-                        <!-- /.col -->
-                    <div class="col-sm-4 invoice-col">
-                        <b>Invoice #{{ $detail_order->invoice }}</b><br>
-                        <br>
-                        <b>Order ID:</b> {{ $detail_order->id }}<br>
-                        <b>Payment Due:</b> {{ date('d-m-Y', strtotime($detail_order->order_end)) }}<br>
+                    <div class="col-md-12">
+                        <img src="{{ asset('storage/'.$detail_order->bank->bank_image) }}" alt="{{ $detail_order->bank->bank_name }}" class="img-fluid float-left" style="width:30%">
+                        <span class="text-muted well well-sm shadow-none">{{ "(".$detail_order->bank->bank_code.") ".$detail_order->bank->bank_number }}<br>an. Wildan Fuady</span>
                     </div>
-                    <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-
-                    <!-- Table row -->
-                    <div class="row">
-                        <div class="col-12 table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Invoice</th>
-                                        <th>Product</th>
-                                        <th>Date</th>
-                                        <th>Expired</th>
-                                        <th>Status</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{ $detail_order->invoice }}</td>
-                                        <td>{{ $detail_order->product->product_name }}</td>
-                                        <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_date)) }}</td>
-                                        <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_end)) }}</td>
-                                        <td>{{ $detail_order->order_status }}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-
-                    <div class="row">
-                    <!-- accepted payments column -->
-                    <div class="col-6">
-                    <div class="row">
-                        <div class="col-12">
-                            <p class="lead">Payment Methods:</p>
-                            <img src="{{ asset('storage/'.$detail_order->bank->bank_image) }}" alt="{{ $detail_order->bank->bank_name }}" class="img-fluid float-left" style="width:30%">
-                            <span class="text-muted well well-sm shadow-none">{{ "(".$detail_order->bank->bank_code.") ".$detail_order->bank->bank_number }}<br>an. Wildan Fuady</span>
-                        </div>
-                        <div class="col-12">
-                            <p class="text-muted well well-sm shadow-none" style="margin-top: 10px;">
-                            Silahkan transfer sesuai dengan jumlah yang tertera plus <strong>3 digit kode unik</strong> agar proses aktivasi berjalan dengan cepat.
-                            </p>
-                        </div>
-                    </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-6">
-                        <p class="lead">Tanggal Expired <b>{{ date('d-m-Y', strtotime($detail_order->order_end)) }}</b> jam <b>{{ date('H:i', strtotime($detail_order->order_end)) }}</b></p>
-
-                        <div class="table-responsive">
+                </div>
+                </div>
+                <div class="col-md-4 ml-md-auto text-right">
+                <div class="table-responsive">
                         <table class="table">
                             <tr>
                             <th style="width:50%">Subtotal:</th>
@@ -127,24 +90,17 @@
                             </tr>
                         </table>
                         </div>
-                    </div>
-                    <!-- /.col -->
-                    </div>
-                    <!-- /.row -->
-
-                    <!-- this row will not appear when printing -->
-                    <div class="row no-print">
-                    <div class="col-12">
-                        <a href="{{ url('konfirmasi-pembayaran') }}" class="btn btn-primary float-right" style="margin-right: 5px;">
-                        <i class="far fa-credit-card"></i> Bayar Sekarang
-                        </a>
-                    </div>
-                    </div>
                 </div>
-            <!-- /.invoice -->
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            </div>
+            <hr>
+            <div class="text-right mg-y-20">
+                <button type="button" class="btn btn-primary mg-t-5" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
+            </div>
+            </div>
+        </div>
+        <!--/ Invoice End -->
     </div>
 </div>
-
-@endsection
+<!--/ Page Inner End -->
+<!--================================-->
+@include('partials.footer')

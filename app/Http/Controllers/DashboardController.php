@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DashboardController extends Controller
 {
@@ -11,13 +13,9 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        // $this->middleware('admin');
+        $this->middleware('permission:dashboard-admin', ['only' => ['dashboard']]);
     }
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
+
     public function index()
     {
         $user_id = Auth::user()->id;
@@ -28,12 +26,26 @@ class DashboardController extends Controller
 
         $data['total_subscribers'] = \App\Subscribers::where('user_id', $user_id)->count();
         $data['total_landingpage'] = \App\Landingpage::where('user_id', $user_id)->count();
-        $data['activity_log'] = \App\Subscribers::where('user_id', $user_id)->get();
+        $raw_log = "log_activities.created_at as log_created_at, log_activities.status, users.name";
+        $data['activity_log'] = \App\LogActivity::join('users', 'log_activities.user_id', '=', 'users.id')
+            ->where('log_activities.user_id', $user_id)
+            ->selectRaw($raw_log)
+            ->orderBy('log_activities.id', 'desc')
+            ->limit(6)
+            ->get();
         
+        $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, landingpages.lp_name as lp_name, subscribers.created_at as sub_created_at";
+        $data['leads'] = \App\Subscribers::join('landingpages', 'subscribers.lp_id', '=', 'landingpages.lp_id')
+            ->where('subscribers.user_id', $user_id)
+            ->selectRaw($raw_sub)
+            ->orderBy('subscribers.id', 'desc')
+            ->limit(5)
+            ->get();
+
         if (Auth::check() && Auth::user()->level == 'admin') {
             return $this->dashboard();
         } else {
-            return view('dashboard.home', $data);
+            return view('dashboard_user', $data);
         }
     }
 
@@ -61,6 +73,6 @@ class DashboardController extends Controller
         $data['total_pending'] = \App\Order::where('order_status','Pending')->count();
         $data['total_expired'] = \App\Order::where('order_status','Expired')->count();
         
-        return view('dashboard.dashboard', $data);
+        return view('dashboard_admin', $data);
     }
 }

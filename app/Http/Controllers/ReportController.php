@@ -26,9 +26,9 @@ class ReportController extends Controller
         return view('report.order', $data);
     }
 
-    public function penjualan()
+    public function leads()
     {
-        return view('report.penjualan');
+        return view('report.leads');
     }
 
     public function promo()
@@ -44,6 +44,11 @@ class ReportController extends Controller
     public function share()
     {
         return view('report.share');
+    }
+
+    public function payment()
+    {
+        return view('report.payment');
     }
 
     public function user($product = null)

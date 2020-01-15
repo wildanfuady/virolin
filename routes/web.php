@@ -13,6 +13,9 @@
 
 Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
+Route::get('/test', function(){
+    return view('theme');
+});
 Route::get('/kirimemail','KirimEmailController@index');
 
 Route::post('finish', 'SnapController@finish')->name('payment.finish');
@@ -89,22 +92,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('forms','FormController');
     Route::get('forms/destroy/{id}','FormController@destroy');
 
-    Route::resource('landingpages','LandingpageController');
-    
-    Route::get('landingpage/create-step-1','LandingpageController@create_step_1');
-    Route::get('landingpage/edit-step-1/{id}','LandingpageController@edit_step_1');
-    Route::post('landingpage/act-create-step-1','LandingpageController@act_create_step_1');
-
-    Route::get('landingpage/create-step-2','LandingpageController@create_step_2');
-    Route::post('landingpage/act-create-step-2','LandingpageController@act_create_step_2');
-
-    Route::get('landingpage/create-step-3','LandingpageController@create_step_3');
-    Route::post('landingpage/act-create-step-3','LandingpageController@act_create_step_3');
-
     Route::resource('reports','ReportController');
     Route::get('report/trafik','ReportController@trafik');
     Route::get('report/share','ReportController@share');
-    Route::get('report/order','ReportController@order');
+    Route::get('report/leads','ReportController@leads');
+    Route::get('report/payment','ReportController@payment');
     Route::get('report/destroy/{id}','ReportController@destroy');
 
     Route::resource('testimonials','TestimonialController');
@@ -113,7 +105,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
     Route::resource('/usersubscribers','User\SubscribersController');
 
-    Route::get('promo/fetchpromo','DashboardController@fecth_promo');
+    Route::get('promo','UserPromoController@index');
+
+    Route::get('profile','ProfileController@index');
+    Route::get('tutorial','TutorialController@index');
 });
 
 Route::get('/cache/clear',function(){

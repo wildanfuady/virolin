@@ -1,29 +1,25 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Subscribers</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<div class="page-inner">
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Create List Subscriber</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Subscribers</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Create List Subscriber</a>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    {{ Form::open(['route' => 'mysubscribers.store']) }}
+        <div class="row row-xs clearfix">
+            <div class="col-md-12 col-lg-12">
+                <div class="card mg-b-20">
+                {{ Form::open(['route' => 'mysubscribers.store']) }}
                     <div class="card-header">
-                        Create List Subscriber
+                        <h4 class="card-header-title">
+                            Create List Subscriber
+                        </h4>
                     </div>
                     <div class="card-body">
                     @if (count($errors) > 0)
@@ -49,15 +45,15 @@
                                 
                     </div>
                     <div class="card-footer">
-                        <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
-                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                        <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
+                        &nbsp;
+                        &nbsp;
+                        <button type="submit" class="btn btn-primary pull-right">Simpan</button>
                     </div>
                     {{ Form::close() }}
                 </div>
             </div>
         </div>
-    <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
 </div>
-
-@endsection
+@include('partials.footer')

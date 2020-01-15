@@ -1,28 +1,53 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Reports</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Report Share WA</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Reports</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Report Share WA</a>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-body">
-                Halaman report share
+        <div class="row row-xs clearfix">
+            <!--================================-->
+            <!--  Annual Report Start-->
+            <!--================================-->
+            <div class="col-lg-12">
+            <div class="card mg-b-20">
+                <div class="card-header">
+                    <h4 class="card-header-title">
+                        Report Share WA
+                    </h4>
+                    <div class="card-header-btn">
+                        <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
+                        <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
+                        <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
+                        <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
+                    </div>
+                </div>
+                <div class="collapse show">
+                    <div class="card-body pd-t-0 pd-b-20 collapse show">
+                        Rancangan:
+                        <ul>
+                            <li>Jumlah Share WA per minggu pakai chart line</li>
+                            <li>Total masing2 landingpage punya jumlah share berapa (table)</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+    <!--/ Main Wrapper End -->
 </div>
-@endsection
+<!--/ Page Inner End -->
+<!--================================-->
+@include('partials.footer')  

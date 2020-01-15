@@ -1,26 +1,20 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Subscribers</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<div class="page-inner">
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Edit Data Subscriber</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Subscribers</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Edit Data Subscriber</a>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
+        <div class="row row-xs clearfix">
+            <div class="col-md-12 col-lg-12">
+                <div class="card mg-b-20">
                     {{ Form::open(['url' => 'mysubscriber/new/store/'.$id]) }}
                     <div class="card-header">
                         Edit Subscriber
@@ -80,8 +74,6 @@
                 </div>
             </div>
         </div>
-    <!-- /.row -->
-    </div><!-- /.container-fluid -->
+    </div>
 </div>
-
-@endsection
+@include('partials.footer')

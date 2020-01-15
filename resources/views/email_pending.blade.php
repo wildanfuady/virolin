@@ -1,2 +1,0 @@
-<h1>Halo {{ $name }}</h1>
-<p>Status pembayaran Anda masih {{ $status }}, silahkan masuk ke halaman dashbord virolin dan lakukan pembayaran melalui payment gateway atau dengan melakukan konfirmasi pembayaran. Terima kasih.</p>
