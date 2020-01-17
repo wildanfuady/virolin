@@ -46,16 +46,12 @@ class ReportController extends Controller
         return view('report.share');
     }
 
-<<<<<<< HEAD
     public function payment()
     {
         return view('report.payment');
     }
 
-    public function user($product = null)
-=======
     public function user(Request $request)
->>>>>>> bdbaaf23e042edc3ec81085b97bdf28d3df1ce8d
     {
         $paginate = 10;
         $keyword = $request->query('keyword');

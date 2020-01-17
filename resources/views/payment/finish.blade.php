@@ -43,7 +43,7 @@
                                 <tr>
                                     <td>Order Date</td>
                                     <td>:</td>
-                                                                       <td>{{ $order->order_date }}</td>
+                                    <td>{{ $order->order_date }}</td>
 
                                 </tr>
                                 <tr>
@@ -66,8 +66,8 @@
                                     <td>Instruction</td>
                                     <td>:</td>
                                     <td>@if ($order->order_status == 'Waiting for payment')
-                    <button class="btn btn-success btn-sm" onclick="snap.pay('{{ $order->transaction_id }}')">Complete Payment</button>
-                    @endif</td>
+                                        <button class="btn btn-success btn-sm" onclick="snap.pay('{{ $order->transaction_id }}')">Complete Payment</button>
+                                    @endif</td>
                                 </tr>
                                 @endif
                             </table>

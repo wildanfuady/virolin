@@ -54,6 +54,36 @@
         <div class="header-right pull-right">
             <ul class="list-inline justify-content-end">
             <!-- <li class="list-inline-item align-middle"><a  href="#" id="search-button"><i class="ion-ios-search-strong tx-20"></i></a></li> -->
+            <!-- Notifications Dropdown Start -->
+            <!--================================-->
+            <li class="list-inline-item dropdown hidden-xs">
+                <a class="notification-icon" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="icon-bell tx-16"></i>
+                <span class="notification-count wave in"></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right shadow-2">
+                    <!-- Top Notifications Area -->
+                    <div class="top-notifications-area">
+                        <!-- Heading -->
+                        <div class="notifications-heading">
+                        <div class="heading-title">
+                            <h6>Notifications</h6>
+                        </div>
+                        <span>5+ New Notifications</span>
+                        </div>
+                        <div class="notifications-box" id="notificationsBox">
+
+                        <!-- Ajax Generate  -->
+
+                        </div>
+                        <div class="notifications-footer">
+                        <a href="">View all Notifications</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <!--/ Notifications Dropdown End -->
+            <!--================================-->
             <!-- Profile Dropdown Start -->
             <!--================================-->
             <li class="list-inline-item dropdown">
@@ -87,3 +117,52 @@
     </nav>
 </div>
 <!--/ Page Header End -->
+<script type='text/javascript'>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'promo/fetchpromo',
+            type: 'get',
+            dataType: 'json',
+            success: function(response){
+
+                var len = 0;
+                $('#notificationsBox').empty(); // Empty <tbody>
+                if(response['data'] != null){
+                    len = response['data'].length;
+                }
+
+                if(len > 0){
+
+                    for(var i=0; i<len; i++){
+                        var promo_id        = response['data'][i].promo_id;
+                        var promo_title     = response['data'][i].promo_title;
+                        var promo_slug      = response['data'][i].promo_slug;
+                        var promo_start     = response['data'][i].promo_start;
+                        var promo_end       = response['data'][i].promo_end;
+                        var promo_content   = response['data'][i].promo_content
+                        ;
+                        var generate = "<a class='dropdown-item list-group-item' href='{{ url('promo/detail/') }}/"+promo_slug+"'>"+
+                            "<div class='d-flex justify-content-between'>" +
+                                "<div class='wd-45 ht-38 mg-r-15 d-flex align-items-center justify-content-center rounded-circle card-icon-success'>"+
+                                    "<i class='fa fa-check tx-success tx-16'></i>" +
+                                "</div>" +
+                                "<div>" +
+                                    "<span>" + promo_title + "</span>" +
+                                    "<span class='small tx-gray-600 ft-right'>" + promo_start + " - " + promo_end +"</span>" +
+                                    "<div class='tx-gray-600 tx-11'>Dummy text of the printing and type setting industry.</div>" +
+                                "</div>" +
+                            "</div>" +
+                        "</a>";
+
+                        $("#notificationsBox").append(generate);
+                    }
+
+                } else {
+                    var generate = "Belum ada data";
+
+                    $("#notificationsBox").append(generate);
+                }
+            }
+       });
+    });
+</script>

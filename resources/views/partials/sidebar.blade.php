@@ -16,14 +16,14 @@
     <div class="page-sidebar-menu">
         <ul class="accordion-menu">
             @can('dashboard-admin')
-            <li class="open active">
+            <li>
             <a href="{{ url('dashboard') }}"><i data-feather="home"></i>
                 <span>Dashboard</span>
             </a>
             </li>
             @endcan
             @can('dashboard-user')
-            <li class="open active">
+            <li>
             <a href="{{ url('home') }}"><i data-feather="home"></i>
                 <span>Dashboard</span>
             </a>
@@ -57,49 +57,49 @@
             @endif
             @can('role-list')
             <li>
-            <a href="{{ route('roles.index') }}"><i data-feather="layers"></i>
+            <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
             <span>Role Permission</span></a>
             </li>
             @endcan
             @can('users-list')
             <li>
-            <a href="{{ route('users.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('users.index') }}"><i data-feather="users"></i>
             <span>Manage Customer</span></a>
             </li>
             @endcan
             @can('banks-list')
             <li>
-            <a href="{{ route('banks.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('banks.index') }}"><i data-feather="dollar-sign"></i>
             <span>Manage Bank</span></a>
             </li>
             @endcan
             @can('promos-list')
             <li>
-            <a href="{{ route('promos.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('promos.index') }}"><i data-feather="percent"></i>
             <span>Manage Promo</span></a>
             </li>
             @endcan
             @can('orders-list')
             <li>
-            <a href="{{ route('orders.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('orders.index') }}"><i data-feather="shopping-cart"></i>
             <span>Manage Order</span></a>
             </li>
             @endcan
             @can('payments-list')
             <li>
             <a href="{{ route('payment.index') }}"><i data-feather="send"></i>
-            <span>Manage Payment</span></a>
+            <span>Manage Payment</span><span class="badge badge-success ft-right count_payment">10+</span></a>
             </li>
             @endcan
             @can('products-list')
             <li>
-            <a href="{{ route('products.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('products.index') }}"><i data-feather="folder"></i>
             <span>Manage Product</span></a>
             </li>
             @endcan
             @can('reports-list')
             <li>
-            <a href="{{ route('reports.index') }}"><i data-feather="send"></i>
+            <a href="{{ route('reports.index') }}"><i data-feather="bar-chart"></i>
             <span>Manage Reports</span></a>
             </li>
             @endcan
@@ -147,3 +147,17 @@
 <!--/ Sidebar Footer End -->
 </div>
 <!--/ Page Sidebar End -->
+<script>
+$(document).ready(function() {
+  
+  // Get Jumlah Konfirmasi Pembayaran
+  $.ajax({
+    type : "GET",
+    url  : '/payment/count_payment',
+    dataType : "JSON",
+    success: function (data) {
+      $('.count_payment').html(data);
+    }
+  });
+});
+</script>

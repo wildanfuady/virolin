@@ -106,6 +106,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/usersubscribers','User\SubscribersController');
 
     Route::get('promo','UserPromoController@index');
+    Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
 
     Route::get('profile','ProfileController@index');
     Route::get('tutorial','TutorialController@index');

@@ -1,67 +1,73 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Roles</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Edit Role</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Roles</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Edit Role</a>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                Edit a Role
-            </div>
-            {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
-            <div class="card-body">
+        <div class="row row-xs clearfix">
+          <div class="col-md-12 col-lg-12">
+            <div class="card mg-b-20">
+              <div class="card-header">
+                <h4 class="card-header-title">
+                    Detail Role
+                </h4>
+              </div>
+              {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+              <div class="card-body collapse show">
                
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Name:</strong>
-                        {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Name:</strong>
+                            {!! Form::text('name', null, array('placeholder' => 'Name','class' => 'form-control')) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Permission:</strong>
-                        <br/>
-                        <br/>
-                        <div class="form-group clearfix">
-                        <div class="row">
-                        @foreach($permission as $value)
-                        <div class="col-md-3 mb-3">
-                            <div class="icheck-success d-inline">
-                                {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name', 'id' => "checkboxSuccess".$value->id)) }}
-                                <label for="checkboxSuccess<?= $value->id ?>">
-                                    <?= $value->name ?>
-                                </label>
+                    <div class="col-xs-12 col-sm-12 col-md-12">
+                        <div class="form-group">
+                            <strong>Permission:</strong>
+                            <br/>
+                            <br/>
+                            <div class="form-group clearfix">
+                            <div class="row">
+                            @foreach($permission as $value)
+                            <div class="col-md-3 mb-3">
+                                <div class="custom-control custom-checkbox">
+                                    {{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name', 'id' => "customCheck".$value->id)) }}
+                                    <label for="customCheck<?= $value->id ?>">
+                                        <?= $value->name ?>
+                                    </label>
+                                </div>
+                            </div>
+                            @endforeach
+                            </div>
                             </div>
                         </div>
-                        @endforeach
-                        </div>
-                        </div>
                     </div>
                 </div>
+                    
+                </div>
+                <div class="card-footer">
+                    <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
+                    &nbsp;
+                    &nbsp;
+                    <button type="submit" class="btn btn-primary float-right">Update</button>
+                </div>
+                {!! Form::close() !!}
             </div>
-                
-            </div>
-            <div class="card-footer">
-                <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
-                <button type="submit" class="btn btn-primary float-right">Update</button>
-            </div>
-            {!! Form::close() !!}
         </div>
     </div>
 </div>
-@endsection
+@include('partials.footer')  

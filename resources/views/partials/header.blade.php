@@ -20,6 +20,7 @@
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/toastr/toastr.min.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/chartist/chartist.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/apex-chart/apexcharts.css">
+      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
       <!-- Favicon -->	

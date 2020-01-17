@@ -36,11 +36,29 @@
       <script src="{{ asset('template/metrical') }}/js/highlight.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/steps/jquery.steps.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/parsleyjs/parsley.js"></script>
+      <script src="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.js"></script>
       <script src="{{ asset('template/metrical') }}/js/app.js"></script>
       <script src="{{ asset('template/metrical') }}/js/custom.js"></script>
       <script>
-         $(document).ready(function(){
-           'use strict';
+        $(document).ready(function(){
+          'use strict';
+
+          var url = window.location;
+
+          $('.textarea').summernote({
+            height: 350,
+          });
+
+          var a = $('ul.accordion-menu li a').filter(function() {
+              return this.href == url;
+          }).parent('ul.accordion-menu li').addClass('open active');
+
+          // var = $('.page-sidebar-menu > .accordion-menu > li').addClass('open active');
+          console.log(a);
+          
+          $('ul.nav-treeview a').filter(function() {
+              return this.href == url;
+          }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open') .prev('a').addClass('active');
          
            $('#wizard1').steps({
              headerTag: 'h3',

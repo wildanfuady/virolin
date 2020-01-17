@@ -1,30 +1,34 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Products</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Products</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Products</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Products</a>
             </div>
         </div>
-    </div>
-</div>
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                @can('products-create')
-                    <a class="btn btn-info btn-sm float-right" href="{{ route('products.create') }}"> Create New Product</a>
-                @endcan
-                List Product
-            </div>
-            <div class="card-body">
+
+        <div class="row row-xs clearfix">
+          <div class="col-md-12 col-lg-12">
+            <div class="card mg-b-50">
+              <div class="card-header">
+                <h4 class="card-header-title">
+                    List Product
+                    @can('products-create')
+                        <a class="btn btn-info btn-sm float-right" href="{{ route('products.create') }}"> Create New Product</a>
+                    @endcan
+                </h4>
+              </div>
+              <div class="card-body collapse show">
                 <?php
                     if($msg_success = Session::get('success')){
                         $class = "alert alert-success alert-dismissable";
@@ -45,18 +49,19 @@
                     {{ $msg }}
                 </div>
                 <div class="row mt-3 mb-3">
-                    <div class="col-md-11">
+                    <div class="col-md-10">
                         <div class="form-group">
                             {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari produk ...', 'id' => 'search']) }}
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered">
-                        <tr class="bg-info">
+                        <thead>
+                        <tr>
                             <th width="20px">No</th>
                             <th>Name</th>
                             <th>Max DB</th>
@@ -64,6 +69,8 @@
                             <th>Status</th>
                             <th width="150px" style="text-align:center">Action</th>
                         </tr>
+                        </thead>
+                        <tbody>
                         @foreach ($products as $key => $product)
                         <tr>
                             <td>{{ ++$i }}</td>
@@ -73,17 +80,18 @@
                             <td>{{ $product->product_status }}</td>
                             <td style="text-align:center">
                             <div class="btn-group">
-                                <a class="btn btn-info btn-sm" href="{{ route('products.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
+                                <a class="btn btn-light btn-sm" href="{{ route('products.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
                                 @can('products-edit')
-                                <a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-light btn-sm" href="{{ route('products.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
                                 @endcan
                                 @can('products-delete')
-                                <a class="btn btn-danger btn-sm" href="{{ url('products/destroy/'.$product->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
+                                <a class="btn btn-light btn-sm" href="{{ url('products/destroy/'.$product->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                 @endcan
                             </div>
                             </td>
                         </tr>
                         @endforeach
+                        </tbody>
                     </table>
                 </div>
                 <div class="row float-right">
@@ -119,4 +127,4 @@
 
 </script>
 
-@endsection
+@include('partials.footer')

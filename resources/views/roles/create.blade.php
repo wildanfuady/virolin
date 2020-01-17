@@ -1,29 +1,33 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Roles</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Create Role</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Roles</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Create Role</a>
             </div>
         </div>
-    </div>
-</div>
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                Create a New Role
-            </div>
-            {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+
+        <div class="row row-xs clearfix">
+          <div class="col-md-12 col-lg-12">
+            <div class="card mg-b-20">
+              <div class="card-header">
+                <h4 class="card-header-title">
+                    Create Role
+                </h4>
+              </div>
+              {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+              <div class="card-body collapse show">
                 
-            <div class="card-body">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -67,10 +71,12 @@
             </div>
             <div class="card-footer">
                 <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
+                &nbsp;
+                &nbsp;
                 <button type="submit" class="btn btn-primary float-right">Tambah</button>
             </div>
             {!! Form::close() !!}
         </div>
     </div>
 </div>
-@endsection 
+@include('partials.footer')  

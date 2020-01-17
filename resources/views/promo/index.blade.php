@@ -1,31 +1,34 @@
-@extends('template')
-@section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Promo's</h1>
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Promo's</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Promo's</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Promo's</a>
             </div>
         </div>
-    </div>
-</div>
 
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
-            <div class="card-header">
-                @can('promos-create')
-                    <a class="btn btn-info btn-sm float-right" href="{{ route('promos.create') }}"> Create New Promo</a>
-                @endcan
-                <i class="fa fa-percent"></i> List All Promo
-            </div>
-            <div class="card-body">
+        <div class="row row-xs clearfix">
+          <div class="col-md-12 col-lg-12">
+            <div class="card mg-b-20">
+              <div class="card-header">
+                <h4 class="card-header-title">
+                    List Promo
+                    @can('promos-create')
+                        <a class="btn btn-info btn-sm float-right" href="{{ route('promos.create') }}"> Create New Promo</a>
+                    @endcan
+                </h4>
+              </div>
+              <div class="card-body collapse show">
                 <?php
                     if($msg_success = Session::get('success')){
                         $class = "alert alert-success alert-dismissable";
@@ -46,19 +49,19 @@
                     {{ $msg }}
                 </div>
                 <div class="row mt-3 mb-3">
-                    <div class="col-md-11">
+                    <div class="col-md-10">
                         <div class="form-group">
                             {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari promo ...', 'id' => 'search']) }}
                         </div>
                     </div>
-                    <div class="col-md-1">
+                    <div class="col-md-2">
                         <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
                     </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="table_id">
                         <thead>
-                            <tr class="bg-info">
+                            <tr>
                                 <th width="10px" style="text-align:center">No</th>
                                 <th>Title</th>
                                 <th>Start</th>
@@ -78,12 +81,12 @@
                                 <td> {{$item->promo_status}} </td>
                                 <td class="text-center">
                                     <div class="btn-group">
-                                        <a href="{{ route('promos.show', $item->promo_id) }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>
+                                        <a href="{{ route('promos.show', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
                                         @can('promos-edit')
-                                        <a href="{{ route('promos.edit', $item->promo_id) }}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                        <a href="{{ route('promos.edit', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                         @endcan
                                         @can('promos-delete')
-                                        <a href="{{ url('promos/destroy/'. $item->promo_id) }}" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
+                                        <a href="{{ url('promos/destroy/'. $item->promo_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                         @endcan
                                     </div>
                                 </td>
@@ -121,4 +124,4 @@
 
     </script>
 
-@endsection
+@include('partials.footer')
