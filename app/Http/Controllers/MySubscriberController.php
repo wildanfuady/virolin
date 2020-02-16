@@ -116,8 +116,27 @@ class MySubscriberController extends Controller
     public function show(Request $request, $id)
     {
         $paginate = 10;
-        $data['detail_list_subscribers'] = Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
-        ->where('subscribers.list_sub_id', $id)->where('subscribers.user_id', Auth::user()->id)->where('subscribers.subscriber_status', 'valid')->paginate($paginate);
+        $keyword = $request->query('keyword');
+        $where = [];
+        $orwhere = [];
+
+        $where[] = ['subscribers.list_sub_id', $id];
+        $where[] = ['subscribers.user_id', Auth::user()->id];
+
+        if(!empty($keyword)) {
+            $where[] = ['subscriber_name', 'LIKE', "%{$keyword}%"];
+            $where[] = ['subscriber_email', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $data['detail_list_subscribers'] = Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')->where($where)->where('subscribers.subscriber_status', 'valid')->paginate($paginate);
+        }
+        else {
+            $data['detail_list_subscribers'] = Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')->where($where)->where('subscribers.subscriber_status', 'valid')->paginate($paginate);
+        }
+        $data['keyword'] = $keyword;
+        
+        
         $data['id'] = $id;
         return view('mysubscriber.show', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);
     }
@@ -172,6 +191,15 @@ class MySubscriberController extends Controller
         $hapus = $list->delete();
         if($hapus){
             return redirect()->route('mysubscribers.index')->with('warning', 'Deleted List Subscriber Successfully');
+        }
+    }
+
+    public function destroy_subscriber($id)
+    {
+        $subscriber = \App\Subscribers::find($id);
+        $hapus = $subscriber->delete();
+        if($hapus){
+            return redirect()->back()->with('warning', 'Deleted Subscriber Successfully');
         }
     }
 }

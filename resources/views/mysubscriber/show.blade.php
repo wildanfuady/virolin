@@ -44,6 +44,16 @@
                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
                             {{ $msg }}
                         </div>
+                        <div class="row mt-3 mb-3">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari subscriber ...', 'id' => 'search']) }}
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
+                            </div>
+                        </div>
                         <div class="table-responsive">
                             <table class="table table-bordered" id="table_id">
                                 <thead>
@@ -67,12 +77,8 @@
                                         <td>{{ $item->subscriber_status }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.show',$item->list_sub_id) }}"><i class="fa fa-eye"></i></a>
-                                                @can('mysubscriber-edit')
-                                                <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.edit',$item->list_sub_id) }}"><i class="fa fa-edit"></i></a>
-                                                @endcan
                                                 @can('mysubscriber-delete')
-                                                <a class="btn btn-light btn-sm" href="{{ url('mysubsciber/destroy/'.$item->lp_list_sub_idid) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ url('mysubscriber/destroy-subscriber/'.$item->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>
                                         </td>
@@ -81,11 +87,34 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{ $detail_list_subscribers->links() }}
+                        {{ $detail_list_subscribers->appends($_GET)->links() }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+
+    $(document).ready(function() {
+
+        $("#search").keypress(function(event){
+            if(event.keyCode == 13) { // kode enter
+                filter();
+            }
+        });
+
+        $("#btn-search").click(function(event){
+            filter();
+        });
+
+        var filter = function(){
+            var keyword = $("#search").val();
+            console.log(keyword);
+
+            window.location.replace("{{ route('mysubscribers.show', $id) }}?keyword=" + keyword);
+        }
+    });
+
+</script>
 @include('partials.footer')

@@ -100,6 +100,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('mysubscriber/new/create/{id}','MySubscriberController@create_subscriber');
     Route::post('mysubscriber/new/store/{id}','MySubscriberController@store_subscriber');
     Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy');
+    Route::get('mysubscriber/destroy-subscriber/{id}','MySubscriberController@destroy_subscriber');
 
     Route::resource('autoresponders','AutoresponderController');
     Route::get('autoresponders/destroy/{id}','AutoresponderController@destroy');
