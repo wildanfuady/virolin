@@ -69,7 +69,7 @@
                         <div class="heading-title">
                             <h6>Notifications</h6>
                         </div>
-                        <span>5+ New Notifications</span>
+                        <span>{{ \App\Promo::totalPromo() }} promo</span>
                         </div>
                         <div class="notifications-box" id="notificationsBox">
 
@@ -77,7 +77,7 @@
 
                         </div>
                         <div class="notifications-footer">
-                        <a href="{{ url('all-notification') }}">View all Notifications</a>
+                        <a href="{{ url('promo') }}">View all Notifications</a>
                         </div>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                     }
 
                 } else {
-                    var generate = "Belum ada data";
+                    var generate = "<span class='text-center'>Belum ada promo</span>";
 
                     $("#notificationsBox").append(generate);
                 }

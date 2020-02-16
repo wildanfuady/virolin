@@ -121,8 +121,8 @@
             <span>Report</span><i class="accordion-icon fa fa-angle-left"></i></a>
             <ul class="sub-menu">
                 <li><a href="{{ url('report/shares') }}">Shares</a></li>
+                <li><a href="{{ url('report/payment') }}">Payment</a></li>
                 <li><a href="{{ url('report/trafik') }}">Trafik</a></li>
-                <li><a href="{{ url('report/leads') }}">Lead Magnet</a></li>
             </ul>
             </li>
             @endcan

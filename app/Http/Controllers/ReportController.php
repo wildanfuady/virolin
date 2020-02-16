@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Order;
+use App\Subscribers;
+use App\Campaign;
 use DB;
 
 class ReportController extends Controller
@@ -26,11 +29,6 @@ class ReportController extends Controller
         return view('report.order', $data);
     }
 
-    public function leads()
-    {
-        return view('report.leads');
-    }
-
     public function promo()
     {
         return view('report.promo');
@@ -43,12 +41,18 @@ class ReportController extends Controller
 
     public function share()
     {
-        return view('report.share');
+        $user_id = Auth::user()->id;
+        $raw = "campaign_name, campaign_share";
+        $data['shares'] = Campaign::selectRaw($raw)->where('user_id', $user_id)->get();
+        return view('report.share', $data);
     }
 
     public function payment()
     {
-        return view('report.payment');
+        $user_id = Auth::user()->id;
+        $data['order'] = Order::with(['product'])->where('user_id', $user_id)->first();
+        $data['total_db'] = Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+        return view('report.payment', $data);
     }
 
     public function user(Request $request)

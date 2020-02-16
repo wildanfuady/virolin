@@ -62,26 +62,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    @foreach($shares as $key => $data)
                                     <tr>
-                                        <td>1</td>
-                                        <td>Landing Page 1</td>
-                                        <td>60</td>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>{{ $data->campaign_name }}</td>
+                                        <td>{{ $data->campaign_share }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Landing Page 2</td>
-                                        <td>42</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Landing Page 3</td>
-                                        <td>51</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Landing Page 4</td>
-                                        <td>6</td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -103,7 +91,7 @@ var ctx1 = document.getElementById('chartBar1').getContext('2d');
 var myChart1 = new Chart(ctx1, {
     type: 'bar',
     data: {
-        labels: ['Senin', 'Selesa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
         datasets: [{
             data: [10, 24, 20, 25, 35, 50, 10],
             backgroundColor: '#5D78FF',

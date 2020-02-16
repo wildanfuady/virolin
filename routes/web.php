@@ -110,7 +110,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('reports','ReportController');
     Route::get('report/trafik','ReportController@trafik');
     Route::get('report/shares','ReportController@share');
-    Route::get('report/leads','ReportController@leads');
     Route::get('report/payment','ReportController@payment');
     Route::get('report/destroy/{id}','ReportController@destroy');
 
@@ -121,6 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/usersubscribers','User\SubscribersController');
 
     Route::get('promo','UserPromoController@index');
+    Route::get('promo/detail/{id}','UserPromoController@show');
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
 
     Route::get('profile','ProfileController@index');

@@ -24,6 +24,7 @@
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
+      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/themify-icons/themify-icons.css">
       <!-- Favicon -->	
       <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
       <!-- Midtrans -->
