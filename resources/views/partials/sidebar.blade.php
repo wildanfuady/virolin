@@ -105,7 +105,7 @@
             @endcan
             @can('landingpage-list')
             <li>
-            <a href="{{ route('landingpages.index') }}"><i data-feather="layers"></i>
+            <a href="{{ route('campaign.index') }}"><i data-feather="layers"></i>
             <span>Campaign</span></a>
             </li>
             @endcan
@@ -117,10 +117,10 @@
             @endcan
             @can('report-user')
             <li>
-            <a href=""><i data-feather="file"></i>
+            <a href="{{ url('report') }}"><i data-feather="file"></i>
             <span>Report</span><i class="accordion-icon fa fa-angle-left"></i></a>
             <ul class="sub-menu">
-                <li><a href="{{ url('report/share') }}">Shares</a></li>
+                <li><a href="{{ url('report/shares') }}">Shares</a></li>
                 <li><a href="{{ url('report/trafik') }}">Trafik</a></li>
                 <li><a href="{{ url('report/leads') }}">Lead Magnet</a></li>
             </ul>

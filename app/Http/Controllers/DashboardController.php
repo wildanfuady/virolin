@@ -24,8 +24,24 @@ class DashboardController extends Controller
             ->join('products', 'products.product_id', '=', 'users.product_id')
             ->where('user_id', $user_id)->first();
 
-        $data['total_subscribers'] = \App\Subscribers::where('user_id', $user_id)->count();
-        $data['total_landingpage'] = \App\Landingpage::where('user_id', $user_id)->count();
+        $data['total_subscribers'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+
+        $tanggal = date('Y-m-d');
+        // $saat_ini = date('Y-m-d H:i:s');
+        $minggu_lalu = date('Y-m-d', strtotime('-1 week', strtotime($tanggal)));
+
+        $data['total_subscriber_now'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid', 'created_at' => strtotime($tanggal)])->count();
+        
+        $data['total_subscriber_in_week'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at', '>=', $minggu_lalu)->count();
+
+        $data['total_landingpage'] = \App\Campaign::where('user_id', $user_id)->count();
+
+        $query = "SUM(campaign_share) as total";
+        $data['total_shares'] = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+
+        $query = "SUM(campaign_form_view) as total_visitor";
+        $data['total_visitors'] = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+
         $raw_log = "log_activities.created_at as log_created_at, log_activities.status, users.name";
         $data['activity_log'] = \App\LogActivity::join('users', 'log_activities.user_id', '=', 'users.id')
             ->where('log_activities.user_id', $user_id)
@@ -34,8 +50,8 @@ class DashboardController extends Controller
             ->limit(6)
             ->get();
         
-        $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, landingpages.lp_name as lp_name, subscribers.created_at as sub_created_at";
-        $data['leads'] = \App\Subscribers::join('landingpages', 'subscribers.lp_id', '=', 'landingpages.lp_id')
+        $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, campaigns.campaign_name as lp_name, subscribers.created_at as sub_created_at";
+        $data['leads'] = \App\Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
             ->where('subscribers.user_id', $user_id)
             ->selectRaw($raw_sub)
             ->orderBy('subscribers.id', 'desc')

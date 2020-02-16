@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <!-- Loading Styles -->
+  <link href="css/build.min.css" rel="stylesheet">
+  <link href="css/plugins/owl.carousel.min.css" rel="stylesheet">
+
+  <!-- Google Fonts -->
+  <link rel="stylesheet" type="text/css"
+        href="http://fonts.googleapis.com/css?family=Lato:300,400,700,900,300italic,400italic,700italic,900italic">
+
+  <!-- Custom Styles -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/responsive.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+<body>
+<div id="page" class="page">
+  <section id="social-2-slider" class="p-t-b-60 bg-dg text-silver">
+    <div class="container reveal rb-20-0">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+          <!-- Twitter Logo -->
+          <div class="pos-absolute text-color">
+            <i class="fa fa-twitter fa-5x"></i>
+          </div>
+          <!-- /End Twitter Logo -->
+
+          <!-- Twitter Post -->
+          <div class="p-l-100 p-t-25">
+            <div id="twitter-2-post" data-widget-profile="egotype"></div>
+          </div>
+          <!-- /End Twitter Post -->
+
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<!-- /#page -->
+
+<!-- Scripts -->
+<script src="js/plugins/jquery1.11.2.min.js"></script>
+<script src="js/plugins/bootstrap.min.js"></script>
+<script src="js/plugins/owl.carousel.min.js"></script>
+<script src="js/plugins/scrollreveal.min.js"></script>
+<script src="js/plugins/prefixfree.min.js"></script>
+<script src="js/plugins/twitterFetcher_min.js"></script>
+
+<!-- Custom Script -->
+<script src="js/custom.js"></script>
+
+<script>
+  $(function () {
+    startSocialDark();
+  });
+
+  function startSocialDark() {
+    function handleTweets(tweets) {
+      var x = tweets.length,
+          n = 0,
+          element = document.getElementById('twitter-2-post'),
+          html = '<div id="twitter-2-slider" class="owl-carousel owl-theme">';
+      while (n < x) {
+        html += '<div>' + tweets[n] + '</div>';
+        n++;
+      }
+      html += '</div>';
+      element.innerHTML = html;
+
+      /* Twits attached to owl-carousel */
+      $("#twitter-2-slider").owlCarousel({
+        loop: true,
+        margin: 30,
+        responsiveClass: true,
+        autoplay: true,
+        autoplayTimeout: 7000,
+        autoplayHoverPause: true,
+        items: 1,
+        smartSpeed: 3000,
+        dots: false
+      });
+    }
+
+
+    var widgetProfile = $('#twitter-2-post').attr('data-widget-profile');
+
+    var config_feed = {
+      "profile": {"screenName": widgetProfile},
+      "domId": 'exampleProfile',
+      "maxTweets": 5,
+      "enableLinks": true,
+      "showUser": false,
+      "showTime": true,
+      "dateFunction": '',
+      "showRetweet": false,
+      "customCallback": handleTweets,
+      "showInteraction": false
+    };
+
+    twitterFetcher.fetch(config_feed);
+  }
+</script>
+</body>
+</html>

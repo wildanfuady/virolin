@@ -22,6 +22,13 @@ Route::post('finish', 'SnapController@finish')->name('payment.finish');
 Route::post('unfinish', 'SnapController@unfinish')->name('payment.unfinish');
 Route::post('error', 'SnapController@error')->name('payment.error');
 
+Route::get('{slug}/share','CampaignShareController@share');
+Route::get('{slug}/confirm','CampaignShareController@notif_confirm');
+Route::get('{slug}/thanks','CampaignShareController@thanks');
+Route::get('{slug}/failed','CampaignShareController@failed');
+Route::get('confirm/{slug}/{token}','CampaignShareController@confirm');
+Route::post('{slug}/send','CampaignShareController@send');
+
 Auth::routes(['verify' => true]);
 
 Route::group(['middleware' => ['auth']], function () {
@@ -81,6 +88,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('landingpages','LandingpageController');
     Route::get('landingpages/destroy/{id}','LandingpageController@destroy');
 
+    // Route::get('campaign/{slug}','CampaignController@campaign');
+
+    Route::resource('campaign','CampaignController');
+    Route::get('campaign/destroy/{id}','CampaignController@destroy');
+    Route::get('campaign/create/custom','CampaignController@custom');
+    
+    Route::post('campaign/buat','CampaignController@buat');
+
     Route::resource('mysubscribers','MySubscriberController');
     Route::get('mysubscriber/new/create/{id}','MySubscriberController@create_subscriber');
     Route::post('mysubscriber/new/store/{id}','MySubscriberController@store_subscriber');
@@ -94,7 +109,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('reports','ReportController');
     Route::get('report/trafik','ReportController@trafik');
-    Route::get('report/share','ReportController@share');
+    Route::get('report/shares','ReportController@share');
     Route::get('report/leads','ReportController@leads');
     Route::get('report/payment','ReportController@payment');
     Route::get('report/destroy/{id}','ReportController@destroy');

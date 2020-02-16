@@ -1,0 +1,1522 @@
+/*
+Template Name: fibre
+Theme URL: http://www.egotype.com/fibre/
+Description: Landing Page
+Author: Egotype
+Author URL: http://www.egotype.com
+Version: 1.0
+Tags: Landing Page, HTML5, CSS3, Bootstrap, Jquery, Marketing Landing page,
+App Landing page, WebApp Landing page
+*/
+
+/* ___________________________________________
+
+                   CONTENT
+   ___________________________________________ */
+
+/*   01. General Styles                        */
+/*   02. Typography                            */
+/*   03. Backgrounds                           */
+/*   04. Buttons, Links                        */
+/*   05. Forms                                 */
+/*   06. Panel                                 */
+/*   07. Carousel, Loader                      */
+/*   08. Spacing & Alignment                   */
+/*   09. Navigation Header                     */
+/*   10. Hero Section                          */
+/*   11. Function Section                      */
+/*   12. Features Section                      */
+/*   13. Download Section                      */
+/*   14. Pricing Section                       */
+/*   15. Video Section                         */
+/*   16. Testimonials Section                  */
+/*   17. Newsletter Section                    */
+/*   18. Facts Section                         */
+
+/* _____________________________________
+
+   01. General Styles
+   _____________________________________ */
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.light-version {
+  color: #444;
+}
+
+.dark-version {
+  color: #bfbfbf;
+}
+
+/* ----------------------------------
+   Bootstrap Fix: IE10
+   in Windows 8 & Windows Phone 8
+   ---------------------------------- */
+
+@-webkit-viewport {
+  width: device-width;
+}
+
+@-moz-viewport {
+  width: device-width;
+}
+
+@-ms-viewport {
+  width: device-width;
+}
+
+@-o-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}
+
+/* _____________________________________
+
+   02. Typography
+   _____________________________________ */
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+h1, .h1 {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+h2, .h2 {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h3, .h3 {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+h4, .h4 {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+h5, .h5 {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+h6, .h6 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+p, .lead {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 0;
+}
+
+strong,
+b {
+  font-weight: 600;
+}
+
+.h1 .small, .h1 small,
+.h2 .small, .h2 small,
+.h3 .small, .h3 small,
+.h4 .small, .h4 small,
+.h5 .small, .h5 small,
+.h6 .small, .h6 small,
+h1 .small, h1 small,
+h2 .small, h2 small,
+h3 .small, h3 small,
+h4 .small, h4 small,
+h5 .small, h5 small,
+h6 .small, h6 small {
+  font-size: 50%;
+  color: inherit;
+}
+
+/* ----------------------------------
+   Font Colors
+   ---------------------------------- */
+
+.text-color {
+  color: #3aafd6;
+}
+
+.text-dark {
+  color: #444;
+}
+
+.text-silver {
+  color: #bfbfbf;
+}
+
+.text-white {
+  color: #fff;
+}
+
+/* ----------------------------------
+   Icons
+   ---------------------------------- */
+
+.icon-sm .icon {
+  font-size: 32px;
+}
+
+.icon-md .icon{
+  font-size: 50px;
+}
+
+.icon-lg .icon {
+  font-size: 80px;
+}
+
+.icon-color {
+  color: #3aafd6;
+}
+
+/* ----------------------------------
+   Tooltip
+   ---------------------------------- */
+
+.tooltip {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.tooltip-inner {
+  display: block;
+  text-align: left;
+  white-space: pre-line;
+}
+
+/* _____________________________________
+
+   03. Backgrounds
+   _____________________________________ */
+
+.bg-color {
+  background-color: #3aafd6;
+}
+
+.bg-color-light {
+  background-color: #e2f3f9;
+}
+
+.bg-color-dark {
+  background-color: #379bbc;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
+.bg-light {
+  background-color: #f7f7f7;
+}
+
+.bg-lightgrey {
+  background-color: #f4f4f4;
+}
+
+.bg-silver {
+  background-color: #bfbfbf;
+}
+
+.bg-grey {
+  background-color: #4f4f4f;
+}
+
+.bg-dg {
+  background-color: #494949;
+}
+
+.bg-dark {
+  background-color: #444444;
+}
+
+.bg-black {
+  background-color: #000;
+}
+
+/* _____________________________________
+
+   04. Buttons, Links
+   _____________________________________ */
+
+a:hover {
+  text-decoration: none;
+}
+
+a,
+a.link-color,
+i.link-color {
+  color: #3aafd6;
+  text-decoration: none;
+  outline: 0;
+}
+
+a:hover,
+a.link-color:hover,
+a.link-color:active,
+a.link-color:focus,
+i.link-color:hover,
+i.link-color:active,
+i.link-color:focus {
+  color: #379bbc;
+  text-decoration: none;
+}
+
+a.link-white,
+i.link-white,
+a.link-white:link {
+  color: #fff;
+}
+
+i.link-white:hover,
+a.link-white:hover {
+  color: #d9d9d9;
+}
+
+a.link-silver,
+a.link-silver:link {
+  color: #bfbfbf;
+}
+
+a.link-silver:hover {
+  color: #a8a8a8;
+}
+
+a.link-dark,
+a.link-dark:link {
+  color: #444;
+}
+
+a.link-dark:hover {
+  color: #222;
+}
+
+.btn,
+a.btn {
+  display: inline-block;
+  margin: 5px !important;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 14px;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 15px;
+  border: none;
+  transition: background .3s ease-in-out;
+}
+
+.btn:first-child {
+  margin-left: 0 !important;
+}
+
+.btn:last-child {
+  margin-right: 0 !important;
+}
+
+.text-center .btn:first-child {
+  margin-left: 5px !important;
+}
+
+.text-center .btn:last-child {
+  margin-right: 5px !important;
+}
+
+.btn:active,
+a.btn:active {
+  box-shadow: none;
+}
+
+.btn-xs,
+a.btn-xs {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 12px;
+  border: none;
+  border-radius: 9px;
+}
+
+.btn-sm,
+a.btn-sm {
+  padding: 4px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 15px;
+}
+
+.btn-lg,
+a.btn-lg {
+  padding-left: 30px;
+  padding-right: 30px;
+  border-radius: 21px;
+}
+
+.btn i {
+  margin-right: 10px;
+}
+
+.btn[type="submit"] i {
+  margin: 0;
+}
+
+/* ----------------------------------
+   Buttons Circle
+   ---------------------------------- */
+
+.btn-circle {
+  display: inline-block;
+  height: 34px;
+  width: 34px;
+  margin: 0;
+  text-align: center;
+  line-height: 32px;
+  transition: background .3s ease-in-out;
+  border-radius: 50%;
+  border: none;
+}
+
+.btn-circle-xs {
+  width: 18px;
+  height: 18px;
+  font-size: 10px;
+
+}
+
+.btn-circle-xs i {
+  line-height: 18px;
+}
+
+.btn-circle-sm {
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+}
+
+.btn-circle-sm i {
+  line-height: 30px;
+}
+
+.btn-circle-lg {
+  height: 40px;
+  width: 40px;
+  font-size: 16px;
+}
+
+.btn-circle-lg i {
+  line-height: 36px;
+}
+
+/* ----------------------------------
+   Social Buttons
+   ---------------------------------- */
+
+ul.social {
+  display: inline-block;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.social > li {
+  float: left;
+  margin: 5px;
+}
+
+.social > li > a {
+  margin: 0;
+}
+
+.social > li:first-child {
+  margin-left: 0;
+}
+
+.social > li:last-child {
+  margin-right: 0;
+}
+
+.text-center .social > li:first-child {
+  margin-left: 5px;
+}
+
+.text-center .social > li:last-child {
+  margin-right: 5px;
+}
+
+/* ----------------------------------
+   Top Button
+   ---------------------------------- */
+
+.btn-top {
+  position: fixed;
+  bottom: 80px;
+  right: 0;
+  z-index: 500;
+  display: none;
+  margin-right: 20px;
+  font-size: 24px;
+  line-height: 40px;
+  cursor: pointer;
+  filter: alpha(opacity=40);
+  opacity: 0.4;
+}
+
+.btn-top:hover {
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+/* ----------------------------------
+   Buttons Color
+   ---------------------------------- */
+
+.btn-color,
+.inverse a.btn-color {
+  color: #fff;
+  background-color: #3aafd6;
+}
+
+.btn-color:hover,
+.btn-color:active,
+.btn-color:focus {
+  color: #fff;
+  background-color: #379bbc;
+}
+
+.btn-border-color,
+a.btn-border-color {
+  color: #3aafd6 !important;
+  background-color: transparent;
+  border: 1px solid #3aafd6;
+}
+
+.btn-border-color:hover,
+.btn-border-color:active,
+.btn-border-color:focus {
+  color: #379bbc !important;
+  border: 1px solid #379bbc;
+}
+
+.input-group .btn-border-color:hover,
+.input-group .btn-border-color:active,
+.input-group .btn-border-color:focus {
+  border: 1px solid #6b7b8a;
+}
+
+/* ----------------------------------
+   Buttons White
+   ---------------------------------- */
+
+.btn-white,
+.inverse a.btn-white {
+  color: #444 !important;
+  background-color: #fff;
+}
+
+.btn-white:hover,
+.btn-white:active,
+.btn-white:focus {
+  background-color: #d9d9d9;
+}
+
+.btn-border-white,
+a.btn-border-white {
+  color: #fff !important;
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.btn-border-white:hover,
+.btn-border-white:active,
+.btn-border-white:focus {
+  color: #d9d9d9 !important;
+  border: 1px solid #d9d9d9;
+}
+
+.input-group .btn-border-white:hover,
+.input-group .btn-border-white:active,
+.input-group .btn-border-white:focus {
+  border: 1px solid #fff;
+}
+
+/* ----------------------------------
+   Buttons Silver
+   ---------------------------------- */
+
+.btn-silver,
+.inverse a.btn-silver {
+  color: #fff !important;
+  background-color: #bfbfbf;
+}
+
+.btn-silver:hover,
+.btn-silver:active,
+.btn-silver:focus {
+  background-color: #a8a8a8;
+}
+
+.btn-border-silver,
+a.btn-border-silver {
+  color: #bfbfbf;
+  background-color: transparent;
+  border: 1px solid #bfbfbf;
+}
+
+.btn-border-silver:hover,
+.btn-border-silver:active,
+.btn-border-silver:focus {
+  color: #a8a8a8;
+  border: 1px solid #a8a8a8;
+}
+
+.input-group .btn-border-silver:hover,
+.input-group .btn-border-silver:active,
+.input-group .btn-border-silver:focus {
+  border: 1px solid #bfbfbf;
+}
+
+/* ----------------------------------
+   Buttons Grey
+   ---------------------------------- */
+
+.btn-grey,
+.inverse a.btn-grey {
+  color: #fff !important;
+  background-color: #4f4f4f;
+}
+
+.btn-grey:hover,
+.btn-grey:active,
+.btn-grey:focus {
+  background-color: #434343;
+}
+
+.btn-border-grey,
+a.btn-border-grey {
+  color: #4f4f4f !important;
+  background-color: transparent;
+  border: 1px solid #4f4f4f;
+}
+
+.btn-border-grey:hover,
+.btn-border-grey:active,
+.btn-border-grey:focus {
+  color: #4f4f4f !important;
+  border: 1px solid #434343;
+}
+
+.input-group .btn-border-grey:hover,
+.input-group .btn-border-grey:active,
+.input-group .btn-border-grey:focus {
+  border: 1px solid #474747;
+}
+
+/* _____________________________________
+
+   05. Forms
+   _____________________________________ */
+
+.form-control {
+  padding-left: 16px;
+  padding-right: 16px;
+  font-size: 14px;
+  border-radius: 17px;
+  box-shadow: none;
+  appearance: none;
+  outline: 0;
+}
+
+textarea.form-control {
+  border-radius: 5px;
+  resize: none;
+}
+
+.input-group .form-control:first-child {
+  border-right: none;
+}
+
+.input-group-btn:last-child > .btn {
+  border-left: none;
+}
+
+.input-group .input-group-btn:last-child > .btn {
+  margin-left: -1px !important;
+}
+
+.input-group .btn {
+  height: 34px;
+  padding: 0 20px;
+  margin: 0 !important;
+  color: #3aafd6 !important;
+}
+
+.form-control:focus,
+.form-control:focus + .input-group-btn .btn {
+  border-color: #3aafd6;
+  box-shadow: none;
+  outline: none;
+}
+
+.error .form-control,
+.error .btn {
+  border-color: #3aafd6 !important;
+}
+
+/* ----------------------------------
+   Form White
+   ---------------------------------- */
+
+.form-control-white {
+  color: #fff;
+  background-color: transparent;
+  border: 1px solid #fff;
+}
+
+.form-control.form-control-silver::-moz-placeholder {
+  color: #fff;
+}
+
+.form-control.form-control-silver:-ms-input-placeholder {
+  color: #fff;
+}
+
+.form-control.form-control-silver::-webkit-input-placeholder {
+  color: #fff;
+}
+
+/* ----------------------------------
+   Form Silver
+   ---------------------------------- */
+
+.form-control-silver {
+  color: #bfbfbf;
+  background-color: transparent;
+  border: 1px solid #bfbfbf;
+}
+
+.form-control.form-control-silver::-moz-placeholder {
+  color: #bfbfbf;
+}
+
+.form-control.form-control-silver:-ms-input-placeholder {
+  color: #bfbfbf;
+}
+
+.form-control.form-control-silver::-webkit-input-placeholder {
+  color: #bfbfbf;
+}
+
+/* ----------------------------------
+   Validation Message
+   ---------------------------------- */
+
+#message-newsletter,
+#message-contact {
+  display: none;
+}
+
+.message {
+  color: #3aafd6;
+  margin: 0 auto;
+  width: 200px;
+}
+
+.message-icon {
+  display: block;
+  height: 30px;
+  width: 30px;
+  font-size: 14px;
+  text-align: center;
+  border: 1px solid #3aafd6;
+  border-radius: 50%;
+}
+
+.message-icon i {
+  line-height: 30px;
+}
+
+.message span {
+  display: inline-block;
+}
+
+.message-text {
+  margin: 10px 5px;
+  font-weight: 600;
+}
+
+/* _____________________________________
+
+   06. Panel
+   _____________________________________ */
+
+.panel {
+  border: none;
+  border-radius: 5px;
+}
+
+.panel-color {
+  border-color: #3aafd6;
+}
+
+.panel-group .panel {
+  margin-bottom: 7px;
+  border-radius: 5px;
+}
+
+.panel-group .panel-heading + .panel-collapse > .panel-body,
+.panel-group .panel-heading + .panel-collapse > .list-group {
+  border: none;
+}
+
+.panel-heading {
+  padding: 5px 15px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.panel.active > .panel-heading {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: #fff;
+}
+
+.panel-color > .panel-heading {
+  color: #fff;
+  background-color: #3aafd6;
+}
+
+.panel-color.active > .panel-heading {
+  color: #3aafd6;
+}
+
+.panel-body {
+  padding-top: 3px;
+}
+
+.panel-title {
+  font-weight: 400;
+  line-height: 30px;
+}
+
+.panel-title .icon {
+  float: right;
+  font-size: 30px;
+  line-height: 10px;
+  width: 25px;
+  height: 30px;
+}
+
+/* _____________________________________
+
+   07. Slider, Carousel, Loader
+   _____________________________________ */
+
+/* ----------------------------------
+   Revolution Slider
+   ---------------------------------- */
+
+.hero-slider {
+  height: 900px;
+}
+
+.rs-dot .tp-bullet {
+  height: 4px;
+  width: 4px;
+  background-color: #bfbfbf;
+  border-radius: 2px;
+}
+
+.light-version .rs-dot .tp-bullet.selected {
+  background-color: #999;
+}
+
+.dark-version .rs-dot .tp-bullet.selected,
+.dark-version .rs-dot .tp-bullet:hover {
+  background-color: #3aafd6;
+}
+
+.tp-bannertimer {
+  background-color: #3aafd6;
+  height: 2px;
+  top: 100%;
+  margin-top: -2px;
+}
+
+/* ----------------------------------
+   Owl Slider
+   ---------------------------------- */
+
+.owl-theme .owl-nav.disabled + .owl-dots {
+  margin-top: 20px;
+}
+
+.owl-theme .owl-dots {
+  text-align: center;
+}
+
+.owl-theme .owl-dots .owl-dot {
+  display: inline-block;
+  zoom: 1;
+  vertical-align: middle;
+}
+
+.owl-theme .owl-dots .owl-dot span {
+  display: block;
+  height: 4px;
+  width: 4px;
+  margin: 4px 3px;
+  background-color: #bfbfbf;
+  border-radius: 2px;
+  transition: opacity 200ms ease;
+}
+
+.light-version .owl-theme .owl-dots .owl-dot.active span,
+.light-version .owl-theme .owl-dots .owl-dot:hover span {
+  background-color: #999;
+}
+
+.dark-version .owl-theme .owl-dots .owl-dot.active span,
+.dark-version .owl-theme .owl-dots .owl-dot:hover span {
+  background-color: #3aafd6;
+}
+
+/* ----------------------------------
+   Swiper Slider
+   ---------------------------------- */
+
+.swiper-container {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  width: 263px;
+  height: 467px;
+}
+
+.swiper-container-horizontal > .swiper-pagination-bullets .swiper-pagination-bullet {
+  margin: 4px 3px;
+}
+
+.swiper-pagination-bullet {
+  opacity: 1;
+  height: 4px;
+  width: 4px;
+  background-color: #bfbfbf;
+}
+
+.light-version .swiper-pagination-bullet-active {
+  background-color: #999;
+}
+
+.dark-version .swiper-pagination-bullet-active {
+  background-color: #3aafd6;
+}
+
+/* ----------------------------------
+   Loader
+   ---------------------------------- */
+
+.loader {
+  position: fixed;
+  z-index: 1200;
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.loader-inner {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.ball-pulse-color > div {
+  background-color: #3aafd6;
+}
+
+/* _____________________________________
+
+   08. Spacing, Alignment, Helperclasses
+   _____________________________________ */
+
+.vert-middle-sm,
+.vert-middle-md,
+.vert-middle-lg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hor-middle {
+  margin: 0 auto;
+}
+
+.p-t-b-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.p-t-b-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.p-t-b-20 {
+  padding: 20px 0;
+}
+
+.p-t-b-15 {
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.p-t-b-30 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.p-t-b-60 {
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+
+.p-t-25 {
+  padding-top: 25px;
+}
+
+.p-l-30 {
+  padding-left: 30px;
+}
+
+.p-l-60 {
+  padding-left: 60px;
+}
+
+.p-l-100 {
+  padding-left: 100px;
+}
+
+.no-padding-md {
+  padding: 0;
+}
+
+.logo-wrapper {
+  margin-left: 4px;
+  vertical-align: text-bottom;
+}
+
+.block-line .block {
+  display: inline-block;
+  padding: 0 6px;
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+.block-line .block:first-child {
+  padding-left: 0;
+}
+
+.block-line .block:last-child {
+  padding-right: 0;
+}
+
+.separator {
+  margin: 0 5px
+}
+
+.ov-hidden {
+  overflow: hidden;
+}
+
+.pos-relative {
+  position: relative;
+}
+
+.pos-absolute {
+  position: absolute;
+}
+
+.section-overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.opacity-90 {
+  filter: alpha(opacity=90);
+  opacity: 0.9;
+}
+
+/* _____________________________________
+
+   09. Navigation Hero
+   _____________________________________ */
+
+.navbar {
+  padding: 28px 5px 22px 5px;
+  margin-bottom: 0;
+  border: none;
+  box-shadow: none;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar-brand {
+  padding: 4px 15px;
+  height: auto;
+}
+
+.logo-wg span {
+  background: url("../images/logo-white.png") no-repeat center;
+}
+
+.logo-color span {
+  background: url("../images/logo-blue.png") no-repeat center;
+}
+
+.navbar-brand span {
+  display: block;
+  background-size: auto 28px;
+  height: 28px;
+  width: 82px;
+}
+
+.navbar-nav > li > a {
+  padding: 10px 15px;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: transparent;
+}
+
+.navbar-nav > .active > a,
+.navbar-nav > .active > a:hover,
+.navbar-nav > .active > a:focus {
+  background-color: #eee;
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.navbar-toggle {
+  padding: 5px 15px 3px;
+  margin-right: 15px;
+  border: none;
+}
+
+.navbar ul.social {
+  display: inherit;
+  padding: 0 15px;
+}
+
+/* ----------------------------------
+   Navbar Transparent / Scroll Color
+   ---------------------------------- */
+
+.navbar.navbar-light {
+  background-color: #fff;
+  transition: all 0.5s ease-in-out;
+}
+
+.navbar.navbar-dark {
+  background-color: #444;
+  transition: all 0.5s ease-in-out;
+}
+
+.dark-nav .navbar-nav > li > a {
+  color: #bfbfbf;
+}
+
+.light-nav .navbar-nav > li > a {
+  color: #444;
+}
+
+.dark-nav-colored-hero .navbar-nav > li > a {
+  color: #fff;
+}
+
+/* ----------------------------------
+   Navbar Icon
+   ---------------------------------- */
+
+.navbar-icon {
+  position: relative;
+  height: 20px;
+  width: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transform: rotate(0deg);
+  transition: .5s ease-in-out;
+
+}
+
+.navbar-icon span {
+  position: absolute;
+  left: 0;
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #3aafd6;
+  border-radius: 9px;
+  filter: alpha(opacity=100);
+  opacity: 1;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.navbar-icon span:nth-child(1) {
+  top: 0;
+}
+
+.navbar-icon span:nth-child(2) {
+  top: 8px;
+}
+
+.navbar-icon span:nth-child(3) {
+  top: 16px;
+}
+
+.navbar-icon.open span:nth-child(1) {
+  top: 8px;
+  transform: rotate(135deg);
+}
+
+.navbar-icon.open span:nth-child(2) {
+  left: -40px;
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.navbar-icon.open span:nth-child(3) {
+  top: 8px;
+  transform: rotate(-135deg);
+}
+
+/* _____________________________________
+
+   10. Hero Section
+   _____________________________________ */
+
+.hero-p-v1 {
+  padding-top: 208px;
+  padding-bottom: 150px;
+}
+
+.hero-p-v2 {
+  padding-top: 190px;
+  padding-bottom: 114px;
+}
+
+.hero-p-v3 {
+  padding-top: 180px;
+}
+
+.hero-image {
+  background: url("../images/hero-image-bg.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.hero-video {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: -1000;
+}
+
+.hero-video img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  min-height: 100%;
+  min-width: 100%;
+}
+
+.loaded img {
+  filter: alpha(opacity=0);
+  opacity: 0;
+}
+
+.img-top-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  width: 63%;
+}
+
+.img-top-top {
+  position: absolute;
+  top: 200px;
+  right: 0;
+  width: 100%;
+}
+
+/* _____________________________________
+
+   11. Function Section
+   _____________________________________ */
+
+.function-device-shadow {
+  background: url("../images/function-1-device-shadow.png") no-repeat center;
+  background-size: cover;
+}
+
+.image-abs-300 {
+  height: 300px
+}
+
+.image-abs-300 img {
+  position: absolute;
+  top: 15%;
+  width: 130%;
+}
+
+/* _____________________________________
+
+   12. Features Section
+   _____________________________________ */
+
+.features-left {
+  text-align: right;
+}
+
+.features-right {
+  text-align: left;
+}
+
+.image-watch {
+  height: 300px
+}
+
+.image-watch img {
+  position: absolute;
+  top: 15%;
+  width: 130%;
+}
+
+/* _____________________________________
+
+   13. Download Section
+   _____________________________________ */
+
+.download-device-shadow {
+  background: url("../images/download-device-shadow.png") no-repeat center;
+  background-size: cover;
+}
+
+/* _____________________________________
+
+   14. Pricing Section
+   _____________________________________ */
+
+.price-marker {
+  display: table;
+  height: 100px;
+  width: 100px;
+  margin: 25px auto;
+  color: #fff;
+  background-color: #3aafd6;
+  border-radius: 50%;
+}
+
+.price-plan {
+  padding: 30px 0 20px 0;
+  border: 1px solid;
+  border-radius: 5px;
+}
+
+.dark-version.price-plan {
+  border-color: #666;
+  box-shadow: 1px 1px 1px 0 #5f5f5f;
+}
+
+.light-version.price-plan {
+  border-color: #eee;
+  box-shadow: 1px 1px 1px 0 #f4f4f4;
+}
+
+.price {
+  display: table-cell;
+  margin: 0;
+  font-size: 32px;
+  line-height: 0.6;
+  vertical-align: middle;
+}
+
+.price-cent {
+  font-size: 50%;
+  vertical-align: super;
+}
+
+.price-period {
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.price-details {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.price-details li {
+  margin-bottom: 20px;
+}
+
+/* _____________________________________
+
+   15. Video Section
+   _____________________________________ */
+
+.video-wrapper {
+  margin-bottom: 20px;
+}
+
+.video-wrapper > .eVideo {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
+}
+
+.skeleton .eVideo {
+  display: none;
+}
+
+/* _____________________________________
+
+   16. Testimonials Section
+   _____________________________________ */
+
+.speech-bubble {
+  position: relative;
+  padding: 15px 20px;
+  border-radius: 5px;
+}
+
+.speech-bubble p {
+  margin-bottom: 2px;
+}
+
+.speech-bubble-arrow {
+  width: 0;
+  height: 0;
+  margin: 0 auto;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid;
+}
+
+.speech-bubble-color {
+  color: #fff;
+  background-color: #3aafd6;
+}
+
+.speech-bubble-light {
+  color: #444;
+  background-color: #ebf7fb;
+}
+
+.speech-bubble-arrow-light {
+  border-top-color: #ebf7fb;
+}
+
+.speech-bubble-arrow-color {
+  border-top-color: #3aafd6;
+}
+
+.testimonial-details h4 {
+  margin-bottom: 0;
+}
+
+.testimonial-details p {
+  margin-bottom: 10px;
+}
+
+.testimonial-img {
+  width: 125px;
+  height: 125px;
+  margin-bottom: 20px;
+}
+
+.testimonial-details ul.social {
+  display: inline-table;
+}
+
+.testimonial-slider.owl-carousel .owl-item img {
+  display: inline;
+  width: auto;
+}
+
+/* _____________________________________
+
+   17. Newsletter Section
+   _____________________________________ */
+
+.newsletter-image {
+  background: url("../images/newsletter-image-bg.jpg") center no-repeat;
+  background-size: cover;
+}
+
+/* _____________________________________
+
+   18. Facts Section
+   _____________________________________ */
+
+.chart-value {
+  font-size: 36px;
+  line-height: 3.3;
+}
+
+.chart-unit {
+  margin-left: 3px;
+  font-size: 24px;
+}
+
+.circles-valueStroke {
+  stroke: #3aafd6;
+}
+
+.light-version .circles-maxValueStroke {
+  stroke: #eee;
+}
+
+.dark-version .circles-maxValueStroke {
+  stroke: #555;
+}

@@ -60,9 +60,12 @@
                         </thead>
                         <tbody>
                         @foreach ($banks as $key => $bank)
+                        <?php
+                        $bank->num_rows();
+                        ?>
                         <tr>
                             <td width="10px" style="text-align:center">{{ ++$i }}</td>
-                            <td>{{ $bank->bank_name }}</td>
+                            <td>{{ $bank->id }}</td>
                             <td>{{ $bank->bank_status }}</td>
                             <td>
                             <div class="btn-group">

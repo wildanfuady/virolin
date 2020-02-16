@@ -78,7 +78,7 @@
                             <i class="icon-people tx-warning tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">0</span></h2>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscribers }}</span></h2>
                             <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>User</span>subscribe</div>
                         </div>
                         </div>
@@ -118,7 +118,7 @@
                             <i class="icon-paper-plane tx-primary tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">0</span></h2>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_shares->total }}</span></h2>
                             <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Share</span>whatsapp</div>
                         </div>
                         </div>
@@ -138,7 +138,7 @@
                             <i class="icon-globe tx-danger tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_landingpage}}</span></h2>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_visitors->total_visitor }}</span></h2>
                             <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Visitor</span>unik</div>
                         </div>
                         </div>
@@ -199,36 +199,47 @@
                 <div class="card-body pd-0 collapse show" id="recentEarnings">
                     <div class="row d-flex pd-t-20 pd-b-35 pd-x-15">
                         <div class="col-sm-6 col-xl-4">
+                            <div class="media mg-t-20">
+                                <div class="wd-40 wd-md-50 ht-40 ht-md-50 card-icon-warning mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded">
+                                    <i class="icon-people tx-warning tx-20"></i>
+                                </div>
+                                <div>
+                                    <span class="tx-uppercase tx-10 tx-gray-500">Subscriber Hari Ini</span>
+                                    <h4 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscriber_now }} </span></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-4">
+                            <div class="media mg-t-20">
+                                <div class="wd-40 wd-md-50 ht-40 ht-md-50 card-icon-warning mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded">
+                                    <i class="icon-people tx-warning tx-20"></i>
+                                </div>
+                                <div>
+                                    <span class="tx-uppercase tx-10 tx-gray-500">Subscriber Minggu Ini</span>
+                                    <h4 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscriber_in_week }} </span></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 col-xl-3">
                         <div class="media mg-t-20">
                             <div class="wd-40 wd-md-50 ht-40 ht-md-50 card-icon-warning mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded">
                                 <i class="icon-people tx-warning tx-20"></i>
                             </div>
                             <div>
-                                <span class="tx-uppercase tx-10 tx-gray-500">Subscriber Today</span>
-                                <h4 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">0</span></h4>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-sm-6 col-xl-3">
-                        <div class="media mg-t-20">
-                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 card-icon-success mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded">
-                                <i class="icon-disc tx-success tx-20"></i>
-                            </div>
-                            <div>
-                                <span class="tx-uppercase tx-10 tx-gray-500">All Subscriber</span>
-                                <h4 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">0</span></h4>
+                                <span class="tx-uppercase tx-10 tx-gray-500">Semua Subscriber</span>
+                                <h4 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscribers }}</span></h4>
                             </div>
                         </div>
                         </div>
                     </div>
                     <div class="table-responsive">
                         <table class="table table-hover mg-b-0">
-                        <thead class="tx-dark tx-uppercase tx-10 tx-bold">
+                        <thead class="tx-dark tx-uppercase tx-bold">
                             <tr>
                                 <th>Nama</th>
-                                <th class="text-right">Email</th>
-                                <th class="text-right">Landingpage</th>
-                                <th class="text-right">Waktu</th>
+                                <th>Email</th>
+                                <th>Landingpage</th>
+                                <th>Waktu</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -237,7 +248,7 @@
                                 <td>{{ $lead->name }}</td>
                                 <td>{{ $lead->email }}</td>
                                 <td>{{ $lead->lp_name }}</td>
-                                <td>{{ $lead-> sub_created_at }}</td>
+                                <td>{{ date('d-m-Y H:i', strtotime($lead->sub_created_at)) }}</td>
                             </tr>
                             @endforeach
                         </tbody>

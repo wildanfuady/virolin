@@ -51,7 +51,7 @@
                                         <th width="1%">No</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <th>Landingpage</th>
+                                        <th>Campaign</th>
                                         <th>Status</th>
                                         <th width="150px" class="text-center">Action</th>
                                     </tr>
@@ -63,16 +63,16 @@
                                         <td class="text-center">{{$no++}}</td>
                                         <td>{{ $item->subscriber_name }}</td>
                                         <td>{{ $item->subscriber_email }}</td>
-                                        <td>{{ $item->lp_name }}</td>
+                                        <td>{{ $item->campaign_name }}</td>
                                         <td>{{ $item->subscriber_status }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-info btn-sm" href="{{ route('mysubscribers.show',$item->list_sub_id) }}"><i class="fa fa-eye"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.show',$item->list_sub_id) }}"><i class="fa fa-eye"></i></a>
                                                 @can('mysubscriber-edit')
-                                                <a class="btn btn-primary btn-sm" href="{{ route('mysubscribers.edit',$item->list_sub_id) }}"><i class="fa fa-edit"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.edit',$item->list_sub_id) }}"><i class="fa fa-edit"></i></a>
                                                 @endcan
                                                 @can('mysubscriber-delete')
-                                                <a class="btn btn-danger btn-sm" href="{{ url('mysubsciber/destroy/'.$item->lp_list_sub_idid) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash-alt"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ url('mysubsciber/destroy/'.$item->lp_list_sub_idid) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>
                                         </td>

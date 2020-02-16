@@ -8,6 +8,7 @@
       <meta name="description" content="">
       <meta name="keyword" content="">
       <meta name="author"  content=""/>
+      <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- Page Title -->
       <title>Virolin Dashboard</title>
       <!-- Main CSS -->			

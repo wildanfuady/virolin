@@ -18,33 +18,6 @@
         </div>
 
         <div class="row row-xs clearfix">
-            <!--================================-->
-            <!--  Annual Report Start-->
-            <!--================================-->
-            <div class="col-lg-12">
-                <div class="card mg-b-20">
-                    <div class="card-header">
-                        <h4 class="card-header-title">
-                            Report Share WA
-                        </h4>
-                        <div class="card-header-btn">
-                            <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
-                            <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
-                            <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
-                            <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
-                        </div>
-                    </div>
-                    <div class="collapse show">
-                        <div class="card-body pd-t-0 pd-b-20 collapse show">
-                            Rancangan:
-                            <ul>
-                                <li>Jumlah Share WA per minggu pakai chart line</li>
-                                <li>Total masing2 landingpage punya jumlah share berapa (table)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-12">
                 <div class="card mg-b-20">
                     <div class="card-header">

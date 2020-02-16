@@ -33,10 +33,10 @@
         @if(Auth::user()->level == "user" && Auth::user()->status == "valid" || Auth::user()->status == "Valid")
             <ul class="navbar-nav mr-auto">
                 <li class="mg-t-5">
-                    <a class="btn btn-primary mg-r-10" href="{{ route('landingpages.index') }}"><i data-feather="layers"></i> Campaign</a>
+                    <a class="btn btn-primary mg-r-10" href="{{ route('campaign.index') }}"><i data-feather="layers"></i> Campaign</a>
                 </li>
                 <li class="mg-t-5">
-                    <a class="btn btn-success mg-r-10" href="{{ route('landingpages.create') }}"><i data-feather="plus-circle"></i> Create Campaign</a>
+                    <a class="btn btn-success mg-r-10" href="{{ route('campaign.create') }}"><i data-feather="plus-circle"></i> Create Campaign</a>
                 </li>
                 <li class="mg-t-5">
                     <a class="btn btn-warning mg-r-10" href="{{ url('tutorial') }}"><i data-feather="book-open"></i> Tutorial</a>
@@ -77,7 +77,7 @@
 
                         </div>
                         <div class="notifications-footer">
-                        <a href="">View all Notifications</a>
+                        <a href="{{ url('all-notification') }}">View all Notifications</a>
                         </div>
                     </div>
                 </div>
@@ -120,7 +120,7 @@
 <script type='text/javascript'>
     $(document).ready(function(){
         $.ajax({
-            url: 'promo/fetchpromo',
+            url: '{{ url('promo/fetchpromo') }}',
             type: 'get',
             dataType: 'json',
             success: function(response){

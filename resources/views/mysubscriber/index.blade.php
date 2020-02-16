@@ -72,7 +72,7 @@
                                     <td>
                                     <?php
 
-                                    $jumlah_sub = DB::table('subscribers')->where('user_id', $item->user_id)->where('list_sub_id', $item->list_sub_id)->count();
+                                    $jumlah_sub = DB::table('subscribers')->where('user_id', $item->user_id)->where('list_sub_id', $item->list_sub_id)->where('subscriber_status', 'valid')->count();
                                     echo $jumlah_sub;
 
                                     ?>

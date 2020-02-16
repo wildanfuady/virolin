@@ -116,8 +116,8 @@ class MySubscriberController extends Controller
     public function show(Request $request, $id)
     {
         $paginate = 10;
-        $data['detail_list_subscribers'] = Subscribers::join('landingpages', 'subscribers.lp_id', '=', 'landingpages.lp_id')
-        ->where('subscribers.list_sub_id', $id)->where('subscribers.user_id', Auth::user()->id)->paginate($paginate);
+        $data['detail_list_subscribers'] = Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
+        ->where('subscribers.list_sub_id', $id)->where('subscribers.user_id', Auth::user()->id)->where('subscribers.subscriber_status', 'valid')->paginate($paginate);
         $data['id'] = $id;
         return view('mysubscriber.show', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);
     }
