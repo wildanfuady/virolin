@@ -24,33 +24,17 @@
       <script src="{{ asset('template/metrical') }}/plugins/feather-icon/feather.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/bootstrap/js/bootstrap.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/pace/pace.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/toastr/toastr.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/countup/counterup.min.js"></script>		
-      <script src="{{ asset('template/metrical') }}/plugins/waypoints/waypoints.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/chartjs/chartjs.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/apex-chart/apexcharts.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/apex-chart/irregular-data-series.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/simpler-sidebar/jquery.simpler-sidebar.min.js"></script>	   
-      <script src="{{ asset('template/metrical') }}/js/dashboard/sales-dashboard-init.js"></script>
+      <script src="{{ asset('template/metrical') }}/plugins/simpler-sidebar/jquery.simpler-sidebar.min.js"></script>
       <script src="{{ asset('template/metrical') }}/js/jquery.slimscroll.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/js/highlight.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/steps/jquery.steps.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/parsleyjs/parsley.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.js"></script>
       <script src="{{ asset('template/metrical') }}/js/app.js"></script>
       <script src="{{ asset('template/metrical') }}/js/custom.js"></script>
+      @yield('js')
       <script>
         $(document).ready(function(){
           'use strict';
 
           var url = window.location;
-
-          $('.textarea').summernote({
-            height: 350,
-          });
           
-         
-
           var a = $('ul.accordion-menu li a').filter(function() {
               return this.href == url;
           }).parent('ul.accordion-menu li').addClass('open active');

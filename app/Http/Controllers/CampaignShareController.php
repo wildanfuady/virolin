@@ -53,6 +53,21 @@ class CampaignShareController extends Controller
         return view('campaign/create/index');
     }
 
+    public function campaign($slug)
+    {
+        $campaign = Campaign::join('templates', 'campaigns.campaign_template', '=', 'templates.template_id')
+                    ->where('campaign_slug', $slug)->first();
+
+        if(!empty($campaign)){
+            $campaign->campaign_form_view += 1;
+            $campaign->save(); 
+            return view('campaign.page', compact('campaign'));
+        } else {
+            return view('campaign/error_404');
+        }
+
+    }
+
     public function share($slug)
     {
         // $id = 12;
@@ -100,6 +115,7 @@ class CampaignShareController extends Controller
             $id = $campaign->campaign_id;
             $user = $campaign->user_id;
             $text = $campaign->campaign_confirm;
+            $title_confirm = $campaign->campaign_subject_confirm_email;
             $group = $campaign->campaign_group;
         }
 
@@ -122,7 +138,7 @@ class CampaignShareController extends Controller
             $campaign->campaign_share = $campaign->campaign_share + 3;
             $update = $campaign->save();
 
-            $kirim = Mail::to($email)->send(new ConfirmEmail($fullname, $email, $token, $text, $slug));
+            $kirim = Mail::to($email)->send(new ConfirmEmail($fullname, $email, $token, $title, $text, $slug));
 
             return redirect(url($slug.'/confirm'));
             
@@ -152,6 +168,7 @@ class CampaignShareController extends Controller
         $campaign = Campaign::where('campaign_slug', $slug)->first();
 
         if(!empty($campaign)){
+            $title = $campaign->campaign_subject_thank_email;
             $thank = $campaign->campaign_form_thank;
         }
 
@@ -161,7 +178,7 @@ class CampaignShareController extends Controller
         $verify->subscriber_status = "valid";
         $update = $verify->save();
 
-        $kirim = Mail::to($email)->send(new ThankEmail($fullname, $email, $thank));
+        $kirim = Mail::to($email)->send(new ThankEmail($fullname, $title, $email, $thank));
         
         return redirect(url($slug.'/thanks'));
         

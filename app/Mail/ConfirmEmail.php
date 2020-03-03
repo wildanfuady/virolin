@@ -16,11 +16,12 @@ class ConfirmEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($fullname, $email, $token, $teks, $slug)
+    public function __construct($fullname, $email, $token, $title, $teks, $slug)
     {
         $this->fullname = $fullname;
         $this->email = $email;
         $this->token = $token;
+        $this->title = $title;
         $this->teks = $teks;
         $this->slug = $slug;
     }
@@ -33,7 +34,7 @@ class ConfirmEmail extends Mailable
     public function build()
     {
         return $this->from('tim@virolin.com', 'Tim Virolin')
-            ->subject('Selangkah Lagi untuk Dapatkan Akses Free Ecourse dari Virolin')
+            ->subject($this->title)
             ->view('email.confirm')
             ->with(
             [

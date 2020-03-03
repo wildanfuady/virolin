@@ -7,7 +7,7 @@
     <link href="{{ asset('landingpage/content') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('landingpage/content') }}/css/bonus.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css" />
-    <title>Virolin - Manage Database in Simple Ways </title>
+    <title>Share: {{ $campaign->campaign_name }} - Virolin.com</title>
     <style>.pwnu-container{margin-top: 25px;}.pmwu-progress-wrap{margin:0 auto;display:block;}.pmwu-progress{display:inline-block;width:100%;max-width:460px;height:32px;border:2px solid #c5c5c5;border-radius:16px;padding:4px;vertical-align:middle}.disabledButton{pointer-events: none;}.pmwu-bar{background-color:#e800a2;width:15%;height:100%;border-radius:16px;background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.3) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(255,255,255,.3) 50%,rgba(255,255,255,.3) 75%,rgba(0,0,0,0) 75%,rgba(0,0,0,0));background-image:linear-gradient(45deg,rgba(255,255,255,.3) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(255,255,255,.3) 50%,rgba(255,255,255,.3) 75%,rgba(0,0,0,0) 75%,rgba(0,0,0,0));background-size:30px 30px;max-width:100%;}.pmwu-bar svg{position:relative;top:-4px}.button-pmwu-default svg{margin-right:10px;position:relative;top:3px}.pmwu-blink{animation:blinker 1.2s linear infinite}@keyframes blinker{50%{opacity:0}}</style>
     <script src="{{ asset('landingpage') }}/js/jquery-2.1.1.min.js" type="text/javascript"></script> 
 </head>

@@ -9,11 +9,11 @@
     <div id="main-wrapper">
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Report Share WA</h1>
+            <h1 class="pd-0 mg-0 tx-20">Report Share</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Report Share WA</a>
+            <a class="breadcrumb-item" href="">Report Share</a>
             </div>
         </div>
 
@@ -42,7 +42,7 @@
                 <div class="card mg-b-20">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Report Share WA
+                            Report Share
                         </h4>
                         <div class="card-header-btn">
                             <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -57,7 +57,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Landing Page</th>
+                                        <th>Campaign</th>
                                         <th>Jumlah Share</th>
                                     </tr>
                                 </thead>
@@ -82,10 +82,8 @@
 </div>
 <!--/ Page Inner End -->
 <!--================================-->
-@include('partials.footer')  
-<script src="{{ asset('template/metrical') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="{{ asset('template/metrical') }}/plugins/datatables/responsive/dataTables.responsive.js"></script>
-<script src="{{ asset('template/metrical') }}/plugins/datatables/extensions/dataTables.jqueryui.min.js"></script>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/chartjs/chartjs.js"></script>
 <script>
 var ctx1 = document.getElementById('chartBar1').getContext('2d');
 var myChart1 = new Chart(ctx1, {
@@ -130,3 +128,5 @@ var myChart1 = new Chart(ctx1, {
     }
 });
 </script>
+@endsection
+@include('partials.footer')  

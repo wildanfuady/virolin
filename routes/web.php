@@ -134,3 +134,5 @@ Route::get('/cache/clear',function(){
     $exitCode3  = Artisan::call('view:clear');
     return 'sukses';
 });
+
+Route::get('{slug}','CampaignShareController@campaign');

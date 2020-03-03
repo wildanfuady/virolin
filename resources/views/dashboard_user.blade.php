@@ -265,4 +265,13 @@
 </div>
 <!--/ Page Inner End -->
 <!--================================-->
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/countup/counterup.min.js"></script>		
+<script src="{{ asset('template/metrical') }}/plugins/waypoints/waypoints.min.js"></script>
+<script>
+$( function() {
+	$('.counter').countUp();
+});
+</script>
+@endsection
 @include('partials.footer')  

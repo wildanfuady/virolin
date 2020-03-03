@@ -64,10 +64,8 @@
 </div>
 <!--/ Page Inner End -->
 <!--================================-->
-@include('partials.footer')  
-<script src="{{ asset('template/metrical') }}/plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="{{ asset('template/metrical') }}/plugins/datatables/responsive/dataTables.responsive.js"></script>
-<script src="{{ asset('template/metrical') }}/plugins/datatables/extensions/dataTables.jqueryui.min.js"></script>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/chartjs/chartjs.js"></script>
 <script>
 var ctx1 = document.getElementById('chartBrowser').getContext('2d');
 var myChart1 = new Chart(ctx1, {
@@ -127,3 +125,4 @@ var myChart2 = new Chart(ctx2, {
     }
 });
 </script>
+@include('partials.footer')  
