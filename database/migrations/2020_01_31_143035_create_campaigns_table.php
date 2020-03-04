@@ -17,12 +17,18 @@ class CreateCampaignsTable extends Migration
             $table->bigIncrements('campaign_id');
             $table->string('campaign_slug');
             $table->string('campaign_name');
-            $table->text('campaign_template');
+            $table->bigInteger('campaign_template');
             $table->enum('campaign_form_hp', ['Ya', 'Tidak']);
             $table->enum('campaign_form_address', ['Ya', 'Tidak']);
+            $table->text('campaign_subject_confirm_email');
+            $table->text('campaign_confirm');
+            $table->text('campaign_subject_thank_email');
             $table->text('campaign_form_thank');
+            $table->text('campaign_text_share');
             $table->integer('campaign_form_view');
+            $table->integer('campaign_group');
             $table->integer('user_id');
+            $table->integer('campaign_share');
             $table->timestamps();
         });
     }

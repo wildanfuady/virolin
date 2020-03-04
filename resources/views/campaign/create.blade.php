@@ -426,7 +426,6 @@
                             </div>
                             <div class="form-group">
                               <label class="form-control-label">Text Headline:</label>
-                              <textarea type="text" name="block8_headline" class="form-control textarea"></textarea>
                               {{ Form::textarea('block8_headline', '', ['class' => 'form-control textarea', 'placeholder' => 'Headline Deskripsi', 'autocomplete' => 'off']) }}
                             </div>
                             <div class="form-group">

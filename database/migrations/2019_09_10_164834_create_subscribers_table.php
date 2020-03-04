@@ -22,7 +22,7 @@ class CreateSubscribersTable extends Migration
             $table->string('subscriber_verifikasi', 150);
             $table->enum('subscriber_status', ['valid', 'invalid']);
             $table->integer('user_id');
-            $table->integer('lp_id');
+            $table->integer('campaign_id');
             $table->integer('list_sub_id');
             $table->timestamps();
         });

@@ -58,14 +58,14 @@
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('sub_lp', 'Landing Page') }}
-                            {{ Form::select('sub_lp', $lp, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::label('sub_lp', 'Campaign') }}
+                            {{ Form::select('sub_lp', $campaign, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
                         </div>
                         
                         <div class="form-group">
 
                             {{ Form::label('sub_status', 'Status') }}
-                            {{ Form::select('sub_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('sub_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
                         </div>
                                 
                     </div>

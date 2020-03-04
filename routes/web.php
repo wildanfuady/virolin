@@ -97,6 +97,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('campaign/buat','CampaignController@buat');
 
     Route::resource('mysubscribers','MySubscriberController');
+    Route::get('mysubscriber/{id}/export', 'MySubscriberController@export');
     Route::get('mysubscriber/new/create/{id}','MySubscriberController@create_subscriber');
     Route::post('mysubscriber/new/store/{id}','MySubscriberController@store_subscriber');
     Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy');

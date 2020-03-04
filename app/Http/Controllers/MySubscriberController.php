@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Subscribers;
+use App\Campaign;
+use App\Exports\SubscribersExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MySubscriberController extends Controller
 {
@@ -55,7 +58,7 @@ class MySubscriberController extends Controller
     public function create_subscriber($id)
     {
         $data['id'] = $id;
-        $data['lp'] = \App\Landingpage::where('lp_status', 'Active')->pluck('lp_name', 'lp_id');
+        $data['campaign'] = \App\Campaign::pluck('campaign_name', 'campaign_id');
         return view('mysubscriber.create_subscriber', $data);
     }
 
@@ -64,22 +67,32 @@ class MySubscriberController extends Controller
         $this->validate($request,[
             'sub_name' => 'required',
             'sub_email' => 'required|email',
-            'sub_hp' => 'required|numeric',
-            'sub_alamat' => 'required|string',
             'sub_status' => 'required|string',
             'sub_lp' => 'required|string',
         ]);
+
+        if(empty($request->sub_hp)){
+            $no_hp = "-";
+        } else {
+            $no_hp = $request->sub_hp;
+        }
+
+        if(empty($request->sub_alamat)){
+            $alamat = "-";
+        } else {
+            $alamat = $request->sub_alamat;
+        }
 
         $user_id = Auth::user()->id;
         $new_subscriber = new \App\Subscribers;
         $new_subscriber->subscriber_name = $request->sub_name;
         $new_subscriber->subscriber_email = $request->sub_email;
-        $new_subscriber->subscriber_nohp = $request->sub_hp;
-        $new_subscriber->subscriber_alamat = $request->sub_alamat;
+        $new_subscriber->subscriber_nohp = $no_hp;
+        $new_subscriber->subscriber_alamat = $alamat;
         $new_subscriber->subscriber_status = $request->sub_status;
         $new_subscriber->user_id = $user_id;
         $new_subscriber->list_sub_id = $id;
-        $new_subscriber->lp_id = $request->sub_lp;
+        $new_subscriber->campaign_id = $request->sub_lp;
         $new_subscriber->subscriber_verifikasi = 1;
         $simpan = $new_subscriber->save();
 
@@ -201,5 +214,15 @@ class MySubscriberController extends Controller
         if($hapus){
             return redirect()->back()->with('warning', 'Deleted Subscriber Successfully');
         }
+    }
+
+    public function export($id) 
+    {
+        $date = date('d-m-Y H:i');
+        return Excel::download(new SubscribersExport($id), $date.'-subscribers.csv', \Maatwebsite\Excel\Excel::CSV, [
+            'Content-Type' => 'text/csv',
+        ]);
+        return back();
+
     }
 }
