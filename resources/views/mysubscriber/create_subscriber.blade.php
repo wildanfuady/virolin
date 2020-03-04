@@ -50,22 +50,24 @@
                         <div class="form-group">
                             {{ Form::label('sub_hp', 'No Hp') }}
                             {{ Form::number('sub_hp', '', ['class' => 'form-control', 'placeholder' => '---- ---- ----']) }}
+                            <span style="color: red; font-style: italic">Kosongkan no hp jika tidak dibutuhkan</span>
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_alamat', 'Alamat') }}
-                            {{ Form::textarea('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address']) }}
+                            {{ Form::text('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address']) }}
+                            <span style="color: red; font-style: italic">Kosongkan alamat jika tidak dibutuhkan</span>
                         </div>
 
                         <div class="form-group">
-                            {{ Form::label('sub_lp', 'Landing Page') }}
-                            {{ Form::select('sub_lp', $lp, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::label('sub_lp', 'Campaign') }}
+                            {{ Form::select('sub_lp', $campaign, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
                         </div>
                         
                         <div class="form-group">
 
                             {{ Form::label('sub_status', 'Status') }}
-                            {{ Form::select('sub_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('sub_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
                         </div>
                                 
                     </div>

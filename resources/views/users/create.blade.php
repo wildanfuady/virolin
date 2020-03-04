@@ -62,7 +62,7 @@
                         <div class="col-sm-10">
                             <select name="product_id" class="form-control" id="">
                                 @foreach ($produk as $item)
-                                    <option value="{{$item->id}}">{{$item->product_name}}</option>
+                                    <option value="{{$item->product_id}}">{{$item->product_name}}</option>
                                 @endforeach
                             </select>
                         </div>

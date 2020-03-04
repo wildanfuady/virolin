@@ -209,9 +209,9 @@ $(document).ready(function() {
     page_sidebar_init();
     boxed_page();
     accordion_menu();
-    navbar_init();
-    right_sidebar();
-    plugins_init();
+    // navbar_init();
+    // right_sidebar();
+    // plugins_init();
     
 });
 

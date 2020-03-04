@@ -16,9 +16,10 @@ class ThankEmail extends Mailable
      *
      * @return void
      */
-    public function __construct($fullname, $email, $thank)
+    public function __construct($fullname, $title, $email, $thank)
     {
         $this->fullname = $fullname;
+        $this->title = $title;
         $this->email = $email;
         $this->thank = $thank;
     }
@@ -31,7 +32,7 @@ class ThankEmail extends Mailable
     public function build()
     {
         return $this->from('tim@virolin.com', 'Tim Virolin')
-        ->subject('Terima kasih! Subscribe telah berhasil')
+        ->subject($this->title)
         ->view('email.thanks')
             ->with(
             [

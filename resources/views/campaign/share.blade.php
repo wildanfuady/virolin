@@ -1,15 +1,19 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Share: {{ $campaign->campaign_name }} - Virolin.com</title>
+
+    <!-- CSS From App -->
     <link href="{{ asset('landingpage/content') }}/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{{ asset('landingpage/content') }}/css/bonus.css" rel="stylesheet" />
+    <link href="{{ asset('landingpage/content') }}/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css" />
-    <title>Virolin - Manage Database in Simple Ways </title>
-    <style>.pwnu-container{margin-top: 25px;}.pmwu-progress-wrap{margin:0 auto;display:block;}.pmwu-progress{display:inline-block;width:100%;max-width:460px;height:32px;border:2px solid #c5c5c5;border-radius:16px;padding:4px;vertical-align:middle}.disabledButton{pointer-events: none;}.pmwu-bar{background-color:#e800a2;width:15%;height:100%;border-radius:16px;background-image:-webkit-linear-gradient(45deg,rgba(255,255,255,.3) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(255,255,255,.3) 50%,rgba(255,255,255,.3) 75%,rgba(0,0,0,0) 75%,rgba(0,0,0,0));background-image:linear-gradient(45deg,rgba(255,255,255,.3) 25%,rgba(0,0,0,0) 25%,rgba(0,0,0,0) 50%,rgba(255,255,255,.3) 50%,rgba(255,255,255,.3) 75%,rgba(0,0,0,0) 75%,rgba(0,0,0,0));background-size:30px 30px;max-width:100%;}.pmwu-bar svg{position:relative;top:-4px}.button-pmwu-default svg{margin-right:10px;position:relative;top:3px}.pmwu-blink{animation:blinker 1.2s linear infinite}@keyframes blinker{50%{opacity:0}}</style>
-    <script src="{{ asset('landingpage') }}/js/jquery-2.1.1.min.js" type="text/javascript"></script> 
+
+    <!-- JS From App -->
+    <script src="{{ asset('landingpage/content') }}/js/jquery-2.1.1.min.js" type="text/javascript"></script> 
 </head>
 <body>
     <div class="banner">
@@ -17,51 +21,24 @@
             <div class="col-md-6 col-md-push-3 text-center">
                 <div class="">
                     <h1 class="md22 sm30 xs25 w600 white top1 text-center">
-                     Selangkah lagi untuk masuk Channel Belajar
+                     Selangkah lagi untuk dapatkan aksesnya
                     </h1>
                 </div>
             </div>
             <div class="clearfix"></div>
           
             <div class="col-md-10 col-md-offset-1 text-center">
-
                 <h1 class="md45 sm30 xs25 lh120 yellow w600">
-                    Ajak teman anda untuk bergabung <br>Free E-Course ini <br>
+                    Ajak teman anda untuk mendapatkan <br>{{ $campaign->campaign_name }}<br>
                 </h1>
-            </div>
-            <div class="clearfix"></div>
-            <div class="text-center">
-                <p class="md25 sm18 xs18 lh120  white">
-                    Simak Video penjelasan di Bawah ini
-                </p>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-9 col-md-push-1 col-sm-10 col-xs-12 col-xs-offset-0 ml5 mt1">
-                <div class="responsive-video">
-                    <object data=""><iframe width="853" height="480" src="https://www.youtube.com/embed/2dGyZCLwRII" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></object>
-                </div>
-
             </div>
 
         </div>
-        <div class="clearfix"></div>
         <div class="container">
-            <div class="text-center">
-                <p class="md25 sm20 xs20 lh120 white mt2 w600 mb-1">
-                
-                </p>
-				 <p class="md25 sm20 xs20 lh120 white mt2 w600 mb-1">
-             
-                </p>
-            </div>
 
-         <div class="row">
+            <div class="row">
                 <div class="col-md-12 col-sm-12 col-xs-12 bonusbutton mt1">
-                    <a href="#" class="md29 sm41 xs15 montserrat w700">  Daftar Gratis</a>
-                </div>
-                <div class="clearfix"></div>
-                <div class="col-md-12 col-xs-12 col-sm-7 mt2">
-                    
+                    <a href="#share" class="md29 sm41 xs15 montserrat w700">Oke Siap</a>
                 </div>
             </div>
         </div>
@@ -69,39 +46,39 @@
 
 	<br><br>
 	
-	 <div class="banner8">
+	<div class="banner8">
         <div class="container">
             <div class="text-center">
 				 <p class="md25 sm20 xs20 lh120  mt2 w600 mb-1">
-                    Untuk mendapatkan akses Free Course di Channel Telegram secara khusus ikuti 3 langkah berikut :
+                    Untuk mendapatkan {{ $campaign->campaign_name }} secara khusus, ikuti 3 langkah berikut:
                 </p>
             </div>
 
             <div class="clearfix"></div>
             <div class="text-center mt2">
-                <img src="{{ asset('landingpage/content') }}/bonusimg/arrowred.png" class="img-responsive center-block" alt="wrrred" />
+                <img src="{{ asset('landingpage/content') }}/img/arrowred.png" class="img-responsive center-block" alt="wrrred" />
             </div>
             <div class="row mt3">
                 <div class="col-md-4 col-md-offset-1">
-                    <img src="{{ asset('landingpage/content') }}/bonusimg/sharewa2.png" class="img-responsive center-block" alt="icon77" />
+                    <img src="{{ asset('landingpage/content') }}/img/sharewa2.png" class="img-responsive center-block" alt="icon77" />
                 </div>
-                <div class="col-md-5 mt5">
-                    <img src="{{ asset('landingpage/content') }}/bonusimg/line1.png" class="img-responsive center-block" alt="line1" />
+                <div class="col-md-5 mt5 line">
+                    <img src="{{ asset('landingpage/content') }}/img/line1.png" class="img-responsive center-block" alt="line1" />
                 </div>
 
             </div>
             <div class="row mt3">
 
-                <div class="col-md-5 col-md-push-2 mt6">
-                    <img src="{{ asset('landingpage/content') }}/bonusimg/line2.png" class="img-responsive center-block" alt="line2" />
+                <div class="col-md-5 col-md-push-2 mt6 line">
+                    <img src="{{ asset('landingpage/content') }}/img/line2.png" class="img-responsive center-block" alt="line2" />
                 </div>
                 <div class="col-md-4 col-md-push-2">
-                    <img src="{{ asset('landingpage/content') }}/bonusimg/sharewa3.png" class="img-responsive center-block" alt="icon60" />
+                    <img src="{{ asset('landingpage/content') }}/img/sharewa3.png" class="img-responsive center-block" alt="icon60" />
                 </div>
             </div>
             <div class="row mt3">
                 <div class="col-md-4 col-md-offset-1">
-                    <img src="{{ asset('landingpage/content') }}/bonusimg/sharewa4.png" class="img-responsive center-block" alt="icon90" />
+                    <img src="{{ asset('landingpage/content') }}/img/sharewa4.png" class="img-responsive center-block" alt="icon90" />
                 </div>
                 
 
@@ -112,20 +89,15 @@
         <div class="container pt4">
             <div class="col-md-10 col-md-offset-1">
                  <p class="md25 sm20 xs20 lh120  mt2 w600 mb-1 text-center">
-                    Selamat, anda langsung bisa segera mengakses Free Course Special ini
+                    Setelah itu... Selamat, Anda langsung bisa mendapatkan {{ $campaign->campaign_name }}
                 </p>
             </div>
         </div>
     </div>
     
-   <div class="banner11">
+   <div class="banner11" id="share">
 
         <div class="container">
-
-            <div class="clearfix"></div>
-           
-            <div class="clearfix"></div>
-
        
             <div class="row" id="prefer">
             
@@ -273,19 +245,15 @@
         <div class="container">
             <div class=" white">
                 <div class="col-md-12 col-sm-12 col-xs-12 md15 sm14 xs11 text-center">
-                    <a href="#" target="_blank"> CopyRight 2020 @ Virolin.Com</a>
-                   
-
+                    Copyright &copy; 2020 | All Right Reserved | Created with <i class="fa fa-heart" style="color:red"></i> by <a href="https://virolin.com" target="_blank"> Virolin</a>
                 </div>
             </div>
         </div>
     </div>
-    
-   
 
     <script>
     // Set the date we're counting down to
-    var countDownDate = new Date("Feb 14, 2020 09:01:00").getTime();
+    var countDownDate = new Date("Mar 15, 2020 09:01:00").getTime();
     
     // Update the count down every 1 second
     var x = setInterval(function() {
@@ -397,6 +365,6 @@
     </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="{{ asset('landingpage') }}/flexslider/jquery.flexslider-min.js" type="text/javascript"></script>
+<script src="{{ asset('landingpage/content') }}/flexslider/jquery.flexslider-min.js" type="text/javascript"></script>
 </body>
 </html>

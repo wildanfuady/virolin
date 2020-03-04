@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -36,11 +37,22 @@ class DashboardController extends Controller
 
         $data['total_landingpage'] = \App\Campaign::where('user_id', $user_id)->count();
 
-        $query = "SUM(campaign_share) as total";
-        $data['total_shares'] = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+        // $query = "SUM(campaign_share) as total";
+        // $total_shares = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+        // if(empty($total_shares)){
+        //     $data['total_shares'] = 0;
+        // } else {
+        //     $data['total_shares'] = $total_shares;
+        // }
 
         $query = "SUM(campaign_form_view) as total_visitor";
-        $data['total_visitors'] = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+        $total_visitors = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+
+        if(empty($total_visitors)){
+            $data['total_visitors'] = 0;
+        } else {
+            $data['total_visitors'] = $total_visitors;
+        }
 
         $raw_log = "log_activities.created_at as log_created_at, log_activities.status, users.name";
         $data['activity_log'] = \App\LogActivity::join('users', 'log_activities.user_id', '=', 'users.id')
@@ -51,12 +63,19 @@ class DashboardController extends Controller
             ->get();
         
         $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, campaigns.campaign_name as lp_name, subscribers.created_at as sub_created_at";
+        
         $data['leads'] = \App\Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
             ->where('subscribers.user_id', $user_id)
             ->selectRaw($raw_sub)
             ->orderBy('subscribers.id', 'desc')
             ->limit(5)
             ->get();
+        
+        $raw_order = "products.product_name, products.product_max_db";
+        $data['order'] = \App\Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                        ->where('orders.user_id', $user_id)
+                        ->selectRaw($raw_order)
+                        ->first();
 
         if (Auth::check() && Auth::user()->level == 'admin') {
             return $this->dashboard();

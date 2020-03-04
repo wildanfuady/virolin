@@ -11,25 +11,26 @@
       <meta name="csrf-token" content="{{ csrf_token() }}">
       <!-- Page Title -->
       <title>Virolin Dashboard</title>
-      <!-- Main CSS -->			
+      <!-- Favicon -->	
+      <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
+      <!-- Main CSS Primary -->			
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/bootstrap/css/bootstrap.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/font-awesome/css/font-awesome.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/flag-icon/flag-icon.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/simple-line-icons/css/simple-line-icons.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/ionicons/css/ionicons.css">
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/steps/jquery.steps.css">
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/toastr/toastr.min.css">
+      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
+      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
+      <!-- CSS Sekunder -->
+      <!-- <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/steps/jquery.steps.css"> -->
+      <!-- <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/toastr/toastr.min.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/chartist/chartist.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/apex-chart/apexcharts.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.css">
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/themify-icons/themify-icons.css">
-      <!-- Favicon -->	
-      <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
+      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/themify-icons/themify-icons.css"> -->
+      @yield('css')
       <!-- Midtrans -->
       <script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
-      
       <script src="{{ asset('template/metrical') }}/plugins/jquery/jquery.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/jquery-ui/jquery-ui.js"></script>
       

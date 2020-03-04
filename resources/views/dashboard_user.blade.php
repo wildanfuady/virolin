@@ -111,15 +111,15 @@
                 <div class="card-body pd-y-0">
                     <div class="custom-fieldset mb-4">
                         <div class="clearfix">
-                        <label>Share WA</label>
+                        <label>My Order</label>
                         </div>
                         <div class="d-flex align-items-center text-dark">
                         <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
                             <i class="icon-paper-plane tx-primary tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_shares->total }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Share</span>whatsapp</div>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">{{ $order->product_name }}</h2>
+                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>{{ $order->product_max_db }} </span> database</div>
                         </div>
                         </div>
                     </div>
@@ -238,7 +238,7 @@
                             <tr>
                                 <th>Nama</th>
                                 <th>Email</th>
-                                <th>Landingpage</th>
+                                <th>Campaign</th>
                                 <th>Waktu</th>
                             </tr>
                         </thead>
@@ -265,4 +265,13 @@
 </div>
 <!--/ Page Inner End -->
 <!--================================-->
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/countup/counterup.min.js"></script>		
+<script src="{{ asset('template/metrical') }}/plugins/waypoints/waypoints.min.js"></script>
+<script>
+$( function() {
+	$('.counter').countUp();
+});
+</script>
+@endsection
 @include('partials.footer')  
