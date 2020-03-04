@@ -76,7 +76,7 @@ var myChart1 = new Chart(ctx1, {
         labels: ['Google', 'Firefox', 'Facebook', 'Twitter', 'Opera', 'Whatsapp'],
         datasets: [{
             data: [10, 24, 20, 25, 35, 50],
-            backgroundColor: '#5D78FF',
+            backgroundColor: ['#5D78FF','#63CF72','#C9D5FA','#00a65a', '#00c0ef', '#f56954'],
             borderWidth: 1,
             fill: true,
             label: 'Value1'
