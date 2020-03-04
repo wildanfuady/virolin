@@ -86,7 +86,7 @@
                                             <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.edit',$item->list_sub_id) }}"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('mysubscriber-delete')
-                                            <a class="btn btn-light btn-sm" href="{{ url('mysubscriber/destroy/'.$item->list_sub_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-light btn-sm" href="{{ url('mysubscriber/destroy/'.$item->list_sub_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus list subscriber <?= $item->list_sub_name ?> ini? Jika ya, maka semua subscriber di list ini akan ikut terhapus.');"><i class="fa fa-trash"></i></a>
                                             @endcan
                                         </div>
                                     </td>

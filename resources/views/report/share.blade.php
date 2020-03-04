@@ -42,7 +42,7 @@
                 <div class="card mg-b-20">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Report Share
+                            Report Campaign
                         </h4>
                         <div class="card-header-btn">
                             <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -59,6 +59,7 @@
                                         <th>No</th>
                                         <th>Campaign</th>
                                         <th>Jumlah Share</th>
+                                        <th>Total Visitor</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -68,6 +69,7 @@
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $data->campaign_name }}</td>
                                         <td>{{ $data->campaign_share }}</td>
+                                        <td>{{ $data->campaign_form_view }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>

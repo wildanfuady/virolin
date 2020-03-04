@@ -42,7 +42,7 @@ class ReportController extends Controller
     public function share()
     {
         $user_id = Auth::user()->id;
-        $raw = "campaign_name, campaign_share";
+        $raw = "campaign_name, campaign_share, campaign_form_view";
         $data['shares'] = Campaign::selectRaw($raw)->where('user_id', $user_id)->get();
         return view('report.share', $data);
     }

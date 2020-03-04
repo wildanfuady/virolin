@@ -50,11 +50,13 @@
                         <div class="form-group">
                             {{ Form::label('sub_hp', 'No Hp') }}
                             {{ Form::number('sub_hp', '', ['class' => 'form-control', 'placeholder' => '---- ---- ----']) }}
+                            <span style="color: red; font-style: italic">Kosongkan no hp jika tidak dibutuhkan</span>
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_alamat', 'Alamat') }}
-                            {{ Form::textarea('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address']) }}
+                            {{ Form::text('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address']) }}
+                            <span style="color: red; font-style: italic">Kosongkan alamat jika tidak dibutuhkan</span>
                         </div>
 
                         <div class="form-group">

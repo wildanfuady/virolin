@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Landingpage;
 use App\Campaign;
 use App\ListSubscriber;
+use App\Subscribers;
+use App\Order;
 use App\Form;
 use App\Autoresponder;
 use Illuminate\Support\Facades\Auth;
@@ -85,65 +87,89 @@ class CampaignShareController extends Controller
 
     public function send(Request $request, $slug)
     {
-        $rules = [
-            'fullname' => 'required|string|regex:/^[a-zA-Z ]+$/u|max:35',
-            'email' => 'required|email'
-        ];
-
-        $messages = [
-            'fullname.required' => 'Nama Lengkap wajib diisi',
-            'fullname.string' => 'Nama Lengkap hanya boleh berupa huruf dan angka',
-            'fullname.regex' => 'Nama Lengkap hanya boleh berupa huruf dan angka',
-            'fullname.max' => 'Nama Lengkap maksimal 35 karakter termasuk spasi',
-            'email.required' => 'Email wajib diisi',
-            'email.email' => 'Email yang Anda masukan tidak valid',
-        ];
-
-        $validator = Validator::make($request->all(), $rules, $messages);
-        
-        if($validator->fails()){
-            return redirect(url($slug.'/failed'))->withErrors($validator)->withInput($request->all());
-        }
-
-        $fullname = $request->fullname;
-        $email = $request->email;
-        $token = $this->getToken(30);
 
         $campaign = Campaign::where('campaign_slug', $slug)->first();
 
-        if(!empty($campaign)){
-            $id = $campaign->campaign_id;
-            $user = $campaign->user_id;
-            $text = $campaign->campaign_confirm;
-            $title_confirm = $campaign->campaign_subject_confirm_email;
-            $group = $campaign->campaign_group;
-        }
+        if(empty($campaign)){
 
-        $sub = new \App\Subscribers;
+            return redirect(url($slug.'/failed'))->with('warning', 'Maaf, Anda tidak dapat submit ke page ini. Hubungi pemilik campaign untuk info lebih lanjut.');
+        
+        } else {
 
-        $sub->subscriber_name = $fullname;
-        $sub->subscriber_email = $email;
-        $sub->subscriber_nohp = "Tidak";
-        $sub->subscriber_alamat = "Tidak";
-        $sub->subscriber_verifikasi = $token;
-        $sub->subscriber_status = "invalid";
-        $sub->user_id = $user;
-        $sub->campaign_id = $id;
-        $sub->list_sub_id = $group;
-        $simpan = $sub->save();
+            // dapatkan id user
+            $user_id = $campaign->user_id;
 
-        if($simpan){
-            // Update campaign
-            $campaign = Campaign::where('campaign_id', 12)->first();
-            $campaign->campaign_share = $campaign->campaign_share + 3;
-            $update = $campaign->save();
+            // cek jumlah database yang ia miliki
+            $total_subscriber_user = Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+            // tampilkan maksimal subscriber yang ia miliki
+            $select = "products.product_max_db";
+            $total_max_database_user = Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                                        ->where('orders.user_id', $user_id)
+                                        ->selectRaw($select)
+                                        ->first();
 
-            $kirim = Mail::to($email)->send(new ConfirmEmail($fullname, $email, $token, $title, $text, $slug));
+            if($total_subscriber_user >= $total_max_database_user->product_max_db){
 
-            return redirect(url($slug.'/confirm'));
+                return redirect(url($slug.'/failed'))->with('warning', 'Maaf, Anda tidak dapat subscribe ke page ini. Hubungi pemilik campaign untuk info lebih lanjut.');
             
-        }
+            } else {
 
+
+                $rules = [
+                    'fullname' => 'required|string|regex:/^[a-zA-Z ]+$/u|max:35',
+                    'email' => 'required|email'
+                ];
+
+                $messages = [
+                    'fullname.required' => 'Nama Lengkap wajib diisi',
+                    'fullname.string' => 'Nama Lengkap hanya boleh berupa huruf dan angka',
+                    'fullname.regex' => 'Nama Lengkap hanya boleh berupa huruf dan angka',
+                    'fullname.max' => 'Nama Lengkap maksimal 35 karakter termasuk spasi',
+                    'email.required' => 'Email wajib diisi',
+                    'email.email' => 'Email yang Anda masukan tidak valid',
+                ];
+
+                $validator = Validator::make($request->all(), $rules, $messages);
+                
+                if($validator->fails()){
+                    return redirect(url($slug.'/failed'))->withErrors($validator)->withInput($request->all());
+                }
+
+                $fullname = $request->fullname;
+                $email = $request->email;
+                $token = $this->getToken(30);
+
+                $id = $campaign->campaign_id;
+                $user = $campaign->user_id;
+                $text = $campaign->campaign_confirm;
+                $title_confirm = $campaign->campaign_subject_confirm_email;
+                $group = $campaign->campaign_group;
+
+                $sub = new \App\Subscribers;
+
+                $sub->subscriber_name = $fullname;
+                $sub->subscriber_email = $email;
+                $sub->subscriber_nohp = "Tidak";
+                $sub->subscriber_alamat = "Tidak";
+                $sub->subscriber_verifikasi = $token;
+                $sub->subscriber_status = "invalid";
+                $sub->user_id = $user;
+                $sub->campaign_id = $id;
+                $sub->list_sub_id = $group;
+                $simpan = $sub->save();
+
+                if($simpan){
+                    // Update campaign
+                    $campaign->campaign_share = $campaign->campaign_share + 3;
+                    $update = $campaign->save();
+
+                    $kirim = Mail::to($email)->send(new ConfirmEmail($fullname, $email, $token, $title_confirm, $text, $slug));
+
+                    return redirect(url($slug.'/confirm'));
+                    
+                }
+            }
+        }
     }
 
     public function failed($slug)

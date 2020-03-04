@@ -13,10 +13,7 @@
 
 Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
-Route::get('/test', function(){
-    return view('theme');
-});
-Route::get('/kirimemail','KirimEmailController@index');
+// Route::get('/kirimemail','KirimEmailController@index');
 
 Route::post('finish', 'SnapController@finish')->name('payment.finish');
 Route::post('unfinish', 'SnapController@unfinish')->name('payment.unfinish');
@@ -83,31 +80,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('payment','PaymentController');
     
     Route::get('payment/destroy/{id}','PaymentController@destroy');
+
+    Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
+    Route::resource('/usersubscribers','User\SubscribersController');
     
     // Module User 
-    Route::resource('landingpages','LandingpageController');
-    Route::get('landingpages/destroy/{id}','LandingpageController@destroy');
-
-    // Route::get('campaign/{slug}','CampaignController@campaign');
 
     Route::resource('campaign','CampaignController');
-    Route::get('campaign/destroy/{id}','CampaignController@destroy');
-    Route::get('campaign/create/custom','CampaignController@custom');
-    
-    Route::post('campaign/buat','CampaignController@buat');
+    Route::get('campaign/destroy/{id}','CampaignController@destroy')->where('id', '[0-9]+');
 
     Route::resource('mysubscribers','MySubscriberController');
-    Route::get('mysubscriber/{id}/export', 'MySubscriberController@export');
-    Route::get('mysubscriber/new/create/{id}','MySubscriberController@create_subscriber');
-    Route::post('mysubscriber/new/store/{id}','MySubscriberController@store_subscriber');
-    Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy');
-    Route::get('mysubscriber/destroy-subscriber/{id}','MySubscriberController@destroy_subscriber');
-
-    Route::resource('autoresponders','AutoresponderController');
-    Route::get('autoresponders/destroy/{id}','AutoresponderController@destroy');
-
-    Route::resource('forms','FormController');
-    Route::get('forms/destroy/{id}','FormController@destroy');
+    Route::get('mysubscriber/{id}/export', 'MySubscriberController@export')->where('id', '[0-9]+');
+    Route::get('mysubscriber/new/create/{id}','MySubscriberController@create_subscriber')->where('id', '[0-9]+');
+    Route::post('mysubscriber/new/store/{id}','MySubscriberController@store_subscriber')->where('id', '[0-9]+');
+    Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy')->where('id', '[0-9]+');
+    Route::get('mysubscriber/destroy-subscriber/{id}','MySubscriberController@destroy_subscriber')->where('id', '[0-9]+');
 
     Route::resource('reports','ReportController');
     Route::get('report/trafik','ReportController@trafik');
@@ -115,18 +102,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('report/payment','ReportController@payment');
     Route::get('report/destroy/{id}','ReportController@destroy');
 
-    Route::resource('testimonials','TestimonialController');
-    Route::get('testimonial/destroy/{id}','TestimonialController@destroy');
-
-    Route::post('/user/ingatkan', 'KirimEmailController@ingatkan');
-    Route::resource('/usersubscribers','User\SubscribersController');
-
     Route::get('promo','UserPromoController@index');
-    Route::get('promo/detail/{id}','UserPromoController@show');
+    Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
 
     Route::get('profile','ProfileController@index');
-    Route::get('tutorial','TutorialController@index');
 });
 
 Route::get('/cache/clear',function(){

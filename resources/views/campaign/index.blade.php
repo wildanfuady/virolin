@@ -83,7 +83,7 @@
                                                 <a class="btn btn-light btn-sm" href="{{ route('campaign.edit', $item->campaign_id) }}"><i class="fa fa-edit"></i></a>
                                                 @endcan
                                                 @can('landingpage-delete')
-                                                <a class="btn btn-light btn-sm" href="{{ url('campaign/destroy/'.$item->campaign_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ url('campaign/destroy/'.$item->campaign_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus campaign <?= $item->campaign_name ?>? Jika ya, maka data akan dihapus secara permanen.');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>
                                         </td>
@@ -118,7 +118,7 @@
             var keyword = $("#search").val();
             console.log(keyword);
 
-            window.location.replace("{{ url('landingpages') }}?keyword=" + keyword);
+            window.location.replace("{{ url('campaign') }}?keyword=" + keyword);
         }
     });
 

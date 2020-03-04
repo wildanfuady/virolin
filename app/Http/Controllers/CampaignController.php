@@ -305,8 +305,13 @@ class CampaignController extends Controller
     public function edit($id)
     {
         $campaign = Campaign::join('templates', 'templates.template_id', '=', 'campaigns.campaign_template')->where('campaign_id', $id)->first();
-        $list_sub = ListSubscriber::where('list_sub_status', 'Active')->pluck('list_sub_name', 'list_sub_id');
-        return view('campaign.edit', compact('campaign', 'list_sub'));
+
+        if(empty($campaign)){
+            return redirect(url('campaign'))->with('warning', 'Halaman yang Anda cari tidak tersedia');
+        } else {
+            $list_sub = ListSubscriber::where('list_sub_status', 'Active')->pluck('list_sub_name', 'list_sub_id');
+            return view('campaign.edit', compact('campaign', 'list_sub'));
+        }
     }
 
     /**
@@ -522,10 +527,17 @@ class CampaignController extends Controller
     public function destroy($id)
     {
         $campaign = Campaign::find($id);
-        $hapus = $campaign->delete();
-        if($hapus){
+
+        $template_id = $campaign->campaign_template;
+
+        $template = Template::find($template_id);
+        $hapus_template = $template->delete();
+
+        if($hapus_template){
+            $campaign->delete();
             return redirect()->route('campaign.index')->with('warning', 'Deleted Campaign Successfully');
         }
+        
     }
 
     public function custom()

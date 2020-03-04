@@ -38,9 +38,6 @@
                 <li class="mg-t-5">
                     <a class="btn btn-success mg-r-10" href="{{ route('campaign.create') }}"><i data-feather="plus-circle"></i> Create Campaign</a>
                 </li>
-                <li class="mg-t-5">
-                    <a class="btn btn-warning mg-r-10" href="{{ url('tutorial') }}"><i data-feather="book-open"></i> Tutorial</a>
-                </li>
             </ul>
             @else 
             @endif
@@ -141,7 +138,7 @@
                         var promo_end       = response['data'][i].promo_end;
                         var promo_content   = response['data'][i].promo_content
                         ;
-                        var generate = "<a class='dropdown-item list-group-item' href='{{ url('promo/detail/') }}/"+promo_slug+"'>"+
+                        var generate = "<a class='dropdown-item list-group-item' href='{{ url('promo/detail/') }}/"+promo_id+"'>"+
                             "<div class='d-flex justify-content-between'>" +
                                 "<div class='wd-45 ht-38 mg-r-15 d-flex align-items-center justify-content-center rounded-circle card-icon-success'>"+
                                     "<i class='fa fa-check tx-success tx-16'></i>" +

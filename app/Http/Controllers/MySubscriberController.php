@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use App\Subscribers;
+use App\Order;
 use App\Campaign;
 use App\Exports\SubscribersExport;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Validator;
 
 class MySubscriberController extends Controller
 {
@@ -57,47 +59,108 @@ class MySubscriberController extends Controller
 
     public function create_subscriber($id)
     {
-        $data['id'] = $id;
-        $data['campaign'] = \App\Campaign::pluck('campaign_name', 'campaign_id');
-        return view('mysubscriber.create_subscriber', $data);
+        $list = \App\ListSubscriber::find($id);
+
+        if(empty($list)){
+            return redirect(url('mysubscribers'))->with('warning', 'Halaman yang Anda cari tidak tersedia');
+        } else {
+
+            $user_id = Auth::user()->id;
+
+            // cek jumlah database yang ia miliki
+            $total_subscriber_user = Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+            // tampilkan maksimal subscriber yang ia miliki
+            $select = "products.product_max_db";
+            $total_max_database_user = Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                                        ->where('orders.user_id', $user_id)
+                                        ->selectRaw($select)
+                                        ->first();
+
+            if($total_subscriber_user >= $total_max_database_user->product_max_db){
+
+                return redirect()->back()->with('warning', 'Maaf, Anda tidak dapat menambah subscriber baru. Jumlah database yang Anda miliki sudah sampai pada batas maksimal.');
+            
+            } else {
+
+                $data['id'] = $id;
+                $data['campaign'] = \App\Campaign::pluck('campaign_name', 'campaign_id');
+                return view('mysubscriber.create_subscriber', $data);
+            
+            }
+        }
+
     }
 
     public function store_subscriber(Request $request, $id)
     {
-        $this->validate($request,[
-            'sub_name' => 'required',
-            'sub_email' => 'required|email',
-            'sub_status' => 'required|string',
-            'sub_lp' => 'required|string',
-        ]);
-
-        if(empty($request->sub_hp)){
-            $no_hp = "-";
-        } else {
-            $no_hp = $request->sub_hp;
-        }
-
-        if(empty($request->sub_alamat)){
-            $alamat = "-";
-        } else {
-            $alamat = $request->sub_alamat;
-        }
-
         $user_id = Auth::user()->id;
-        $new_subscriber = new \App\Subscribers;
-        $new_subscriber->subscriber_name = $request->sub_name;
-        $new_subscriber->subscriber_email = $request->sub_email;
-        $new_subscriber->subscriber_nohp = $no_hp;
-        $new_subscriber->subscriber_alamat = $alamat;
-        $new_subscriber->subscriber_status = $request->sub_status;
-        $new_subscriber->user_id = $user_id;
-        $new_subscriber->list_sub_id = $id;
-        $new_subscriber->campaign_id = $request->sub_lp;
-        $new_subscriber->subscriber_verifikasi = 1;
-        $simpan = $new_subscriber->save();
 
-        if($simpan){
-            return redirect('mysubscribers/'.$id)->with('success', 'Created New Subscriber Successfully');
+        // cek jumlah database yang ia miliki
+        $total_subscriber_user = Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+        // tampilkan maksimal subscriber yang ia miliki
+        $select = "products.product_max_db";
+        $total_max_database_user = Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                                    ->where('orders.user_id', $user_id)
+                                    ->selectRaw($select)
+                                    ->first();
+
+        if($total_subscriber_user >= $total_max_database_user->product_max_db){
+
+            return redirect(url('mysubscribers/'.$id))->with('warning', 'Maaf, Anda tidak dapat menambah subscriber baru. Jumlah database yang Anda miliki sudah sampai pada batas maksimal.');
+        
+        } else {
+
+            $rules = [
+                'sub_name' => 'required',
+                'sub_email' => 'required|email',
+                'sub_status' => 'required',
+                'sub_lp' => 'required',
+            ];
+
+            $messages = [
+                'sub_name.required' => 'Nama Subscriber wajib diisi',
+                'sub_email.required' => 'Email wajib diisi',
+                'sub_email.email' => 'Email yang Anda masukan tidak valid',
+                'sub_status.required' => 'Status wajib diisi',
+                'sub_lp.required' => 'Campaign wajib diisi',
+                
+            ];
+
+            $validator = Validator::make($request->all(), $rules, $messages);
+            
+            if($validator->fails()){
+                return redirect()->back()->withErrors($validator)->withInput($request->all());
+            }
+
+            if(empty($request->sub_hp)){
+                $no_hp = "-";
+            } else {
+                $no_hp = $request->sub_hp;
+            }
+
+            if(empty($request->sub_alamat)){
+                $alamat = "-";
+            } else {
+                $alamat = $request->sub_alamat;
+            }
+
+            $new_subscriber = new \App\Subscribers;
+
+            $new_subscriber->subscriber_name = $request->sub_name;
+            $new_subscriber->subscriber_email = $request->sub_email;
+            $new_subscriber->subscriber_nohp = $no_hp;
+            $new_subscriber->subscriber_alamat = $alamat;
+            $new_subscriber->subscriber_status = $request->sub_status;
+            $new_subscriber->user_id = $user_id;
+            $new_subscriber->list_sub_id = $id;
+            $new_subscriber->campaign_id = $request->sub_lp;
+            $new_subscriber->subscriber_verifikasi = 1;
+            $simpan = $new_subscriber->save();
+
+            if($simpan){
+                return redirect('mysubscribers/'.$id)->with('success', 'Created New Subscriber Successfully');
+            }
+
         }
     }
 
@@ -163,6 +226,11 @@ class MySubscriberController extends Controller
     public function edit($id)
     {
         $list = \App\ListSubscriber::where('list_sub_id',$id)->first();
+
+        if(empty($list)){
+            return redirect(url('mysubscribers'))->with('warning', 'Halaman yang Anda cari tidak tersedia');
+        }
+
         return view('mysubscriber.edit', compact('list'));
     }
 

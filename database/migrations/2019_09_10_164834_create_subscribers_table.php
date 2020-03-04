@@ -23,8 +23,9 @@ class CreateSubscribersTable extends Migration
             $table->enum('subscriber_status', ['valid', 'invalid']);
             $table->integer('user_id');
             $table->integer('campaign_id');
-            $table->integer('list_sub_id');
+            $table->unsignedBigInteger('list_sub_id');
             $table->timestamps();
+            $table->foreign('list_sub_id')->references('list_sub_id')->on('list_subscribers')->onDelete('cascade');
         });
     }
 

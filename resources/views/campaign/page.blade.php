@@ -1,7 +1,7 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -9,7 +9,7 @@
 
     <!-- CSS From App -->
     <link href="{{ asset('landingpage/content') }}/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="{{ asset('landingpage/content') }}/css/bonus.css" rel="stylesheet" />
+    <link href="{{ asset('landingpage/content') }}/css/style.css" rel="stylesheet" />
     <link href="{{ asset('landingpage/content') }}/css/timer.css" type="text/css" />
     <!-- CSS From Internet -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
@@ -202,7 +202,7 @@
             <div class="container">
                 <div class=" white">
                     <div class="col-md-12 col-sm-12 col-xs-12 md15 sm14 xs11 text-center">
-                        <a href="https://virolin.com" target="_blank"> CopyRight 2020 @ Virolin.Com</a>
+                        Copyright &copy; 2020 | All Right Reserved | Created with <i class="fa fa-heart" style="color:red"></i> by <a href="https://virolin.com" target="_blank"> Virolin</a>
                     </div>
                 </div>
             </div>
