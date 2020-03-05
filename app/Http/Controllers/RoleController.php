@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 use DB;
 
 
@@ -61,10 +62,22 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        $rules = [
             'name' => 'required|unique:roles,name',
             'permission' => 'required',
-        ]);
+        ];
+
+        $messages = [
+            'name.required' => 'Role wajib diisi',
+            'name.unique' => 'Nama Role telah terdaftar',
+            'permission.required' => 'Permission wajib diisi',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
 
         $role = Role::create(['name' => $request->input('name')]);
@@ -120,11 +133,22 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'name' => 'required',
+        $rules = [
+            'name' => 'required|unique:roles,name',
             'permission' => 'required',
-        ]);
+        ];
 
+        $messages = [
+            'name.required' => 'Role wajib diisi',
+            'name.unique' => 'Nama Role telah terdaftar',
+            'permission.required' => 'Permission wajib diisi',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $role = Role::find($id);
         $role->name = $request->input('name');

@@ -67,12 +67,6 @@
             <span>Manajemen Bank</span></a>
             </li>
             @endcan
-            @can('users-list')
-            <li>
-            <a href="{{ route('users.index') }}"><i data-feather="users"></i>
-            <span>Manajemen Customer</span></a>
-            </li>
-            @endcan
             @can('orders-list')
             <li>
             <a href="{{ route('orders.index') }}"><i data-feather="shopping-cart"></i>
@@ -95,6 +89,12 @@
             <li>
             <a href="{{ route('reports.index') }}"><i data-feather="bar-chart"></i>
             <span>Manajemen Laporan</span></a>
+            </li>
+            @endcan
+            @can('users-list')
+            <li>
+            <a href="{{ route('users.index') }}"><i data-feather="users"></i>
+            <span>Manajemen User</span></a>
             </li>
             @endcan
             @can('role-list')

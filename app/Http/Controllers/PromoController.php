@@ -38,7 +38,7 @@ class PromoController extends Controller
             $data['list_promo'] = \App\Promo::where($where)->paginate($paginate);
         }
         $data['keyword'] = $keyword;
-        return view('promo.index', $data);
+        return view('promo.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);
     }
 
     /**
@@ -59,23 +59,54 @@ class PromoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'promo_title' => 'required|string',
+        $rules = [
+            'promo_title' => 'required',
             'promo_status' => 'required',
             'promo_start' => 'required',
             'promo_end' => 'required',
-            'promo_content' => 'required'
-        ]);
+            'promo_content' => 'required',
+            'promo_code' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'promo_percent' => 'required|numeric',
+            'promo_image' => 'required|max:1000'
+        ];
+
+        $messages = [
+            'promo_title.required' => 'Judul Promo wajib diisi',
+            'promo_status.required' => 'Status wajib diisi',
+            'promo_start.required' => 'Tanggal Mulai Promo wajib diisi',
+            'promo_end.required' => 'Tanggal Akhir Promo wajib diisi',
+            'promo_content.required' => 'Konten Promo wajib diisi',
+            'promo_code.required' => 'Kode Promo wajib diisi',
+            'promo_code.regex' => 'Kode Promo hanya boleh diisi dengan angka, huruf dan spasi',
+            'promo_percent.required' => 'Nilai % Promo wajib diisi',
+            'promo_percent.numeric' => 'Nilai % Promo hanya boleh diisi dengan angka',
+            'promo_image.required' => 'Gambar wajib diisi',
+            'promo_image.max' => 'Kapasitas Gambar maksimal 1 mb'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
         $judul = $request->input('promo_title');
         $lower = strtolower($judul);
         $slug = str_replace(" ", "-", $lower);
+
+        $image = $request->file('promo_image')->store('promo', 'public');
+
         $promo = new Promo;
+                
         $promo->promo_title = $request->input('promo_title');
         $promo->promo_slug = $slug;
         $promo->promo_status = $request->input('promo_status');
         $promo->promo_start = $request->input('promo_start');
         $promo->promo_end = $request->input('promo_end');
-        $promo->promo_content = nl2br($request->input('promo_content'));
+        $promo->promo_code = $request->input('promo_code');
+        $promo->promo_percent = $request->input('promo_percent');
+        $promo->promo_image = $image;
+        $promo->promo_content = $request->input('promo_content');
         $insert = $promo->save();
 
         if($insert){
@@ -116,23 +147,56 @@ class PromoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'promo_title' => 'required|string',
+        $rules = [
+            'promo_title' => 'required',
             'promo_status' => 'required',
             'promo_start' => 'required',
             'promo_end' => 'required',
-            'promo_content' => 'required'
-        ]);
+            'promo_content' => 'required',
+            'promo_code' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'promo_percent' => 'required|numeric',
+            'promo_image' => 'max:1000'
+        ];
+
+        $messages = [
+            'promo_title.required' => 'Judul Promo wajib diisi',
+            'promo_status.required' => 'Status wajib diisi',
+            'promo_start.required' => 'Tanggal Mulai Promo wajib diisi',
+            'promo_end.required' => 'Tanggal Akhir Promo wajib diisi',
+            'promo_content.required' => 'Konten Promo wajib diisi',
+            'promo_code.required' => 'Kode Promo wajib diisi',
+            'promo_code.regex' => 'Kode Promo hanya boleh diisi dengan angka, huruf dan spasi',
+            'promo_percent.required' => 'Nilai % Promo wajib diisi',
+            'promo_percent.numeric' => 'Nilai % Promo hanya boleh diisi dengan angka',
+            'promo_image.max' => 'Kapasitas Gambar maksimal 1 mb'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        } 
 
         $judul = $request->input('promo_title');
         $lower = strtolower($judul);
         $slug = str_replace(" ", "-", $lower);
+
         $promo = Promo::find($id);
+
+        if($request->file('promo_image') != null)
+        {
+            $image = $request->file('promo_image')
+                ->store('promo', 'public');
+            $promo->promo_image = $image;
+        }
+
         $promo->promo_title = $request->input('promo_title');
         $promo->promo_slug = $slug;
         $promo->promo_status = $request->input('promo_status');
         $promo->promo_start = $request->input('promo_start');
         $promo->promo_end = $request->input('promo_end');
+        $promo->promo_code = $request->input('promo_code');
+        $promo->promo_percent = $request->input('promo_percent');
         $promo->promo_content = nl2br($request->input('promo_content'));
         $update = $promo->save();
 

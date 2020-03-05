@@ -9,7 +9,7 @@
     <div id="main-wrapper">
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Manage Roles</h1>
+            <h1 class="pd-0 mg-0 tx-20">Manajement Role</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
@@ -19,12 +19,12 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                        List Roles
+                        List Data Role
                             @can('role-create')
-                                <a class="btn btn-info btn-sm float-right" href="{{ route('roles.create') }}"> Create New Role</a>
+                                <a class="btn btn-info btn-sm float-right" href="{{ route('roles.create') }}"> Tambah Role</a>
                             @endcan
                         </h4>
                     </div>
@@ -53,7 +53,7 @@
                             <thead>
                             <tr>
                                 <th width="10px">No</th>
-                                <th>Name</th>
+                                <th>Role</th>
                                 <th width="100px" style="text-align:center">Action</th>
                             </tr>
                             </thead>

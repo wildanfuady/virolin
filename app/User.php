@@ -128,4 +128,24 @@ class User extends Authenticatable implements MustVerifyEmail
         }
         
     }
+
+    public function setExpired(User $user)
+    {
+        // set Status User Menjadi Valid
+        $this->attributes['status'] = 'invalid';
+        self::save();
+        
+        // create data ModelHasRole
+        // $cek = DB::table('model_has_roles')
+        //        ->where('role_id', 2)
+        //        ->where('model_type', 'App\User')
+        //        ->where('model_id', $user->id)
+        //        ->first();
+        
+        // if($cek != null)
+        // {
+        //     $cek->delete();
+        // }
+        
+    }
 }

@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 use App\User;
 use Carbon\Carbon;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
+use Illuminate\Support\Facades\Validator;
 use DB;
-use Hash;
 
 class UsersController extends Controller
 {
@@ -74,21 +75,40 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'name' => 'required|min:5|max:50|string',
+        $rules = [
+            'name' => 'required|min:5|max:50|regex:/^[a-zA-Z ]+$/u',
             'email' => 'required|email',
-            'product_id' => 'required|numeric',
-            'status' => 'required|string',
-            'masa_aktif' => 'required',
-            'password' => 'required|string',
-            'roles' => 'required'
-        ]);
+            'product_id' => 'required',
+            'status' => 'required',
+            'password' => 'required|string|min:8|max:80'
+        ];
+
+        $messages = [
+            'name.required' => 'Nama Lengkap wajib diisi',
+            'name.min' => 'Nama Lengkap minimal 5 karakter',
+            'name.max' => 'Nama Lengkap wajib maksimal 50 karakter',
+            'name.regex' => 'Nama Lengkap hanya boleh diisi dengan huruf dan spasi',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Email yang Anda masukan tidak valid',
+            'product_id.required' => 'Produk wajib diisi',
+            'password.required' => 'Password wajib diisi',
+            'password.min' => 'Password minimal 8 karakter',
+            'password.max' => 'Password wajib maksimal 50 karakter',
+            'status.required' => 'Status wajib diisi'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $input['level'] = 'user';
 
         $user = User::create($input);
+
         $user->assignRole($request->input('roles'));
 
         return redirect('users')->with('success','Created User Successfully');
@@ -131,28 +151,51 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'name' => 'required|min:5|max:50|string',
+        $rules = [
+            'name' => 'required|min:5|max:50|regex:/^[a-zA-Z ]+$/u',
             'email' => 'required|email',
-            'product_id' => 'required|numeric',
-            'status' => 'required|string',
-            'masa_aktif' => 'required',
-        ]);
+            'product_id' => 'required',
+            'status' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'Nama Lengkap wajib diisi',
+            'name.min' => 'Nama Lengkap minimal 5 karakter',
+            'name.max' => 'Nama Lengkap wajib maksimal 50 karakter',
+            'name.regex' => 'Nama Lengkap hanya boleh diisi dengan huruf dan spasi',
+            'email.required' => 'Email wajib diisi',
+            'email.email' => 'Email yang Anda masukan tidak valid',
+            'product_id.required' => 'Produk wajib diisi',
+            'status.required' => 'Status wajib diisi'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
 
         $user = \App\User::find($id);
+
+        if(!empty($request->get('password'))){
+            $user->password = Hash::make($request->get('password'));
+        }
+
+        if($request->get('status') == "valid"){
+            $user->setSuccess($user);
+        }
+
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->status = $request->get('status');
         $user->product_id = $request->get('product_id');
-
-        if($request->get('masa_aktif') == "Ya"){
-            $user->masa_aktif = Carbon::now()->add(365, 'days');
-        }
-        
         $user->save();
+
         if(!empty($request->input('roles'))){
             $user->assignRole($request->input('roles'));
         }
+
         return redirect()->route('users.index')->with('info','Updated Promo Successfully');
     }
 

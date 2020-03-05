@@ -29,7 +29,7 @@
                 <div class="card mg-b-20">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Detail Role
+                            Detail Data Role
                         </h4>
                     </div>
                     <div class="card-body collapse show" id="collapse1">
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12">
                                 <div class="form-group">
-                                    <strong>Name:</strong>
+                                    <strong>Role:</strong>
                                     {{ $role->name }}
                                 </div>
                             </div>

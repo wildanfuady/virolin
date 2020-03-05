@@ -44,13 +44,35 @@ class BankController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'promo_title' => 'required|string',
-            'promo_status' => 'required',
-            'promo_start' => 'required',
-            'promo_end' => 'required',
-            'promo_content' => 'required'
-        ]);
+        $rules = [
+            'bank_name' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'bank_code' => 'required|numeric',
+            'bank_nasabah' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'bank_number' => 'required|numeric',
+            'bank_status' => 'required',
+            'bank_image' => 'required|max:1000|dimensions:max_width=200,max_height=200'
+        ];
+
+        $messages = [
+            'bank_name.required' => 'Nama Bank wajib diisi',
+            'bank_name.regex' => 'Nama Bank hanya boleh diisi dengan huruf dan spasi',
+            'bank_code.required' => 'Kode Bank wajib diisi',
+            'bank_code.numeric' => 'Kode Bank hanya boleh diisi dengan angka',
+            'bank_nasabah.required' => 'Nama Nasabah wajib diisi',
+            'bank_nasabah.regex' => 'Nama Nasabah hanya boleh diisi dengan huruf dan angka',
+            'bank_number.required' => 'No Rekening Bank wajib diisi',
+            'bank_number.numeric' => 'No Rekening Bank hanya boleh diisi dengan angka',
+            'bank_status.required' => 'Status wajib diisi',
+            'bank_image.required' => 'Logo Bank wajib diisi',
+            'bank_image.max' => 'Logo Bank maksimal 1 mb',
+            'bank_image.dimensions' => 'Logo Bank maksimal lebar 200px dan tinggi 200px'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $image = $request->file('bank_image')
                 ->store('banks', 'public');
@@ -103,13 +125,34 @@ class BankController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'promo_title' => 'required|string',
-            'promo_status' => 'required',
-            'promo_start' => 'required',
-            'promo_end' => 'required',
-            'promo_content' => 'required'
-        ]);
+        $rules = [
+            'bank_name' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'bank_code' => 'required|numeric',
+            'bank_nasabah' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'bank_number' => 'required|numeric',
+            'bank_status' => 'required',
+            'bank_image' => 'max:1000|dimensions:max_width=200,max_height=200'
+        ];
+
+        $messages = [
+            'bank_name.required' => 'Nama Bank wajib diisi',
+            'bank_name.regex' => 'Nama Bank hanya boleh diisi dengan huruf dan spasi',
+            'bank_code.required' => 'Kode Bank wajib diisi',
+            'bank_code.numeric' => 'Kode Bank hanya boleh diisi dengan angka',
+            'bank_nasabah.required' => 'Nama Nasabah wajib diisi',
+            'bank_nasabah.regex' => 'Nama Nasabah hanya boleh diisi dengan huruf dan angka',
+            'bank_number.required' => 'No Rekening Bank wajib diisi',
+            'bank_number.numeric' => 'No Rekening Bank hanya boleh diisi dengan angka',
+            'bank_status.required' => 'Status wajib diisi',
+            'bank_image.max' => 'Logo Bank maksimal 1 mb',
+            'bank_image.dimensions' => 'Logo Bank maksimal lebar 200px dan tinggi 200px'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $bank = \App\Banks::find($id);
 

@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/dropify/css/dropify.min.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -22,14 +25,14 @@
             <div class="card mg-b-20">
               <div class="card-header">
                 <h4 class="card-header-title">
-                    Edit Bank
+                    Edit Data Bank
                 </h4>
               </div>
               {{ Form::model($bank, ['method' => 'PATCH','route' => ['banks.update', $bank->id], 'files' => TRUE]) }}
               <div class="card-body collapse show">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
                         <ul>
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -40,31 +43,34 @@
             
                 <div class="form-group">
                     {{ Form::label('name', 'Nama') }}
-                    {{ Form::text('bank_name', $bank->bank_name, ['class' => 'form-control', 'placeholder' => 'Nama Bank']) }}
+                    {{ Form::text('bank_name', $bank->bank_name, ['class' => 'form-control', 'placeholder' => 'Nama Bank', 'autocomplete' => 'off']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('code', 'Kode Bank') }}
-                    {{ Form::number('bank_code', $bank->bank_code, ['class' => 'form-control', 'placeholder' => 'Kode Bank']) }}
+                    {{ Form::number('bank_code', $bank->bank_code, ['class' => 'form-control', 'placeholder' => 'Kode Bank', 'autocomplete' => 'off']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('norek', 'Nomor Rekening') }}
-                    {{ Form::number('bank_number', $bank->bank_rekening, ['class' => 'form-control', 'placeholder' => 'Nomor Rekening']) }}
+                    {{ Form::number('bank_number', $bank->bank_rekening, ['class' => 'form-control', 'placeholder' => 'Nomor Rekening', 'autocomplete' => 'off']) }}
                 </div>
                 <div class="form-group">
-                    {{ Form::label('nasabah', 'an. Nasabah') }}
-                    {{ Form::text('bank_nasabah', $bank->bank_nasabah, ['class' => 'form-control', 'placeholder' => 'an. Nasabah']) }}
+                    {{ Form::label('nasabah', 'An. Nasabah') }}
+                    {{ Form::text('bank_nasabah', $bank->bank_nasabah, ['class' => 'form-control', 'placeholder' => 'An. Nasabah', 'autocomplete' => 'off']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('status', 'Status') }}
-                    {{ Form::select('bank_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], $bank->bank_status, ['class' => 'form-control', 'placeholder' => 'Choose one']) }}
+                    {{ Form::select('bank_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $bank->bank_status, ['class' => 'form-control', 'placeholder' => 'Choose one']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('image', 'Image') }}
                     <br>
                     <img src="{{ asset('storage/'.$bank->bank_image) }}" alt="" width="100px">
                     <br>
+                    <br>
                     {{ Form::label('image', 'Ganti Image') }}
-                    {{ Form::file('bank_image', ['class' => 'form-control']) }}
+                    <br>
+                    <span style="font-style: italic; color: red">Kosongkan jika tidak ingin mengubah gambar.</span>
+                    {{ Form::file('bank_image', ['class'=> 'dropify', 'data-show-loader' => 'false']) }}
                 </div>
                 
             </div>
@@ -78,4 +84,20 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
+<script>
+
+$(document).ready(function(){
+  $('.dropify').dropify({
+    messages: {
+      'default': 'Drag and drop a file here or click',
+      'replace': 'Drag and drop or click to replace',
+      'remove':  'Remove',
+      'error':   'Ooops, something wrong happended.'
+    }
+  });
+});
+</script>
+@endsection
 @include('partials.footer')

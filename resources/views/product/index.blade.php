@@ -19,7 +19,7 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-50">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
                             List Produk

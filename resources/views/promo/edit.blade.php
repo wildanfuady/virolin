@@ -1,3 +1,7 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.css">
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/dropify/css/dropify.min.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -25,11 +29,11 @@
                             Detail Promo
                         </h4>
                     </div>
-                    {{ Form::model($promo, ['method' => 'PATCH','route' => ['promos.update', $promo->promo_id], 'files' => 'TRUE']) }}
+                    {{ Form::model($promo, ['method' => 'PATCH','route' => ['promos.update', $promo->promo_id], 'files' => true]) }}
                     <div class="card-body collapse show">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
                                 <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -41,31 +45,50 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_title', 'Title') }}
-                                    {{ Form::text('promo_title', $promo->promo_title, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo Title']) }}
+                                    {{ Form::label('promo_title', 'Judul') }}
+                                    {{ Form::text('promo_title', $promo->promo_title, ['class'=> 'form-control', 'placeholder'=> 'Judul Promo']) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('promo_status', 'Status') }}
-                                    {{ Form::select('promo_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], $promo->promo_status, ['class'=> 'form-control', 'placeholder'=> 'Choose One']) }}
+                                    {{ Form::select('promo_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], $promo->promo_status, ['class'=> 'form-control', 'placeholder'=> 'Pilih Status']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_start', 'Start') }}
-                                    {{ Form::text('promo_start', $promo->promo_start, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo Start']) }}
+                                    {{ Form::label('promo_start', 'Tanggal Mulai') }}
+                                    <small class="sidetitle">Format: bulan/tanggal/tahun</small>
+                                    <input type="date" value="{{ $promo->promo_start }}" class="form-control" placeholder="Tanggal Mulai" name="promo_start">
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_end', 'End') }}
-                                    {{ Form::text('promo_end', $promo->promo_end, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo End']) }}
+                                    {{ Form::label('promo_end', 'Tanggal Berakhir') }}
+                                    <small class="sidetitle">Format: bulan/tanggal/tahun</small>
+                                    <input type="date" value="{{ $promo->promo_end }}" class="form-control" placeholder="Tanggal Berakhir" name="promo_end">
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_code', 'Kode Promo') }}
+                                    <small class="sidetitle">Maksimal 20 karakter</small>
+                                    <input type="text" value="{{ $promo->promo_code }}" class="form-control" name="promo_code" maxlength="20" style="text-transform:uppercase">
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_percent', 'Promo %') }}
+                                    <small class="sidetitle">Masukan angka tanpa menggunakan %. Persent otomatis dari sistem.</small>
+                                    <input type="number" value="{{ $promo->promo_percent }}" class="form-control" name="promo_percent" placeholder="Contoh: 10">
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_image', 'Gambar') }}
+                                    {{ Form::file('promo_image', ['class'=> 'dropify', 'data-show-loader' => 'false']) }}
                                 </div>
 
                             </div>
                             <div class="col-lg-6">
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_content', 'Content') }}
-                                    {{ Form::textarea('promo_content', $promo->promo_content, ['class'=> 'form-control textarea', 'placeholder'=> 'Enter Promo Content']) }}
+                                    {{ Form::label('promo_content', 'Konten') }}
+                                    {{ Form::textarea('promo_content', $promo->promo_content, ['class'=> 'form-control textarea', 'placeholder'=> 'Konten']) }}
                                 </div>
 
                             </div>
@@ -84,5 +107,26 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
+<script>
+$(document).ready(function(){
 
+    $('.textarea').summernote({
+        height: 350,
+    });
+
+    $('.dropify').dropify({
+        messages: {
+        'default': 'Drag and drop a file here or click',
+        'replace': 'Drag and drop or click to replace',
+        'remove':  'Remove',
+        'error':   'Ooops, something wrong happended.'
+        }
+    });
+
+})
+</script>
+@endsection
 @include('partials.footer')
