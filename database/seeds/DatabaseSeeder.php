@@ -176,6 +176,6 @@ class DatabaseSeeder extends Seeder
             Permission::create(['name' => $permission]);
         }
         factory(User::class, 20)->create();
-        factory(Subscribers::class, 20)->create();
+        // factory(Subscribers::class, 20)->create();
     }
 }

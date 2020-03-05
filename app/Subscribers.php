@@ -10,7 +10,7 @@ class Subscribers extends Model
     protected $table = "subscribers";
     
     protected $fillable = [
-        'subscriber_name', 'subscriber_email', 'subscriber_nohp', 'subscriber_alamat','subscriber_verifikasi', 'subscriber_status', 'user_id' ,'lp_id'
+        'subscriber_name', 'subscriber_email', 'subscriber_nohp', 'subscriber_alamat','subscriber_verifikasi', 'subscriber_status', 'user_id' ,'campaign_id'
     ];
 
     public function user()

@@ -294,9 +294,11 @@
                           <div class="col-md-7 col-sm-7 col-xs-7">
                             <div class="form-group">
                               <div class="row">
-                                <div class="col-md-4"><label class="form-control-label">Background:</label></div>
+                                <div class="col-md-4"><label class="form-control-label">Background Headline:</label></div>
                                 <div class="col-md-8">
-                                  {{ Form::text('block4_bg', $campaign->block4_bg, ['class'=> 'form-control cp2', 'placeholder' => 'Background']) }}
+                                  {{ Form::text('block4_bg', $campaign->block4_bg, ['class'=> 'form-control cp2', 'placeholder' => 'Color Text']) }}
+                                  <br>
+                                  {{ Form::text('block4_bg_headline', $campaign->block4_bg_headline, ['class'=> 'form-control cp2', 'placeholder' => 'Background Headline']) }}
                                 </div>
                               </div>
                             </div>
@@ -304,8 +306,6 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Headline Utama:</label></div>
                                 <div class="col-md-8">
-                                  {{ Form::text('block4_bg_headline', $campaign->block4_bg_headline, ['class'=> 'form-control cp2', 'placeholder' => 'Headline']) }}
-                                  <br>
                                   {{ Form::textarea('block4_text_headline', $campaign->block4_text_headline_desc, ['class' => 'form-control textarea', 'placeholder' => 'Headline Utama']) }}
                                 </div>
                               </div>

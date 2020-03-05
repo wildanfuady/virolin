@@ -203,42 +203,42 @@
     </div>
     </div>
         
-    <div class="col-md-8 col-md-offset-2 text-center">
+    <!--<div class="col-md-8 col-md-offset-2 text-center">-->
 
-        <h1 class="md40 sm38 xs26 lh120 w600">
-            Sebelum ...
-        </h1>
+    <!--    <h1 class="md40 sm38 xs26 lh120 w600">-->
+    <!--        Sebelum ...-->
+    <!--    </h1>-->
 
-    </div>
+    <!--</div>-->
     
-    <div class="container">
-      <div class="row" id="started">
-          <table class="table" style="border-top:none; outline:none; background: transparent !important">
-              <tr class="text-center">
-                  <td class="text-center">
-                      <h1 id="myDay">00</h1>
-                      <br>
-                      <p class="lead">HARI</p>
-                  </td>
-                  <td class="text-center">
-                      <h1 id="myHours">00</h1>
-                      <br>
-                      <p class="lead">JAM</p>
-                  </td>
-                  <td class="text-center">
-                      <h1 id="myMinute">00</h1>
-                      <br>
-                      <p class="lead">MENIT</p>
-                  </td>
-                  <td class="text-center">
-                      <h1 id="mySecond">00</h1>
-                      <br>
-                      <p class="lead">DETIK</p>
-                  </td>
-              </tr>
-          </table>
-      </div>
-    </div>	 
+    <!--<div class="container">-->
+    <!--  <div class="row" id="started">-->
+    <!--      <table class="table" style="border-top:none; outline:none; background: transparent !important">-->
+    <!--          <tr class="text-center">-->
+    <!--              <td class="text-center">-->
+    <!--                  <h1 id="myDay">00</h1>-->
+    <!--                  <br>-->
+    <!--                  <p class="lead">HARI</p>-->
+    <!--              </td>-->
+    <!--              <td class="text-center">-->
+    <!--                  <h1 id="myHours">00</h1>-->
+    <!--                  <br>-->
+    <!--                  <p class="lead">JAM</p>-->
+    <!--              </td>-->
+    <!--              <td class="text-center">-->
+    <!--                  <h1 id="myMinute">00</h1>-->
+    <!--                  <br>-->
+    <!--                  <p class="lead">MENIT</p>-->
+    <!--              </td>-->
+    <!--              <td class="text-center">-->
+    <!--                  <h1 id="mySecond">00</h1>-->
+    <!--                  <br>-->
+    <!--                  <p class="lead">DETIK</p>-->
+    <!--              </td>-->
+    <!--          </tr>-->
+    <!--      </table>-->
+    <!--  </div>-->
+    <!--</div>	 -->
 		
 	
     <div class="strip_footer clear">
