@@ -31,7 +31,7 @@ class DashboardController extends Controller
         // $saat_ini = date('Y-m-d H:i:s');
         $minggu_lalu = date('Y-m-d', strtotime('-1 week', strtotime($tanggal)));
 
-        $data['total_subscriber_now'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid', 'created_at' => strtotime($tanggal)])->count();
+        $data['total_subscriber_now'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at' ,'>=', $tanggal)->count();
         
         $data['total_subscriber_in_week'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at', '>=', $minggu_lalu)->count();
 
