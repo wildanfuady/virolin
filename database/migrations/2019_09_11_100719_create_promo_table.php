@@ -20,6 +20,8 @@ class CreatePromoTable extends Migration
             $table->text('promo_content');
             $table->date('promo_start');
             $table->date('promo_end');
+            $table->string('promo_code');
+            $table->bigInteger('promo_percent');
             $table->enum('promo_status', ['Active', 'Inactive']);
             $table->timestamps();
         });

@@ -20,16 +20,16 @@
         <div class="row row-xs clearfix">
           <div class="col-md-12 col-lg-12">
             <div class="card mg-b-50" style="margin-bottom:20%">
-                {!! Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) !!}
+                {{ Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) }}
                 <div class="card-header">
                     <h4 class="card-header-title">
-                        Edit User
+                        Edit Data User
                     </h4>
                 </div>
                 <div class="card-body collapse show">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
-                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
                             <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -39,50 +39,41 @@
                     @endif
                 
                     <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Name</label>
+                        <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                         <div class="col-sm-10">
-                            {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Nama User']) }}
+                            {{ Form::text('name', $user->name, ['class' => 'form-control', 'placeholder' => 'Nama Lengkap', 'autocomplete' => 'off', 'autosave' => 'false']) }}
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                        {{ Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email']) }}
+                        {{ Form::text('email', $user->email, ['class' => 'form-control', 'placeholder' => 'Email', 'autocomplete' => 'off', 'autosave' => 'false']) }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10">
+                            <input type="password" class="form-control" name="password" placeholder="Password" autocomplete = "off" autosave = "false">
+                            <span style="color: red; font-style: italic">Kosongkan password jika tidak ingin mengubah data</span>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Produk</label>
                         <div class="col-sm-10">
-                            {{ Form::select('product_id', $products, $user->product_id, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('product_id', $products, $user->product_id, ['class' => 'form-control', 'placeholder' => 'Choose One', 'autocomplete' => 'off', 'autosave' => 'false']) }}
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Status</label>
                         <div class="col-sm-10">
-                            {{ Form::select('status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $user->status, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}  
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Ubah Masa Aktif</label>
-                        <div class="col-sm-10">
-                            <div class="icheck-success d-inline">
-                                {{ Form::radio('masa_aktif', 'Tidak', false, array('class' => 'name', 'id' => "radioSuccess1", 'checked')) }}
-                                <label for="radioSuccess1">
-                                    Tidak
-                                </label>
-                            </div>
-                            <div class="icheck-success d-inline">
-                                {{ Form::radio('masa_aktif', 'Ya', false, array('class' => 'name', 'id' => "radioSuccess2")) }}
-                                <label for="radioSuccess2">
-                                    Ya
-                                </label>
-                            </div>
+                            {{ Form::select('status', ['valid' => 'Valid', 'invalid' => 'Invalid'], $user->status, ['class' => 'form-control', 'placeholder' => 'Choose One', 'autocomplete' => 'off', 'autosave' => 'false']) }}  
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Role</label>
                         <div class="col-sm-10">
-                            {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                            {{ Form::select('roles[]', $roles, [], array('class' => 'form-control', 'multiple')) }}
+                            <span style="color: red; font-style: italic">Kosongkan role jika tidak ingin mengubah data</span>
                         </div>
                     </div>
                     

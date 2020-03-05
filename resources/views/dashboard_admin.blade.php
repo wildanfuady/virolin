@@ -31,7 +31,7 @@
                 <div class="card-body pd-y-0">
                     <div class="custom-fieldset mb-4">
                         <div class="clearfix">
-                        <label>Total Users</label>
+                        <label>Customers</label>
                         </div>
                         <div class="d-flex align-items-center text-dark">
                         <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-warning">
@@ -51,14 +51,14 @@
                 <div class="card-body pd-y-0">
                     <div class="custom-fieldset mb-4">
                         <div class="clearfix">
-                        <label>Campaign</label>
+                        <label>Campaigns</label>
                         </div>
                         <div class="d-flex align-items-center text-dark">
                         <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-success">
                             <i class="icon-diamond tx-success tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_landingpage}}</span></h2>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_campaign }}</span></h2>
                             <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Campaign</span>aktif</div>
                         </div>
                         </div>
@@ -71,15 +71,15 @@
                 <div class="card-body pd-y-0">
                     <div class="custom-fieldset mb-4">
                         <div class="clearfix">
-                        <label>Share</label>
+                        <label>Order</label>
                         </div>
                         <div class="d-flex align-items-center text-dark">
                         <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
                             <i class="icon-handbag tx-primary tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">$<span class="counter">4,900</span><small class="tx-15">.50</small></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>+350</span>avg. sales</div>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_pending }}</span></h2>
+                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>payment</span>baru</div>
                         </div>
                         </div>
                     </div>
@@ -91,15 +91,15 @@
                 <div class="card-body pd-y-0">
                     <div class="custom-fieldset mb-4">
                         <div class="clearfix">
-                        <label>Visitor</label>
+                        <label>Confirm</label>
                         </div>
                         <div class="d-flex align-items-center text-dark">
                         <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-danger">
-                            <i class="icon-speedometer tx-danger tx-20"></i>
+                            <i class="icon-note tx-danger tx-20"></i>
                         </div>
                         <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">$<span class="counter">9,900</span><small class="tx-15">.50</small></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-danger mr-2 d-flex align-items-center"><i class="ion-android-arrow-down mr-1"></i>+130</span>avg. sales</div>
+                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_confirm }}</span></h2>
+                            <div class="d-flex align-items-center tx-gray-500"><span class="text-danger mr-2 d-flex align-items-center"><i class="ion-android-arrow-down mr-1"></i>confirm</span>payment</div>
                         </div>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
                             <span class="tx-uppercase tx-10 mg-b-10">User Aktif</span>
                             <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_aktif}}</span></h3>
 
-                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_aktif}} user aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selangkapnya</a></p>
+                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_aktif}} user aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
 
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 mg-y-20">
@@ -142,7 +142,7 @@
                             <span class="tx-uppercase tx-10 mg-b-10">User Expired</span>
                             <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_kadaluarsa}}</span></h3>
 
-                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_kadaluarsa}} user expired saat ini. <a href="{{ route('users.index') }}">Lihat Selangkapnya</a></p>
+                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_kadaluarsa}} user expired saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
 
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-12 mg-y-20">
@@ -150,7 +150,7 @@
                             <span class="tx-uppercase tx-10 mg-b-10">User Non Aktif</span>
                             <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_nonaktif}}</span></h3>
                             
-                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat user non aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selangkapnya</a></p>
+                            <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat user non aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
 
                         </div>
                         </div>

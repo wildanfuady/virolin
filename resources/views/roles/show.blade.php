@@ -1,3 +1,10 @@
+@section('css')
+<style>
+    label{
+        font-size: 16px !important;
+    }
+</style>
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -18,37 +25,41 @@
         </div>
 
         <div class="row row-xs clearfix">
-          <div class="col-md-12 col-lg-12">
-            <div class="card mg-b-20">
-              <div class="card-header">
-                <h4 class="card-header-title">
-                    Detail Role
-                </h4>
-              </div>
-              <div class="card-body collapse show" id="collapse1">
-               
-                <div class="row">
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Name:</strong>
-                            {{ $role->name }}
-                        </div>
+            <div class="col-md-12 col-lg-12">
+                <div class="card mg-b-20">
+                    <div class="card-header">
+                        <h4 class="card-header-title">
+                            Detail Data Role
+                        </h4>
                     </div>
-                    <div class="col-xs-12 col-sm-12 col-md-12">
-                        <div class="form-group">
-                            <strong>Permissions:</strong>
-                            @if(!empty($rolePermissions))
-                                @foreach($rolePermissions as $v)
-                                    <label class="badge badge-success">{{ $v->name }}</label>
-                                @endforeach
-                            @endif
+                    <div class="card-body collapse show" id="collapse1">
+                    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Role:</strong>
+                                    {{ $role->name }}
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="form-group">
+                                    <strong>Permissions:</strong>
+                                    <br>
+                                    <br>
+                                    @if(!empty($rolePermissions))
+                                        @foreach($rolePermissions as $v)
+                                            <label class="badge badge-success">{{ $v->name }}</label><br>
+                                        @endforeach
+                                    @endif
+                                </div>
+                            </div>
                         </div>
+
+                    </div>
+                    <div class="card-footer">
+                        <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
                     </div>
                 </div>
-
-            </div>
-            <div class="card-footer">
-                <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
             </div>
         </div>
     </div>

@@ -50,6 +50,7 @@
         <!--================================-->
         <div class="header-right pull-right">
             <ul class="list-inline justify-content-end">
+            @if(Auth::user()->level == "user" && Auth::user()->status == "valid" || Auth::user()->status == "Valid")
             <!-- <li class="list-inline-item align-middle"><a  href="#" id="search-button"><i class="ion-ios-search-strong tx-20"></i></a></li> -->
             <!-- Notifications Dropdown Start -->
             <!--================================-->
@@ -81,6 +82,7 @@
             </li>
             <!--/ Notifications Dropdown End -->
             <!--================================-->
+            @endif
             <!-- Profile Dropdown Start -->
             <!--================================-->
             <li class="list-inline-item dropdown">

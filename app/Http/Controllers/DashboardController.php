@@ -96,7 +96,7 @@ class DashboardController extends Controller
         $data['activity_log'] = \App\Subscribers::where('user_id', $user_id)->get();
 
         // chart jumlah total landing page
-        $data['total_landingpage'] = \App\Landingpage::get()->count();
+        $data['total_campaign'] = \App\Campaign::get()->count();
         // Chart jumlah users
         $data['total_users'] = \App\User::where('level','<>','admin')->count();
         // Chart user aktif, kadaluarsa, non aktif
@@ -107,6 +107,8 @@ class DashboardController extends Controller
         $data['total_active'] = \App\Order::where('order_status','Active')->count();
         $data['total_pending'] = \App\Order::where('order_status','Pending')->count();
         $data['total_expired'] = \App\Order::where('order_status','Expired')->count();
+
+        $data['total_confirm'] = \App\Payment::where('payment_status','Pending')->count();
         
         return view('dashboard_admin', $data);
     }
