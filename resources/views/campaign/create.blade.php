@@ -114,12 +114,12 @@
                       </div>
                       <div class="form-group">
                         <label class="form-control-label">Gunakan No Telp.:</label>
-                        {{ Form::select('campaign_form_telp', ['Tidak', 'Ya', 'autocomplete' => 'off'], null, ['class'=> 'form-control', 'id' => 'campaign_form_telp', 'autocomplete' => 'off']) }}
+                        {{ Form::select('campaign_form_telp', ['Tidak', 'Ya'], null, ['class'=> 'form-control', 'id' => 'campaign_form_telp', 'autocomplete' => 'off']) }}
                       </div>
 
                       <div class="form-group">
                         <label class="form-control-label">Gunakan Alamat:</label>
-                        {{ Form::select('campaign_form_address', ['Tidak', 'Ya', 'autocomplete' => 'off'], null, ['class'=> 'form-control', 'id' => 'campaign_form_address', 'autocomplete' => 'off']) }}
+                        {{ Form::select('campaign_form_address', ['Tidak', 'Ya'], null, ['class'=> 'form-control', 'id' => 'campaign_form_address', 'autocomplete' => 'off']) }}
                       </div>
 
                       <div class="row">
@@ -240,7 +240,7 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Alasan 1:</label></div>
                                 <div class="col-md-3">
-                                  {{ Form::select('block3_alasan1_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download', 'autocomplete' => 'off'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                                  {{ Form::select('block3_alasan1_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                                 </div>
                                 <div class="col-md-5">
                                   {{ Form::textarea('block3_alasan1_text', '', ['class' => 'form-control', 'placeholder' => 'Alasan 1', 'cols' => 10]) }}
@@ -251,7 +251,7 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Alasan 2:</label></div>
                                 <div class="col-md-3">
-                                  {{ Form::select('block3_alasan2_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download', 'autocomplete' => 'off'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                                  {{ Form::select('block3_alasan2_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                                 </div>
                                 <div class="col-md-5">
                                   {{ Form::textarea('block3_alasan2_text', '', ['class' => 'form-control', 'placeholder' => 'Alasan 2', 'cols' => 10]) }}
@@ -262,7 +262,7 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Alasan 3:</label></div>
                                 <div class="col-md-3">
-                                  {{ Form::select('block3_alasan3_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download', 'autocomplete' => 'off'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                                  {{ Form::select('block3_alasan3_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                                 </div>
                                 <div class="col-md-5">
                                   {{ Form::textarea('block3_alasan3_text', '', ['class' => 'form-control', 'placeholder' => 'Alasan 3', 'cols' => 10]) }}
@@ -273,7 +273,7 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Alasan 4:</label></div>
                                 <div class="col-md-3">
-                                  {{ Form::select('block3_alasan4_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download', 'autocomplete' => 'off'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
+                                  {{ Form::select('block3_alasan4_icon', ['' => 'Pilih Icon', 'search' => 'Search', 'search_data' => 'Search Data', 'safety' => 'Safety', 'broadcast' => 'Broadcasts', 'gear' => 'Gear', 'download' => 'Download'], null, ['class' => 'form-control', 'autocomplete' => 'off']) }}
                                 </div>
                                 <div class="col-md-5">
                                   {{ Form::textarea('block3_alasan4_text', '', ['class' => 'form-control', 'placeholder' => 'Alasan 4', 'cols' => 10]) }}
@@ -294,9 +294,11 @@
                           <div class="col-md-7 col-sm-7 col-xs-7">
                             <div class="form-group">
                               <div class="row">
-                                <div class="col-md-4"><label class="form-control-label">Background:</label></div>
+                                <div class="col-md-4"><label class="form-control-label">Background Headline:</label></div>
                                 <div class="col-md-8">
-                                  {{ Form::text('block4_bg', '', ['class'=> 'form-control cp2', 'placeholder' => 'Background', 'autocomplete' => 'off']) }}
+                                  {{ Form::text('block4_bg', '', ['class'=> 'form-control cp2', 'placeholder' => 'Color Text', 'autocomplete' => 'off']) }}
+                                  <br>
+                                  {{ Form::text('block4_bg_headline', '', ['class'=> 'form-control cp2', 'placeholder' => 'Background Headline', 'autocomplete' => 'off']) }}
                                 </div>
                               </div>
                             </div>
@@ -304,8 +306,6 @@
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Headline Utama:</label></div>
                                 <div class="col-md-8">
-                                  {{ Form::text('block4_bg_headline', '', ['class'=> 'form-control cp2', 'placeholder' => 'Headline', 'autocomplete' => 'off']) }}
-                                  <br>
                                   {{ Form::textarea('block4_text_headline', '', ['class' => 'form-control textarea', 'placeholder' => 'Headline Utama', 'autocomplete' => 'off']) }}
                                 </div>
                               </div>

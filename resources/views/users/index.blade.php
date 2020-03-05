@@ -117,7 +117,7 @@
                     </div>
                     <div class="row float-right">
                         <div class="col-md-12">
-                            {{ $users->links() }}
+                            {{ $users->appends($_GET)->links() }}
                         </div>
                     </div>
                 </div>

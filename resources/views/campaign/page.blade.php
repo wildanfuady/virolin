@@ -82,20 +82,20 @@
                 <div class="col-md-7 col-sm-7 col-xs-12 llmt6 padding0 lmt6">
 
                     <div class="col-md-6 col-sm-6 col-xs-12 padding0">
-                        <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/sales-img/{{ $campaign->block3_alasan1_icon }}.png" class="center-block img-responsive"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan1_icon }}.png" class="center-block img-responsive"></div>
                         <div class="col-md-9 col-sm-9 col-xs-9 padding0">
                             <p class="md20 sm19 xs18 white lh130 lmt2 xsmt2">{{ $campaign->block3_alasan1_text }}</p>
                             <div class="hidden-xs">&nbsp;</div>
                         </div>
-                        <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/sales-img/{{ $campaign->block3_alasan2_icon }}.png" class="center-block img-responsive"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan2_icon }}.png" class="center-block img-responsive"></div>
                         <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan2_text }}</p></div>
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-12 padding0 lmt0 xsmt2">
-                        <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/sales-img/{{ $campaign->block3_alasan3_icon }}.png" class="center-block img-responsive"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan3_icon }}.png" class="center-block img-responsive"></div>
                         <div class="col-md-9 col-sm-9 col-xs-9 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan3_text }}</p></div>
 
-                        <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/sales-img/{{ $campaign->block3_alasan4_icon }}.png" class="center-block img-responsive"></div>
+                        <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan4_icon }}.png" class="center-block img-responsive"></div>
                         <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan4_text }}</p></div>
                     </div>
 

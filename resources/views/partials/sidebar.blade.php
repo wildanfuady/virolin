@@ -55,52 +55,52 @@
                 </li>
                 @endif
             @endif
-            @can('role-list')
+            @can('payments-list')
             <li>
-            <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
-            <span>Role Permission</span></a>
-            </li>
-            @endcan
-            @can('users-list')
-            <li>
-            <a href="{{ route('users.index') }}"><i data-feather="users"></i>
-            <span>Manage Customer</span></a>
+            <a href="{{ route('payment.index') }}"><i data-feather="send"></i>
+            <span>Konfirmasi Pembayaran</span><span class="badge badge-success ft-right count_payment">10+</span></a>
             </li>
             @endcan
             @can('banks-list')
             <li>
             <a href="{{ route('banks.index') }}"><i data-feather="dollar-sign"></i>
-            <span>Manage Bank</span></a>
+            <span>Manajemen Bank</span></a>
             </li>
             @endcan
-            @can('promos-list')
+            @can('users-list')
             <li>
-            <a href="{{ route('promos.index') }}"><i data-feather="percent"></i>
-            <span>Manage Promo</span></a>
+            <a href="{{ route('users.index') }}"><i data-feather="users"></i>
+            <span>Manajemen Customer</span></a>
             </li>
             @endcan
             @can('orders-list')
             <li>
             <a href="{{ route('orders.index') }}"><i data-feather="shopping-cart"></i>
-            <span>Manage Order</span></a>
-            </li>
-            @endcan
-            @can('payments-list')
-            <li>
-            <a href="{{ route('payment.index') }}"><i data-feather="send"></i>
-            <span>Manage Payment</span><span class="badge badge-success ft-right count_payment">10+</span></a>
+            <span>Manajemen Order</span></a>
             </li>
             @endcan
             @can('products-list')
             <li>
             <a href="{{ route('products.index') }}"><i data-feather="folder"></i>
-            <span>Manage Product</span></a>
+            <span>Manajemen Produk</span></a>
+            </li>
+            @endcan
+            @can('promos-list')
+            <li>
+            <a href="{{ route('promos.index') }}"><i data-feather="percent"></i>
+            <span>Manajemen Promo</span></a>
             </li>
             @endcan
             @can('reports-list')
             <li>
             <a href="{{ route('reports.index') }}"><i data-feather="bar-chart"></i>
-            <span>Manage Reports</span></a>
+            <span>Manajemen Laporan</span></a>
+            </li>
+            @endcan
+            @can('role-list')
+            <li>
+            <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
+            <span>Role Permission</span></a>
             </li>
             @endcan
             @can('landingpage-list')

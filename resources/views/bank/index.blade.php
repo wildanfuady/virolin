@@ -9,11 +9,11 @@
     <div id="main-wrapper">
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Bank's</h1>
+            <h1 class="pd-0 mg-0 tx-20">Manajemen Bank</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Bank's</a>
+            <a class="breadcrumb-item" href="">Banks</a>
             </div>
         </div>
 
@@ -24,7 +24,7 @@
                 <h4 class="card-header-title">
                     List Bank
                     @can('banks-create')
-                        <a class="btn btn-info btn-sm float-right" href="{{ route('banks.create') }}"> Create New Bank</a>
+                        <a class="btn btn-info btn-sm float-right" href="{{ route('banks.create') }}">Tambah Bank</a>
                     @endcan
                 </h4>
               </div>
@@ -51,9 +51,13 @@
                 <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th width="10px" style="text-align:center">No</th>
-                                <th>Name</th>
+                                <th>Logo Bank</th>
+                                <th>Kode Bank</th>
+                                <th>Nama Bank</th>
+                                <th>No Rekening</th>
+                                <th>Atas Nama</th>
                                 <th>Status</th>
                                 <th width="100px" style="text-align:center">Action</th>
                             </tr>
@@ -61,15 +65,18 @@
                         <tbody>
                         @foreach ($banks as $key => $bank)
                         <?php
-                        $bank->num_rows();
+                        // $bank->num_rows();
                         ?>
-                        <tr>
+                        <tr class="text-center">
                             <td width="10px" style="text-align:center">{{ ++$i }}</td>
-                            <td>{{ $bank->id }}</td>
+                            <td><img src="{{ asset('storage/'.$bank->bank_image) }}" width="50"></td>
+                            <td>{{ $bank->bank_code }}</td>
+                            <td>{{ $bank->bank_name }}</td>
+                            <td>{{ $bank->bank_number }}</td>
+                            <td>{{ $bank->bank_nasabah }}</td>
                             <td>{{ $bank->bank_status }}</td>
                             <td>
                             <div class="btn-group">
-                                <a class="btn btn-light btn-sm" href="{{ route('banks.show',$bank->id) }}"><i class="fa fa-eye"></i></a>
                                 @can('banks-edit')
                                 <a class="btn btn-light btn-sm" href="{{ route('banks.edit',$bank->id) }}"><i class="fa fa-edit"></i></a>
                                 @endcan
