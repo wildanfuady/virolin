@@ -68,8 +68,24 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $data->campaign_name }}</td>
-                                        <td>{{ $data->campaign_share }}</td>
-                                        <td>{{ $data->campaign_form_view }}</td>
+                                        <td>
+                                            @foreach ($share as $trafikShare)
+                                                @if ($trafikShare->campaign_id == $data->campaign_id)
+                                                    {{ $trafikShare->total }}
+                                                @else
+                                                    {{-- 0 --}}
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                        <td>
+                                            @foreach ($visitor as $trafikVisitor)
+                                                @if ($trafikVisitor->campaign_id == $data->campaign_id)
+                                                    {{ $trafikVisitor->total }}
+                                                @else
+                                                    {{-- 0 --}}
+                                                @endif
+                                            @endforeach
+                                        </td>
                                     </tr>
                                     @endforeach
                                 </tbody>

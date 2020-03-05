@@ -71,9 +71,17 @@ var ctx1 = document.getElementById('chartBrowser').getContext('2d');
 var myChart1 = new Chart(ctx1, {
     type: 'pie',
     data: {
-        labels: ['Google', 'Firefox', 'Facebook', 'Twitter', 'Opera', 'Whatsapp'],
+        labels: [
+            @foreach ($trafik as $data)
+                "{{ $data->trafik_browser }}",
+            @endforeach
+        ],
         datasets: [{
-            data: [10, 24, 20, 25, 35, 50],
+            data: [
+                @foreach ($trafik as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
             backgroundColor: ['#5D78FF','#63CF72','#C9D5FA','#00a65a', '#00c0ef', '#f56954'],
             borderWidth: 1,
             fill: true,
@@ -88,23 +96,11 @@ var myChart2 = new Chart(ctx2, {
     data: {
         labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November' ,'Desember'],
         datasets: [{
-            data: [10, 24, 20, 25, 35, 50, 10],
+            data: [{{$trafik_jan}},{{$trafik_feb}},{{$trafik_mar}},{{$trafik_apr}},{{$trafik_mei}},{{$trafik_jun}},{{$trafik_jul}},{{$trafik_agu}},{{$trafik_sep}},{{$trafik_okt}},{{$trafik_nov}},{{$trafik_des}}],
             backgroundColor: '#5D78FF',
             borderWidth: 1,
             fill: true,
-            label: 'Value1'
-        }, {
-            data: [10, 24, 20, 10, 24, 20, 25],
-            backgroundColor: '#63CF72',
-            borderWidth: 1,
-            fill: true,
-            label: 'Value2'
-        }, {
-            data: [20, 30, 28, 33, 10, 24, 20],
-            backgroundColor: '#C9D5FA',
-            borderWidth: 1,
-            fill: true,
-            label: 'Value3'
+            label: 'Total'
         }]
     },
     options: {

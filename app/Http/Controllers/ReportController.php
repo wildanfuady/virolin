@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use App\Order;
 use App\Subscribers;
 use App\Campaign;
+use App\TrafikCampaign;
+use App\TrafikShare;
 use DB;
 
 class ReportController extends Controller
@@ -36,14 +38,31 @@ class ReportController extends Controller
 
     public function trafik()
     {
-        return view('report.trafik');
+        $user_id = Auth::user()->id;
+        $data['trafik'] = TrafikCampaign::select('trafik_browser', DB::raw('count(*) as total'))->groupBy('trafik_browser')->join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->get();
+        $data['trafik_all'] = TrafikCampaign::first();
+        $data['trafik_jan'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-01')->where('trafik_campaign.created_at','<','2020-02')->count();
+        $data['trafik_feb'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-02')->where('trafik_campaign.created_at','<','2020-03')->count();
+        $data['trafik_mar'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-03')->where('trafik_campaign.created_at','<','2020-04')->count();
+        $data['trafik_apr'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-04')->where('trafik_campaign.created_at','<','2020-05')->count();
+        $data['trafik_mei'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-05')->where('trafik_campaign.created_at','<','2020-06')->count();
+        $data['trafik_jun'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-06')->where('trafik_campaign.created_at','<','2020-07')->count();
+        $data['trafik_jul'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-07')->where('trafik_campaign.created_at','<','2020-08')->count();
+        $data['trafik_agu'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-08')->where('trafik_campaign.created_at','<','2020-09')->count();
+        $data['trafik_sep'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-09')->where('trafik_campaign.created_at','<','2020-10')->count();
+        $data['trafik_okt'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-10')->where('trafik_campaign.created_at','<','2020-11')->count();
+        $data['trafik_nov'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-11')->where('trafik_campaign.created_at','<','2020-12')->count();
+        $data['trafik_des'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-12')->count();
+        return view('report.trafik', $data);
     }
 
     public function share()
     {
         $user_id = Auth::user()->id;
-        $raw = "campaign_name, campaign_share, campaign_form_view";
+        $raw = "campaign_id, campaign_name, campaign_share, campaign_form_view";
         $data['shares'] = Campaign::selectRaw($raw)->where('user_id', $user_id)->get();
+        $data['share'] = TrafikShare::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();
+        $data['visitor'] = TrafikCampaign::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();
         return view('report.share', $data);
     }
 

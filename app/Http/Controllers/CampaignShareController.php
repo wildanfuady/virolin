@@ -10,6 +10,8 @@ use App\Subscribers;
 use App\Order;
 use App\Form;
 use App\Autoresponder;
+use App\TrafikCampaign;
+use App\TrafikShare;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Session;
@@ -61,6 +63,31 @@ class CampaignShareController extends Controller
                     ->where('campaign_slug', $slug)->first();
 
         if(!empty($campaign)){
+            // get data ip 
+            $server = $_SERVER;
+            $ip = $server['REMOTE_ADDR'];
+            
+            // get data browser
+            $browser =  $server['HTTP_USER_AGENT'];
+            $chrome = '/Chrome/';
+			$firefox = '/Firefox/';
+			$ie = '/IE/';
+            if(preg_match($chrome, $browser)){
+				$dataBrowser = 'Chrome/Opera';
+			}elseif(preg_match($firefox, $browser)){
+				$dataBrowser = 'Firefox';
+			}elseif(preg_match($ie, $browser)){
+				$dataBrowser = 'IE';
+            }
+            // get id_campaign
+            $id_campaign = $campaign->campaign_id;
+            // save trafik
+            $trafik_campaign = new \App\TrafikCampaign;
+            $trafik_campaign->trafik_ip = $ip;
+            $trafik_campaign->trafik_browser = $dataBrowser;
+            $trafik_campaign->campaign_id = $id_campaign;
+            $trafik_campaign = $trafik_campaign->save();
+
             $campaign->campaign_form_view += 1;
             $campaign->save(); 
             return view('campaign.page', compact('campaign'));
@@ -159,6 +186,34 @@ class CampaignShareController extends Controller
                 $simpan = $sub->save();
 
                 if($simpan){
+                    // get data ip 
+                    $server = $_SERVER;
+                    // get data browser
+                    $browser =  $server['HTTP_USER_AGENT'];
+                    $chrome = '/Chrome/';
+                    $firefox = '/Firefox/';
+                    $ie = '/IE/';
+                    if(preg_match($chrome, $browser)){
+                        $dataBrowser = 'Chrome/Opera';
+                    }elseif(preg_match($firefox, $browser)){
+                        $dataBrowser = 'Firefox';
+                    }elseif(preg_match($ie, $browser)){
+                        $dataBrowser = 'IE';
+                    }
+                    // get id_campaign
+                    $id_campaign = $campaign->campaign_id;
+                    
+
+                    $ip = $server['REMOTE_ADDR'];
+                    for ($i=0; $i < 3; $i++) { 
+                        // save trafik
+                        $trafik_share = new \App\TrafikShare;
+                        $trafik_share->trafik_ip = $ip;
+                        $trafik_share->trafik_browser = $dataBrowser;
+                        $trafik_share->campaign_id = $id_campaign;
+                        $trafik_share = $trafik_share->save();
+                    }
+
                     // Update campaign
                     $campaign->campaign_share = $campaign->campaign_share + 3;
                     $update = $campaign->save();
