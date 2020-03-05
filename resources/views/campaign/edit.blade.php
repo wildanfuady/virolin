@@ -43,7 +43,7 @@
         @endif
         <div class="row row-xs clearfix">
           <div class="col-md-12 col-lg-12">
-            <div class="card mg-b-20">
+            <div class="card mg-b-100">
               <div class="card-header">
                 <h4 class="card-header-title">
                     Edit Campaign
@@ -109,7 +109,7 @@
                   <div class="tab-pane fade" id="form">
                     <div class="card-body collapse show">
                       
-                    <div class="row">
+                      <div class="row">
                         <div class="col-md-6">
                           <label class="form-control-label">Gunakan No Telp.:</label>
                           {{ Form::select('campaign_form_telp', ['Tidak', 'Ya'], $campaign->campaign_form_hp, ['class'=> 'form-control', 'id' => 'campaign_form_telp']) }}
@@ -119,10 +119,10 @@
                           {{ Form::select('campaign_form_address', ['Tidak', 'Ya'], $campaign->campaign_form_address, ['class'=> 'form-control', 'id' => 'campaign_form_address']) }}
                         </div>
                       </div>
+                        
                       
-                    </div>
 
-                    <div class="row">
+                      <div class="row">
                         <div class="col-md-12">
                           <div class="btn-group float-right">
                             <button id="prev1" class="btn btn-secondary btn-lg float-right">Prev</button>
@@ -130,6 +130,8 @@
                           </div>
                         </div>
                       </div>
+
+                    </div>
 
                   </div>
                   <div class="tab-pane fade" id="template">
@@ -611,6 +613,7 @@ $(document).ready(function(){
   });
   $('.textarea').summernote({
     height: 350,
+    followingToolbar: false
   });
 })
 </script>

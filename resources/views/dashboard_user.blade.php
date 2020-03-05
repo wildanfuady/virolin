@@ -4,9 +4,9 @@
 <!--================================-->
 <!-- Page Inner Start -->
 <!--================================-->
-<div class="page-inner">
+<div class="page-inner mg-b-100">
     <!-- Main Wrapper -->
-    <div id="main-wrapper">
+    <div id="main-wrapper" style="heigh: 100%">
         <!--================================-->
         <!-- Breadcrumb Start -->
         <!--================================-->

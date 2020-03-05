@@ -59,7 +59,7 @@ class ReportController extends Controller
     public function share()
     {
         $user_id = Auth::user()->id;
-        $raw = "campaign_id, campaign_name, campaign_share, campaign_form_view";
+        $raw = "campaign_id, campaign_name, campaign_slug, campaign_share, campaign_form_view";
         $data['shares'] = Campaign::selectRaw($raw)->where('user_id', $user_id)->get();
         $data['share'] = TrafikShare::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();
         $data['visitor'] = TrafikCampaign::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();

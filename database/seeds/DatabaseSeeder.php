@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@gmail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'email_verified_at' => now(),
-            'status' => 'Valid',
+            'status' => 'valid',
             'level' => 'admin',
             'remember_token' => Str::random(10),
             'created_at' => Carbon::now(),
@@ -175,7 +175,5 @@ class DatabaseSeeder extends Seeder
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission]);
         }
-        factory(User::class, 20)->create();
-        factory(Subscribers::class, 20)->create();
     }
 }

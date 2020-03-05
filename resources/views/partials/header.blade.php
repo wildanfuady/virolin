@@ -29,15 +29,36 @@
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/themify-icons/themify-icons.css"> -->
       @yield('css')
+      <style>
+      /* #text_mobile{
+         display: none;
+      } */
+      @media(min-width: 400px){
+         .text_mobile{
+            display: none;
+         }
+         footer{
+            width: 82%;
+         }
+      }
+      @media(max-width: 800px){
+         .text_mobile{
+            display: block;
+         }
+         footer{
+            width: 100%;
+         }
+      }
+      </style>
       <!-- Midtrans -->
       <script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
       <script src="{{ asset('template/metrical') }}/plugins/jquery/jquery.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/jquery-ui/jquery-ui.js"></script>
       
    </head>
-   <body>
+   <body style="background:#f7f7fe;">
       <!--================================-->
       <!-- Page Container Start -->
       <!--================================-->
-      <div class="page-container">
+      <div class="page-container" style="background-color: #5d78ff">
       

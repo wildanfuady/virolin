@@ -656,6 +656,7 @@ $(document).ready(function(){
   });
   $('.textarea').summernote({
     height: 350,
+    followingToolbar: false
   });
 })
 </script>

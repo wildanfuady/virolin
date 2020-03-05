@@ -26,13 +26,13 @@
       <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
       <![endif]-->
    </head>
-   <body>
+   <body style="background: orange">
       <!--================================-->
       <!-- User Singin Start -->
       <!--================================-->			
       <div class="ht-100v d-flex">
-         <div class="card shadow-none pd-20 mx-auto wd-300 text-center bd-1 align-self-center">
-            <h4 class="card-title mt-3 text-center">Virolin</h4>
+         <div class="card shadow-none pd-20 mx-auto wd-300 text-center bd-1 align-self-center"style="border-radius: 10px">
+            <h4 class="card-title mt-3 text-center"><img src="{{ asset('image/logo-virolin.png') }}" class="img-fluid"></h4>
             <p class="text-center">Log in untuk mengakses data</p>
             <form method="POST" action="{{ route('login') }}">
             @csrf

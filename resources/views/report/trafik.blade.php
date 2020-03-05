@@ -19,7 +19,7 @@
 
         <div class="row row-xs clearfix">
             <div class="col-lg-6">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Chart Browser

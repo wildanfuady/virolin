@@ -10,7 +10,6 @@ class UserPromoController extends Controller
     public function index(Request $request)
     {
         $now = date('Y-m-d');
-        echo $now;
         $paginate= 3;
         $data['promo'] = Promo::where('promo_status', 'Active')->where('promo_start', '<=', $now)->where('promo_end', '>=', $now)->paginate($paginate);
         return view('promo.user.index', $data)->with('i', ($request->input('page', 1) - 1) * $paginate);

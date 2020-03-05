@@ -19,10 +19,10 @@
 
         <div class="row row-xs clearfix">
             <div class="col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Jumlah Share Per minggu
+                            Jumlah Share Per Campaign
                         </h4>
                         <div class="card-header-btn">
                             <a href="#" data-toggle="collapse" class="btn card-collapse" data-target="#collapse1" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -39,10 +39,10 @@
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Report Campaign
+                            Report Share
                         </h4>
                         <div class="card-header-btn">
                             <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -53,22 +53,23 @@
                     </div>
                     <div class="collapse show">
                         <div class="card-body collapse show" id="collapse1">
-                            <table id="basicDataTable" class="table responsive nowrap">
+                            <table id="basicDataTable" class="table responsive table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>No</th>
+                                        <th style="width: 50px" class="text-center">No</th>
                                         <th>Campaign</th>
-                                        <th>Jumlah Share</th>
-                                        <th>Total Visitor</th>
+                                        <!-- <th>Jumlah Share</th>
+                                        <th>Total Visitor</th> -->
+                                        <th style="width: 200px" class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
                                     @foreach($shares as $key => $data)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
+                                        <td class="text-center">{{ $key + 1 }}</td>
                                         <td>{{ $data->campaign_name }}</td>
-                                        <td>
+                                        <!-- <td>
                                             @foreach ($share as $trafikShare)
                                                 @if ($trafikShare->campaign_id == $data->campaign_id)
                                                     {{ $trafikShare->total }}
@@ -76,15 +77,17 @@
                                                     {{-- 0 --}}
                                                 @endif
                                             @endforeach
-                                        </td>
-                                        <td>
-                                            @foreach ($visitor as $trafikVisitor)
+                                        </!-->
+                                        <!-- <td> -->
+                                            {{-- @foreach ($visitor as $trafikVisitor)
                                                 @if ($trafikVisitor->campaign_id == $data->campaign_id)
                                                     {{ $trafikVisitor->total }}
                                                 @else
-                                                    {{-- 0 --}}
+                                                    0
                                                 @endif
-                                            @endforeach
+                                            @endforeach --}}
+                                        <td class="text-center">
+                                            <a href="{{ url('report/shares/'.$data->campaign_slug) }}" class="btn btn-primary">Buka Laporan</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -107,7 +110,7 @@ var ctx1 = document.getElementById('chartBar1').getContext('2d');
 var myChart1 = new Chart(ctx1, {
     type: 'bar',
     data: {
-        labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+        labels: ['Campaign A', 'Campaign B', 'Campaign C', 'Campaign C', 'Campaign D', 'Campaign E', 'Campaign F'],
         datasets: [{
             data: [10, 24, 20, 25, 35, 50, 10],
             backgroundColor: '#5D78FF',

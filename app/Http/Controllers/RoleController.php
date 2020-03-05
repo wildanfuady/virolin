@@ -134,13 +134,12 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'name' => 'required|unique:roles,name',
+            'name' => 'required',
             'permission' => 'required',
         ];
 
         $messages = [
             'name.required' => 'Role wajib diisi',
-            'name.unique' => 'Nama Role telah terdaftar',
             'permission.required' => 'Permission wajib diisi',
         ];
 

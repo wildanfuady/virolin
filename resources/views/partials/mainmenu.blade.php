@@ -1,11 +1,11 @@
 <!--================================-->
 <!-- Page Content Start -->
 <!--================================-->
-<div class="page-content">
+<div class="page-content" style="background:#f7f7fe">
 <!--================================-->
 <!-- Page Header Start -->
 <!--================================-->
-<div class="page-header">
+<div class="page-header" style="background: orange; color: white">
     <div class="search-form">
         <form action="#" method="GET">
             <div class="input-group">
@@ -22,9 +22,9 @@
     <nav class="navbar navbar-expand-lg">
         <ul class="list-inline list-unstyled mg-r-20">
             <!-- Mobile Toggle and Logo -->
-            <li class="list-inline-item align-text-top"><a class="hidden-md hidden-lg" href="#" id="sidebar-toggle-button"><i class="ion-navicon tx-20"></i></a></li>
+            <li class="list-inline-item align-text-top"><a class="hidden-md hidden-lg" href="#" id="sidebar-toggle-button"><i class="ion-navicon tx-20"style="color: white;"></i></a> </li>
             <!-- PC Toggle and Logo -->
-            <li class="list-inline-item align-text-top"><a class="hidden-xs hidden-sm" href="#" id="collapsed-sidebar-toggle-button"><i class="ion-navicon tx-20"></i></a></li>
+            <li class="list-inline-item align-text-top"><a class="hidden-xs hidden-sm" href="#" id="collapsed-sidebar-toggle-button"><i class="ion-navicon tx-20" style="color: white;"></i></a><span class="text_mobile" style="font-size: 15pt; font-weight: bold">Virolin</span></li>
         </ul>
         <!--================================-->
         <!-- Mega Menu Start -->
@@ -56,7 +56,7 @@
             <!--================================-->
             <li class="list-inline-item dropdown hidden-xs">
                 <a class="notification-icon" href="" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="icon-bell tx-16"></i>
+                <i class="icon-bell tx-16" style="color: white;"></i>
                 <span class="notification-count wave in"></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right shadow-2">
@@ -86,7 +86,7 @@
             <!-- Profile Dropdown Start -->
             <!--================================-->
             <li class="list-inline-item dropdown">
-                <a  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="select-profile">Hi, @if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif!</span><img src="{{ asset('template/metrical') }}/images/avatar-placeholder.png"" class="img-fluid wd-35 ht-35 rounded-circle" alt=""></a>
+                <a  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="select-profile" style="color: white;">Hi, @if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif</span><img src="{{ asset('template/metrical') }}/images/avatar-placeholder.png" class="img-fluid wd-35 ht-35 rounded-circle" alt=""></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2">
                     <div class="user-profile-area">
                         <div class="user-profile-heading">
