@@ -42,6 +42,7 @@
                         <ul class="nav ft-sm-none ft-right" id="pills-tab" role="tablist">
                         <li class="nav-item mg-r-10">
                             <a class="btn btn-sm btn-label-primary active show" id="nav-activity-tab" data-toggle="pill" href="#my-activity" role="tab" aria-controls="my-activity" aria-selected="false">Edit Profile</a>
+                            <a class="btn btn-sm btn-label-primary active show"  href="{{route('profil.password')}}" aria-selected="false">Edit Password</a>
                         </li>
                         </ul>
                     </div>

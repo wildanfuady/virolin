@@ -110,25 +110,35 @@ var ctx1 = document.getElementById('chartBar1').getContext('2d');
 var myChart1 = new Chart(ctx1, {
     type: 'bar',
     data: {
-        labels: ['Campaign A', 'Campaign B', 'Campaign C', 'Campaign C', 'Campaign D', 'Campaign E', 'Campaign F'],
+        labels: [
+            @foreach ($share as $labels)
+                "{{ $labels->campaign_name }}",
+            @endforeach
+        ],
         datasets: [{
-            data: [10, 24, 20, 25, 35, 50, 10],
+            data: [
+                @foreach ($share as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
             backgroundColor: '#5D78FF',
             borderWidth: 1,
             fill: true,
-            label: 'LP 1'
+            label: 'Share'
         }, {
-            data: [10, 24, 20, 10, 24, 20, 25],
+            data: [
+                @foreach ($share as $labels)
+                    @foreach ($visitor as $data)
+                        @if ($labels->campaign_id == $data->campaign_id)
+                            "{{ $data->total }}",
+                        @endif
+                    @endforeach
+                @endforeach
+            ],
             backgroundColor: '#63CF72',
             borderWidth: 1,
             fill: true,
-            label: 'LP 2'
-        }, {
-            data: [20, 30, 28, 33, 10, 24, 20],
-            backgroundColor: '#C9D5FA',
-            borderWidth: 1,
-            fill: true,
-            label: 'LP 3'
+            label: 'Visitor'
         }]
     },
     options: {
