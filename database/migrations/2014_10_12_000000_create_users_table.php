@@ -21,7 +21,6 @@ class CreateUsersTable extends Migration
             $table->string('product_id');
             $table->string('status');
             $table->enum('level',['admin', 'user']);
-            $table->date('masa_aktif');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();

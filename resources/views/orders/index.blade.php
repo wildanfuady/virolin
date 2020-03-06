@@ -9,7 +9,7 @@
     <div id="main-wrapper">
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Orders</h1>
+            <h1 class="pd-0 mg-0 tx-20">Manajemen Order</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
@@ -19,10 +19,10 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            List Order
+                            List Data Order
                         </h4>
                     </div>
                     <div class="card-body collapse show">
@@ -90,7 +90,7 @@
                                         {{ $item->order_status }} </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ url('orders.show', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
                                                 @can('orders-edit')
                                                 <a href="{{ route('orders.edit', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan

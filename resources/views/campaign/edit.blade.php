@@ -305,7 +305,11 @@
                             <div class="form-group">
                               <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Headline Utama:</label></div>
+<<<<<<< HEAD
                                 <div class="col-md-8">
+=======
+                                <div class="col-md-8">\
+>>>>>>> c85c3d92f53d27847a1e21d41daad7a86e0ac97f
                                   {{ Form::textarea('block4_text_headline', $campaign->block4_text_headline_desc, ['class' => 'form-control textarea', 'placeholder' => 'Headline Utama']) }}
                                 </div>
                               </div>

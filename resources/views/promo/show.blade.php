@@ -19,7 +19,7 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Detail Promo
@@ -30,7 +30,7 @@
                             <div class="col-lg-6">
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_title', 'Title') }}
+                                    {{ Form::label('promo_title', 'Judul') }}
                                     {{ Form::text('promo_title', $promo->promo_title, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo Title', 'readonly']) }}
                                 </div>
 
@@ -40,21 +40,37 @@
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_start', 'Start') }}
-                                    {{ Form::text('promo_start', $promo->promo_start, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo Start', 'readonly']) }}
+                                    {{ Form::label('promo_start', 'Tanggal Mulai') }}
+                                    {{ Form::text('promo_start', date('d-m-Y', strtotime($promo->promo_start)), ['class'=> 'form-control', 'placeholder'=> 'Enter Promo Start', 'readonly']) }}
                                 </div>
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_end', 'End') }}
-                                    {{ Form::text('promo_end', $promo->promo_end, ['class'=> 'form-control', 'placeholder'=> 'Enter Promo End', 'readonly']) }}
+                                    {{ Form::label('promo_end', 'Tanggal Berakhir') }}
+                                    {{ Form::text('promo_end', date('d-m-Y', strtotime($promo->promo_end)), ['class'=> 'form-control', 'placeholder'=> 'Enter Promo End', 'readonly']) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_code', 'Kode Promo') }}
+                                    <input type="text" value="{{ $promo->promo_code }}" class="form-control" name="promo_code" maxlength="20" style="text-transform:uppercase" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_percent', 'Promo %') }}
+                                    <input type="number" value="{{ $promo->promo_percent }}" class="form-control" name="promo_percent" placeholder="Contoh: 10" readonly>
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('promo_end', 'Gambar') }}
+                                    <br>
+                                    <img src="{{ asset('storage/'.$promo->promo_image) }}" alt="{{ $promo->promo_title }}" width="50%">
                                 </div>
 
                             </div>
                             <div class="col-lg-6">
 
                                 <div class="form-group">
-                                    {{ Form::label('promo_content', 'Content') }}
-                                    <br>
+                                    {{ Form::label('promo_content', 'Konten') }}
+                                    <hr>
                                     <?php echo "$promo->promo_content"; ?>
                                 </div>
 
