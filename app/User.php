@@ -26,7 +26,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = "users";
     
     protected $fillable = [
-        'name', 'email', 'password', 'product_id', 'email_verified_at','status','level','masa_aktif'
+        'name', 'email', 'password', 'gender', 'phone', 'password', 'address', 'product_id', 'email_verified_at','status','level','masa_aktif'
     ];
 
     public function order()

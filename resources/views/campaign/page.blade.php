@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Campaign: {{ $campaign->campaign_name }} - Virolin.com</title>
-
+    <!-- Favicon -->	
+    <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
     <!-- CSS From App -->
     <link href="{{ asset('landingpage/content') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('landingpage/content') }}/css/style.css" rel="stylesheet" />

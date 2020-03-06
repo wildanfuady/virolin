@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html>
    <head>
-      <!-- The above 6 meta tags *must* come first in the head; any other head content must come *after* these tags -->
       <meta charset="utf-8">
-	  <meta http-equiv="x-ua-compatible" content="IE=edge">
+      <meta http-equiv="x-ua-compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-	  <meta name="description" content="">
-	  <meta name="keyword" content="">
-	  <meta name="author"  content=""/>
+      <meta name="description" content="Virolin.com - Manage Database in Simple Ways">
+      <meta name="keyword" content="virolin, virolin.com, ">
+      <meta name="author" content="virolin.com"/>
+      <!-- Favicon -->	
+      <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
       <!-- Page Title -->
       <title>Log In | Virolin.com</title>
       <!-- Main CSS -->			
@@ -17,14 +18,6 @@
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/ionicons/css/ionicons.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
-      <!-- Favicon -->	
-      <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn"t work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="http://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="http://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
    </head>
    <body style="background: orange">
       <!--================================-->

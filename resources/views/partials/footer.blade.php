@@ -31,21 +31,5 @@
       <script src="{{ asset('template/metrical') }}/js/app.js"></script>
       <script src="{{ asset('template/metrical') }}/js/custom.js"></script>
       @yield('js')
-      <script>
-        $(document).ready(function(){
-          'use strict';
-
-          var url = window.location;
-          
-          var a = $('ul.accordion-menu li a').filter(function() {
-              return this.href == url;
-          }).parent('ul.accordion-menu li').addClass('open active');
-          
-          $('ul.nav-treeview a').filter(function() {
-              return this.href == url;
-          }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open') .prev('a').addClass('active');
-         
-         });
-      </script>
    </body>
 </html>

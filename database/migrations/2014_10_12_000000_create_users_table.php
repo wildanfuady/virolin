@@ -22,10 +22,6 @@ class CreateUsersTable extends Migration
             $table->string('status');
             $table->enum('level',['admin', 'user']);
             $table->string('password');
-            $table->string('phone')->nullable();
-            $table->text('address')->nullable();
-            $table->text('image')->nullable();
-            $table->enum('gender', ['pria', 'wanita'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
