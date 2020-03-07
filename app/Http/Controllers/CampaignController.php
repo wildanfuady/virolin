@@ -249,7 +249,7 @@ class CampaignController extends Controller
         $template->block4_text_headline     = $request->block4_text_headline;
         $template->block4_text_headline_desc= $request->block4_text_headline_desc;
         $template->block4_image             = $image4;
-        $template->block4_text_headline_color= $block4_text_headline_color;
+        $template->block4_text_headline_color= $request->block4_text_headline_color;
 
         $template->block5_bg                = $request->block5_bg;
         $template->block5_text              = $request->block5_text;
@@ -260,7 +260,7 @@ class CampaignController extends Controller
         $template->block6_bg                = $request->block6_bg;
         $template->block6_text_headline     = $request->block6_text_headline;
         $template->block6_image             = $image6;
-        $template->block6_text_headline_color= $block6_text_headline_color;
+        $template->block6_text_headline_color= $request->block6_text_headline_color;
 
         $template->block7_faq               = $request->block7_faq;
 

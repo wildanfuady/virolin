@@ -103,8 +103,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
 
     Route::get('profile','ProfileController@index')->name('profil.index');
-    Route::get('profile/password','ProfileController@password')->name('profil.password');
+    Route::get('profile/password','ProfileController@password')->name('profile.password');
     Route::post('profile/password','ProfileController@password_update')->name('profile.pass_update');
+    Route::get('profile/edit','ProfileController@edit')->name('profile.edit');
+    Route::post('profile/update','ProfileController@update')->name('profile.update');
 });
 
 Route::get('/cache/clear',function(){

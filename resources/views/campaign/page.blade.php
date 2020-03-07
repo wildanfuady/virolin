@@ -13,7 +13,7 @@
     <link href="{{ asset('landingpage/content') }}/css/style.css" rel="stylesheet" />
     <link href="{{ asset('landingpage/content') }}/css/timer.css" type="text/css" />
     <!-- CSS From Internet -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css" />
     <!-- JS From App -->
     <script src="{{ asset('landingpage/content') }}/js/custom.js"></script>
     <script src="{{ asset('landingpage/content') }}/js/jquery.min.js"></script>
