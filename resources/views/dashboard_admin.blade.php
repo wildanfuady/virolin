@@ -20,6 +20,7 @@
             </div>
         </div>
         <!--/ Breadcrumb End -->
+        <div class="mg-b-100">
         <!--================================-->
         @if(Auth::user()->status == "valid" || Auth::user()->status == "Valid")
         <!-- Count Card Start -->
@@ -27,84 +28,84 @@
         <div class="row row-xs clearfix">
 
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Customers</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-warning">
-                            <i class="icon-people tx-warning tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_users }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>User</span>aktif</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Customers</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-warning">
+                                <i class="icon-people tx-warning tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_users }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>User</span>aktif</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Campaigns</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-success">
-                            <i class="icon-diamond tx-success tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_campaign }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Campaign</span>aktif</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Campaigns</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-success">
+                                <i class="icon-diamond tx-success tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_campaign }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Campaign</span>aktif</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Order</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
-                            <i class="icon-handbag tx-primary tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_pending }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>payment</span>baru</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Order</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
+                                <i class="icon-handbag tx-primary tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_pending }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>payment</span>baru</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Confirm</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-danger">
-                            <i class="icon-note tx-danger tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_confirm }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-danger mr-2 d-flex align-items-center"><i class="ion-android-arrow-down mr-1"></i>confirm</span>payment</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Confirm</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-danger">
+                                <i class="icon-note tx-danger tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_confirm }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-danger mr-2 d-flex align-items-center"><i class="ion-android-arrow-down mr-1"></i>confirm</span>payment</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             
         </div>
@@ -189,6 +190,7 @@
             <!--================================-->
         </div>
         @endif
+        </div>
 
     </div>
     <!--/ Main Wrapper End -->

@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Konfirmasi Email - Virolin.com</title>
-    
+    <!-- Favicon -->	
+    <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
+    <!-- CSS File -->
     <link href="{{ asset('landingpage/content') }}/css/bootstrap.min.css" rel="stylesheet" />
     <link href="{{ asset('landingpage/content') }}/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" type="text/css" />

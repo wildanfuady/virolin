@@ -101,7 +101,8 @@ class DashboardController extends Controller
         $data['total_users'] = \App\User::where('level','<>','admin')->count();
         // Chart user aktif, kadaluarsa, non aktif
         $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->count();
-        $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
+        $data['users_kadaluarsa'] = "";
+        // $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
         $data['users_nonaktif'] = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
         // Chart Payment & Leads
         $data['total_active'] = \App\Order::where('order_status','Active')->count();

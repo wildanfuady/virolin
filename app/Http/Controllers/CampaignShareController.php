@@ -10,10 +10,13 @@ use App\Subscribers;
 use App\Order;
 use App\Form;
 use App\Autoresponder;
+use App\TrafikCampaign;
+use App\TrafikShare;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Session;
 use Input;
+use Carbon\Carbon;
 use App\Mail\ConfirmEmail;
 use App\Mail\ThankEmail;
 use Illuminate\Support\Facades\Mail;
@@ -55,14 +58,53 @@ class CampaignShareController extends Controller
         return view('campaign/create/index');
     }
 
-    public function campaign($slug)
+    public function campaign(Request $request, $slug)
     {
         $campaign = Campaign::join('templates', 'campaigns.campaign_template', '=', 'templates.template_id')
                     ->where('campaign_slug', $slug)->first();
 
         if(!empty($campaign)){
-            $campaign->campaign_form_view += 1;
-            $campaign->save(); 
+            // get data ip 
+            $server = $_SERVER;
+
+            $ip = $server['REMOTE_ADDR'];
+            $tanggal = date('Y-m-d');
+            $cek_trafik = \App\TrafikCampaign::where('trafik_ip', $ip)->where('created_at', Carbon::today())->first();
+
+            if(empty($cek_trafik)){
+
+                $medium = $request->query('utm_medium');
+            
+                // get data browser
+                $browser =  $server['HTTP_USER_AGENT'];
+                $chrome = '/Chrome/';
+                $firefox = '/Firefox/';
+                $ie = '/IE/';
+                if(preg_match($chrome, $browser)){
+                    $dataBrowser = 'Chrome/Opera';
+                }elseif(preg_match($firefox, $browser)){
+                    $dataBrowser = 'Firefox';
+                }elseif(preg_match($ie, $browser)){
+                    $dataBrowser = 'IE';
+                }
+                // get id_campaign
+                $id_campaign = $campaign->campaign_id;
+                // save trafik
+                $trafik_campaign = new \App\TrafikCampaign;
+
+                if(!empty($medium)) {
+                    $trafik_campaign->trafik_medium = $medium;
+                }
+
+                $trafik_campaign->trafik_ip = $ip;
+                $trafik_campaign->trafik_browser = $dataBrowser;
+                $trafik_campaign->campaign_id = $id_campaign;
+                $trafik_campaign = $trafik_campaign->save();
+
+                $campaign->campaign_form_view += 1;
+                $campaign->save();
+            }
+
             return view('campaign.page', compact('campaign'));
         } else {
             return view('campaign/error_404');
@@ -139,6 +181,8 @@ class CampaignShareController extends Controller
                 $email = $request->email;
                 $token = $this->getToken(30);
 
+                $medium = $request->query('utm_medium');
+
                 $id = $campaign->campaign_id;
                 $user = $campaign->user_id;
                 $text = $campaign->campaign_confirm;
@@ -159,6 +203,39 @@ class CampaignShareController extends Controller
                 $simpan = $sub->save();
 
                 if($simpan){
+                    // get data ip 
+                    $server = $_SERVER;
+                    // get data browser
+                    $browser =  $server['HTTP_USER_AGENT'];
+                    $chrome = '/Chrome/';
+                    $firefox = '/Firefox/';
+                    $ie = '/IE/';
+                    if(preg_match($chrome, $browser)){
+                        $dataBrowser = 'Chrome/Opera';
+                    }elseif(preg_match($firefox, $browser)){
+                        $dataBrowser = 'Firefox';
+                    }elseif(preg_match($ie, $browser)){
+                        $dataBrowser = 'IE';
+                    }
+                    // get id_campaign
+                    $id_campaign = $campaign->campaign_id;
+                    
+
+                    $ip = $server['REMOTE_ADDR'];
+                    for ($i=0; $i < 3; $i++) { 
+                        // save trafik
+                        $trafik_share = new \App\TrafikShare;
+
+                        if(!empty($medium)) {
+                            $trafik_campaign->trafik_medium = $medium;
+                        }
+
+                        $trafik_share->trafik_ip = $ip;
+                        $trafik_share->trafik_browser = $dataBrowser;
+                        $trafik_share->campaign_id = $id_campaign;
+                        $trafik_share = $trafik_share->save();
+                    }
+
                     // Update campaign
                     $campaign->campaign_share = $campaign->campaign_share + 3;
                     $update = $campaign->save();

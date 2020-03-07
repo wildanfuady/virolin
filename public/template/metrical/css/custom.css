@@ -1,0 +1,24 @@
+.nav-tabs > .nav-item > a{
+    background-color: #5d78ff;
+    border: 1px solid white;
+    color: white;
+    padding: 20px 25px;
+}
+@media(min-width:800px) {
+
+    span.text_mobile{
+        display: none;
+    }
+    footer.page-footer{
+        width: 82%;
+    }
+}
+
+@media(max-width:600px) {
+    footer.page-footer{
+        width: 100%;
+    }
+    .nav-tabs > .nav-item > a{
+        padding: 10px 10px;
+    }
+}

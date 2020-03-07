@@ -1,3 +1,7 @@
+@section('css')
+<!-- Midtrans -->
+<script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')

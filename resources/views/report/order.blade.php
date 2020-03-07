@@ -22,7 +22,7 @@
             <h5><i class="fa fa-exclamation-triangle text-warning"></i> Penting:</h5>
             Masa aktif akun Anda akan berakhir pada <strong>{{ date('d-m-Y', strtotime($order->order_end)) }}</strong>. Lakukan <strong>perpanjangan / renewal</strong> akun maksimal seminggu sebelum masa aktif berakhir. 
         </div>
-        <div class="card">
+        <div class="card mg-b-100">
             <div class="card-header">
                 Halaman Report Order
             </div>

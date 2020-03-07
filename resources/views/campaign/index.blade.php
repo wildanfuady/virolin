@@ -78,7 +78,7 @@
                                         <td>{{ date('d-m-Y H:i', strtotime($item->created_at)) }}</td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a class="btn btn-light btn-sm" href="{{ url($item->campaign_slug) }}" target="_blank"><i class="fa fa-eye"></i></a>
+                                                <a class="btn btn-light btn-sm" href="{{ url($item->campaign_slug.'/?utm_source=campaign&utm_medium=dashboard&utm_campaign='.$item->campaign_slug) }}" target="_blank"><i class="fa fa-eye"></i></a>
                                                 @can('landingpage-edit')
                                                 <a class="btn btn-light btn-sm" href="{{ route('campaign.edit', $item->campaign_id) }}"><i class="fa fa-edit"></i></a>
                                                 @endcan

@@ -15,7 +15,7 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     {{ Form::open(['url' => 'mysubscriber/new/store/'.$id]) }}
                     <div class="card-header">
                         <h4 class="card-header-title">

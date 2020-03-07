@@ -204,7 +204,7 @@ body {
 	background: #e0e7fd;
 }
 
-. {
+.bg-white{
 	background-color: #f3f5f7!important;
 }
 
@@ -873,7 +873,8 @@ ul li a#collapsed-sidebar-toggle-button i,
 	padding: 20px;
 	overflow-y: auto;
 	border-left: 1px solid rgba(230, 230, 230, 0.7);
-	-webkit-box-sizig: border-box -moz-box-sizing: border-box;
+	-webkit-box-sizig: border-box;
+	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
 
@@ -2557,8 +2558,8 @@ ul.accordion-menu li a span.badge.badge-danger[href]:hover,
 	color: #fff!important;
 }
 
-ul.accordion-menu li a span..badge.badge-warning[href]:focus,
-ul.accordion-menu li a span..badge.badge-warning[href]:hover {
+ul.accordion-menu li a span.badge.badge-warning[href]:focus,
+ul.accordion-menu li a span.badge.badge-warning[href]:hover {
 	color: #000!important;
 }
 
