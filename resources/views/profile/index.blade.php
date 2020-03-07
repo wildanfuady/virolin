@@ -26,10 +26,10 @@
                     <div class="col-md-4 mg-t-10 mg-l-auto">
                         <ul class="list-unstyled tx-gray-100 mb-0">
                         <li><i class="ti-target mr-2 font-18"></i> <b>Gender </b>: {{ $account->gender }}</li>
-                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>phone </b>: null</li>
-                        <li class="mt-2"><i class="ti-headphone-alt mr-2 font-18"></i> <b>phone </b>: null</li>
+                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>Nomor Telpon </b>: {{ $account->phone }}</li>
+                        {{-- <li class="mt-2"><i class="ti-headphone-alt mr-2 font-18"></i> <b>phone </b>: null</li> --}}
                         <li class="mt-2"><i class="ti-email mr-2 font-18"></i> <b>Email </b>: {{ Auth::user()->email }}</li>
-                        <li class="mt-2"><i class="ti-map mr-2 font-18"></i> <b>Location </b>: null</li>
+                        <li class="mt-2"><i class="ti-map mr-2 font-18"></i> <b>Location </b>: {{ $account->address }}</li>
                         </ul>
                     </div>
                 </div>
@@ -41,8 +41,8 @@
                     <div class="col-12">
                         <ul class="nav ft-sm-none ft-right" id="pills-tab" role="tablist">
                         <li class="nav-item mg-r-10">
-                            <a class="btn btn-sm btn-label-primary active show" id="nav-activity-tab" data-toggle="pill" href="#my-activity" role="tab" aria-controls="my-activity" aria-selected="false">Edit Profile</a>
-                            <a class="btn btn-sm btn-label-primary active show"  href="{{route('profil.password')}}" aria-selected="false">Edit Password</a>
+                            <a class="btn btn-sm btn-label-primary active show"  href="{{route('profile.edit')}}" aria-selected="false">Edit Profile</a>
+                            <a class="btn btn-sm btn-label-primary active show"  href="{{route('profile.password')}}" aria-selected="false">Edit Password</a>
                         </li>
                         </ul>
                     </div>
