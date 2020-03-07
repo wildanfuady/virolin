@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -16,7 +19,7 @@
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
                 <div class="card mg-b-100">
-                    {{ Form::open(['url' => 'mysubscriber/new/store/'.$id]) }}
+                    {{ Form::open(['url' => 'mysubscriber/new/store/'.$id, 'id' => 'create_subscribers']) }}
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Create New Subscriber
@@ -39,35 +42,35 @@
                         <div class="form-group">
                         
                             {{ Form::label('sub_name', 'Name') }}
-                            {{ Form::text('sub_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Name']) }}
+                            {{ Form::text('sub_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Name', 'id' => 'sub_name']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_email', 'Email') }}
-                            {{ Form::text('sub_email', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Email', 'type' => 'email']) }}
+                            {{ Form::text('sub_email', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Email', 'type' => 'email', 'id' => 'sub_email']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_hp', 'No Hp') }}
-                            {{ Form::number('sub_hp', '', ['class' => 'form-control', 'placeholder' => '---- ---- ----']) }}
-                            <span style="color: red; font-style: italic">Kosongkan no hp jika tidak dibutuhkan</span>
+                            <span class="sidetitle">Kosongkan no hp jika tidak dibutuhkan</span>
+                            {{ Form::number('sub_hp', '', ['class' => 'form-control', 'placeholder' => '---- ---- ----', 'id' => 'sub_hp']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_alamat', 'Alamat') }}
-                            {{ Form::text('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address']) }}
-                            <span style="color: red; font-style: italic">Kosongkan alamat jika tidak dibutuhkan</span>
+                            <span class="sidetitle">Kosongkan alamat jika tidak dibutuhkan</span>
+                            {{ Form::text('sub_alamat', '', ['class' => 'form-control', 'placeholder' => 'Enter Subscriber Address', 'id' => 'sub_alamat']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('sub_lp', 'Campaign') }}
-                            {{ Form::select('sub_lp', $campaign, null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('sub_lp', $campaign, null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'sub_lp']) }}
                         </div>
                         
                         <div class="form-group">
 
                             {{ Form::label('sub_status', 'Status') }}
-                            {{ Form::select('sub_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('sub_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'sub_status']) }}
                         </div>
                                 
                     </div>
@@ -75,7 +78,7 @@
                         <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
-                        <button type="submit" class="btn btn-primary float-right">Simpan</button>
+                        <button type="button" id="btn_submit_create_subscriber" class="btn btn-primary float-right">Simpan</button>
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -83,4 +86,8 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')

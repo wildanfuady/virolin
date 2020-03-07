@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -14,8 +17,8 @@
         </div>
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
-                {{ Form::open(['route' => 'mysubscribers.store']) }}
+                <div class="card mg-b-100">
+                {{ Form::open(['route' => 'mysubscribers.store', 'id' => 'create_list_subscribers']) }}
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Create List Subscriber
@@ -35,12 +38,12 @@
 
                         <div class="form-group">
                             {{ Form::label('group_name', 'Group Name') }}
-                            {{ Form::text('group_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Group Name']) }}
+                            {{ Form::text('group_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Group Name', 'autocomplete' => 'off', 'id' => 'group_name']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('group_status', 'Group Status') }}
-                            {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], null, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'group_status']) }}
                         </div>
                                 
                     </div>
@@ -48,7 +51,7 @@
                         <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
-                        <button type="submit" class="btn btn-primary pull-right">Simpan</button>
+                        <button type="button" id="btn_submit_create_list_subscribers" class="btn btn-primary pull-right">Simpan</button>
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -56,4 +59,8 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')

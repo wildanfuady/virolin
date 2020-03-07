@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -15,8 +18,8 @@
 
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-20">
-                    {{ Form::model($list, ['method' => 'PATCH','route' => ['mysubscribers.update', $list->list_sub_id]]) }}
+                <div class="card mg-b-100">
+                    {{ Form::model($list, ['method' => 'PATCH','route' => ['mysubscribers.update', $list->list_sub_id], 'id' => 'update_list_subscribers']) }}
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Edit List Subscriber
@@ -35,12 +38,12 @@
                         @endif
                         <div class="form-group">
                             {{ Form::label('group_name', 'Group Name') }}
-                            {{ Form::text('group_name', $list->list_sub_name, ['class' => 'form-control', 'placeholder' => 'Enter Group Name']) }}
+                            {{ Form::text('group_name', $list->list_sub_name, ['class' => 'form-control', 'placeholder' => 'Enter Group Name', 'autocomplete' => 'off', 'id' => 'edit_group_name']) }}
                         </div>
 
                         <div class="form-group">
                             {{ Form::label('group_status', 'Group Status') }}
-                            {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], $list->list_sub_status, ['class' => 'form-control', 'placeholder' => 'Choose One']) }}
+                            {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], $list->list_sub_status, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'edit_group_status']) }}
                         </div>
                                 
                     </div>
@@ -48,7 +51,7 @@
                         <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
-                        <button type="submit" class="btn btn-primary float-right">Update</button>
+                        <button type="button" id="btn_update_create_list_subscribers" class="btn btn-primary float-right">Update</button>
                     </div>
                     {{ Form::close() }}
                 </div>
@@ -56,4 +59,8 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')

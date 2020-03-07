@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -86,7 +89,7 @@
                                             <a class="btn btn-light btn-sm" href="{{ route('mysubscribers.edit',$item->list_sub_id) }}"><i class="fa fa-edit"></i></a>
                                             @endcan
                                             @can('mysubscriber-delete')
-                                            <a class="btn btn-light btn-sm" href="{{ url('mysubscriber/destroy/'.$item->list_sub_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus list subscriber <?= $item->list_sub_name ?> ini? Jika ya, maka semua subscriber di list ini akan ikut terhapus.');"><i class="fa fa-trash"></i></a>
+                                            <a class="btn btn-light btn-sm" onclick="return swal_delete_alert('{{ url('mysubscriber/destroy/'.$item->list_sub_id) }}', 'Apakah Anda yakin ingin menghapus list subscriber <?= $item->list_sub_name ?> ini? \nJika ya, maka semua subscriber di list ini akan ikut terhapus.');"><i class="fa fa-trash"></i></a>
                                             @endcan
                                         </div>
                                     </td>
@@ -101,8 +104,23 @@
         </div>
     </div>
 </div>
-
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
 <script>
+
+    function swal_delete_alert(url, string){
+        swal({
+            title: "Warning!",
+            text: string,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5d78ff",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak"
+        }, function() {
+            window.location.href = url;
+        });
+    }
 
     $(document).ready(function() {
 
@@ -125,5 +143,5 @@
     });
 
 </script>
-
+@endsection
 @include('partials.footer')

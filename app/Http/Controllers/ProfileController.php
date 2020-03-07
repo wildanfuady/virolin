@@ -17,6 +17,8 @@ class ProfileController extends Controller
         $data['account'] = \App\User::find($user_id);
         $data['order'] = \App\Order::where('user_id', $user_id)->first();
         $data['subscriber'] = \App\Subscribers::where('user_id', $user_id)->first();
+        $data['total_db'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
+
         return view('profile.index', $data);
     }
 
