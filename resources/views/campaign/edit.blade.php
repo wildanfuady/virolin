@@ -599,7 +599,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Subjek Konfirmasi Email:</label>
-                            {{ Form::text('campaign_subject_confirm_email', $campaign->campaign_subject_confirm_email, ['class'=> 'form-control', 'placeholder' => 'Tulis subjek konfirmasi email', 'autocomplete' => 'off', 'id'=> 'sadssd']) }}
+                            {{ Form::text('campaign_subject_confirm_email', $campaign->campaign_subject_confirm_email, ['class'=> 'form-control', 'placeholder' => 'Tulis subjek konfirmasi email', 'autocomplete' => 'off', 'id'=> 'campaign_subject_confirm_email']) }}
                           </div>
                         </div>
                       </div>
@@ -616,7 +616,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Konfirmasi Email:</label>
-                            {{ Form::textarea('campaign_confirm', $campaign->campaign_confirm, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off', 'id'=> 'sadssd']) }}
+                            {{ Form::textarea('campaign_confirm', $campaign->campaign_confirm, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off', 'id'=> 'campaign_confirm']) }}
                           </div>
                         </div>
                       </div>
@@ -639,7 +639,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Subjek Thank Email:</label>
-                            {{ Form::text('campaign_subject_thank_email', $campaign->campaign_subject_thank_email, ['class'=> 'form-control', 'placeholder' => 'Tulis subjek thank email', 'autocomplete' => 'off', 'id'=> 'sadssd']) }}
+                            {{ Form::text('campaign_subject_thank_email', $campaign->campaign_subject_thank_email, ['class'=> 'form-control', 'placeholder' => 'Tulis subjek thank email', 'autocomplete' => 'off', 'id'=> 'campaign_subject_thank_email']) }}
                           </div>
                         </div>
                       </div>
@@ -656,7 +656,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Thank Email:</label>
-                            {{ Form::textarea('campaign_form_thank', $campaign->campaign_form_thank, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off', 'id'=> 'sadssd']) }}
+                            {{ Form::textarea('campaign_form_thank', $campaign->campaign_form_thank, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off', 'id'=> 'campaign_form_thank']) }}
                           </div>
                         </div>
                       </div>

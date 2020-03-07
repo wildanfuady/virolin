@@ -96,17 +96,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy')->where('id', '[0-9]+');
     Route::get('mysubscriber/destroy-subscriber/{id}','MySubscriberController@destroy_subscriber')->where('id', '[0-9]+');
 
-    Route::resource('reports','ReportController');
-    Route::get('report/trafik','ReportController@trafik');
-    Route::get('report/shares','ReportController@share');
-    Route::get('report/payment','ReportController@payment');
-    Route::get('report/destroy/{id}','ReportController@destroy');
+    Route::resource('report','ReportController');
 
     Route::get('promo','UserPromoController@index');
     Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
 
-    Route::get('profile','ProfileController@index');
+    Route::get('profile','ProfileController@index')->name('profil.index');
+    Route::get('profile/password','ProfileController@password')->name('profil.password');
+    Route::post('profile/password','ProfileController@password_update')->name('profile.pass_update');
 });
 
 Route::get('/cache/clear',function(){

@@ -18,38 +18,37 @@
         </div>
 
         <div class="row row-xs clearfix">
-            <div class="col-md-12 col-lg-12">
-                <div class="card mg-b-100">
-                    <div class="card-header">
-                        <h4 class="card-header-title">
-                            List Data Promo
-                        </h4>
-                    </div>
-                    <div class="card-body collapse show">
 
-                        <div class="card-columns">
+            @if(count($promo) > 0)
 
-                            @foreach($promo as $item)
-                            <div class="card mg-15">
-                                <a href="{{ url('promo/detail/'. $item->promo_id) }}">
-                                <img src="{{ asset('storage/'.$item->promo_image) }}" class="card-img-top img-fluid wd-100p" alt="{{ $item->promo_title }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ $item->promo_title }}</h5>
-                                    <p class="card-text">{{ substr($item->promo_content, 0, 20) }}</small></p>
-                                </div>
-                                </a>
-                            </div>
-                            @endforeach
-
+                @foreach($promo as $item)
+                <div class="card-columns">
+                    <div class="card mg-15" style="height: 300px">
+                        <a href="{{ url('promo/detail/'. $item->promo_id) }}">
+                        <img src="{{ asset('storage/'.$item->promo_image) }}" class="card-img-top img-fluid wd-100p" alt="{{ $item->promo_title }}" style="height: 150px">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $item->promo_title }}</h5>
+                            <p class="card-text">
+                                <p><i class="fa fa-calendar"></i> Tanggal Mulai: {{ date('d-m-Y', strtotime($item->promo_start)) }}</p>
+                                <p><i class="fa fa-calendar"></i> Tanggal Akhir: {{ date('d-m-Y', strtotime($item->promo_end)) }}</p>
+                            </p>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12 mg-15">
-                                {{ $promo->links() }}
-                            </div>
-                        </div>
+                        </a>
                     </div>
                 </div>
-            </div>                        
+                @endforeach
+            @else
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    Belum ada promo saat ini ...
+                </div>
+            </div>
+            @endif
+            <div class="row">
+                <div class="col-md-12 mg-15">
+                    {{ $promo->links() }}
+                </div>
+            </div>                      
         </div>
     </div>
 </div>

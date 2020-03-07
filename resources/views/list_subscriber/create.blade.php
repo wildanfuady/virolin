@@ -29,7 +29,7 @@
 
                         <div class="form-group">
                             {{ Form::label('group_name', 'Group Name') }}
-                            {{ Form::text('group_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Group Name']) }}
+                            {{ Form::text('group_name', '', ['class' => 'form-control', 'placeholder' => 'Enter Group Name', 'autocomplete' => 'off']) }}
                         </div>
 
                         <div class="form-group">
