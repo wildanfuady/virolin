@@ -87,7 +87,7 @@
             @endcan
             @can('reports-list')
             <li>
-            <a href="{{ route('reports.index') }}"><i data-feather="bar-chart"></i>
+            <a href="{{ route('report.index') }}"><i data-feather="bar-chart"></i>
             <span>Manajemen Laporan</span></a>
             </li>
             @endcan

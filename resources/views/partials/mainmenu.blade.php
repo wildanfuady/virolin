@@ -138,7 +138,7 @@
                         var promo_slug      = response['data'][i].promo_slug;
                         var promo_start     = response['data'][i].promo_start;
                         var promo_end       = response['data'][i].promo_end;
-                        var promo_content   = response['data'][i].promo_content
+                        var promo_content   = response['data'][i].promo_content;
                         ;
                         var generate = "<a class='dropdown-item list-group-item' href='{{ url('promo/detail/') }}/"+promo_id+"'>"+
                             "<div class='d-flex justify-content-between'>" +
@@ -147,8 +147,7 @@
                                 "</div>" +
                                 "<div>" +
                                     "<span>" + promo_title + "</span>" +
-                                    "<span class='small tx-gray-600 ft-right'>" + promo_start + " - " + promo_end +"</span>" +
-                                    "<div class='tx-gray-600 tx-11'>Dummy text of the printing and type setting industry.</div>" +
+                                    "<div class='tx-gray-600 tx-11'>Klik untuk melihat detail promo ...</div>" +
                                 "</div>" +
                             "</div>" +
                         "</a>";
@@ -157,7 +156,7 @@
                     }
 
                 } else {
-                    var generate = "<span class='text-center'>Belum ada promo</span>";
+                    var generate = "<div class='text-center pd-l-10 pd-t-10'>Belum ada promo</div>";
 
                     $("#notificationsBox").append(generate);
                 }
