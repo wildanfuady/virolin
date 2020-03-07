@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -177,24 +176,15 @@
    <table class="w320 full-width-gmail-android" bgcolor="#f9f8f8" background="https://www.filepicker.io/api/file/al80sTOMSEi5bKdmCgp2" style="background-color:transparent" cellpadding="0" cellspacing="0" border="0" width="100%">
       <tr>
         <td width="100%" height="48" valign="top">
-            <!--[if gte mso 9]>
-            <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;height:49px;">
-              <v:fill type="tile" src="https://www.filepicker.io/api/file/al80sTOMSEi5bKdmCgp2" color="#ffffff" />
-              <v:textbox inset="0,0,0,0">
-            <![endif]-->
-              <table class="full-width-gmail-android" cellspacing="0" cellpadding="0" border="0" width="100%">
-                <tr>
-                  <td class="header center" width="100%">
-                    <a href="#">
-                      Tim Virolin
-                    </a>
-                  </td>
-                </tr>
-              </table>
-            <!--[if gte mso 9]>
-              </v:textbox>
-            </v:rect>
-            <![endif]-->
+          <table class="full-width-gmail-android" cellspacing="0" cellpadding="0" border="0" width="100%">
+            <tr>
+              <td class="header center" width="100%">
+                <a href="#">
+                  Tim Virolin
+                </a>
+              </td>
+            </tr>
+          </table>
         </td>
       </tr>
     </table>

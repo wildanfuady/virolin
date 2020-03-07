@@ -240,13 +240,58 @@ class CampaignShareController extends Controller
                     $campaign->campaign_share = $campaign->campaign_share + 3;
                     $update = $campaign->save();
 
-                    $kirim = Mail::to($email)->send(new ConfirmEmail($fullname, $email, $token, $title_confirm, $text, $slug));
+                    $link = url('confirm/'.$slug.'/'.$token);
+                    $kirim = $this->kirim_email($title_confirm, $fullname, $text, $email, $link, "confirm");
 
-                    return redirect(url($slug.'/confirm'));
-                    
+                    $response = json_decode($kirim, true);
+
+                    if($response['status'] == "success" && $response['response'] == "Mail Sent"){
+                        return redirect(url($slug.'/confirm'));
+                    } else if($response['status'] == "failed" && $response['response'] == "Blacklisted")
+                    {
+                        return redirect(url($slug.'/failed'))->withErrors(['Email yang Anda masukan tidak terdaftar di platform manapun / tidak valid.'])->withInput($request->all());
+                    } else {
+                        return redirect(url($slug.'/failed'))->withErrors(['Maaf, server sedang dalam perbaikan.'])->withInput($request->all());
+                    }
                 }
             }
         }
+    }
+
+    public function kirim_email($text_subject, $penerima, $text_content, $to, $link, $type){
+        $api_token      = 'd0420a05d11e7f1de48b879faa3ec4b4';
+        $from_name      = 'Tim Virolin';
+        $from_email     = 'tim@virolin.com';
+        $subject        = $text_subject;
+        $nama           = "<b>$penerima</b>";
+        $email          = "<b>$to</b>";
+        $new_text1       = strtr($text_content, array('{nama}' => $nama));
+        $new_text2       = strtr($new_text1, array('{email}' => $to));
+        $ttd            = "<p>Regards,<p>
+                            <p><a href='https://virolin.com'>Virolin.com</a></p>";
+        if($type == "confirm"){
+            $content        = $new_text2.'<br><br><div style="text-align: center"><a href="'.$link.'" style="padding: 10px 50px; color: #fff;background-color: #5d78ff;border:1px solid #5d78ff; text-decoration: none; border-radius: 5px">Konfirmasi Email</a></div><br><br>'.$ttd;
+        } else if($type == "thank"){
+            $content        = $new_text2.'<br><br>'.$ttd;
+        } else {
+            $content = "Maaf, server sedang dalam perbaikan.";
+        }
+        $recipient      = $to;
+        $params = [
+            'from_name' => $from_name,
+            'from_email' => $from_email,
+            'recipient' => $recipient,
+            'subject' => $subject,
+            'content' => $content,
+            'api_token' => $api_token,
+        ];
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://app.mailketing.id/api/v1/send");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $output = curl_exec($ch);
+        return $output;
     }
 
     public function failed($slug)
@@ -265,25 +310,44 @@ class CampaignShareController extends Controller
         $verify = \App\Subscribers::where(['subscriber_verifikasi' => $token, 'subscriber_status' => 'invalid'])->first();
 
         if(empty($verify)){
+
             return redirect(url($slug.'/failed'));
+
+        } else {
+
+            $campaign = Campaign::where('campaign_slug', $slug)->first();
+
+            if(!empty($campaign)){
+
+                $title_thank = $campaign->campaign_subject_thank_email;
+                $content_thank = $campaign->campaign_form_thank;
+            
+
+                $fullname = $verify->subscriber_name;
+                $email = $verify->subscriber_email;
+
+                $verify->subscriber_status = "valid";
+                $update = $verify->save();
+
+                // $kirim = Mail::to($email)->send(new ThankEmail($fullname, $title, $email, $thank));
+
+                $kirim = $this->kirim_email($title_thank, $fullname, $content_thank, $email, $link = "", "thank");
+
+                $response = json_decode($kirim, true);
+
+                if($response['status'] == "success" && $response['response'] == "Mail Sent"){
+                    return redirect(url($slug.'/thanks'));
+                } else if($response['status'] == "failed" && $response['response'] == "Blacklisted")
+                {
+                    return redirect(url($slug.'/failed'))->withErrors(['Token Anda bisa saja sudah expired.', 'Silahkan ulangi lagi.'])->withInput($request->all());
+                } else {
+                    return redirect(url($slug.'/failed'))->withErrors(['Maaf, server sedang dalam perbaikan.'])->withInput($request->all());
+                }
+            } else {
+                return redirect(url($slug.'/failed'));
+            }
+
         }
-
-        $campaign = Campaign::where('campaign_slug', $slug)->first();
-
-        if(!empty($campaign)){
-            $title = $campaign->campaign_subject_thank_email;
-            $thank = $campaign->campaign_form_thank;
-        }
-
-        $fullname = $verify->subscriber_name;
-        $email = $verify->subscriber_email;
-
-        $verify->subscriber_status = "valid";
-        $update = $verify->save();
-
-        $kirim = Mail::to($email)->send(new ThankEmail($fullname, $title, $email, $thank));
-        
-        return redirect(url($slug.'/thanks'));
         
     }
 

@@ -161,11 +161,11 @@
                         <div class="card-body">
                             <br>
                             @if (count($errors) > 0)
-                                <div class="alert alert-danger">
-                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                    <ul>
+                                <div class="alert alert-danger text-left">
+                                    <strong>Whoops!</strong> Terjadi kesalahan dalam input data.<br><br>
+                                    <ul style="padding-left:15px">
                                     @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
+                                        <li style="padding-left:15px">{{ $error }}</li>
                                     @endforeach
                                     </ul>
                                 </div>
