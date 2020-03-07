@@ -25,7 +25,7 @@
                     <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 hidden-sm">
                         <div class="card bd-l-0-force bd-t-0-force bd-r-0-force">
                             {{ Form::open(['route' => 'profile.pass_update', 'files' => true]) }}
-                            <div class="card-body pd-b-0">
+                            <div class="card-body pd-b-20">
                                 @if (count($errors) > 0)
                                 <div class="alert alert-danger">
                                     <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>

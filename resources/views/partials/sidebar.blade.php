@@ -87,7 +87,7 @@
             @endcan
             @can('reports-list')
             <li>
-            <a href="{{ route('reports.index') }}"><i data-feather="bar-chart"></i>
+            <a href="{{ route('report.index') }}"><i data-feather="bar-chart"></i>
             <span>Manajemen Laporan</span></a>
             </li>
             @endcan
@@ -117,13 +117,14 @@
             @endcan
             @can('report-user')
             <li>
-            <a href="{{ url('report') }}"><i data-feather="file"></i>
-            <span>Report</span><i class="accordion-icon fa fa-angle-left"></i></a>
-            <ul class="sub-menu">
+            <a href="{{ route('report.index') }}"><i data-feather="file"></i>
+            <span>Report</span>
+            <!-- <i class="accordion-icon fa fa-angle-left"></i></a> -->
+            <!-- <ul class="sub-menu">
                 <li><a href="{{ url('report/shares') }}">Shares</a></li>
                 <li><a href="{{ url('report/payment') }}">Payment</a></li>
                 <li><a href="{{ url('report/trafik') }}">Trafik</a></li>
-            </ul>
+            </ul> -->
             </li>
             @endcan
             
@@ -137,7 +138,7 @@
 <div class="sidebar-footer">									
     <a class="pull-left" href="{{ url('profile') }}" data-toggle="tooltip" data-placement="top" data-original-title="Profile">
     <i data-feather="user" class="ht-15"></i></a>									
-    <a class="pull-left " href="{{ url('report/payment') }}" data-toggle="tooltip" data-placement="top" data-original-title="Payment">
+    <a class="pull-left " href="{{ url('profile#order') }}" data-toggle="tooltip" data-placement="top" data-original-title="Order">
     <i data-feather="dollar-sign" class="ht-15"></i></a>
     <a class="pull-left" href="{{ url('promo') }}" data-toggle="tooltip" data-placement="top" data-original-title="Promo">
     <i data-feather="bell" class="ht-15"></i></a>

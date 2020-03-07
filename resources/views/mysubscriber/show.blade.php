@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -79,7 +82,7 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 @can('mysubscriber-delete')
-                                                <a class="btn btn-light btn-sm" href="{{ url('mysubscriber/destroy-subscriber/'.$item->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                                <a class="btn btn-light btn-sm" onclick="return swal_delete_alert('{{ url('mysubscriber/destroy-subscriber/'.$item->id) }}', 'Apakah Anda yakin ingin menghapus subscriber \nbernama <?=$item->subscriber_name ?>?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>
                                         </td>
@@ -95,8 +98,23 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
 <script>
 
+    function swal_delete_alert(url, string){
+        swal({
+            title: "Warning!",
+            text: string,
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#5d78ff",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak"
+        }, function() {
+            window.location.href = url;
+        });
+    }	
     $(document).ready(function() {
 
         $("#search").keypress(function(event){
@@ -118,4 +136,5 @@
     });
 
 </script>
+@endsection
 @include('partials.footer')

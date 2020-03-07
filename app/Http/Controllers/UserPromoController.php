@@ -25,7 +25,7 @@ class UserPromoController extends Controller
     public function show($id)
     {
         $now = date('Y-m-d');
-        $data['detail_promo'] = Promo::where('promo_status', 'Active')->where('promo_start', '<=', $now)->where('promo_end', '>=', $now)->limit(5)->get();
+        $data['detail_promo'] = Promo::where('promo_status', 'Active')->where('promo_start', '<=', $now)->where('promo_end', '>=', $now)->where('promo_id', '<>', $id)->limit(5)->get();
         $data['promo'] = Promo::find($id);
         if(empty($data['promo'])){
             return redirect(url('promo'));

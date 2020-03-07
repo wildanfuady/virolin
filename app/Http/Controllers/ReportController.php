@@ -19,26 +19,12 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
-        return view('report.index');
-    }
-
-    public function order()
-    {
         $user_id = Auth::user()->id;
-        $data['order'] = \App\Order::with(['product'])->where('user_id', $user_id)->first();
-        return view('report.order', $data);
-    }
 
-    public function promo()
-    {
-        return view('report.promo');
-    }
-
-    public function trafik()
-    {
-        $user_id = Auth::user()->id;
+        // Report Trafik
         $data['trafik'] = TrafikCampaign::select('trafik_browser', DB::raw('count(*) as total'))->groupBy('trafik_browser')->join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->get();
         $data['trafik_all'] = TrafikCampaign::first();
         $data['trafik_jan'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-01')->where('trafik_campaign.created_at','<','2020-02')->count();
@@ -53,30 +39,14 @@ class ReportController extends Controller
         $data['trafik_okt'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-10')->where('trafik_campaign.created_at','<','2020-11')->count();
         $data['trafik_nov'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-11')->where('trafik_campaign.created_at','<','2020-12')->count();
         $data['trafik_des'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-12')->count();
-        return view('report.trafik', $data);
-    }
 
-    public function share()
-    {
-        $user_id = Auth::user()->id;
+        // Share
         $raw = "campaign_id, campaign_name, campaign_slug, campaign_share, campaign_form_view";
         $data['shares'] = Campaign::selectRaw($raw)->where('user_id', $user_id)->get();
         $data['share'] = TrafikShare::select('campaigns.campaign_name','campaigns.campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->join('campaigns','campaigns.campaign_id','=','trafik_share.campaign_id')->orderBy('campaigns.created_at','desc')->limit(7)->get();
-        // return $data['share'];
         $data['visitor'] = TrafikCampaign::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();
-        return view('report.share', $data);
-    }
 
-    public function shareDetail($slug){
-        return view('report.share_detail');
-    }
-
-    public function payment()
-    {
-        $user_id = Auth::user()->id;
-        $data['order'] = Order::with(['product'])->where('user_id', $user_id)->first();
-        $data['total_db'] = Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
-        return view('report.payment', $data);
+        return view('report.index', $data);
     }
 
     public function user(Request $request)
@@ -145,9 +115,14 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $user_id = Auth::user()->id;
+        $campaign = Campaign::where('campaign_slug', $slug)->where('user_id', $user_id)->first();
+        if(empty($campaign)){
+            return view('errors.404');
+        }
+        return view('report.report_detail');
     }
 
     /**

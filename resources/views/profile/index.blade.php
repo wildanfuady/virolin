@@ -13,7 +13,14 @@
                         <div class="d-flex align-items-center">
                         <div class="mr-3">										
                             <span class="avatar avatar-lg avatar-online pd-b-20">
-                            <img src="{{ asset('storage/user/'.$account->gender.'.png') }}" class="img-fluid wd-100" alt="">
+                            <?php 
+                            if(empty($account->gender)){
+                                $gender = "no-image";
+                            } else {
+                                $gender = $account->gender;
+                            }
+                            ?>
+                            <img src="{{ asset('storage/user/'.$gender.".png") }}" class="img-fluid" alt="">
                             </span>
                         </div>
                         <div class="mg-b-0">
@@ -26,9 +33,9 @@
                     <div class="col-md-4 mg-t-10 mg-l-auto">
                         <ul class="list-unstyled tx-gray-100 mb-0">
                         <li><i class="ti-target mr-2 font-18"></i> <b>Gender </b>: {{ $account->gender }}</li>
-                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>Nomor Telpon </b>: {{ $account->phone }}</li>
                         {{-- <li class="mt-2"><i class="ti-headphone-alt mr-2 font-18"></i> <b>phone </b>: null</li> --}}
                         <li class="mt-2"><i class="ti-email mr-2 font-18"></i> <b>Email </b>: {{ Auth::user()->email }}</li>
+                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>phone </b>: {{ $account->phone }}</li>
                         <li class="mt-2"><i class="ti-map mr-2 font-18"></i> <b>Location </b>: {{ $account->address }}</li>
                         </ul>
                     </div>
@@ -49,17 +56,41 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="row no-gutters mg-b-20">
-    <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 hidden-sm">
-        <div class="card bd-l-0-force bd-t-0-force bd-r-0-force">
-            <div class="card-body pd-b-0">
-                <p>Data Akun</p>
-                <ul>
-                    <li>Bisa Ubah Password</li>
-                    <li>Tambahkan no hp, alamat dan bio</li>
-                </ul>
+        <div class="col-md-12 col-lg-12 mg-t-20 mg-b-10" id="order">
+            <div class="card mg-b-100">
+                <div class="card-header">
+                    <h4 class="card-header-title">
+                    My Order
+                    </h4>
+                </div>
+                <div class="card-body collapse show">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="table_id">
+                            <thead>
+                                <tr>
+                                    <th width="1%">No</th>
+                                    <th>Invoice</th>
+                                    <th>Product</th>
+                                    <th>Max Database</th>
+                                    <th>Now Database</th>
+                                    <th>Expired</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="text-center">1</td>
+                                    <td>{{ $order->invoice }}</td>
+                                    <td>{{ $order->product->product_name }}</td>
+                                    <td>{{ $order->product->product_max_db }}</td>
+                                    <td>{{ $total_db }}</td>
+                                    <td>{{ date('d-m-Y', strtotime($order->order_end)) }}</td>
+                                    <td>{{ $order->order_status }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

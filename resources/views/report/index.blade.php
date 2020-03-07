@@ -19,70 +19,89 @@
 
         <div class="row row-xs clearfix">
             <div class="col-lg-12">
-                <div class="card mg-b-100">
+                <div class="card mg-b-20">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Reports
+                            Jumlah Share dan Visitor Per Campaign
                         </h4>
+                        <div class="card-header-btn">
+                            <a href="#" data-toggle="collapse" class="btn card-collapse" data-target="#collapse1" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
+                            <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
+                            <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
+                            <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a>
+                        </div>
                     </div>
-                    <div class="card-body collapse show">
-                        Halaman report berisi tentang:
-                        <ul>
-                            <li>Grafik pengunjung dari berbagai browser</li>
-                            <li>Total yang ngebuka si landing page</li>
-                            <li>Total yang ngeshare</li>
-                            <li>total yang ngisi data</li>
-                            <li>total landing page yang dia punya</li>
-                            <li>total subscriber per landingpage</li>
-                        </ul>
+                    <div class="card-body collapse show" id="collapse1">
+                        <div class="clearfix">
+                            <canvas id="chartBar1" height="150"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-12">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="card mg-b-20">
-                            <div class="card-body">
-                                <div class="media d-inline-flex">
-                                <div>
-                                    <span class="tx-uppercase tx-10 mg-b-10">Total Landing Page</span>					  
-                                    <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">4</span> </h2>
-                                </div>
-                                </div>
-                            </div>
+                <div class="card mg-b-20">
+                    <div class="card-header">
+                        <h4 class="card-header-title">
+                            Detail Report Campaign
+                        </h4>
+                        <div class="card-header-btn">
+                            <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
+                            <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
+                            <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
+                            <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="card mg-b-20">
-                            <div class="card-body">
-                                <div class="media d-inline-flex">
-                                <div>
-                                    <span class="tx-uppercase tx-10 mg-b-10">Total Share</span>					  
-                                    <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">4</span> </h2>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card mg-b-20">
-                            <div class="card-body">
-                                <div class="media d-inline-flex">
-                                <div>
-                                    <span class="tx-uppercase tx-10 mg-b-10">Total Mengisi Data</span>					  
-                                    <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">4</span> </h2>
-                                </div>
-                                </div>
-                            </div>
+                    <div class="collapse show">
+                        <div class="card-body collapse show" id="collapse1">
+                            <table id="basicDataTable" class="table responsive table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 50px" class="text-center">No</th>
+                                        <th>Campaign</th>
+                                        <!-- <th>Jumlah Share</th>
+                                        <th>Total Visitor</th> -->
+                                        <th style="width: 200px" class="text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($shares as $key => $data)
+                                    <tr>
+                                        <td class="text-center">{{ $key + 1 }}</td>
+                                        <td>{{ $data->campaign_name }}</td>
+                                        <!-- <td>
+                                            @foreach ($share as $trafikShare)
+                                                @if ($trafikShare->campaign_id == $data->campaign_id)
+                                                    {{ $trafikShare->total }}
+                                                @else
+                                                    {{-- 0 --}}
+                                                @endif
+                                            @endforeach
+                                        </!-->
+                                        <!-- <td> -->
+                                            {{-- @foreach ($visitor as $trafikVisitor)
+                                                @if ($trafikVisitor->campaign_id == $data->campaign_id)
+                                                    {{ $trafikVisitor->total }}
+                                                @else
+                                                    0
+                                                @endif
+                                            @endforeach --}}
+                                        <td class="text-center">
+                                            <a href="{{ route('report.show', $data->campaign_slug) }}" class="btn btn-primary">Buka Laporan</a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Chart Berdasarkan browser
+                            Chart Browser
                         </h4>
                         <div class="card-header-btn">
                             <a href="#" data-toggle="collapse" class="btn card-collapse" data-target="#collapse1" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -99,10 +118,10 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="card mg-b-20">
+                <div class="card mg-b-100">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            Total Yang ngebuka Landing Page
+                            Data Pengunjung tahun 2020
                         </h4>
                         <div class="card-header-btn">
                             <a href="#" data-toggle="collapse" class="btn card-collapse" data-target="#collapse1" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
@@ -111,59 +130,9 @@
                             <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a>
                         </div>
                     </div>
-                    <div class="card-body collapse show" id="collapse11">
+                    <div class="card-body collapse show" id="collapse1">
                         <div class="clearfix">
-                            <canvas id="chartLandingPage" height="150"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12">
-                <div class="card mg-b-20">
-                    <div class="card-header">
-                        <h4 class="card-header-title">
-                            Report Share WA
-                        </h4>
-                        <div class="card-header-btn">
-                            <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
-                            <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
-                            <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
-                            <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
-                        </div>
-                    </div>
-                    <div class="collapse show">
-                        <div class="card-body collapse show" id="collapse1">
-                            <table id="basicDataTable" class="table responsive nowrap">
-                                <thead>
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Landing Page</th>
-                                        <th>Jumlah Subscriber</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Landing Page 1</td>
-                                        <td>60</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Landing Page 2</td>
-                                        <td>42</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Landing Page 3</td>
-                                        <td>51</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Landing Page 4</td>
-                                        <td>6</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <canvas id="chartMonth" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -171,31 +140,78 @@
         </div>
     </div>
 </div>
-@include('partials.footer')
-<script type="text/javascript">
-var ctx1 = document.getElementById('chartBrowser').getContext('2d');
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/chartjs/chartjs.js"></script>
+<script>
+var ctx1 = document.getElementById('chartBar1').getContext('2d');
 var myChart1 = new Chart(ctx1, {
-    type: 'pie',
+    type: 'bar',
     data: {
-        labels: ['Google', 'Firefox', 'Facebook', 'Twitter', 'Opera', 'Whatsapp'],
+        labels: [
+            @foreach ($share as $labels)
+                "{{ $labels->campaign_name }}",
+            @endforeach
+        ],
         datasets: [{
-            data: [10, 24, 20, 25, 35, 50],
+            data: [
+                @foreach ($share as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
             backgroundColor: '#5D78FF',
             borderWidth: 1,
             fill: true,
-            label: 'Value1'
+            label: 'Total Share'
+        }, {
+            data: [
+                @foreach ($share as $labels)
+                    @foreach ($visitor as $data)
+                        @if ($labels->campaign_id == $data->campaign_id)
+                            "{{ $data->total }}",
+                        @endif
+                    @endforeach
+                @endforeach
+            ],
+            backgroundColor: '#63CF72',
+            borderWidth: 1,
+            fill: true,
+            label: 'Total Visitor'
         }]
     },
- 
+    options: {
+        legend: {
+            display: true,
+            labels: {
+                display: true
+            }
+        },
+        scales: {
+            yAxes: [{
+                stacked: true
+            }],
+            xAxes: [{
+                stacked: true
+            }]
+        }
+    }
 });
-var ctx2 = document.getElementById('chartLandingPage').getContext('2d');
+
+var ctx2 = document.getElementById('chartBrowser').getContext('2d');
 var myChart2 = new Chart(ctx2, {
     type: 'pie',
     data: {
-        labels: ['LP 1', 'LP 2', 'LP 3', 'LP 4', 'LP 5', 'LP 6'],
+        labels: [
+            @foreach ($trafik as $data)
+                "{{ $data->trafik_browser }}",
+            @endforeach
+        ],
         datasets: [{
-            data: [10, 24, 20, 25, 35, 50],
-            backgroundColor: '#5D78FF',
+            data: [
+                @foreach ($trafik as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
+            backgroundColor: ['#5D78FF','#63CF72','#C9D5FA','#00a65a', '#00c0ef', '#f56954'],
             borderWidth: 1,
             fill: true,
             label: 'Value1'
@@ -203,4 +219,36 @@ var myChart2 = new Chart(ctx2, {
     },
  
 });
+var ctx3 = document.getElementById('chartMonth').getContext('2d');
+var myChart3 = new Chart(ctx3, {
+    type: 'bar',
+    data: {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November' ,'Desember'],
+        datasets: [{
+            data: [{{$trafik_jan}},{{$trafik_feb}},{{$trafik_mar}},{{$trafik_apr}},{{$trafik_mei}},{{$trafik_jun}},{{$trafik_jul}},{{$trafik_agu}},{{$trafik_sep}},{{$trafik_okt}},{{$trafik_nov}},{{$trafik_des}}],
+            backgroundColor: '#5D78FF',
+            borderWidth: 1,
+            fill: true,
+            label: 'Total'
+        }]
+    },
+    options: {
+        legend: {
+            display: false,
+            labels: {
+                display: false
+            }
+        },
+        scales: {
+            yAxes: [{
+                stacked: true
+            }],
+            xAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});
 </script>
+@endsection
+@include('partials.footer')
