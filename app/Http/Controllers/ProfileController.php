@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:profile-list|profile-edit', ['only' => ['index','password']]);
+        $this->middleware('permission:profile-list', ['only' => ['index','password']]);
+        $this->middleware('permission:profile-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:profile-edit-password', ['only' => ['password','password_update']]);
+    }
+
     public function index()
     {
         $user_id = Auth::user()->id;

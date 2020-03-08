@@ -18,8 +18,9 @@ class CreateTrafikCampaignTable extends Migration
             $table->string('trafik_ip');
             $table->string('trafik_browser');
             $table->string('trafik_medium')->nullable();
-            $table->integer('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->nullable();
             $table->timestamps();
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
         });
     }
 

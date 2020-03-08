@@ -24,8 +24,8 @@
                         <h4 class="card-header-title">
                             List Campaign
                         </h4>
-                        @can('landingpage-create')
-                            <a class="btn btn-info btn-sm float-right" href="{{ route('campaign.create') }}"> Create New Campaign</a>
+                        @can('campaign-create')
+                            <a class="btn btn-info btn-sm float-right" href="{{ route('campaign.create') }}"> Create Campaign</a>
                         @endcan
                     </div>
                     <div class="card-body">
@@ -79,10 +79,10 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a class="btn btn-light btn-sm" href="{{ url($item->campaign_slug.'/?utm_source=campaign&utm_medium=dashboard&utm_campaign='.$item->campaign_slug) }}" target="_blank"><i class="fa fa-eye"></i></a>
-                                                @can('landingpage-edit')
+                                                @can('campaign-edit')
                                                 <a class="btn btn-light btn-sm" href="{{ route('campaign.edit', $item->campaign_id) }}"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('landingpage-delete')
+                                                @can('campaign-delete')
                                                 <a class="btn btn-light btn-sm" href="{{ url('campaign/destroy/'.$item->campaign_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus campaign <?= $item->campaign_name ?>? Jika ya, maka data akan dihapus secara permanen.');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>

@@ -49,7 +49,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
-                                <button type="button" id="btn_submit_create_list_subscribers" class="btn btn-primary float-right">Update</button>
+                                <button type="button" id="btn_submit_create_list_subscribers" class="btn btn-primary float-right">Simpan</button>
                             </div>
                         </div>
                         &nbsp;

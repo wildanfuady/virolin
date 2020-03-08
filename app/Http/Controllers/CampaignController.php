@@ -20,10 +20,10 @@ class CampaignController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:landingpage-list|landingpage-create|landingpage-edit|landingpage-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:landingpage-create', ['only' => ['create','store']]);
-        $this->middleware('permission:landingpage-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:landingpage-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:campaign-list|campaign-create|campaign-edit|campaign-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:campaign-create', ['only' => ['create','store']]);
+        $this->middleware('permission:campaign-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:campaign-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)

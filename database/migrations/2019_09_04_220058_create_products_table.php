@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('product_name');
             $table->text('product_desc');
             $table->integer('product_max_db');
+            $table->enum('product_type', ['bulanan', 'tahunan', 'tiga_bulan', 'enam_bulan']);
             $table->string('product_status');
             $table->integer('product_price');
             $table->timestamps();

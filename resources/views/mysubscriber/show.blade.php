@@ -23,8 +23,10 @@
                         <h4 class="card-header-title">
                             List Subscriber
                         </h4>
+                        @can('mysubscriber-detail-export')
                         <a class="btn btn-success btn-sm" href="{{ url('mysubscriber/'.$id.'/export') }}"> Export CSV</a>&nbsp;&nbsp;
-                        @can('mysubscriber-create')
+                        @endcan
+                        @can('mysubscriber-detail-create')
                             <a class="btn btn-info btn-sm" href="{{ url('mysubscriber/new/create/'.$id) }}"> Tambah Subscriber</a>
                         @endcan
                     </div>

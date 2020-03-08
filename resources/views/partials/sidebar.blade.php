@@ -55,43 +55,43 @@
                 </li>
                 @endif
             @endif
-            @can('payments-list')
+            @can('payment-list')
             <li>
             <a href="{{ route('payment.index') }}"><i data-feather="send"></i>
             <span>Konfirmasi Pembayaran</span><span class="badge badge-success ft-right count_payment">10+</span></a>
             </li>
             @endcan
-            @can('banks-list')
+            @can('bank-list')
             <li>
             <a href="{{ route('banks.index') }}"><i data-feather="dollar-sign"></i>
             <span>Manajemen Bank</span></a>
             </li>
             @endcan
-            @can('orders-list')
+            @can('order-list')
             <li>
             <a href="{{ route('orders.index') }}"><i data-feather="shopping-cart"></i>
             <span>Manajemen Order</span></a>
             </li>
             @endcan
-            @can('products-list')
+            @can('product-list')
             <li>
             <a href="{{ route('products.index') }}"><i data-feather="folder"></i>
             <span>Manajemen Produk</span></a>
             </li>
             @endcan
-            @can('promos-list')
+            @can('promo-list')
             <li>
             <a href="{{ route('promos.index') }}"><i data-feather="percent"></i>
             <span>Manajemen Promo</span></a>
             </li>
             @endcan
-            @can('reports-list')
+            @can('report-list')
             <li>
-            <a href="{{ route('report.index') }}"><i data-feather="bar-chart"></i>
+            <a href="{{ url('report') }}"><i data-feather="bar-chart"></i>
             <span>Manajemen Laporan</span></a>
             </li>
             @endcan
-            @can('users-list')
+            @can('user-list')
             <li>
             <a href="{{ route('users.index') }}"><i data-feather="users"></i>
             <span>Manajemen User</span></a>
@@ -103,7 +103,7 @@
             <span>Role Permission</span></a>
             </li>
             @endcan
-            @can('landingpage-list')
+            @can('campaign-list')
             <li>
             <a href="{{ route('campaign.index') }}"><i data-feather="layers"></i>
             <span>Campaign</span></a>
@@ -117,14 +117,8 @@
             @endcan
             @can('report-user')
             <li>
-            <a href="{{ route('report.index') }}"><i data-feather="file"></i>
+            <a href="{{ url('report') }}"><i data-feather="file"></i>
             <span>Report</span>
-            <!-- <i class="accordion-icon fa fa-angle-left"></i></a> -->
-            <!-- <ul class="sub-menu">
-                <li><a href="{{ url('report/shares') }}">Shares</a></li>
-                <li><a href="{{ url('report/payment') }}">Payment</a></li>
-                <li><a href="{{ url('report/trafik') }}">Trafik</a></li>
-            </ul> -->
             </li>
             @endcan
             

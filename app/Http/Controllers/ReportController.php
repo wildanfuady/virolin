@@ -19,6 +19,13 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware(['auth','verified']);
+        $this->middleware('permission:report-user|report-user-detail', ['only' => ['index','show']]);
+        $this->middleware('permission:report-user', ['only' => ['index']]);
+        $this->middleware('permission:report-user-detail', ['only' => ['show']]);
+    }
 
     public function index()
     {
@@ -47,45 +54,6 @@ class ReportController extends Controller
         $data['visitor'] = TrafikCampaign::select('campaign_id', DB::raw('count(*) as total'))->groupBy('campaign_id')->get();
 
         return view('report.index', $data);
-    }
-
-    public function user(Request $request)
-    {
-        $paginate = 10;
-        $keyword = $request->query('keyword');
-        $where = [];
-        $orwhere = [];
-
-        if(!empty($keyword)) {
-            $where[] = ['name', 'LIKE', "%{$keyword}%"];
-            $orwhere[] = ['email', 'LIKE', "%{$keyword}%"];
-        }
-
-        if(empty($keyword)) {
-            $db_users = \App\User::with(['product'])->where('level','<>','admin')->where('status','valid')->paginate($paginate);
-        }
-        else {
-            $db_users = \App\User::with(['product'])->where('level','<>','admin')->where('status','valid')->where($where)->orWhere($orwhere)->paginate($paginate);
-        }
-        
-        $time_now = Carbon::now();
-        // Chart jumlah users
-        $total_users = \App\User::where('level','<>','admin')->count();
-
-        // Chart user aktif, kadaluarsa, non aktif
-        $users_aktif = \App\User::where('status','valid')->where('level','<>','admin')->where('masa_aktif','>=',$time_now)->count();
-        $users_kadaluarsa = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->where('status','valid')->count();
-        $users_nonaktif = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
-
-        // Chart user with db        
-        // $data['users_db_count'] = \App\User::select(DB::raw('count(*) as jumlah_db'))->join('')->groupBy('subscriber.user_id')->get();
-        $users_db_count = DB::table('subscribers')->select(DB::raw('count(subscribers.id) as total, user_id'))->groupBy('subscribers.user_id')->get();
-
-        // Chart product users 
-        $users_product = \App\Products::get();
-        $users_product_count = DB::table('users')->select(DB::raw('count(users.product_id) as total,users.product_id'))->groupBy('users.product_id')->join('products','products.product_id','=','users.product_id')->where('level','<>','admin')->get();
-
-        return view('report.user', compact('db_users','total_users','users_aktif','users_kadaluarsa','users_nonaktif','users_db_count','users_product','users_product_count','keyword'));
     }
 
     /**
@@ -131,10 +99,7 @@ class ReportController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        //
-    }
+    
 
     /**
      * Update the specified resource in storage.
@@ -157,5 +122,44 @@ class ReportController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function user(Request $request)
+    {
+        $paginate = 10;
+        $keyword = $request->query('keyword');
+        $where = [];
+        $orwhere = [];
+
+        if(!empty($keyword)) {
+            $where[] = ['name', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['email', 'LIKE', "%{$keyword}%"];
+        }
+
+        if(empty($keyword)) {
+            $db_users = \App\User::with(['product'])->where('level','<>','admin')->where('status','valid')->paginate($paginate);
+        }
+        else {
+            $db_users = \App\User::with(['product'])->where('level','<>','admin')->where('status','valid')->where($where)->orWhere($orwhere)->paginate($paginate);
+        }
+        
+        $time_now = Carbon::now();
+        // Chart jumlah users
+        $total_users = \App\User::where('level','<>','admin')->count();
+
+        // Chart user aktif, kadaluarsa, non aktif
+        $users_aktif = \App\User::where('status','valid')->where('level','<>','admin')->where('masa_aktif','>=',$time_now)->count();
+        $users_kadaluarsa = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->where('status','valid')->count();
+        $users_nonaktif = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
+
+        // Chart user with db        
+        // $data['users_db_count'] = \App\User::select(DB::raw('count(*) as jumlah_db'))->join('')->groupBy('subscriber.user_id')->get();
+        $users_db_count = DB::table('subscribers')->select(DB::raw('count(subscribers.id) as total, user_id'))->groupBy('subscribers.user_id')->get();
+
+        // Chart product users 
+        $users_product = \App\Products::get();
+        $users_product_count = DB::table('users')->select(DB::raw('count(users.product_id) as total,users.product_id'))->groupBy('users.product_id')->join('products','products.product_id','=','users.product_id')->where('level','<>','admin')->get();
+
+        return view('report.user', compact('db_users','total_users','users_aktif','users_kadaluarsa','users_nonaktif','users_db_count','users_product','users_product_count','keyword'));
     }
 }

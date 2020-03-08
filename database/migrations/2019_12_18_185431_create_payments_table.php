@@ -21,7 +21,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('payment_total_transfer');
             $table->timestamp('payment_tanggal_transfer');
             $table->string('payment_bukti_transfer')->nullable();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->string('payment_status');
             $table->timestamps();
             $table->foreign('user_id')->references('id')->on('users');

@@ -15,10 +15,11 @@ class CreateVisitorsTable extends Migration
     {
         Schema::create('visitors', function (Blueprint $table) {
             $table->bigIncrements('visitor_id');
-            $table->bigInteger('campaign_id');
             $table->string('visitor_ip');
             $table->string('visitor_browser');
+            $table->unsignedBigInteger('campaign_id')->nullable();
             $table->timestamps();
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
         });
     }
 

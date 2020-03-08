@@ -21,11 +21,13 @@ class CreateSubscribersTable extends Migration
             $table->text('subscriber_alamat');
             $table->string('subscriber_verifikasi', 150);
             $table->enum('subscriber_status', ['valid', 'invalid']);
-            $table->integer('user_id');
-            $table->integer('campaign_id');
-            $table->unsignedBigInteger('list_sub_id');
+            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('campaign_id')->nullable();
+            $table->unsignedBigInteger('list_sub_id')->nullable();
             $table->timestamps();
-            // $table->foreign('list_sub_id')->references('list_sub_id')->on('list_subscribers')->onDelete('cascade');
+            $table->foreign('list_sub_id')->references('list_sub_id')->on('list_subscribers')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
         });
     }
 

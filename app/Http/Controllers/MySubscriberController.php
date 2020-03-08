@@ -20,6 +20,10 @@ class MySubscriberController extends Controller
         $this->middleware('permission:mysubscriber-list|mysubscriber-create|mysubscriber-edit|mysubscriber-delete', ['only' => ['index','store']]);
         $this->middleware('permission:mysubscriber-create', ['only' => ['create','store']]);
         $this->middleware('permission:mysubscriber-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:mysubscriber-detail', ['only' => ['show']]);
+        $this->middleware('permission:mysubscriber-detail-create', ['only' => ['create_subscriber', 'store_subscriber']]);
+        $this->middleware('permission:mysubscriber-detail-delete', ['only' => ['destroy_subscriber']]);
+        $this->middleware('permission:mysubscriber-detail-export', ['only' => ['export']]);
         $this->middleware('permission:mysubscriber-delete', ['only' => ['destroy']]);
     }
 

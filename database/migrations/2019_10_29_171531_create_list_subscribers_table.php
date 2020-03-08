@@ -16,9 +16,10 @@ class CreateListSubscribersTable extends Migration
         Schema::create('list_subscribers', function (Blueprint $table) {
             $table->bigIncrements('list_sub_id');
             $table->string('list_sub_name');
-            $table->bigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->enum('list_sub_status', ['Active', 'Inactive']);
             $table->timestamps();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

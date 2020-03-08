@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <h4 class="card-header-title">
                             List Data User
-                            @can('users-create')
+                            @can('user-create')
                                 <a href="{{ route('users.create') }}" class="btn btn-info btn-sm float-right">Tambah User</a>
                             @endcan
                         </h4>
@@ -89,10 +89,10 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{ route('users.show', $item->id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
-                                                @can('users-edit')
+                                                @can('user-edit')
                                                 <a href="{{ route('users.edit', $item->id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('users-delete')
+                                                @can('user-delete')
                                                 <a href="{{ url('users/destroy/'.$item->id) }}" class="btn btn-sm btn-light" onclick="return confirm('Yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>

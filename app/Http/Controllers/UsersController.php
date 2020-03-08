@@ -17,10 +17,10 @@ class UsersController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('admin');
-        $this->middleware('permission:users-list|users-create|users-edit|users-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:users-create', ['only' => ['create','store']]);
-        $this->middleware('permission:users-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:users-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.

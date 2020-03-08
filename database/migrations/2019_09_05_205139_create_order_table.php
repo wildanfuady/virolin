@@ -16,15 +16,16 @@ class CreateOrderTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('invoice');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('product_id')->nullable();
             $table->timestamp('order_date');
             $table->timestamp('order_end');
             $table->string('order_status');
             $table->string('order_payment');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('kode_unik');
+            $table->dateTime('order_expired')->nullable();
             $table->timestamps();
-            // $table->foreign('product_id')->references('product_id')->on('products');
+            $table->foreign('product_id')->references('product_id')->on('products');
             $table->foreign('user_id')->references('id')->on('users');
         });
     }

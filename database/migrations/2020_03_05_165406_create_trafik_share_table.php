@@ -17,8 +17,9 @@ class CreateTrafikShareTable extends Migration
             $table->bigIncrements('id');
             $table->string('trafik_ip');
             $table->string('trafik_browser');
-            $table->integer('campaign_id');
+            $table->unsignedBigInteger('campaign_id')->nullable();
             $table->timestamps();
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
         });
     }
 

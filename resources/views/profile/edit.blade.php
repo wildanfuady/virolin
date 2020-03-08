@@ -92,6 +92,20 @@
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
 <script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
-<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>
+<script>
+$(document).ready(function(){
+
+  $('.dropify').dropify({
+    messages: {
+      'default': 'Drag and drop a file here or click',
+      'replace': 'Drag and drop or click to replace',
+      'remove':  'Remove',
+      'error':   'Ooops, something wrong happended.'
+    }
+  });
+
+});
+</script>	
 @endsection
 @include('partials.footer')

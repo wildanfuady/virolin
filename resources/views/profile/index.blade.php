@@ -15,11 +15,11 @@
                         <?php 
                             $avatar = \App\User::avatar();
                             if($avatar->gender == "pria" && empty($avatar->image)){
-                                $gender = $avatar->gender;
+                                $gender = "user/".$avatar->gender.".png";
                             } else if($avatar->gender == "wanita" && empty($avatar->image)){
-                                $gender = $avatar->gender;
+                                $gender = "user/".$avatar->gender.".png";
                             } else if(empty($avatar->image) && empty($avatar->gender)){
-                                $gender = "no-image.png";
+                                $gender = "user/no-image.png";
                             } else if(!empty($avatar->image) && !empty($avatar->gender)) {
                                 $gender = $avatar->image;
                             }

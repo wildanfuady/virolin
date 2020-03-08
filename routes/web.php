@@ -96,7 +96,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('mysubscriber/destroy/{id}','MySubscriberController@destroy')->where('id', '[0-9]+');
     Route::get('mysubscriber/destroy-subscriber/{id}','MySubscriberController@destroy_subscriber')->where('id', '[0-9]+');
 
-    Route::resource('report','ReportController');
+    Route::get('report','ReportController@index');
+    Route::get('report/{id}','ReportController@show');
 
     Route::get('promo','UserPromoController@index');
     Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');
