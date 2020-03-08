@@ -11,16 +11,21 @@
                 <div class="row no-gutters">
                     <div class="col-md-6 mg-t-20">
                         <div class="d-flex align-items-center">
-                        <div class="mr-3">										
-                            <span class="avatar avatar-lg avatar-online pd-b-20">
-                            <?php 
-                            if(empty($account->gender)){
-                                $gender = "no-image";
-                            } else {
-                                $gender = $account->gender;
+                        <div class="mr-3">								
+                        <?php 
+                            $avatar = \App\User::avatar();
+                            if($avatar->gender == "pria" && empty($avatar->image)){
+                                $gender = $avatar->gender;
+                            } else if($avatar->gender == "wanita" && empty($avatar->image)){
+                                $gender = $avatar->gender;
+                            } else if(empty($avatar->image) && empty($avatar->gender)){
+                                $gender = "no-image.png";
+                            } else if(!empty($avatar->image) && !empty($avatar->gender)) {
+                                $gender = $avatar->image;
                             }
-                            ?>
-                            <img src="{{ asset('storage/user/'.$gender.".png") }}" class="img-fluid" alt="">
+                        ?>		
+                            <span class="avatar avatar-lg avatar-online pd-b-20">
+                            <img src="{{ asset('storage/'.$gender) }}" class="img-fluid wd-35 ht-35 rounded-circle" alt="">
                             </span>
                         </div>
                         <div class="mg-b-0">

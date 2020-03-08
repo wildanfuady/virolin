@@ -104,7 +104,7 @@ class ProfileController extends Controller
 
         if(!empty($request->file('image'))){
             $image = $request->file('image')->store('user', 'public');
-            $user->image = $request->get('image');
+            $user->image = $image;
         }
 
         $user->name = $request->get('name');
