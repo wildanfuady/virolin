@@ -465,6 +465,7 @@ class CampaignController extends Controller
         $template->block1_btn_text          = $request->block1_btn_text;
         $template->block1_btn_text_color    = $request->block1_btn_text_color;
         $template->block1_btn_text_bg       = $request->block1_btn_text_bg;
+        $template->block1_headline2_color   = $request->block1_headline2_color;
 
         $template->block2_text_edukasi      = $request->block2_text_edukasi;
 
@@ -484,6 +485,8 @@ class CampaignController extends Controller
         $template->block3_alasan3_text      = $request->block3_alasan3_text;
         $template->block3_alasan4_icon      = $request->block3_alasan4_icon;
         $template->block3_alasan4_text      = $request->block3_alasan4_text;
+        $template->block3_headline_color    = $request->block3_headline_color;
+        $template->block3_text_alasan_color = $request->block3_text_alasan_color;
 
         if(!empty($request->file('block3_image'))){
             $image4 = $request->file('block4_image')
@@ -495,6 +498,7 @@ class CampaignController extends Controller
         $template->block4_bg_headline       = $request->block4_bg_headline;
         $template->block4_text_headline     = $request->block4_text_headline;
         $template->block4_text_headline_desc= $request->block4_text_headline_desc;
+        $template->block4_text_headline_color= $request->block4_text_headline_color;
 
         $template->block5_bg                = $request->block5_bg;
         $template->block5_text              = $request->block5_text;
@@ -507,6 +511,7 @@ class CampaignController extends Controller
 
         $template->block6_bg                = $request->block6_bg;
         $template->block6_text_headline     = $request->block6_text_headline;
+        $template->block6_text_headline_color= $request->block6_text_headline_color;
 
         $template->block7_faq               = $request->block7_faq;
 

@@ -28,8 +28,8 @@ class ProfileController extends Controller
 
     public function password_update(Request $request){
         $rules = [
-            'password_new' => 'required|string|min:8|max:80',
-            'password_re' => 'required|string|min:8|max:80'
+            'password_new' => 'required|string|min:8|max:50',
+            'password_re' => 'required|string|min:8|max:50'
         ];
 
         $messages = [
@@ -60,7 +60,7 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profil.index')->with('info','Ubah Password Success');
+        return redirect()->route('profil.index')->with('info','Updated Password Successfully');
     }
 
     public function edit(){
@@ -77,6 +77,7 @@ class ProfileController extends Controller
             'gender' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'image' => 'max:1000'
         ];
 
         $messages = [
@@ -89,6 +90,7 @@ class ProfileController extends Controller
             'gender.required' => 'Jenis Kelamin wajib diisi',
             'phone.required' => 'Nomor telepon wajib diisi',
             'address.required' => 'Alamat wajib diisi',
+            'image.max' => 'File gambar maksimal 1 mb',
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -100,6 +102,11 @@ class ProfileController extends Controller
         $id = Auth::user()->id;
         $user = \App\User::find($id);
 
+        if(!empty($request->file('image'))){
+            $image = $request->file('image')->store('user', 'public');
+            $user->image = $request->get('image');
+        }
+
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->gender = $request->get('gender');
@@ -108,6 +115,6 @@ class ProfileController extends Controller
 
         $user->save();
 
-        return redirect()->route('profil.index')->with('info','Updated Profil Berhasil');
+        return redirect()->route('profil.index')->with('info','Updated Profil Successfully');
     }
 }

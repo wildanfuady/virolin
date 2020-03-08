@@ -34,6 +34,12 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Order');
     }
 
+    public static function avatar()
+    {
+        $user_id = Auth::user()->id;
+        return DB::table('users')->where('id', $user_id)->first();
+    }
+
     public function subscribers()
     {
         return $this->hasMany('App\Subscribers');

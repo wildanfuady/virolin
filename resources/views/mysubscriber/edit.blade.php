@@ -28,7 +28,7 @@
                     <div class="card-body">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Whoops!</strong> Terjadi kesalahan saat menginput data..<br><br>
                                 <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -45,13 +45,15 @@
                             {{ Form::label('group_status', 'Group Status') }}
                             {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], $list->list_sub_status, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'edit_group_status']) }}
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
+                                <button type="button" id="btn_update_list_subscribers" class="btn btn-primary float-right">Update</button>
+                            </div>
+                        </div>
+                        &nbsp;
                                 
-                    </div>
-                    <div class="card-footer">
-                        <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="button" id="btn_update_create_list_subscribers" class="btn btn-primary float-right">Update</button>
                     </div>
                     {{ Form::close() }}
                 </div>

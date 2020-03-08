@@ -72,13 +72,15 @@
                             {{ Form::label('sub_status', 'Status') }}
                             {{ Form::select('sub_status', ['valid' => 'Valid', 'invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'sub_status']) }}
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
+                                <button type="button" id="btn_submit_create_subscriber" class="btn btn-primary float-right">Simpan</button>
+                            </div>
+                        </div>
+                        &nbsp;
                                 
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="button" id="btn_submit_create_subscriber" class="btn btn-primary float-right">Simpan</button>
                     </div>
                     {{ Form::close() }}
                 </div>

@@ -45,13 +45,15 @@
                             {{ Form::label('group_status', 'Group Status') }}
                             {{ Form::select('group_status', ['Active' => 'Active', 'Inactive' => 'Inactive'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'id' => 'group_status']) }}
                         </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a href="{{ route('mysubscribers.index') }}" class="btn btn-outline-info">Back</a>
+                                <button type="button" id="btn_submit_create_list_subscribers" class="btn btn-primary float-right">Update</button>
+                            </div>
+                        </div>
+                        &nbsp;
                                 
-                    </div>
-                    <div class="card-footer">
-                        <a href="#" onclick="history.go(-1);" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="button" id="btn_submit_create_list_subscribers" class="btn btn-primary pull-right">Simpan</button>
                     </div>
                     {{ Form::close() }}
                 </div>

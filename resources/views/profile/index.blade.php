@@ -32,10 +32,9 @@
                     </div>
                     <div class="col-md-4 mg-t-10 mg-l-auto">
                         <ul class="list-unstyled tx-gray-100 mb-0">
-                        <li><i class="ti-target mr-2 font-18"></i> <b>Gender </b>: {{ $account->gender }}</li>
-                        {{-- <li class="mt-2"><i class="ti-headphone-alt mr-2 font-18"></i> <b>phone </b>: null</li> --}}
-                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>phone </b>: {{ $account->phone }}</li>
-                        <li class="mt-2"><i class="ti-map mr-2 font-18"></i> <b>Location </b>: {{ $account->address }}</li>
+                        <li><i class="ti-target mr-2 font-18x"></i> <b>Gender </b>: {{ ucfirst($account->gender) }}</li>
+                        <li class="mt-2"><i class="ti-mobile mr-2 font-18"></i> <b>Telp </b>: {{ $account->phone }}</li>
+                        <li class="mt-2"><i class="ti-map mr-2 font-18"></i> <b>Alamat </b>: {{ $account->address }}</li>
                         </ul>
                     </div>
                 </div>

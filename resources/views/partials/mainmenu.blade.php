@@ -86,12 +86,25 @@
             <!-- Profile Dropdown Start -->
             <!--================================-->
             <li class="list-inline-item dropdown">
-                <a  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="select-profile" style="color: white;">Hi, @if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif</span><img src="{{ asset('template/metrical') }}/images/avatar-placeholder.png" class="img-fluid wd-35 ht-35 rounded-circle" alt=""></a>
+                <?php 
+                $avatar = \App\User::avatar();
+                if($avatar->gender == "pria" && empty($avatar->image)){
+                    $gender = $avatar->gender;
+                } else if($avatar->gender == "wanita" && empty($avatar->image)){
+                    $gender = $avatar->gender;
+                } else if(empty($avatar->image) && empty($avatar->gender)){
+                    $gender = "no-image";
+                } else {
+                    $gender = $avatar->image;
+                }
+                ?>
+                <a  href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="select-profile" style="color: white;">Hi, @if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif</span><img src="{{ asset('storage/user/'.$gender.".png") }}" class="img-fluid wd-35 ht-35 rounded-circle" alt=""></a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-profile shadow-2">
                     <div class="user-profile-area">
                         <div class="user-profile-heading">
                         <div class="profile-thumbnail">
-                            <img src="https://via.placeholder.com/100x100" class="img-fluid wd-35 ht-35 rounded-circle" alt="">
+                            <img src="{{ asset('storage/user/'.$gender.".png") }}" class="img-fluid wd-35 ht-35 rounded-circle" alt="">
+                            <!-- <img src="" class="img-fluid wd-35 ht-35 rounded-circle" alt=""> -->
                         </div>
                         <div class="profile-text">
                             <h6>@if(!empty(Auth::user()->name)) {{ Auth::user()->name }} @else {{ "Not Found" }} @endif</h6>

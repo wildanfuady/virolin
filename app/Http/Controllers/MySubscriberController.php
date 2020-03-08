@@ -166,10 +166,25 @@ class MySubscriberController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request,[
-            'group_name' => 'required|min:5|max:50|string',
+        $rules = [
+            'group_name' => 'required|min:5|max:50|regex:/^[a-zA-Z0-9 ]+$/u',
             'group_status' => 'required',
-        ]);
+        ];
+
+        $messages = [
+            'group_name.required' => 'Nama List Subscriber wajib diisi',
+            'group_name.min' => 'Nama List Subscriber minimal 5 karakter',
+            'group_name.max' => 'Nama List Subscriber maksimal 50 karakter',
+            'group_name.regex' => 'Nama List Subscriber hanya boleh diisi dengan huruf, angka dan spasi',
+            'group_status.required' => 'Status wajib diisi',
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $user_id = Auth::user()->id;
         $list = new \App\ListSubscriber;
@@ -243,10 +258,25 @@ class MySubscriberController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'group_name' => 'required|min:5|max:50|string',
+        $rules = [
+            'group_name' => 'required|min:5|max:50|regex:/^[a-zA-Z0-9 ]+$/u',
             'group_status' => 'required',
-        ]);
+        ];
+
+        $messages = [
+            'group_name.required' => 'Nama List Subscriber wajib diisi',
+            'group_name.min' => 'Nama List Subscriber minimal 5 karakter',
+            'group_name.max' => 'Nama List Subscriber maksimal 50 karakter',
+            'group_name.regex' => 'Nama List Subscriber hanya boleh diisi dengan huruf, angka dan spasi',
+            'group_status.required' => 'Status wajib diisi',
+            
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
 
         $user_id = Auth::user()->id;
         $list = \App\ListSubscriber::where('list_sub_id', $id)->first();

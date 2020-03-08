@@ -8,11 +8,11 @@
     <div id="main-wrapper">
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Create Subscriber</h1>
+            <h1 class="pd-0 mg-0 tx-20">Detail List Subscriber</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Create Subscriber</a>
+            <a class="breadcrumb-item" href="">List Subscriber</a>
             </div>
         </div>
 
@@ -25,7 +25,7 @@
                         </h4>
                         <a class="btn btn-success btn-sm" href="{{ url('mysubscriber/'.$id.'/export') }}"> Export CSV</a>&nbsp;&nbsp;
                         @can('mysubscriber-create')
-                            <a class="btn btn-info btn-sm" href="{{ url('mysubscriber/new/create/'.$id) }}"> Create New Subscriber</a>
+                            <a class="btn btn-info btn-sm" href="{{ url('mysubscriber/new/create/'.$id) }}"> Tambah Subscriber</a>
                         @endcan
                     </div>
                     <div class="card-body">

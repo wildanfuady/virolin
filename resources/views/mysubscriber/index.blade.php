@@ -20,10 +20,10 @@
                 <div class="card mg-b-20">
                     <div class="card-header">
                         <h4 class="card-header-title">
-                            List All Subscriber
+                            List Data My Subscriber
                         </h4>
                         @can('mysubscriber-create')
-                            <a class="btn btn-info btn-sm" href="{{ route('mysubscribers.create') }}"> Create List Subscriber</a>
+                            <a class="btn btn-info btn-sm" href="{{ route('mysubscribers.create') }}"> Tambah List Subscriber</a>
                         @endcan
                     </div>
                     <div class="card-body pd-t-0 pd-b-20 collapse show" id="collapse3">
