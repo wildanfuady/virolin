@@ -11,10 +11,10 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:payments-list|payments-create|payments-edit|payments-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:payments-create', ['only' => ['create','store']]);
-        $this->middleware('permission:payments-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:payments-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:payment-list|payment-create|payment-edit|payment-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:payment-create', ['only' => ['create','store']]);
+        $this->middleware('permission:payment-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:payment-delete', ['only' => ['destroy']]);
     }
 
     public function showConfirmationPaymentForm()

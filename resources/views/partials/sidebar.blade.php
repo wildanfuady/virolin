@@ -85,12 +85,6 @@
             <span>Manajemen Promo</span></a>
             </li>
             @endcan
-            @can('report-list')
-            <li>
-            <a href="{{ url('report') }}"><i data-feather="bar-chart"></i>
-            <span>Manajemen Laporan</span></a>
-            </li>
-            @endcan
             @can('user-list')
             <li>
             <a href="{{ route('users.index') }}"><i data-feather="users"></i>
@@ -101,6 +95,12 @@
             <li>
             <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
             <span>Role Permission</span></a>
+            </li>
+            @endcan
+            @can('report-list')
+            <li>
+            <a href="{{ url('report/admin') }}"><i data-feather="bar-chart"></i>
+            <span>Manajemen Laporan</span></a>
             </li>
             @endcan
             @can('campaign-list')

@@ -78,7 +78,7 @@
                             <small class="sidetitle">Hanya boleh diisi dengan huruf, angka dan spasi</small>
                             {{ Form::text('campaign_name', '', ['class'=> 'form-control', 'id' => 'campaign_lp_name', 'placeholder' => 'Masukan Nama / Judul Landing Page', 'autocomplete' => 'off', 'autocomplete' => 'off']) }}
                             <br>
-                            URL: <span id="campaign_slug_text">https://virolin.com/</span>
+                            URL: <span id="campaign_slug_text">https://virolin.ilmucoding.com/</span>
                           </div>
                         </div>
                       </div>

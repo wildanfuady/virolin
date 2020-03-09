@@ -1,175 +1,45 @@
-@extends('template')
-@section('content')
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
 <!-- ChartJS -->
 <script src="{{ asset('template/plugins/chart.js/Chart.min.js') }}"></script>
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Report User </h1>
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Reports</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Report User</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Reports</a>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="content">
-    <div class="container-fluid">
-        <!-- Main row -->
-        <div class="row">
-            <!-- Left col -->
-            <section class="col-lg-6 connectedSortable">
-
-                {{-- card --}}
+        <div class="row row-xs clearfix">
+            <div class="col-lg-12">
                 <div class="card mg-b-100">
                     <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-pie mr-1"></i>
-                            Chart Users
-                        </h3>
-                    </div><!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="chart-responsive">
-                                    <canvas id="users-chart" height="250"></canvas>
-                                </div>
-                                <!-- ./chart-responsive -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <ul class="chart-legend clearfix">
-                                    <li><i class="far fa-circle text-success"></i> Users Aktif: {{$users_aktif}}</li>
-                                    <li><i class="far fa-circle text-info"></i> Users Kadaluarsa: {{$users_kadaluarsa}}
-                                    </li>
-                                    <li><i class="far fa-circle text-danger"></i> Users Nonaktif: {{$users_nonaktif}}
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- /.col -->
+                        <h4 class="card-header-title">
+                            Data Laporan Administrator
+                        </h4>
+                        <div class="card-header-btn">
+                            <a href="#" data-toggle="collapse" class="btn card-collapse" data-target="#collapse1" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
+                            <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
+                            <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
+                            <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a>
                         </div>
-                        <!-- /.row -->
-                    </div><!-- /.card-body -->
+                    </div>
+                    <div class="card-body collapse show" id="collapse1">
+                        <div class="clearfix">
+                            <canvas id="users-chart" height="250"></canvas>
+                        </div>
+                    </div>
                 </div>
-                <!-- /.card -->
-
-            </section>
-            <!-- /.Left col -->
-            <!-- right col (We are only adding the ID to make the widgets sortable)-->
-            <section class="col-lg-6 connectedSortable">
-
-                {{-- card --}}
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-pie mr-1"></i>
-                            Chart Product
-                        </h3>
-                    </div><!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="chart-responsive">
-                                    <canvas id="users-product-chart" height="250"></canvas>
-                                </div>
-                                <!-- ./chart-responsive -->
-                            </div>
-                            <!-- /.col -->
-                            <div class="col-md-4">
-                                <ul class="chart-legend clearfix">
-                                    {{-- <li><i class="far fa-circle text-success"></i> Users Aktif: {{$users_aktif}}</li> --}}
-                                    @foreach ($users_product as $productItem)
-                                        <li>
-                                            <i class=""></i> {{$productItem->product_name}} : 
-                                            @foreach ($users_product_count as $productItemCount)
-                                                @if ($productItem->product_id == $productItemCount->product_id)
-                                                    {{ $productItemCount->total }}
-                                                @endif
-                                            @endforeach
-                                        </li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            <!-- /.col -->
-                        </div>
-                        <!-- /.row -->
-                    </div><!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-
-            </section>
-            <!-- /right col -->
-            {{-- left & right col --}}
-            <section class="col-lg-12 connectedSortable">
-
-                {{-- card --}}
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            <i class="fas fa-chart-pie mr-1"></i>
-                            Chart Users
-                        </h3>
-                    </div><!-- /.card-header -->
-                    <div class="card-body">
-                        <div class="row mt-3 mb-3">
-                            <div class="col-md-11">
-                                <div class="form-group">
-                                    {{ Form::text('search', $keyword, ['class' => 'form-control', 'placeholder' => 'Cari user ...', 'id' => 'search']) }}
-                                </div>
-                            </div>
-                            <div class="col-md-1">
-                                <button id="btn-search" class="btn btn-primary btn-block">Seacrh</button>
-                            </div>
-                        </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr class="bg-info">
-                                        <th width="10px" style="text-align:center">No</th>
-                                        <th>Name</th>
-                                        <th>Total DB</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach ($db_users as $item)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            <td>{{ $item->name }}</td>
-                                            <td>
-                                                @php
-                                                    $subscibe = \App\Subscribers::where('user_id', $item->id)->get();
-                                                    $subscibe_total = count($subscibe);
-                                                @endphp
-                                                {{ $subscibe_total }} of {{ $item->product->product_max_db }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row float-right">
-                            <div class="col-md-12">
-                                {{ $db_users->links() }}
-                            </div>
-                        </div>
-                    </div><!-- /.card-body -->
-                </div>
-                <!-- /.card -->
-
-            </section>
-            {{-- /left & right col --}}
+            </div>
         </div>
     </div>
 </div>
-
+                            
 <script>
 $(function(){
     // Search 
@@ -257,4 +127,4 @@ $(function(){
 });
 </script>
 
-@endsection
+@include('partials.footer')

@@ -190,8 +190,9 @@ class CampaignController extends Controller
 
         // generate text wa
         $text = nl2br($request->campaign_text_share);
-        $char1 = str_replace(" ", "%20", $text);
-        $char2 = str_replace("<br%20/>", "%0A", $char1);
+        // $char1 = str_replace(" ", "%20", $text);
+        // $char2 = str_replace("<br%20/>", "%0A", $char1);
+        // $ttd = "%0A%0AKlik%20di%20sini%20untuk%20info lengkapnya:%0A%0A>>%20https:/virolin.com/".$slug."/?utm_source=campaign"."&"."utm_medium=whatsapp"."&"."utm_campaign=".$slug."%0A%0A>>%20https:/virolin.com/".$slug."/?utm_source=campaign"."&"."utm_medium=whatsapp"."&"."utm_campaign=".$slug;
 
         $campaign = new Campaign();
 
@@ -204,7 +205,7 @@ class CampaignController extends Controller
         $campaign->campaign_form_thank      = $request->campaign_form_thank;
         $campaign->campaign_subject_confirm_email   = $request->campaign_subject_confirm_email;
         $campaign->campaign_confirm         = $request->campaign_confirm;
-        $campaign->campaign_text_share      = $char2;
+        $campaign->campaign_text_share      = $text;
         $campaign->user_id                  = Auth::user()->id; 
         $campaign->campaign_group           = $request->campaign_group; 
         $campaign->campaign_form_view       = 0; 
@@ -436,9 +437,10 @@ class CampaignController extends Controller
         }
 
         // generate text wa
-        $text = $request->campaign_text_share;
-        $char1 = str_replace(" ", "%20", $text);
-        $char2 = str_replace("<br%20/>", "%0A", $char1);
+        $text = nl2br($request->campaign_text_share);
+        // $char1 = str_replace(" ", "%20", $text);
+        // $char2 = str_replace("<br%20/>", "%0A", $char1);
+        // $ttd = "%0A%0AKlik%20di%20sini%20untuk%20info lengkapnya:%0A%0A>>%20https:/virolin.com/".$slug."/?utm_source=campaign"."&"."utm_medium=whatsapp"."&"."utm_campaign=".$slug."%0A%0A>>%20https:/virolin.com/".$slug."/?utm_source=campaign"."&"."utm_medium=whatsapp"."&"."utm_campaign=".$slug;
 
         $campaign = Campaign::find($id);
 
@@ -451,7 +453,7 @@ class CampaignController extends Controller
         $campaign->campaign_form_thank      = $request->campaign_form_thank;
         $campaign->campaign_subject_confirm_email   = $request->campaign_subject_confirm_email;
         $campaign->campaign_confirm         = $request->campaign_confirm;
-        $campaign->campaign_text_share      = $char2;
+        $campaign->campaign_text_share      = $text;
         $campaign->user_id                  = Auth::user()->id; 
         $campaign->campaign_group           = $request->campaign_group; 
 

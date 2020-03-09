@@ -185,7 +185,7 @@ class UsersController extends Controller
         if($request->get('status') == "valid"){
             $user->setSuccess($user);
         }
-
+        // dd($request->input('roles'));
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->status = $request->get('status');

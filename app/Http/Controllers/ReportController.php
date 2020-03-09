@@ -22,9 +22,10 @@ class ReportController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:report-user|report-user-detail', ['only' => ['index','show']]);
+        $this->middleware('permission:report-user|report-user-detail|report-list', ['only' => ['index','show']]);
         $this->middleware('permission:report-user', ['only' => ['index']]);
         $this->middleware('permission:report-user-detail', ['only' => ['show']]);
+        $this->middleware('permission:report-list', ['only' => ['user']]);
     }
 
     public function index()
@@ -55,34 +56,6 @@ class ReportController extends Controller
 
         return view('report.index', $data);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($slug)
     {
         $user_id = Auth::user()->id;
@@ -91,37 +64,6 @@ class ReportController extends Controller
             return view('errors.404');
         }
         return view('report.report_detail');
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 
     public function user(Request $request)
@@ -148,8 +90,8 @@ class ReportController extends Controller
         $total_users = \App\User::where('level','<>','admin')->count();
 
         // Chart user aktif, kadaluarsa, non aktif
-        $users_aktif = \App\User::where('status','valid')->where('level','<>','admin')->where('masa_aktif','>=',$time_now)->count();
-        $users_kadaluarsa = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->where('status','valid')->count();
+        $users_aktif = \App\User::join('orders', 'users.id', '=', 'orders.user_id')->where('users.status','valid')->where('users.level','<>','admin')->where('orders.order_expired','>=',$time_now)->count();
+        $users_kadaluarsa = \App\User::join('orders', 'users.id', '=', 'orders.user_id')->where('orders.order_expired','<=',$time_now)->where('users.level','<>','admin')->where('users.status','valid')->count();
         $users_nonaktif = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
 
         // Chart user with db        

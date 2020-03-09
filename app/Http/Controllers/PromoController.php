@@ -15,10 +15,10 @@ class PromoController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('admin');
-        $this->middleware('permission:promos-list|promos-create|promos-edit|promos-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:promos-create', ['only' => ['create','store']]);
-        $this->middleware('permission:promos-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:promos-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:promo-list|promo-create|promo-edit|promo-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:promo-create', ['only' => ['create','store']]);
+        $this->middleware('permission:promo-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:promo-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)

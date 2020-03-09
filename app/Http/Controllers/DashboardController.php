@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
-
+use DB;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
@@ -14,13 +14,14 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
+        $this->middleware('permission:dashboard-user', ['only' => ['index']]);
         $this->middleware('permission:dashboard-admin', ['only' => ['dashboard']]);
     }
 
     public function index()
     {
         $user_id = Auth::user()->id;
-        
+
         $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
             ->join('products', 'products.product_id', '=', 'users.product_id')
             ->where('user_id', $user_id)->first();
@@ -76,41 +77,52 @@ class DashboardController extends Controller
                         ->where('orders.user_id', $user_id)
                         ->selectRaw($raw_order)
                         ->first();
-
-        if (Auth::check() && Auth::user()->level == 'admin') {
-            return $this->dashboard();
-        } else {
-            return view('dashboard_user', $data);
+        $order = \App\Order::where('user_id', $user_id)->first();
+        $expired = $order->order_expired;
+        $now = date('Y-m-d H:i:s');
+        if(!empty($order)){
+            
+            if($expired < $now){
+                // hapus permission
+                DB::table('model_has_roles')->where('model_id', $user_id)->update(['role_id' => 3]);
+                // return redirect('report');
+            }
         }
+        return view('dashboard_user', $data);
     }
 
     public function dashboard()
     {
-        $user_id = Auth::user()->id;
-        $time_now = Carbon::now();
-        
-        $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
-            ->join('products', 'products.product_id', '=', 'users.product_id')
-            ->where('user_id', $user_id)->first();
+        if (Auth::check() && Auth::user()->level == 'user') {
+            return $this->dashboard();
+        } else {
 
-        $data['activity_log'] = \App\Subscribers::where('user_id', $user_id)->get();
+            $user_id = Auth::user()->id;
+            $time_now = Carbon::now();
+            
+            $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
+                ->join('products', 'products.product_id', '=', 'users.product_id')
+                ->where('user_id', $user_id)->first();
 
-        // chart jumlah total landing page
-        $data['total_campaign'] = \App\Campaign::get()->count();
-        // Chart jumlah users
-        $data['total_users'] = \App\User::where('level','<>','admin')->count();
-        // Chart user aktif, kadaluarsa, non aktif
-        $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->count();
-        $data['users_kadaluarsa'] = "";
-        // $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
-        $data['users_nonaktif'] = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
-        // Chart Payment & Leads
-        $data['total_active'] = \App\Order::where('order_status','Active')->count();
-        $data['total_pending'] = \App\Order::where('order_status','Pending')->count();
-        $data['total_expired'] = \App\Order::where('order_status','Expired')->count();
+            $data['activity_log'] = \App\Subscribers::where('user_id', $user_id)->get();
 
-        $data['total_confirm'] = \App\Payment::where('payment_status','Pending')->count();
-        
-        return view('dashboard_admin', $data);
+            // chart jumlah total landing page
+            $data['total_campaign'] = \App\Campaign::get()->count();
+            // Chart jumlah users
+            $data['total_users'] = \App\User::where('level','<>','admin')->count();
+            // Chart user aktif, kadaluarsa, non aktif
+            $data['users_aktif'] = \App\User::where('status','valid')->where('level','<>','admin')->count();
+            $data['users_kadaluarsa'] = "";
+            // $data['users_kadaluarsa'] = \App\User::where('masa_aktif','<=',$time_now)->where('level','<>','admin')->count();
+            $data['users_nonaktif'] = \App\User::where('status','<>','valid')->where('level','<>','admin')->count();
+            // Chart Payment & Leads
+            $data['total_active'] = \App\Order::where('order_status','Active')->count();
+            $data['total_pending'] = \App\Order::where('order_status','Pending')->count();
+            $data['total_expired'] = \App\Order::where('order_status','Expired')->count();
+
+            $data['total_confirm'] = \App\Payment::where('payment_status','Pending')->count();
+    
+            return view('dashboard_admin', $data);
+        }
     }
 }
