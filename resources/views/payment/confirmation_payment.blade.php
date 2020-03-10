@@ -1,6 +1,10 @@
 @section('css')
 <!-- Midtrans -->
 <script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
+<link rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/select2/css/select2-bootstrap.css">
+<link rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/dropify/css/dropify.min.css">
+<link rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
 @endsection
 @include('partials.header')
 @include('partials.sidebar')
@@ -31,21 +35,15 @@
             <!--  Annual Report Start-->
             <!--================================-->
             <div class="col-lg-12">
-            <div class="card mg-b-20">
+            <div class="card mg-b-100">
                 <div class="card-header">
                     <h4 class="card-header-title">
                         Konfirmasi Pembayaran
                     </h4>
-                    <div class="card-header-btn">
-                        <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
-                        <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
-                        <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
-                        <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
-                    </div>
                 </div>
-                {{ Form::open(['url' => 'konfirmasi-pembayaran/store', 'files' => true]) }}
+                {{ Form::open(['url' => 'konfirmasi-pembayaran/store', 'files' => true, 'id' => 'form_payment_confirmation']) }}
                 <div class="collapse show" id="annualReports">
-                    <div class="card-body pd-t-0 pd-b-20 collapse show">
+                    <div class="card-body pd-t-10 pd-b-20 collapse show">
                         <?php
                             if($msg_success = Session::get('success')){
                                 $class = "alert alert-success alert-dismissable";
@@ -63,12 +61,12 @@
                             {{ $msg }}
                         </div>
                         <div class="alert alert-info alert-dismissible mt-3">
-                            <h5><i class="fa fa-info"></i> Detail Pembayaran</h5>
-                            Anda dapat melihat detail pembayaran <a href="{{ url('payment/detail/'.Auth::user()->id) }}">di sini</a> atau gunakan <a href="#" id="payment-gateway" class="alert-link">payment gateway</a> untuk aktivasi otomatis. 
+                            <strong>Informasi:</strong><br><br>
+                            <p>Anda dapat membayar via midtrans untuk pilihan aktivasi secara otomatis dan tidak perlu melakukan konfirmasi pembayaran. <br><br><a class="btn btn-info btn-sm" href="#" id="payment-gateway"> Bayar via Midtrans</a></p>
                         </div>
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
                                 <ul>
                                 @foreach ($errors->all() as $error)
                                     <li>{{ $error }}</li>
@@ -82,44 +80,57 @@
                                 {{ Form::hidden('id', Auth::user()->id, ['id' => 'user_id']) }}
                                 <div class="form-group">
                                     {{ Form::label('invoice', 'Invoice') }}
-                                    {{ Form::number('invoice', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Invoice']) }}
+                                    <span class="sidetitle">Tidak perlu cantumkan #</span>
+                                    {{ Form::number('invoice', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Invoice', 'autocomplete' => 'off', 'id' => 'invoice']) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('pengirim', 'Pengirim') }}
-                                    {{ Form::text('pengirim', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Name']) }}
+                                    <span class="sidetitle">Pastikan sesuai dengan nama yang tertera di kartu ATM Anda</span>
+                                    {{ Form::text('pengirim', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Name', 'autocomplete' => 'off', 'id' => 'pengirim']) }}
+                                </div>
+
+                                <div class="form-group">
+                                    {{ Form::label('jumlah_transfer', 'Jumlah Transfer') }}
+                                    {{ Form::number('jumlah_transfer', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Rp. ', 'autocomplete' => 'off', 'id' => 'jumlah_transfer']) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('bank', 'Transfer ke Bank') }}
-                                    {{ Form::select('bank', $banks, null, ['class'=> 'form-control border-none', 'placeholder'=> 'Choose One']) }}
+                                    <select name="bank" id="bank" class="form-control select2">
+                                        <option value="">Pilih Bank</option>
+                                        <?php foreach($banks as $item) { ?>
+                                        <option value="<?= $item->id ?>"><?= $item->bank_name." - ".$item->bank_number." an. ".$item->bank_nasabah ?></option>
+                                        <?php } ?>
+                                    </select>
                                 </div>
 
                             </div>
                             <div class="col-lg-6">
 
-                                <div class="form-group">
-                                    {{ Form::label('jumlah_transfer', 'Jumlah Transfer') }}
-                                    {{ Form::number('jumlah_transfer', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Rp. ']) }}
-                                </div>
+                                
 
                                 <div class="form-group">
                                     {{ Form::label('tanggal_transfer', 'Tanggal Transfer') }}
-                                    {{ Form::date('tanggal_transfer', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Rp. ']) }}
+                                    {{ Form::date('tanggal_transfer', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Rp. ', 'autocomplete' => 'off', 'id' => 'tanggal_transfer']) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('bukti_transfer', 'Bukti Transfer') }}
-                                    {{ Form::file('bukti_transfer', ['class'=> 'form-control border-none', 'style' => 'border-bottom:0']) }}
+                                    <span class="sidetitle">Gambar hanya boleh bertipe jpg, jpeg atau png dan maksimal 1 mb</span>
+                                    {{ Form::file('bukti_transfer', ['class'=> 'dropify', 'data-show-loader' => 'false', 'id' => 'bukti_transfer', 'autocomplete' => 'off']) }}
                                 </div>
 
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer d-flex justify-content-center">
-                        <a href="{{ url('home') }}" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        <button type="submit" class="btn btn-primary">Kirim</button>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ url('home') }}" class="btn btn-outline-info">Back</a>
+                                <button type="button" id="btn_payment_confirmation" class="btn btn-primary float-right">Kirim</button>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                 {{ Form::close() }}
@@ -131,7 +142,28 @@
 </div>
 <!--/ Page Inner End -->
 <!--================================-->
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.full.min.js"></script>
 <script>
+	$.fn.select2.defaults.set( "theme", "bootstrap" );
+
+	$( ".select2").select2( {
+		placeholder: "Pilih Bank",
+		width: null
+	} );
+
+    $('.dropify').dropify({
+        messages: {
+        'default': 'Drag and drop a file here or click',
+        'replace': 'Drag and drop or click to replace',
+        'remove':  'Remove',
+        'error':   'Ooops, something wrong happended.'
+        }
+    });
+
     $('#payment-gateway').click(function (event) {
       event.preventDefault();
       $(this).attr("disabled", "disabled");
@@ -149,8 +181,6 @@
         function changeResult(type,data){
           $("#result-type").val(type);
           $("#result-data").val(JSON.stringify(data));
-          //resultType.innerHTML = type;
-          //resultData.innerHTML = JSON.stringify(data);
         }
         snap.pay(data, {
           
@@ -177,5 +207,6 @@
       }
     });
   });
-  </script>
+</script>
+@endsection
 @include('partials.footer')

@@ -132,13 +132,20 @@
             
                 <div class="col-md-8 col-md-offset-2 text-center white">
                     <?php
+                    $slug = $campaign->campaign_slug;
                     $teks_whatsapp = $campaign->campaign_text_share;
-
+                    // ubah spasi ke %20
                     $char = str_replace(" ", "%20", $teks_whatsapp);
+                    // ubah <br /> jadi %0A
+                    $char = str_replace("<br />", "<br%20/>", $char);
+                    $char = str_replace("<br%20/>", "%0A", $char);
+                    // tambahkan tanda tangan
+                    $ttd = "%0A%0AKlik%20di%20sini%20untuk%20info lengkapnya:%0A%0A>>%20https://virolin.ilmucoding.com/".$slug;
+                    $gabung = $char.$ttd;
                     ?>
                     <h4 class="text-lead" id="text-lead" style="color:#ffffff">Cukup Share ke WA sebanyak <span class="pmwu-counter">3</span> kali sampai progress penuh</h4>
                     <div class="pmwu-button" id="pmwu-button" style="margin-top: 5%; margin-bottom: 5%">
-                        <a href="https://api.whatsapp.com/send?text={{ $char }}" target="_blank" class="button-pmwu-default btn btn-success ml-2 btn-lg" style="color:#fff;">
+                        <a href="https://api.whatsapp.com/send?text={{ $gabung }}" target="_blank" class="button-pmwu-default btn btn-success ml-2 btn-lg" style="color:#fff;">
                         <i class="fa fa-whatsapp"></i> Bagikan Sekarang
                         </a> 
                     </div>

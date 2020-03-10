@@ -14,10 +14,10 @@ class OrderController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('admin');
-        $this->middleware('permission:orders-list|orders-create|orders-edit|orders-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:orders-create', ['only' => ['create','store']]);
-        $this->middleware('permission:orders-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:orders-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:order-list|order-create|order-edit|order-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:order-create', ['only' => ['create','store']]);
+        $this->middleware('permission:order-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:order-delete', ['only' => ['destroy']]);
     }
     public function index(Request $request)
     {

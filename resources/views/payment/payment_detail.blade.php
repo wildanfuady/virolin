@@ -3,12 +3,13 @@
 @include('partials.mainmenu')
 <!-- Page Inner Start -->
 <!--================================-->
-<div class="page-inner pd-0-force mg-0-force ht-100vh bg-white">
-    <div class="row no-gutters pd-b-20 pd-t-15 wd-100p clearfix">
+<div class="page-inner bg-white mg-b-100">
+<div id="main-wrapper">
+    <div class="row pd-t-15 clearfix">
         <!--================================-->
         <!--  Invoice Start -->
         <!--================================-->
-        <div class="card pd-20 wd-80p m-auto">
+        <div class="card pd-20">
             <h5 class="card-title bd-b pd-y-20">Invoice <a href="" class="tx-dark">#{{ $detail_order->invoice }}</a></h5>
             <div class="card-body pd-0 printing-area">
             <div class="row">
@@ -22,16 +23,16 @@
                         Email: cs@virolin.com
                     </address>
                 </div>
-                <div class="col-md-3 ml-md-auto text-md-right">
+                <div class="col-md-4 ml-md-auto text-md-right">
                     <h4 class="text-dark">To:</h4>
                     <address>
                         <strong>{{ $detail_order->user->name }}</strong><br>
                         <abbr title="Email">E:</abbr> {{ $detail_order->user->email }}
                     </address>
                     <br><br>
-                    <span><strong>Invoice Date:</strong> {{ date('d-m-Y', strtotime($detail_order->order_date)) }}</span>
+                    <span><strong>Invoice Date:</strong> {{ date('d-m-Y H:i', strtotime($detail_order->order_date)) }}</span>
                     <br>
-                    <span><strong>Expired Date:</strong> {{ date('d-m-Y', strtotime($detail_order->order_end)) }}</span>
+                    <span><strong>Expired Date:</strong> {{ date('d-m-Y H:i', strtotime($detail_order->order_end)) }}</span>
                     <br><br><br><br><br>
                 </div>
             </div>
@@ -48,7 +49,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>{{ $detail_order->invoice }}</td>
+                            <td>#{{ $detail_order->invoice }}</td>
                             <td>{{ $detail_order->product->product_name }}</td>
                             <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_date)) }}</td>
                             <td>{{ date('d-m-Y H:i', strtotime($detail_order->order_end)) }}</td>
@@ -86,7 +87,7 @@
                             </tr>
                             <tr>
                             <th>Total:</th>
-                            <td>{{ "Rp. ".number_format($detail_order->product->product_price + $detail_order->kode_unik) }}</td>
+                            <td style="color:grey; font-weight:700"><b>{{ "Rp. ".number_format($detail_order->product->product_price + $detail_order->kode_unik) }}</b></td>
                             </tr>
                         </table>
                         </div>
@@ -100,6 +101,7 @@
         </div>
         <!--/ Invoice End -->
     </div>
+</div>
 </div>
 <!--/ Page Inner End -->
 <!--================================-->

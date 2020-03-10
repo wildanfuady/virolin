@@ -30,7 +30,7 @@
         <!-- Mega Menu Start -->
         <!--================================-->
         <div class="collapse navbar-collapse">
-        @if(Auth::user()->level == "user" && Auth::user()->status == "valid" || Auth::user()->status == "Valid")
+        @can('campaign-list')
             <ul class="navbar-nav mr-auto">
                 <li class="mg-t-5">
                     <a class="btn btn-primary mg-r-10" href="{{ route('campaign.index') }}"><i data-feather="layers"></i> Campaign</a>
@@ -39,8 +39,7 @@
                     <a class="btn btn-success mg-r-10" href="{{ route('campaign.create') }}"><i data-feather="plus-circle"></i> Create Campaign</a>
                 </li>
             </ul>
-            @else 
-            @endif
+        @endcan
         </div>
         <!--/ Mega Menu End-->
         
@@ -50,7 +49,7 @@
         <!--================================-->
         <div class="header-right pull-right">
             <ul class="list-inline justify-content-end">
-            @if(Auth::user()->level == "user" && Auth::user()->status == "valid" || Auth::user()->status == "Valid")
+            @if(Auth::user()->level == "user" && Auth::user()->status == "valid" || Auth::user()->status == "Valid" || Auth::user()->status == "invalid")
             <!-- <li class="list-inline-item align-middle"><a  href="#" id="search-button"><i class="ion-ios-search-strong tx-20"></i></a></li> -->
             <!-- Notifications Dropdown Start -->
             <!--================================-->

@@ -23,7 +23,7 @@
                     <div class="card-header">
                         <h4 class="card-header-title">
                             List Data Promo
-                            @can('promos-create')
+                            @can('promo-create')
                                 <a class="btn btn-info btn-sm float-right" href="{{ route('promos.create') }}"> Tambah Promo</a>
                             @endcan
                         </h4>
@@ -82,10 +82,10 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ route('promos.show', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
-                                                @can('promos-edit')
+                                                @can('promo-edit')
                                                 <a href="{{ route('promos.edit', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('promos-delete')
+                                                @can('promo-delete')
                                                 <a href="{{ url('promos/destroy/'. $item->promo_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>

@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -23,7 +26,7 @@
               <div class="card-header">
                 <h4 class="card-header-title">
                     List Bank
-                    @can('banks-create')
+                    @can('bank-create')
                         <a class="btn btn-info btn-sm float-right" href="{{ route('banks.create') }}">Tambah Bank</a>
                     @endcan
                 </h4>
@@ -77,11 +80,11 @@
                             <td>{{ $bank->bank_status }}</td>
                             <td>
                             <div class="btn-group">
-                                @can('banks-edit')
+                                @can('bank-edit')
                                 <a class="btn btn-light btn-sm" href="{{ route('banks.edit',$bank->id) }}"><i class="fa fa-edit"></i></a>
                                 @endcan
-                                @can('banks-delete')
-                                <a class="btn btn-light btn-sm" href="{{ url('banks/destroy/'.$bank->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                @can('bank-delete')
+                                <a class="btn btn-light btn-sm" onclick="swal_delete_alert('{{ url('banks/destroy/'.$bank->id) }}', 'Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>
                                 @endcan
                             </div>
                             </td>
@@ -99,4 +102,8 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')  

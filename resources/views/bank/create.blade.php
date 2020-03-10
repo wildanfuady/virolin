@@ -1,5 +1,6 @@
 @section('css')
 <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/dropify/css/dropify.min.css">
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
 @endsection
 @include('partials.header')
 @include('partials.sidebar')
@@ -28,7 +29,7 @@
                     Tambah Data Bank Baru
                 </h4>
               </div>
-              {{ Form::open(['route' => 'banks.store', 'files' => TRUE]) }}
+              {{ Form::open(['route' => 'banks.store', 'files' => TRUE, 'id' => 'form_create_bank']) }}
               <div class="card-body collapse show">
 
                 @if (count($errors) > 0)
@@ -44,35 +45,36 @@
             
                 <div class="form-group">
                     {{ Form::label('name', 'Nama') }}
-                    {{ Form::text('bank_name', '', ['class' => 'form-control', 'placeholder' => 'Nama Bank', 'autocomplete' => 'off']) }}
+                    {{ Form::text('bank_name', '', ['class' => 'form-control', 'placeholder' => 'Nama Bank', 'autocomplete' => 'off', 'id' => 'bank_name']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('code', 'Kode Bank') }}
-                    {{ Form::number('bank_code', '', ['class' => 'form-control', 'placeholder' => 'Kode Bank', 'autocomplete' => 'off']) }}
+                    {{ Form::number('bank_code', '', ['class' => 'form-control', 'placeholder' => 'Kode Bank', 'autocomplete' => 'off', 'id' => 'bank_code']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('norek', 'Nomor Rekening') }}
-                    {{ Form::number('bank_number', '', ['class' => 'form-control', 'placeholder' => 'Nomor Rekening', 'autocomplete' => 'off']) }}
+                    {{ Form::number('bank_number', '', ['class' => 'form-control', 'placeholder' => 'Nomor Rekening', 'autocomplete' => 'off', 'id' => 'bank_number']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('nasabah', 'An. Nasabah') }}
-                    {{ Form::text('bank_nasabah', '', ['class' => 'form-control', 'placeholder' => 'An. Nasabah', 'autocomplete' => 'off']) }}
+                    {{ Form::text('bank_nasabah', '', ['class' => 'form-control', 'placeholder' => 'An. Nasabah', 'autocomplete' => 'off', 'id' => 'bank_nasabah']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('status', 'Status') }}
-                    {{ Form::select('bank_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'autocomplete' => 'off']) }}
+                    {{ Form::select('bank_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, ['class' => 'form-control', 'placeholder' => 'Choose One', 'autocomplete' => 'off', 'id' => 'bank_status']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('image', 'Image') }}
-                    {{ Form::file('bank_image', ['class'=> 'dropify', 'data-show-loader' => 'false']) }}
+                    {{ Form::file('bank_image', ['class'=> 'dropify', 'data-show-loader' => 'false', 'id' => 'bank_image']) }}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
+                        <button type="button" id="btn_create_bank" class="btn btn-primary float-right">Tambah</button>
+                    </div>
                 </div>
                 
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
-                &nbsp;
-                &nbsp;
-                <button type="submit" class="btn btn-primary ft-right">Tambah</button>
             </div>
             {{ Form::close() }}
         </div>
@@ -93,5 +95,7 @@ $(document).ready(function(){
   });
 });
 </script>
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
 @endsection
 @include('partials.footer') 

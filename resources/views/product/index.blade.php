@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -23,7 +26,7 @@
                     <div class="card-header">
                         <h4 class="card-header-title">
                             List Produk
-                            @can('products-create')
+                            @can('product-create')
                                 <a class="btn btn-info btn-sm float-right" href="{{ route('products.create') }}"> Tambah Produk</a>
                             @endcan
                         </h4>
@@ -66,6 +69,7 @@
                                     <th>Nama Produk</th>
                                     <th>Max DB</th>
                                     <th>Harga</th>
+                                    <th>Tipe</th>
                                     <th>Status</th>
                                     <th width="150px" style="text-align:center">Action</th>
                                 </tr>
@@ -77,15 +81,16 @@
                                     <td>{{ $product->product_name }}</td>
                                     <td>{{ $product->product_max_db }}</td>
                                     <td>Rp. {{ number_format($product->product_price) }}</td>
+                                    <td>{{ ucfirst($product->product_type) }}</td>
                                     <td>{{ $product->product_status }}</td>
                                     <td style="text-align:center">
                                     <div class="btn-group">
                                         <a class="btn btn-light btn-sm" href="{{ route('products.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
-                                        @can('products-edit')
+                                        @can('product-edit')
                                         <a class="btn btn-light btn-sm" href="{{ route('products.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
                                         @endcan
-                                        @can('products-delete')
-                                        <a class="btn btn-light btn-sm" href="{{ url('products/destroy/'.$product->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                        @can('product-delete')
+                                        <a class="btn btn-light btn-sm" onclick="swal_delete_alert('{{ url('products/destroy/'.$product->product_id) }}', 'Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                         @endcan
                                     </div>
                                     </td>
@@ -105,6 +110,9 @@
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>
 <script>
 
     $(document).ready(function() {
@@ -127,6 +135,6 @@
         }
     });
 
-</script>
-
+</script>	
+@endsection
 @include('partials.footer')

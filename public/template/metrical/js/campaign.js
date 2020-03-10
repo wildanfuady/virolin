@@ -17,7 +17,7 @@ $(document).ready(function(){
       var find = [" ", '"', "'"];
       var replace = ["-", "", ""];
       text = text.replaceArray(find, replace);
-      var url = "https://virolin.com/"+ text.toLowerCase();
+      var url = "https://virolin.ilmucoding.com/"+ text.toLowerCase();
       $("#campaign_slug_text").html(url);
     });
   
@@ -183,7 +183,7 @@ $(document).ready(function(){
           cekInput("#block8_headline") == 0 ||
           cekInput("#block8_text_button") == 0 ||
           cekInput("#block8_text_color_button") == 0 ||
-          cekInput("#block8_button_bg_color") == false){
+          cekInput("#block8_button_bg_color") == 0){
         swal({
           title: "Oops!",
           text: "Terdapat beberapa data yang belum diisi",
@@ -216,15 +216,15 @@ $(document).ready(function(){
       return false;
     });
 
-    $("#submit").click(function(){
+    $("#submit_create_campaign").click(function(){
 
       if(cekInput("#campaign_subject_confirm_email") == 0 ||
-      cekInput("#campaign_confirm") == 0 ||
+      cekInput("#editor1") == false ||
       cekInput("#campaign_subject_thank_email") == 0 ||
-      cekInput("#campaign_form_thank") == 0){
+      cekInput("#editor2") == false){
         swal({
           title: "Oops!",
-          text: "Teks beberapa data yang belum diisi",
+          text: "Terdapat beberapa data yang belum diisi",
           type: "error"
         });
         return false;
@@ -233,12 +233,29 @@ $(document).ready(function(){
         return true;
       }
     });
+
+    $("#submit_edit_campaign").click(function(){
+
+      if(cekInput("#campaign_subject_confirm_email") == 0 ||
+      cekInput("#editor1") == false ||
+      cekInput("#campaign_subject_thank_email") == 0 ||
+      cekInput("#editor2") == false){
+        swal({
+          title: "Oops!",
+          text: "Terdapat beberapa data yang belum diisi",
+          type: "error"
+        });
+      } else {
+        $("#edit_campaign").submit();
+        return false;
+      }
+    });
   
     $("#preview_teks_share").click(function(){
       
       var dataTeksShare = $("#campaign_text_share").val();
       var dataCampaignSlug = $("#campaign_slug_text").html();
-      var potongSlug = dataCampaignSlug.replace("https://virolin.com/", "");
+      var potongSlug = dataCampaignSlug.replace("https://virolin.ilmucoding.com/", "");
       var dataCampaignName = $("#campaign_lp_name").val();
       if(dataTeksShare == ""){
         // alert("Anda harus mengisi teks share whatsapp terlebih dahulu");
@@ -256,7 +273,7 @@ $(document).ready(function(){
         });
       } else {
         var close = $("#preview_teks_share").html("<i class='fa fa-eye-slash'></i> Close Preview");
-        var add = "<br/><br/>Klik di sini untuk informasi lebih lengkap: <br/><br/> >> " +dataCampaignSlug+ "/?utm_source=campaign&utm_medium=whatsapp&utm_campaign="+ potongSlug + "<br/>>> " +dataCampaignSlug+"/?utm_source=campaign&utm_medium=whatsapp&utm_campaign="+ potongSlug;
+        var add = "<br/><br/>Klik di sini untuk informasi lebih lengkap: <br/><br/> >> " +dataCampaignSlug;
         $("#row_preview_teks_share").html(dataTeksShare + add);
   
         $(close).click(function(evt){

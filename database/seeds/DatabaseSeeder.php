@@ -87,6 +87,30 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        DB::table('roles')->insert([
+            'name' => 'Admin',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'User Aktif',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'User Expired',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        DB::table('roles')->insert([
+            'name' => 'User Baru',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
         $permissions = [
             'role-list',
             'role-create',
@@ -160,6 +184,8 @@ class DatabaseSeeder extends Seeder
             'order-user',
             'dashboard-admin',
             'dashboard-user',
+            'new_user-payment-confirmation',
+            'new_user-payment-detail',
          ];
 
 

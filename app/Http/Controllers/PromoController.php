@@ -15,10 +15,10 @@ class PromoController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('admin');
-        $this->middleware('permission:promos-list|promos-create|promos-edit|promos-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:promos-create', ['only' => ['create','store']]);
-        $this->middleware('permission:promos-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:promos-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:promo-list|promo-create|promo-edit|promo-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:promo-create', ['only' => ['create','store']]);
+        $this->middleware('permission:promo-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:promo-delete', ['only' => ['destroy']]);
     }
 
     public function index(Request $request)
@@ -65,7 +65,7 @@ class PromoController extends Controller
             'promo_start' => 'required',
             'promo_end' => 'required',
             'promo_content' => 'required',
-            'promo_code' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'promo_code' => 'required|regex:/^[a-zA-Z0-9 ]+$/u',
             'promo_percent' => 'required|numeric',
             'promo_image' => 'required|max:1000'
         ];
@@ -153,7 +153,7 @@ class PromoController extends Controller
             'promo_start' => 'required',
             'promo_end' => 'required',
             'promo_content' => 'required',
-            'promo_code' => 'required|regex:/^[a-zA-Z ]+$/u',
+            'promo_code' => 'required|regex:/^[a-zA-Z0-9 ]+$/u',
             'promo_percent' => 'required|numeric',
             'promo_image' => 'max:1000'
         ];

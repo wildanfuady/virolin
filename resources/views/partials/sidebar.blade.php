@@ -29,32 +29,18 @@
             </a>
             </li>
             @endcan
-            @if(Auth::user()->status == "valid" || Auth::user()->status = "Valid")
-            @else
-            <li class="open">
-            <a href="{{ url('home') }}"><i data-feather="home"></i>
-                <span>Dashboard</span>
-            </a>
+            @can('new_user-payment-detail')
+            <li>
+                <a href="{{ url('payment/detail/'.Auth::user()->id) }}"><i data-feather="shopping-cart"></i>
+                <span>Invoice</span></a>
             </li>
-            @endif
-            @if(empty(Auth::user()->id))
-              <!-- Null -->
-            @else
-                <?php 
-                $data = DB::table('users')->where('id', Auth::user()->id)->first();
-                ?>
-                @if($data->status != "valid")
-                <li class="open">
-                    <a href="{{ url('home') }}"><i data-feather="home"></i>
-                        <span>Dashboard {{ $data->status }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ url('konfirmasi-pembayaran') }}"><i data-feather="dollar-sign"></i>
-                    <span>Konfirmasi Pembayaran</span></a>
-                </li>
-                @endif
-            @endif
+            @endcan
+            @can('new_user-payment-confirmation')
+            <li>
+                <a href="{{ url('konfirmasi-pembayaran') }}"><i data-feather="dollar-sign"></i>
+                <span>Konfirmasi Pembayaran</span></a>
+            </li>
+            @endcan
             @can('payment-list')
             <li>
             <a href="{{ route('payment.index') }}"><i data-feather="send"></i>
@@ -85,12 +71,6 @@
             <span>Manajemen Promo</span></a>
             </li>
             @endcan
-            @can('report-list')
-            <li>
-            <a href="{{ url('report') }}"><i data-feather="bar-chart"></i>
-            <span>Manajemen Laporan</span></a>
-            </li>
-            @endcan
             @can('user-list')
             <li>
             <a href="{{ route('users.index') }}"><i data-feather="users"></i>
@@ -101,6 +81,12 @@
             <li>
             <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
             <span>Role Permission</span></a>
+            </li>
+            @endcan
+            @can('report-list')
+            <li>
+            <a href="{{ url('report/admin') }}"><i data-feather="bar-chart"></i>
+            <span>Manajemen Laporan</span></a>
             </li>
             @endcan
             @can('campaign-list')

@@ -52,7 +52,7 @@
                         Kini Anda akan segera menikmati semua fasilitas Virolin setelah melakukan 2 hal, yaitu:
                         <ol>
                             <li>Konfirmasi Pembayaran - <a href="{{ url('konfirmasi-pembayaran') }}">Konfirmasi Sekarang</a></li>
-                            <li>Lengkapi Profile Anda - <a href="{{ url('setting') }}">Klik Di sini</a></li>
+                            <li>Lengkapi Profile Anda - <a href="{{ url('profile') }}">Klik Di sini</a></li>
                         </ol>
                     </div>
                 </div>
@@ -64,6 +64,7 @@
         </div>
         <!-- Selesai Konfirmasi Pembayaran -->
         @endif
+        @can('campaign-list')
         <div class="row row-xs clearfix">
 
             <div class="col-sm-6 col-xl-3">
@@ -259,6 +260,7 @@
             </div>
         </div>
         <!-- Transaction History End -->
+        @endcan
 
     </div>
     <!--/ Main Wrapper End -->

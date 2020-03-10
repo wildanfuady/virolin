@@ -14,10 +14,10 @@ class BankController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('admin');
-        $this->middleware('permission:banks-list|banks-create|banks-edit|banks-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:banks-create', ['only' => ['create','store']]);
-        $this->middleware('permission:banks-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:banks-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:bank-list|bank-create|bank-edit|bank-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:bank-create', ['only' => ['create','store']]);
+        $this->middleware('permission:bank-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:bank-delete', ['only' => ['destroy']]);
     }
     public function index(Request $request)
     {

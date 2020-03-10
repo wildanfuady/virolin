@@ -98,6 +98,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('report','ReportController@index');
     Route::get('report/{id}','ReportController@show')->name('report.show');
+    Route::get('report/admin','ReportController@user');
 
     Route::get('promo','UserPromoController@index');
     Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');

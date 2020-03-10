@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -25,7 +28,7 @@
                             Create Product
                         </h4>
                     </div>
-                    {!! Form::open(array('route' => 'products.store','method'=>'POST')) !!}
+                    {{ Form::open(array('route' => 'products.store', 'id'=>'form_create_product')) }}
                     <div class="card-body collapse show">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -42,41 +45,53 @@
 
                                 <div class="form-group">
                                     {{ Form::label('name', 'Nama Produk') }}
-                                    {!! Form::text('product_name', null, array('placeholder' => 'Nama Produk','class' => 'form-control')) !!}
+                                    {{ Form::text('product_name', null, array('placeholder' => 'Nama Produk','class' => 'form-control', 'id' => 'product_name')) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('max_db', 'Max DB') }}
-                                    {!! Form::number('product_max_db', null, array('placeholder' => 'Max DB','class' => 'form-control')) !!}
+                                    <span class="sidetitle">Maksimal Database Per Produk</span>
+                                    {{ Form::number('product_max_db', null, array('placeholder' => 'Max DB','class' => 'form-control', 'id' => 'product_max_db')) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('price', 'Harga Produk') }}
-                                    {!! Form::number('product_price', null, array('placeholder' => 'Product Price','class' => 'form-control')) !!}
+                                    {{ Form::number('product_price', null, array('placeholder' => 'Product Price','class' => 'form-control', 'id' => 'product_price')) }}
                                 </div>
 
                                 <div class="form-group">
+                                    {{ Form::label('tipe', 'Tipe') }}
+                                    {{ Form::select('product_type', ['bulanan' => 'Bulanan', 'tiga_bulan' => 'Tiga Bulan', 'enam_bulan' => 'Enam Bulan', 'tahunan' => 'Tahunan'], null, array('placeholder' => 'Pilih Tipe Produk','class' => 'form-control', 'id' => 'product_type')) }}
+                                </div>
+                                
+                                <div class="form-group">
                                     {{ Form::label('status', 'Status') }}
-                                    {!! Form::select('product_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, array('placeholder' => 'Choose One','class' => 'form-control')) !!}
+                                    {{ Form::select('product_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], null, array('placeholder' => 'Choose One','class' => 'form-control', 'id' => 'product_status')) }}
                                 </div>
 
                                 <div class="form-group">
                                     {{ Form::label('desc', 'Deskripsi Produk') }}
-                                    {!! Form::textarea('product_desc', '', array('placeholder' => 'Deskripsi Produk','class' => 'form-control')) !!}
+                                    {{ Form::textarea('product_desc', '', array('placeholder' => 'Deskripsi Produk','class' => 'form-control', 'id' => 'product_desc')) }}
                                 </div>
                             </div>
                         </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ route('products.index') }}" class="btn btn-outline-info">Back</a>
+                                <button type="button" id="btn_create_product" class="btn btn-primary float-right">Tambah</button>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="card-footer">
-                        <a href="{{ route('products.index') }}" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="submit" class="btn btn-primary float-right">Tambah</button>
-                    </div>
-                    {!! Form::close() !!}
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')

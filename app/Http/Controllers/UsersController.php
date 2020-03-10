@@ -79,7 +79,6 @@ class UsersController extends Controller
             'name' => 'required|min:5|max:50|regex:/^[a-zA-Z ]+$/u',
             'email' => 'required|email',
             'product_id' => 'required',
-            'status' => 'required',
             'password' => 'required|string|min:8|max:80'
         ];
 
@@ -93,8 +92,7 @@ class UsersController extends Controller
             'product_id.required' => 'Produk wajib diisi',
             'password.required' => 'Password wajib diisi',
             'password.min' => 'Password minimal 8 karakter',
-            'password.max' => 'Password wajib maksimal 50 karakter',
-            'status.required' => 'Status wajib diisi'
+            'password.max' => 'Password wajib maksimal 50 karakter'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -103,13 +101,32 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        $input['level'] = 'user';
+        $input                      = $request->all();
+        $input['password']          = Hash::make($input['password']);
+        $input['level']             = 'user';
+        $input['status']            = 'invalid';
+        $input['email_verified_at'] = Carbon::now();
 
-        $user = User::create($input);
+        $user                       = User::create($input);
 
         $user->assignRole($request->input('roles'));
+
+        // orders
+        $invoice                    = rand(00000, 99999);
+        $order_date                 = Carbon::now();
+        $order_end                  = $order_date->addDays(1);
+        $kode_unik                  = rand(000, 999);
+
+        $order                      = new \App\Order;
+        
+        $order->product_id          = $request->get('product_id');
+        $order->invoice             = $invoice;
+        $order->order_date          = $order_date;
+        $order->order_end           = $order_end;
+        $order->order_status        = "Pending";
+        $order->user_id             = $user->id;
+        $order->kode_unik           = $kode_unik;
+        $order->save();
 
         return redirect('users')->with('success','Created User Successfully');
     }
@@ -185,7 +202,7 @@ class UsersController extends Controller
         if($request->get('status') == "valid"){
             $user->setSuccess($user);
         }
-
+        // dd($request->input('roles'));
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->status = $request->get('status');

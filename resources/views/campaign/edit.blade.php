@@ -48,7 +48,8 @@
                     <a href="" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a>
                 </div>
               </div>
-              {{ Form::model($campaign, ['method' => 'PATCH','route' => ['campaign.update', $campaign->campaign_id]]) }}<div class="nav-tabs-top pd-10">
+              {{ Form::model($campaign, ['method' => 'PATCH','route' => ['campaign.update', $campaign->campaign_id], 'id' => 'edit_campaign']) }}
+              <div class="nav-tabs-top pd-10">
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
                     <a class="nav-link active show" data-toggle="tab" href="#general"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;General</a>
@@ -77,7 +78,7 @@
                             <small class="sidetitle">Hanya boleh diisi dengan huruf, angka dan spasi</small>
                             {{ Form::text('campaign_name', $campaign->campaign_name, ['class'=> 'form-control', 'id' => 'campaign_lp_name', 'placeholder' => 'Masukan Nama / Judul Landing Page', 'autocomplete' => 'off', 'autocomplete' => 'off']) }}
                             <br>
-                            URL: <span id="campaign_slug_text">https://virolin.com/{{ $campaign->campaign_slug }}</span>
+                            URL: <span id="campaign_slug_text">https://virolin.ilmucoding.com/{{ $campaign->campaign_slug }}</span>
                           </div>
                         </div>
                       </div>
@@ -550,7 +551,11 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Share Whatsapp:</label>
-                            {{ Form::textarea('campaign_text_share', $campaign->campaign_text_share, ['class'=> 'form-control', 'id' => 'campaign_text_share', 'placeholder' => 'Tulis teks share whatsapp', 'autocomplete' => 'off', 'id' => 'campaign_text_share']) }}
+                            <?php
+                            $text = $campaign->campaign_text_share;
+                            $char = str_replace("<br />", "", $text);
+                            ?>
+                            {{ Form::textarea('campaign_text_share', $char, ['class'=> 'form-control', 'id' => 'campaign_text_share', 'placeholder' => 'Tulis teks share whatsapp', 'autocomplete' => 'off', 'id' => 'campaign_text_share']) }}
                             <br>
                             <button type="button"  class="btn btn-primary" id="preview_teks_share"><i class="fa fa-eye"></i> Preview Teks Share</button>
                           </div>
@@ -606,6 +611,12 @@
                         <div class="col-md-12">
                           <div class="alert alert-info">
                             Teks yang Anda masukan di bawah ini akan menjadi badan email atau yang Akan dibaca oleh calon leads Anda. <br><br>Contoh: <br><br>Selangkah lagi untuk mendapatkan hadiah spesial dari saya. Klik tombol di bawah ini untuk konfirmasi email.
+                            <br>
+                            <br>
+                            Gunakan <b>{email}</b> untuk langsung menyebut email calon leads Anda dan gunakan <b>{nama}</b> untuk menyebut nama calon leads Anda.
+                            <br>
+                            <br>
+                            Contoh: Halo <b>{nama}</b>, Anda mendaftarkan email <b>{email}</b> untuk mendapatkan tulisan bisnis dari saya.
                           </div>
                         </div>
                       </div>
@@ -614,7 +625,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Konfirmasi Email:</label>
-                            {{ Form::textarea('campaign_confirm', $campaign->campaign_confirm, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off', 'id'=> 'campaign_confirm']) }}
+                            {{ Form::textarea('campaign_confirm', $campaign->campaign_confirm, ['class'=> 'form-control', 'id' => 'editor1', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off']) }}
                           </div>
                         </div>
                       </div>
@@ -646,6 +657,12 @@
                         <div class="col-md-12">
                           <div class="alert alert-info">
                             Teks yang Anda masukan di bawah ini akan digunakan untuk isi badan email saat calon leads Anda berhasil konfirmasi email. Di bagian ini Anda bisa menyisipkan link tertentu sebagai bonus, hadiah, link download atau semacamnya.
+                            <br>
+                            <br>
+                            Gunakan <b>{email}</b> untuk langsung menyebut email calon leads Anda dan gunakan <b>{nama}</b> untuk menyebut nama calon leads Anda.
+                            <br>
+                            <br>
+                            Contoh: Halo <b>{nama}</b>, Anda mendaftarkan email <b>{email}</b>  untuk mendapatkan tulisan bisnis dari saya.
                           </div>
                         </div>
                       </div>
@@ -654,7 +671,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Thank Email:</label>
-                            {{ Form::textarea('campaign_form_thank', $campaign->campaign_form_thank, ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off', 'id'=> 'campaign_form_thank']) }}
+                            {{ Form::textarea('campaign_form_thank', $campaign->campaign_form_thank, ['class'=> 'form-control', 'id' => 'editor2', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off']) }}
                           </div>
                         </div>
                       </div>
@@ -663,7 +680,7 @@
                         <div class="col-md-12">
                           <div class="btn-group float-right">
                             <button type="button" id="prev4" class="btn btn-secondary btn-lg float-right">Prev</button>
-                            <button type="submit" id="submit" class="btn btn-success btn-lg float-right">Submit</button>
+                            <button type="button" id="submit_edit_campaign" class="btn btn-success btn-lg float-right">Submit</button>
                           </div>
                         </div>
                       </div>
@@ -684,9 +701,14 @@
 <!--================================-->
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script> 
-      <script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/js/campaign.js"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script> 
+<script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/campaign.js"></script>	
+<script src="{{ asset('template/metrical') }}/plugins/ckeditor/ckeditor.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/ckeditor/sample.js"></script>
+<script>
+	initSample();
+</script>
 @endsection
 @include('partials.footer')  
