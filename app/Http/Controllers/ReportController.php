@@ -30,22 +30,22 @@ class ReportController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-
+        $year = date('Y');
         // Report Trafik
         $data['trafik'] = TrafikCampaign::select('trafik_browser', DB::raw('count(*) as total'))->groupBy('trafik_browser')->join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->get();
         $data['trafik_all'] = TrafikCampaign::first();
-        $data['trafik_jan'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-01')->where('trafik_campaign.created_at','<','2020-02')->count();
-        $data['trafik_feb'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-02')->where('trafik_campaign.created_at','<','2020-03')->count();
-        $data['trafik_mar'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-03')->where('trafik_campaign.created_at','<','2020-04')->count();
-        $data['trafik_apr'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-04')->where('trafik_campaign.created_at','<','2020-05')->count();
-        $data['trafik_mei'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-05')->where('trafik_campaign.created_at','<','2020-06')->count();
-        $data['trafik_jun'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-06')->where('trafik_campaign.created_at','<','2020-07')->count();
-        $data['trafik_jul'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-07')->where('trafik_campaign.created_at','<','2020-08')->count();
-        $data['trafik_agu'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-08')->where('trafik_campaign.created_at','<','2020-09')->count();
-        $data['trafik_sep'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-09')->where('trafik_campaign.created_at','<','2020-10')->count();
-        $data['trafik_okt'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-10')->where('trafik_campaign.created_at','<','2020-11')->count();
-        $data['trafik_nov'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-11')->where('trafik_campaign.created_at','<','2020-12')->count();
-        $data['trafik_des'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=','2020-12')->count();
+        $data['trafik_jan'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-01')->where('trafik_campaign.created_at','<',$year.'-02')->count();
+        $data['trafik_feb'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-02')->where('trafik_campaign.created_at','<',$year.'-03')->count();
+        $data['trafik_mar'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-03')->where('trafik_campaign.created_at','<',$year.'-04')->count();
+        $data['trafik_apr'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-04')->where('trafik_campaign.created_at','<',$year.'-05')->count();
+        $data['trafik_mei'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-05')->where('trafik_campaign.created_at','<',$year.'-06')->count();
+        $data['trafik_jun'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-06')->where('trafik_campaign.created_at','<',$year.'-07')->count();
+        $data['trafik_jul'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-07')->where('trafik_campaign.created_at','<',$year.'-08')->count();
+        $data['trafik_agu'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-08')->where('trafik_campaign.created_at','<',$year.'-09')->count();
+        $data['trafik_sep'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-09')->where('trafik_campaign.created_at','<',$year.'-10')->count();
+        $data['trafik_okt'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-10')->where('trafik_campaign.created_at','<',$year.'-11')->count();
+        $data['trafik_nov'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-11')->where('trafik_campaign.created_at','<',$year.'-12')->count();
+        $data['trafik_des'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-12')->count();
 
         // Share
         $raw = "campaign_id, campaign_name, campaign_slug, campaign_share, campaign_form_view";
@@ -86,11 +86,29 @@ class ReportController extends Controller
     public function show($slug)
     {
         $user_id = Auth::user()->id;
+        $year = date('Y');
         $campaign = Campaign::where('campaign_slug', $slug)->where('user_id', $user_id)->first();
+        $campaign_id = $campaign->campaign_id;
+        $data['campaign_trafik'] = TrafikCampaign::select('campaign_id','trafik_browser', DB::raw('count(*) as total'))->groupBy('campaign_id')->where('campaign_id', $campaign_id)->groupBy('trafik_browser')->get();
+        $data['campaign_share'] = TrafikShare::select('campaign_id','trafik_browser', DB::raw('count(*) as total'))->groupBy('campaign_id')->where('campaign_id', $campaign_id)->groupBy('trafik_browser')->get();
+
+        $data['trafik_jan'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-01')->where('trafik_campaign.created_at','<',$year.'-02')->count();
+        $data['trafik_feb'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-02')->where('trafik_campaign.created_at','<',$year.'-03')->count();
+        $data['trafik_mar'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-03')->where('trafik_campaign.created_at','<',$year.'-04')->count();
+        $data['trafik_apr'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-04')->where('trafik_campaign.created_at','<',$year.'-05')->count();
+        $data['trafik_mei'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-05')->where('trafik_campaign.created_at','<',$year.'-06')->count();
+        $data['trafik_jun'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-06')->where('trafik_campaign.created_at','<',$year.'-07')->count();
+        $data['trafik_jul'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-07')->where('trafik_campaign.created_at','<',$year.'-08')->count();
+        $data['trafik_agu'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-08')->where('trafik_campaign.created_at','<',$year.'-09')->count();
+        $data['trafik_sep'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-09')->where('trafik_campaign.created_at','<',$year.'-10')->count();
+        $data['trafik_okt'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-10')->where('trafik_campaign.created_at','<',$year.'-11')->count();
+        $data['trafik_nov'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-11')->where('trafik_campaign.created_at','<',$year.'-12')->count();
+        $data['trafik_des'] = TrafikCampaign::join('campaigns','campaigns.campaign_id','=','trafik_campaign.campaign_id')->where('trafik_campaign.campaign_id', $campaign_id)->where('campaigns.user_id',$user_id)->where('trafik_campaign.created_at','>=',$year.'-12')->count();
+        // return $data;
         if(empty($campaign)){
             return view('errors.404');
         }
-        return view('report.report_detail');
+        return view('report.report_detail', $data);
     }
 
     /**
