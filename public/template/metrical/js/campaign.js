@@ -183,7 +183,7 @@ $(document).ready(function(){
           cekInput("#block8_headline") == 0 ||
           cekInput("#block8_text_button") == 0 ||
           cekInput("#block8_text_color_button") == 0 ||
-          cekInput("#block8_button_bg_color") == false){
+          cekInput("#block8_button_bg_color") == 0){
         swal({
           title: "Oops!",
           text: "Terdapat beberapa data yang belum diisi",
@@ -216,21 +216,38 @@ $(document).ready(function(){
       return false;
     });
 
-    $("#submit").click(function(){
+    $("#submit_create_campaign").click(function(){
 
       if(cekInput("#campaign_subject_confirm_email") == 0 ||
-      cekInput("#campaign_confirm") == 0 ||
+      cekInput("#editor1") == false ||
       cekInput("#campaign_subject_thank_email") == 0 ||
-      cekInput("#campaign_form_thank") == 0){
+      cekInput("#editor2") == false){
         swal({
           title: "Oops!",
-          text: "Teks beberapa data yang belum diisi",
+          text: "Terdapat beberapa data yang belum diisi",
           type: "error"
         });
         return false;
       } else {
         $("#create_campaign").submit();
         return true;
+      }
+    });
+
+    $("#submit_edit_campaign").click(function(){
+
+      if(cekInput("#campaign_subject_confirm_email") == 0 ||
+      cekInput("#editor1") == false ||
+      cekInput("#campaign_subject_thank_email") == 0 ||
+      cekInput("#editor2") == false){
+        swal({
+          title: "Oops!",
+          text: "Terdapat beberapa data yang belum diisi",
+          type: "error"
+        });
+      } else {
+        $("#edit_campaign").submit();
+        return false;
       }
     });
   

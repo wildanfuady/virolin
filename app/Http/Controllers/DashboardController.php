@@ -77,14 +77,16 @@ class DashboardController extends Controller
                         ->where('orders.user_id', $user_id)
                         ->selectRaw($raw_order)
                         ->first();
-        $order = \App\Order::where('user_id', $user_id)->first();
-        $expired = $order->order_expired;
-        $now = date('Y-m-d H:i:s');
+        $order = \App\Order::where('user_id', $user_id)->where('order_status', 'Success')->first();
         if(!empty($order)){
+            $expired = $order->order_expired;
+            $now = date('Y-m-d H:i:s');
             
-            if($expired < $now){
+            if(!empty($expired) < $now){
                 // hapus permission
-                DB::table('model_has_roles')->where('model_id', $user_id)->update(['role_id' => 3]);
+                DB::table('model_has_roles')->where('model_id', $user_id)->update(['role_id' => 2]);
+                DB::table('orders')->where('user_id', $user_id)->update(['order_status' => 'Expired']);
+                DB::table('users')->where('id', $user_id)->update(['status' => 'invalid']);
                 // return redirect('report');
             }
         }

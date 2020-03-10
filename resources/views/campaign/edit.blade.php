@@ -48,7 +48,8 @@
                     <a href="" data-toggle="remove" class="btn card-remove"><i class="ion-android-close"></i></a>
                 </div>
               </div>
-              {{ Form::model($campaign, ['method' => 'PATCH','route' => ['campaign.update', $campaign->campaign_id]]) }}<div class="nav-tabs-top pd-10">
+              {{ Form::model($campaign, ['method' => 'PATCH','route' => ['campaign.update', $campaign->campaign_id], 'id' => 'edit_campaign']) }}
+              <div class="nav-tabs-top pd-10">
                 <ul class="nav nav-tabs">
                   <li class="nav-item">
                     <a class="nav-link active show" data-toggle="tab" href="#general"><i class="fa fa-arrow-circle-right"></i>&nbsp;&nbsp;General</a>
@@ -679,7 +680,7 @@
                         <div class="col-md-12">
                           <div class="btn-group float-right">
                             <button type="button" id="prev4" class="btn btn-secondary btn-lg float-right">Prev</button>
-                            <button type="submit" id="submit" class="btn btn-success btn-lg float-right">Submit</button>
+                            <button type="button" id="submit_edit_campaign" class="btn btn-success btn-lg float-right">Submit</button>
                           </div>
                         </div>
                       </div>

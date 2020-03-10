@@ -1,5 +1,6 @@
 @section('css')
 <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/dropify/css/dropify.min.css">
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
 @endsection
 @include('partials.header')
 @include('partials.sidebar')
@@ -28,7 +29,7 @@
                     Edit Data Bank
                 </h4>
               </div>
-              {{ Form::model($bank, ['method' => 'PATCH','route' => ['banks.update', $bank->id], 'files' => TRUE]) }}
+              {{ Form::model($bank, ['method' => 'PATCH','route' => ['banks.update', $bank->id], 'files' => TRUE, 'id' => 'form_edit_bank']) }}
               <div class="card-body collapse show">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -43,23 +44,23 @@
             
                 <div class="form-group">
                     {{ Form::label('name', 'Nama') }}
-                    {{ Form::text('bank_name', $bank->bank_name, ['class' => 'form-control', 'placeholder' => 'Nama Bank', 'autocomplete' => 'off']) }}
+                    {{ Form::text('bank_name', $bank->bank_name, ['class' => 'form-control', 'placeholder' => 'Nama Bank', 'autocomplete' => 'off', 'id' => 'bank_name']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('code', 'Kode Bank') }}
-                    {{ Form::number('bank_code', $bank->bank_code, ['class' => 'form-control', 'placeholder' => 'Kode Bank', 'autocomplete' => 'off']) }}
+                    {{ Form::number('bank_code', $bank->bank_code, ['class' => 'form-control', 'placeholder' => 'Kode Bank', 'autocomplete' => 'off', 'id' => 'bank_code']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('norek', 'Nomor Rekening') }}
-                    {{ Form::number('bank_number', $bank->bank_rekening, ['class' => 'form-control', 'placeholder' => 'Nomor Rekening', 'autocomplete' => 'off']) }}
+                    {{ Form::number('bank_number', $bank->bank_rekening, ['class' => 'form-control', 'placeholder' => 'Nomor Rekening', 'autocomplete' => 'off', 'id' => 'bank_number']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('nasabah', 'An. Nasabah') }}
-                    {{ Form::text('bank_nasabah', $bank->bank_nasabah, ['class' => 'form-control', 'placeholder' => 'An. Nasabah', 'autocomplete' => 'off']) }}
+                    {{ Form::text('bank_nasabah', $bank->bank_nasabah, ['class' => 'form-control', 'placeholder' => 'An. Nasabah', 'autocomplete' => 'off', 'id' => 'bank_nasabah']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('status', 'Status') }}
-                    {{ Form::select('bank_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $bank->bank_status, ['class' => 'form-control', 'placeholder' => 'Choose one']) }}
+                    {{ Form::select('bank_status', ['Valid' => 'Valid', 'Invalid' => 'Invalid'], $bank->bank_status, ['class' => 'form-control', 'placeholder' => 'Choose one', 'id' => 'bank_status']) }}
                 </div>
                 <div class="form-group">
                     {{ Form::label('image', 'Image') }}
@@ -72,13 +73,14 @@
                     <span style="font-style: italic; color: red">Kosongkan jika tidak ingin mengubah gambar.</span>
                     {{ Form::file('bank_image', ['class'=> 'dropify', 'data-show-loader' => 'false']) }}
                 </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
+                        <button type="button" id="btn_edit_bank" class="btn btn-primary float-right">Update</button>
+                    </div>
+                </div>
                 
-            </div>
-            <div class="card-footer">
-                <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
-                &nbsp;
-                &nbsp;
-                <button type="submit" class="btn btn-primary float-right">Update</button>
             </div>
             {{ Form::close() }}
         </div>
@@ -99,5 +101,7 @@ $(document).ready(function(){
   });
 });
 </script>
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
 @endsection
 @include('partials.footer')

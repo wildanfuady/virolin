@@ -131,7 +131,148 @@ $(document).ready(function(){
       } else { $("#form_update_password").submit(); }
     });
 
-    // End Edit Password
+    // CREATE PAYMENT CONFIRMATION
 
-    
+    $("#btn_payment_confirmation").click(function(){
+      
+      if(cekInput("#invoice") == false){
+        swal_error_alert("Invoice wajib diisi");
+      } else if(cekInput("#pengirim") == false){
+        swal_error_alert("Nama Pengirim wajib diisi");
+      } else if(cekInput("#jumlah_transfer") == false){
+        swal_error_alert("Jumlah Transfer wajib diisi");
+      } else if(cekInput("#bank") == false){
+        swal_error_alert("Bank Tujuan wajib diisi");
+      } else if(cekInput("#tanggal_transfer") == false){
+        swal_error_alert("Tanggal Transfer wajib diisi");
+      } else { $("#form_payment_confirmation").submit(); }
+
+    });
+
+    // ======================== MODUL ADMIN =================================
+
+    // CREATE BANK
+
+    $("#btn_create_bank").click(function(){
+      
+      if(cekInput("#bank_name") == false){
+        swal_error_alert("Nama Bank wajib diisi");
+      } else if(cekInput("#bank_code") == false){
+        swal_error_alert("Kode Bank wajib diisi");
+      } else if(cekInput("#bank_number") == false){
+        swal_error_alert("Nomor Rekening Bank wajib diisi");
+      } else if(cekInput("#bank_nasabah") == false){
+        swal_error_alert("Nama Nasabah Bank wajib diisi");
+      } else if(cekInput("#bank_status") == false){
+        swal_error_alert("Status Bank wajib diisi");
+      } else if(cekInput("#bank_image") == false){
+        swal_error_alert("Logo Bank wajib diisi");
+      } else { $("#form_create_bank").submit(); }
+
+    });
+
+    // EDIT BANK
+
+    $("#btn_edit_bank").click(function(){
+      
+      if(cekInput("#bank_name") == false){
+        swal_error_alert("Nama Bank wajib diisi");
+      } else if(cekInput("#bank_code") == false){
+        swal_error_alert("Kode Bank wajib diisi");
+      } else if(cekInput("#bank_number") == false){
+        swal_error_alert("Nomor Rekening Bank wajib diisi");
+      } else if(cekInput("#bank_nasabah") == false){
+        swal_error_alert("Nama Nasabah Bank wajib diisi");
+      } else if(cekInput("#bank_status") == false){
+        swal_error_alert("Status Bank wajib diisi");
+      } else { $("#form_edit_bank").submit(); }
+    });
+
+    // CREATE PRODUCT
+
+    $("#btn_create_product").click(function(){
+      
+      if(cekInput("#product_name") == false){
+        swal_error_alert("Nama Produk wajib diisi");
+      } else if(cekInput("#product_max_db") == false){
+        swal_error_alert("Maksimal Database Produk wajib diisi");
+      } else if(cekInput("#product_price") == false){
+        swal_error_alert("Harga Produk wajib diisi");
+      } else if(cekInput("#product_type") == false){
+        swal_error_alert("Tipe Produk wajib diisi");
+      } else if(cekInput("#product_status") == false){
+        swal_error_alert("Status wajib diisi");
+      } else if(cekInput("#product_desc") == false){
+        swal_error_alert("Deskripsi produk wajib diisi");
+      } else { $("#form_create_product").submit(); }
+
+    });
+
+    // EDIT PRODUCT
+
+    $("#btn_edit_product").click(function(){
+      
+      if(cekInput("#product_name") == false){
+        swal_error_alert("Nama Produk wajib diisi");
+      } else if(cekInput("#product_max_db") == false){
+        swal_error_alert("Maksimal Database Produk wajib diisi");
+      } else if(cekInput("#product_price") == false){
+        swal_error_alert("Harga Produk wajib diisi");
+      } else if(cekInput("#product_type") == false){
+        swal_error_alert("Tipe Produk wajib diisi");
+      } else if(cekInput("#product_status") == false){
+        swal_error_alert("Status wajib diisi");
+      } else if(cekInput("#product_desc") == false){
+        swal_error_alert("Deskripsi produk wajib diisi");
+      } else { $("#form_edit_product").submit(); }
+
+    });
+
+    // CREATE PROMO
+
+    $("#btn_create_promo").click(function(){
+      
+      if(cekInput("#promo_title") == false){
+        swal_error_alert("Judul Promo wajib diisi");
+      } else if(cekInput("#promo_status") == false){
+        swal_error_alert("Status Promo wajib diisi");
+      } else if(cekInput("#promo_start") == false){
+        swal_error_alert("Tanggal Mulai Promo wajib diisi");
+      } else if(cekInput("#promo_end") == false){
+        swal_error_alert("Tanggal Berakhir Promo wajib diisi");
+      } else if(cekInput("#promo_code") == false){
+        swal_error_alert("Kode Promo wajib diisi");
+      } else if(cekInput("#promo_percent") == false){
+        swal_error_alert("Potongan Promo wajib diisi");
+      } else if(cekInput("#promo_image") == false){
+        swal_error_alert("Thumbnail Promo produk wajib diisi");
+      } else if(cekInput("#promo_content") == false){
+        swal_error_alert("Konten Promo wajib diisi");
+      } else { $("#form_create_promo").submit(); }
+
+    });
+
+    // EDIT PROMO
+
+    $("#btn_edit_promo").click(function(){
+      
+      if(cekInput("#promo_title") == false){
+        swal_error_alert("Judul Promo wajib diisi");
+      } else if(cekInput("#promo_status") == false){
+        swal_error_alert("Status Promo wajib diisi");
+      } else if(cekInput("#promo_start") == false){
+        swal_error_alert("Tanggal Mulai Promo wajib diisi");
+      } else if(cekInput("#promo_end") == false){
+        swal_error_alert("Tanggal Berakhir Promo wajib diisi");
+      } else if(cekInput("#promo_code") == false){
+        swal_error_alert("Kode Promo wajib diisi");
+      } else if(cekInput("#promo_percent") == false){
+        swal_error_alert("Potongan Promo wajib diisi");
+      } else if(cekInput("#promo_content") == false){
+        swal_error_alert("Konten Promo wajib diisi");
+        
+      } else { $("#form_edit_promo").submit(); }
+
+    });
+
 });

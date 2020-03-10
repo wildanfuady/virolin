@@ -22,11 +22,11 @@
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/custom.css"/>
-      <!-- CSS Sekunder -->
-      @yield('css')
       <!-- jQuery File -->
       <script src="{{ asset('template/metrical') }}/plugins/jquery/jquery.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/jquery-ui/jquery-ui.js"></script>
+      <!-- CSS Sekunder -->
+      @yield('css')
       
    </head>
    <body style="background:#f7f7fe;">

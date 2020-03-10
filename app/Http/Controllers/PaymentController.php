@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 // use Input;
 use App\Veritrans\Veritrans;
 class PaymentController extends Controller
@@ -11,10 +12,12 @@ class PaymentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:payment-list|payment-create|payment-edit|payment-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:payment-list|payment-create|payment-edit|payment-delete', ['only' => ['index','store', 'countPayment']]);
         $this->middleware('permission:payment-create', ['only' => ['create','store']]);
         $this->middleware('permission:payment-edit', ['only' => ['edit','update']]);
         $this->middleware('permission:payment-delete', ['only' => ['destroy']]);
+        $this->middleware('permission:new_user-payment-confirmation', ['only' => ['showConfirmationPaymentForm', 'confirmationPayment']]);
+        $this->middleware('permission:new_user-payment-detail', ['only' => ['paymentDetail']]);
     }
 
     public function showConfirmationPaymentForm()
@@ -26,7 +29,8 @@ class PaymentController extends Controller
         } 
         else
         {
-            $banks = \App\Banks::where('bank_status', 'Valid')->pluck('bank_name', 'id');
+            $select = "id, bank_name, bank_number, bank_nasabah";
+            $banks = \App\Banks::where('bank_status', 'Valid')->selectRaw($select)->get();
             return view('payment.confirmation_payment', compact('banks'));
         }
         
@@ -43,13 +47,42 @@ class PaymentController extends Controller
             'bukti_transfer' => 'required|mimes:jpg,png,jpeg|max:1000'
         ]);
 
+        $rules = [
+            'invoice' => 'required|min:5|numeric',
+            'pengirim' => 'required|regex:/^[a-zA-Z ]+$/u|min:3',
+            'bank' => 'required',
+            'jumlah_transfer' => 'required|numeric',
+            'tanggal_transfer' => 'required',
+            'bukti_transfer' => 'mimes:jpg,png,jpeg|max:1000'
+        ];
+
+        $messages = [
+            'invoice.required'          => 'Invoice wajib diisi',
+            'invoice.min'               => 'Invoice minimal 5 angka',
+            'invoice.numeric'           => 'Invoice hanya boleh diisi dengan angka',
+            'pengirim.required'         => 'Nama pengirim wajib diisi',
+            'pengirim.regex'            => 'Nama pengirim hanya boleh diisi dengan huruf dan spasi',
+            'pengirim.min'              => 'Nama pengirim minimal 3 karakter',
+            'bank.required'             => 'Bank tujuan wajib diisi',
+            'jumlah_transfer.required'  => 'Jumlah transfer wajib diisi',
+            'bukti_transfer.required'   => 'Bukti transfer wajib diisi',
+            'bukti_transfer.mimes'      => 'Bukti transfer yang diizinkan harus bertipe jpg, jpeg atau png',
+            'bukti_transfer.max'        => 'Bukti transfer yang diizinkan maksimal 1 mb',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $messages);
+        
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        }
+
         // Cek Invoice di Table Order
         $invoice = $request->invoice;
         $order = \App\Order::where('invoice', $invoice)->where('order_status', 'Pending')->first();
 
         if(empty($order)){
 
-            return redirect()->back()->with('error', 'Invoice yang Anda masukan tidak terdaftar di database kami atau invoice Anda sudah expired.');
+            return redirect()->back()->withErrors(['Invoice yang Anda masukan tidak terdaftar di database kami atau invoice Anda sudah expired'])->withInput($request->all());
         
         } else {
             $user_id = Auth::user()->id;
@@ -79,19 +112,22 @@ class PaymentController extends Controller
 
     public function paymentDetail($id)
     {
-        $data['detail_order'] = \App\Order::with(['user', 'product', 'bank'])->where('user_id', $id)->first();
-        return view('payment.payment_detail', $data);
+        $data['detail_order'] = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->join('banks', 'banks.id', '=', 'orders.order_payment')
+            ->join('users', 'users.id', '=', 'orders.user_id')
+            ->where('orders.user_id', $id)->first();
+        if(!empty($data['detail_order'])){
+            return view('payment.payment_detail', $data);
+        } else {
+            return redirect(url('home'));
+        }
     }
 
     public function countPayment()
     {
-        // $id = Input::get("id");
-        // $sql = "SUM(payment_status) as total";
         $payment = \App\Payment::where('payment_status', 'Pending')->count();
-        // $total = 
         $data = $payment;
         echo json_encode($data);
-        // echo "A";
     }
     
     public function index(Request $request)

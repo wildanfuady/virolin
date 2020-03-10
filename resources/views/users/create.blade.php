@@ -1,3 +1,6 @@
+@section('css')
+<link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.css">
+@endsection
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
@@ -20,8 +23,7 @@
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
                 <div class="card mg-b-100">
-                    <form action="{{ route('users.store') }}" method="POST">
-                    {{ csrf_field() }}
+                    {{ Form::open(['route' => 'users.store', 'files' => true, 'id' => 'form_create_user']) }}
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Tambah Data User
@@ -42,19 +44,19 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Nama Lengkap</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" value="{{ old('name') }}" placeholder="Nama Lengkap" name="name">
+                                {{ Form::text('name', '', ['class'=> 'form-control', 'placeholder'=> 'Nama Lengkap', 'id' => 'user_name', 'autocomplete' => 'off']) }}  
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control" value="{{ old('email') }}" name="email" placeholder="Email">
+                                {{ Form::email('email', '', ['class'=> 'form-control', 'placeholder'=> 'Email', 'id' => 'user_email', 'autocomplete' => 'off', 'type' => 'email']) }} 
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Password</label>
                             <div class="col-sm-10">
-                                <input type="password" value="{{ old('password') }}" class="form-control" name="password" placeholder="Password">
+                                 {{ Form::password('password', ['class'=> 'form-control', 'placeholder'=> 'Password', 'id' => 'user_password', 'autocomplete' => 'off', 'type' => 'password']) }} 
                             </div>
                         </div>
                         <div class="form-group row">
@@ -62,39 +64,33 @@
                             <div class="col-sm-10">
                                 <select name="product_id" class="form-control" id="">
                                     @foreach ($produk as $item)
-                                        <option value="{{$item->product_id}}">{{$item->product_name}}</option>
+                                        <option value="{{$item->product_id}}">{{ $item->product_name." - ".$item->product_type }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Status User</label>
-                            <div class="col-sm-10">
-                                <select name="status" class="form-control" id="">
-                                    <option value="valid">Valid</option>
-                                    <option value="invalid">Invalid</option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label class="">Role</label>
+                            <span class="sidetitle">Kosongkan role jika tidak ingin menambahkan data.</span>
+                                {{ Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) }}
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Role</label>
-                            <div class="col-sm-10">
-                            {{ Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) }}
-                            <small style="color: red; font-style: italic">Kosongkan role jika tidak ingin menambahkan data.</small>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="{{ route('users.index') }}" class="btn btn-outline-info">Back</a>
+                                <button type="submit" id="btn_create_user" class="btn btn-primary float-right">Tambah</button>
                             </div>
                         </div>
                         
                     </div>
-                    <div class="card-footer">
-                        <a href="{{ route('users.index') }}" class="btn btn-outline-info">Back</a>
-                        &nbsp;
-                        &nbsp;
-                        <button type="submit" class="btn btn-primary float-right">Tambah</button>
-                    </div>
-                    </form>
+                    {{ Form::close() }}
                 </div>
             </div>
         </div>
     </div>
 </div>
+@section('js')
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/submit.js"></script>	
+@endsection
 @include('partials.footer')

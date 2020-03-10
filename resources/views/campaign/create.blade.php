@@ -607,7 +607,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Konfirmasi Email:</label>
-                            {{ Form::textarea('campaign_confirm', '', ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off', 'id'=> 'campaign_confirm']) }}
+                            {{ Form::textarea('campaign_confirm', '', ['class'=> 'form-control textarea', 'id' => 'editor1', 'placeholder' => 'Tulis teks konfirmasi di email sebelum user subscribe', 'autocomplete' => 'off']) }}
                           </div>
                         </div>
                       </div>
@@ -647,7 +647,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                             <label class="form-control-label">Teks Thank Email:</label>
-                            {{ Form::textarea('campaign_form_thank', '', ['class'=> 'form-control textarea', 'id' => 'campaign_form_thank', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off', 'id'=> 'campaign_form_thank']) }}
+                            {{ Form::textarea('campaign_form_thank', '', ['class'=> 'form-control', 'id' => 'editor2', 'placeholder' => 'Tulis ucapan terima kasih di email', 'autocomplete' => 'off']) }}
                           </div>
                         </div>
                       </div>
@@ -656,7 +656,7 @@
                         <div class="col-md-12">
                           <div class="btn-group float-right">
                             <button type="button" id="prev4" class="btn btn-secondary btn-lg float-right">Prev</button>
-                            <button type="submit" id="submit" class="btn btn-success btn-lg float-right">Submit</button>
+                            <button type="button" id="submit_create_campaign" class="btn btn-success btn-lg float-right">Submit</button>
                           </div>
                         </div>
                       </div>
@@ -677,9 +677,14 @@
 <!--================================-->
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/summernote/summernote-bs4.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script> 
-      <script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/js/campaign.js"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.3.3/js/bootstrap-colorpicker.min.js"></script> 
+<script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>
+<script src="{{ asset('template/metrical') }}/js/campaign.js"></script>	
+<script src="{{ asset('template/metrical') }}/plugins/ckeditor/ckeditor.js"></script>
+<script src="{{ asset('template/metrical') }}/plugins/ckeditor/sample.js"></script>
+<script>
+	initSample();
+</script>
 @endsection
 @include('partials.footer')  

@@ -30,7 +30,7 @@ class CreateCampaignsTable extends Migration
             $table->integer('user_id');
             $table->integer('campaign_share');
             $table->timestamps();
-            $table->foreign('campaign_template')->references('template_id')->on('templates')->onDelete('cascade');
+            // $table->foreign('campaign_template')->references('template_id')->on('templates')->onDelete('cascade');
         });
     }
 
