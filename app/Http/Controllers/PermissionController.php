@@ -28,7 +28,7 @@ class PermissionController extends Controller
         $orwhere = [];
 
         if(!empty($keyword)) {
-            $where[] = ['guard_name', 'LIKE', "%{$keyword}%"];
+            $where[] = ['name', 'LIKE', "%{$keyword}%"];
         }
 
         if(empty($keyword)) {

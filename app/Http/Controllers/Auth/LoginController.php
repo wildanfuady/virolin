@@ -130,7 +130,7 @@ class LoginController extends Controller
         ]);
     }
 
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new controller instance.
