@@ -5,7 +5,7 @@
       <meta http-equiv="x-ua-compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="Virolin.com - Manage Database in Simple Ways">
-      <meta name="keyword" content="virolin, virolin.com, ">
+      <meta name="keyword" content="virolin, virolin.com">
       <meta name="author" content="virolin.com"/>
       <!-- Favicon -->	
       <link rel="icon" href="{{ asset('template/metrical') }}/images/favicon.ico" type="image/x-icon">
@@ -14,8 +14,6 @@
       <!-- Main CSS -->			
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/bootstrap/css/bootstrap.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/font-awesome/css/font-awesome.min.css"/>
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/simple-line-icons/css/simple-line-icons.css">
-      <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/ionicons/css/ionicons.css">
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/app.min.css"/>
       <link type="text/css" rel="stylesheet" href="{{ asset('template/metrical') }}/css/style.min.css"/>
    </head>
@@ -79,10 +77,6 @@
       <!--================================-->	
       <script src="{{ asset('template/metrical') }}/plugins/jquery/jquery.min.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/jquery-ui/jquery-ui.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/popper/popper.js"></script>
       <script src="{{ asset('template/metrical') }}/plugins/bootstrap/js/bootstrap.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/plugins/pace/pace.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/js/jquery.slimscroll.min.js"></script>
-      <script src="{{ asset('template/metrical') }}/js/custom.js"></script>
    </body>
 </html>

@@ -149,6 +149,22 @@ $(document).ready(function(){
 
     });
 
+    // CREATE RENEWAL
+
+    $("#btn_payment_renewal").click(function(){
+      
+      if(cekInput("#pengirim") == false){
+        swal_error_alert("Nama Pengirim wajib diisi");
+      } else if(cekInput("#jumlah_transfer") == false){
+        swal_error_alert("Jumlah Transfer wajib diisi");
+      } else if(cekInput("#bank") == false){
+        swal_error_alert("Bank Tujuan wajib diisi");
+      } else if(cekInput("#tanggal_transfer") == false){
+        swal_error_alert("Tanggal Transfer wajib diisi");
+      } else { $("#form_payment_renewal").submit(); }
+
+    });
+
     // ======================== MODUL ADMIN =================================
 
     // CREATE PERMISSION

@@ -192,6 +192,8 @@ class DatabaseSeeder extends Seeder
             'profile-list',
             'profile-edit',
             'profile-edit-password',
+            'renewal-user',
+            'renewal-create',
             'report-user',
             'report-user-detail',
             'new_user-payment-confirmation',

@@ -63,7 +63,13 @@
         @endcan
         @can('dashboard-user')
         <div class="row row-xs clearfix">
-
+            @can('renewal-user')
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="alert alert-danger">
+                    Selamat datang <strong>{{ Auth::user()->name}}</strong>, akun Anda sudah Expired. Silahkan lakukan <strong>renewal / perpanjangan akun</strong> agar bisa kembali menikmati fasilitas Virolin. Terima kasih.
+                </div>
+            </div>
+            @endcan
             <div class="col-sm-6 col-xl-3">
             <div class="card mg-b-20">
                 <div class="card-body pd-y-0">

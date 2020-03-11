@@ -3,7 +3,7 @@
 <!--================================-->
 <div class="page-sidebar">
 <div class="logo">
-    <a class="logo-img" href="index.html">		
+    <a class="logo-img" href="{{ url('/') }}">		
     <img class="desktop-logo" src="{{ asset('template/metrical') }}/images/logo-virolin-sidebar.png" alt="">
     <img class="small-logo" src="{{ asset('image/sidebar-virolin.jpg') }}" alt="">
     </a>			
@@ -26,6 +26,13 @@
             <li>
             <a href="{{ url('home') }}"><i data-feather="home"></i>
                 <span>Dashboard</span>
+            </a>
+            </li>
+            @endcan
+            @can('renewal-user')
+            <li>
+            <a href="{{ url('renewal') }}"><i data-feather="dollar-sign"></i>
+                <span>Renewal</span>
             </a>
             </li>
             @endcan

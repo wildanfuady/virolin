@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 
 use App\Veritrans\Midtrans;
+use App\Order;
 use App\Veritrans\Veritrans;
 
 use Veritrans_Config;
@@ -47,10 +48,13 @@ class SnapController extends Controller
 
         $user_id = Auth::user()->id;
 
-        $order = \App\Order::where('user_id', $user_id)->first();
+        $order = Order::join('users', 'users.id', '=', 'orders.user_id')
+                        ->join('products', 'products.product_id', 'orders.product_id')
+                        ->join('banks', 'banks.id', 'orders.order_payment')
+                        ->where('orders.user_id', $user_id)
+                        ->first();
 
         $total = $order->kode_unik + $order->product->product_price;
-        error_log($total);
 
         $transaction_details = array(
             'order_id'      => $order->invoice,
@@ -156,20 +160,21 @@ class SnapController extends Controller
         $result = json_decode($result);
 
         if(!empty($result->order_id)) {
-            $order = \App\Order::with(['product', 'user'])->where('id', $result->order_id)->first();
-            // Update status order
-            // $plan = app('rinvex.subscriptions.plan')->find($order->plan_id);
-            /*echo $result->status_message . '<br>';
-            echo 'RESULT <br><pre>';
-            var_dump($result);
-            echo '</pre>' ;*/
+            $order = Order::join('users', 'users.id', '=', 'orders.user_id')
+                ->join('products', 'products.product_id', 'orders.product_id')
+                ->join('banks', 'banks.id', 'orders.order_payment')
+                ->where('orders.id', $result->order_id)->first();
 
             return view('payment.finish', compact('result', 'order'));
         }
         if(Auth::user() != null)
         {
-          $order = \App\Order::with(['product', 'user'])->where('user_id',Auth::user()->id)->first();
-          return view('payment.finish',compact('order'));
+          $order = Order::join('users', 'users.id', '=', 'orders.user_id')
+            ->join('products', 'products.product_id', 'orders.product_id')
+            ->join('banks', 'banks.id', 'orders.order_payment')
+            ->where('orders.user_id', Auth::user()->id)->first();
+          
+            return view('payment.finish',compact('order'));
 
         }
         else
@@ -201,9 +206,9 @@ class SnapController extends Controller
           $data             = \App\Order::where('invoice',$orderId)->first();
           $user             = \App\User::findOrFail($data->user_id);
             
-          $data->update([
-             'payment_type' => $notif->payment_type
-          ]);
+        //   $data->update([
+        //      'payment_type' => $notif->payment_type
+        //   ]);
           
           if ($transaction == 'capture') 
           {
@@ -212,43 +217,44 @@ class SnapController extends Controller
               if($fraud == 'challenge')
               {
                 $data->setPending();
-
                 // Config Email
-                $status = "Pending";
-                $to = $user->email;
-                $name = $user->name;
-                Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
+                // $status = "Pending";
+                // $to = $user->email;
+                // $name = $user->name;
+                // kirim email berhasil
+                // Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
               }
               else 
               {
                 $user->setSuccess($user);
-                $data->setSuccess();
+                $data->setSuccess($data);
                 // Config Email
-                $status = "Success";
-                $to = $user->email;
-                $name = $user->name;
-                Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
+                // $status = "Success";
+                // $to = $user->email;
+                // $name = $user->name;
+                // kirim email berhasil
+                // Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
               }
             }
           } 
           elseif ($transaction == 'settlement') 
           {
                 $user->setSuccess($user);
-                $data->setSuccess();
+                $data->setSuccess($data);
                 // Config Email
-                $status = "Success";
-                $to = $user->email;
-                $name = $user->name;
-                Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
+                // $status = "Success";
+                // $to = $user->email;
+                // $name = $user->name;
+                // Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
           } 
           elseif($transaction == 'pending')
           {
                 $data->setPending();
                 // Config Email
-                $status = "Pending";
-                $to = $user->email;
-                $name = $user->name;
-                Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
+                // $status = "Pending";
+                // $to = $user->email;
+                // $name = $user->name;
+                // Mail::to($to)->send(new KirimEmailNotificationPayment($name, $status));
           } 
           elseif ($transaction == 'deny') 
           {

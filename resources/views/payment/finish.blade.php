@@ -1,20 +1,29 @@
-@extends('template')
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
 @section('content')
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Order</h1>
+<!--================================-->
+<!-- Page Inner Start -->
+<!--================================-->
+<div class="page-inner">
+    <!-- Main Wrapper -->
+    <div id="main-wrapper">
+        <!--================================-->
+        <!-- Breadcrumb Start -->
+        <!--================================-->
+        <div class="pageheader pd-t-25 pd-b-35">
+            <div class="pd-t-5 pd-b-5">
+            <h1 class="pd-0 mg-0 tx-20">Renewal</h1>
             </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Order</li>
-                </ol>
+            <div class="breadcrumb pd-0 mg-0">
+            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+            <a class="breadcrumb-item" href="">Renewal</a>
             </div>
         </div>
-    </div>
-</div>
+        <!--/ Breadcrumb End -->
+        <!--================================-->
+
+        <div class="row row-xs clearfix">
 
 <div class="content">
     <div class="container-fluid">
@@ -80,3 +89,4 @@
 </div>
 
 @endsection
+@include('partials.footer')

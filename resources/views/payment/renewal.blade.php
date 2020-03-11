@@ -1,5 +1,4 @@
 @section('css')
-<!-- Midtrans -->
 <script src="{{ !config('services.midtrans.isProduction') ? 'https://app.sandbox.midtrans.com/snap/snap.js' : 'https://app.midtrans.com/snap/snap.js' }}" data-client-key="{{ config('services.midtrans.clientKey') }}"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css">
 <link rel="stylesheet" href="{{ asset('template/metrical') }}/plugins/select2/css/select2-bootstrap.css">
@@ -21,11 +20,11 @@
         <!--================================-->
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Konfirmasi Pembayaran</h1>
+            <h1 class="pd-0 mg-0 tx-20">Renewal</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Konfirmasi Pembayaran</a>
+            <a class="breadcrumb-item" href="">Renewal</a>
             </div>
         </div>
         <!--/ Breadcrumb End -->
@@ -37,25 +36,9 @@
             <!--================================-->
             <div class="col-lg-12">
             <div class="card mg-b-100">
-                {{ Form::open(['url' => 'konfirmasi-pembayaran/store', 'files' => true, 'id' => 'form_payment_confirmation']) }}
+                {{ Form::open(['url' => 'konfirmasi-pembayaran/store', 'files' => true, 'id' => 'form_payment_renewal']) }}
                 <div class="collapse show" id="annualReports">
                     <div class="card-body pd-t-10 pd-b-20 collapse show">
-                        <?php
-                            if($msg_success = Session::get('success')){
-                                $class = "alert alert-success alert-dismissable";
-                                $msg = $msg_success;
-                            } else if($msg_success = Session::get('error')){
-                                $class = "alert alert-danger alert-dismissable";
-                                $msg = $msg_success;
-                            } else {
-                                $class = "d-none";
-                                $msg = "";
-                            }
-                        ?>
-                        <div class="{{ $class }}">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
-                            {{ $msg }}
-                        </div>
                         <div class="alert alert-info alert-dismissible mt-3">
                             <strong>Informasi:</strong><br><br>
                             <p>Anda dapat membayar via midtrans untuk pilihan aktivasi secara otomatis dan tidak perlu melakukan konfirmasi pembayaran. <br><br><a class="btn btn-info btn-sm" href="#" id="payment-gateway"> Bayar via Midtrans</a></p>
@@ -73,52 +56,46 @@
                             
                         <div class="row">
                             <div class="col-lg-12">
-                                <!--
                                 <h4>Rincian Order Anda</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <tr>
                                             <td>Produk</td>
-                                            <td>{{ $detail_order->product_name }}</td>
+                                            <td>{{ $order->product->product_name }}</td>
                                             <td>Sub Total</td>
-                                            <td><?php $total = $detail_order->product_price + $detail_order->kode_unik; echo "Rp. ".number_format($total,0,',','.'); ?></td>
+                                            <td><?php $total = $order->product->product_price + $order->kode_unik; echo "<span id='total-pembayaran'>Rp. ".number_format($total,0,',','.')."</span>"; ?></td>
                                         </tr>
                                         <tr>
                                             <td>Tipe Produk</td>
-                                            <td>{{ ucfirst($detail_order->product_type) }}</td>
+                                            <td>{{ ucfirst($order->product->product_type) }}</td>
                                             <td rowspan="2">Punya Kupon?</td>
                                             <td rowspan="2">
-                                                {{ Form::hidden('kode_produk', $detail_order->product_id, ['id' => 'input-kode-produk']) }}
+                                                {{ Form::hidden('kode_produk', $order->product->product_id, ['id' => 'input-kode-produk']) }}
                                                 {{ Form::text('kupon', '', ['class' => 'form-control', 'style' => 'text-transform:uppercase', 'id' => 'input-kupon'])}}
                                                 <button type="button" id="apply-kupon" class="btn btn-success float-right mg-t-10">Gunakan Kupon</button>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Harga Produk</td>
-                                            <td>Rp. {{ number_format($detail_order->product_price,0,',','.') }}</td>
+                                            <td>Rp. {{ number_format($order->product->product_price,0,',','.') }}</td>
                                             
                                         </tr>
                                         <tr>
                                             <td>Kode Unik</td>
-                                            <td>Rp. {{ number_format($detail_order->kode_unik,0,',','.') }}</td>
+                                            <td>Rp. {{ number_format($order->kode_unik,0,',','.') }}</td>
                                             <td>Total Pembayaran</td>
-                                            <td id="total_pembayaran"><?php $total = $detail_order->product_price + $detail_order->kode_unik; echo "<span id='total-pembayaran'>Rp. ".number_format($total,0,',','.')."</span>"; ?></td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4">{{ Session::get('kode_promo') }}</td>
+                                            <td id="total_pembayaran"><?php $total = $order->product->product_price + $order->kode_unik; echo "<span id='total-pembayaran'>Rp. ".number_format($total,0,',','.')."</span>"; ?></td>
                                         </tr>
                                     </table>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
-                        <h4>Konfirmasi Pembayaran</h4>
+                        <h4>Renewal / Perpanjangan Akun</h4>
                         <div class="row">
                             <div class="col-lg-6">
                                 {{ Form::hidden('id', Auth::user()->id, ['id' => 'user_id']) }}
                                 <div class="form-group">
-                                    {{ Form::label('invoice', 'Invoice') }}
-                                    <span class="sidetitle">Tidak perlu cantumkan #</span>
-                                    {{ Form::number('invoice', '', ['class'=> 'form-control border-none', 'placeholder'=> 'Enter Invoice', 'autocomplete' => 'off', 'id' => 'invoice']) }}
+                                    {{ Form::hidden('invoice', $order->invoice) }}
                                 </div>
 
                                 <div class="form-group">
@@ -134,21 +111,16 @@
 
                                 <div class="form-group">
                                     {{ Form::label('bank', 'Transfer ke Bank') }}
-                                    <select name="bank" id="bank" class="form-control select2">
-                                        <option value="">Pilih Bank</option>
-                                        <?php foreach($banks as $item) { ?>
-                                        <option value="<?= $item->id ?>"><?= $item->bank_name." - ".$item->bank_number." an. ".$item->bank_nasabah ?></option>
-                                        <?php } ?>
-                                    </select>
+                                    {{ Form::select('bank', $banks, null, ['class' => 'form-control select2', 'placeholder' => 'Pilih Bank']) }}
                                 </div>
-
-                            </div>
-                            <div class="col-lg-6">
 
                                 <div class="form-group">
                                     {{ Form::label('tanggal_transfer', 'Tanggal Transfer') }}
                                     {{ Form::text('tanggal_transfer', '', ['class'=> 'form-control datepicker', 'placeholder'=> 'dd-mm-yyyy ', 'autocomplete' => 'off', 'id' => 'tanggal_transfer', 'readonly']) }}
                                 </div>
+
+                            </div>
+                            <div class="col-lg-6">
 
                                 <div class="form-group">
                                     {{ Form::label('bukti_transfer', 'Bukti Transfer') }}
@@ -162,7 +134,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <a href="{{ url('home') }}" class="btn btn-outline-info">Back</a>
-                                <button type="button" id="btn_payment_confirmation" class="btn btn-primary float-right">Kirim</button>
+                                <button type="button" id="btn_payment_renewal" class="btn btn-primary float-right">Proses</button>
                             </div>
                         </div>
 
@@ -298,48 +270,48 @@
     }); // btn kupon
 
     $('#payment-gateway').click(function (event) {
-      event.preventDefault();
-      $(this).attr("disabled", "disabled");
-    $.ajax({
-      
-      url: './snaptoken',
-      cache: false,
-      success: function(data) {
-        //location = data;
-        console.log('token = '+data);
-        
-        var resultType = document.getElementById('result-type');
-        var resultData = document.getElementById('result-data');
-        function changeResult(type,data){
-          $("#result-type").val(type);
-          $("#result-data").val(JSON.stringify(data));
-        }
-        snap.pay(data, {
-          
-          onSuccess: function(result){
-            changeResult('success', result);
-            console.log(result.status_message);
-            console.log(result);
-            $("#payment-form").submit();
-            location.reload();
-          },
-          onPending: function(result){
-            changeResult('pending', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-            location.reload();
-          },
-          onError: function(result){
-            changeResult('error', result);
-            console.log(result.status_message);
-            $("#payment-form").submit();
-            location.reload();
-          }
-        });
-      }
-    });
+        event.preventDefault();
+        $(this).attr("disabled", "disabled");
+        $.ajax({
+            url: './snaptoken',
+            cache: false,
+            success: function(data) {
+                
+                var resultType = document.getElementById('result-type');
+                var resultData = document.getElementById('result-data');
+                
+                function changeResult(type,data){
+                    $("#result-type").val(type);
+                    $("#result-data").val(JSON.stringify(data));
+                }
 
-});
+                snap.pay(data, {
+                
+                    onSuccess: function(result){
+                        changeResult('success', result);
+                        console.log(result.status_message);
+                        console.log(result);
+                        $("#payment-form").submit();
+                        location.reload();
+                    },
+                    onPending: function(result){
+                        changeResult('pending', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                        location.reload();
+                    },
+                    onError: function(result){
+                        changeResult('error', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                        location.reload();
+                    }
+
+                }); // snap pay
+            } // success
+        }); // ajax
+    }); // payment gateway
+</script>
 </script>
 @endsection
 @include('partials.footer')
