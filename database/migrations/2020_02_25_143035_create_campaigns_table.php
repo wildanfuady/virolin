@@ -27,10 +27,11 @@ class CreateCampaignsTable extends Migration
             $table->text('campaign_text_share');
             $table->integer('campaign_form_view');
             $table->integer('campaign_group');
-            $table->integer('user_id');
+            $table->bigInteger('user_id')->unsigned()->nullable();
             $table->integer('campaign_share');
             $table->timestamps();
-            // $table->foreign('campaign_template')->references('template_id')->on('templates')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('campaign_template')->references('template_id')->on('templates')->onDelete('cascade');
         });
     }
 

@@ -90,34 +90,29 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         if($validator->fails()){
-            return redirect(url('order/edit/'.$id))
-                    ->withErrors($validator)
-                    ->withInput($request->all());
+            return redirect()->back()->withErrors($validator)->withInput($request->all());
+        } 
+
+        $status = $request->status;
+
+        $order = \App\Order::find($id);
+
+        $user   = \App\User::findOrFail($order->user_id);
+
+        if($request->input('order_status') == "Success"){
+            
+            $user->setSuccess($user);
+            $order->setSuccess($order);
+
+            return redirect(url('orders'))->with('info', 'Berhasil mengubah data order.');
+
         } else {
 
-            $order = \App\Order::find($id);
+            $order->setExpired();
 
-            $user   = \App\User::findOrFail($order->user_id);
-
-            if($request->input('order_status') == "Active"){
-                
-                $user->setSuccess($user);
-
-            } else {
-                
-                $user->setExpired($user);
-                $role = DB::table('model_has_roles')->where(['role_id' => 2, 'model_type' => 'App\User', 'model_id' => $user->id])->delete();
-    
-            }
-            
-            $order->order_status = $request->input('order_status');
-            
-            $update = $order->save();
-
-            if($update){
-                return redirect(url('orders'))->with('info', 'Berhasil mengubah data order.');
-            }
         }
+        
+        
     
     }
 

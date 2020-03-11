@@ -43,12 +43,15 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('snap', 'SnapController@snap');
 	Route::get('snaptoken', 'SnapController@token');
     
-    // Module Customer Admin
+    // Module Admin
     Route::resource('users','UsersController');
     Route::get('users/destroy/{id}','UsersController@destroy');
 
     Route::resource('roles','RoleController');
     Route::get('roles/destroy/{id}','RoleController@destroy');
+
+    Route::resource('permission','PermissionController');
+    Route::get('permission/destroy/{id}','PermissionController@destroy');
 
     Route::resource('subscribers','SubscribersController');
     Route::get('subscribers/destroy/{id}','SubscribersController@destroy');
@@ -65,7 +68,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('products','ProductController');
     Route::get('products/destroy/{id}','ProductController@destroy');
 
-    // Route::resource('reports','ReportController');
     Route::get('reports/destroy/{id}','ReportController@destroy');
 
     Route::get('reports/pengunjung','ReportController@pengunjung');
@@ -103,6 +105,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('promo','UserPromoController@index');
     Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
+    Route::get('promo/cekpromo/{id}','UserPromoController@cek_promo');
 
     Route::get('profile','ProfileController@index')->name('profil.index');
     Route::get('profile/password','ProfileController@password')->name('profile.password');

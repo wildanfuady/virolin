@@ -1,5 +1,6 @@
-@extends('template')
-@section('content')
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -89,4 +90,4 @@
         </div>
     </div>
 </div>
-@endsection
+@include('partials.footer')

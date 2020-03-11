@@ -80,7 +80,13 @@
             @can('role-list')
             <li>
             <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
-            <span>Role Permission</span></a>
+            <span>Manajemen Role</span></a>
+            </li>
+            @endcan
+            @can('permission-list')
+            <li>
+            <a href="{{ route('permission.index') }}"><i data-feather="key"></i>
+            <span>Manajemen Permission</span></a>
             </li>
             @endcan
             @can('report-list')

@@ -22,8 +22,7 @@
         <!--/ Breadcrumb End -->
         <!--================================-->
 
-        @if(Auth::user()->status == "valid" || Auth::user()->status == "Valid")
-        @else
+        @can('new_user-payment-confirmation')
         <!-- Konfirmasi Pembayaran -->
         <div class="row row-xs clearfix">
             <!--================================-->
@@ -63,8 +62,8 @@
             <!--================================-->
         </div>
         <!-- Selesai Konfirmasi Pembayaran -->
-        @endif
-        @can('campaign-list')
+        @endcan
+        @can('dashboard-user')
         <div class="row row-xs clearfix">
 
             <div class="col-sm-6 col-xl-3">

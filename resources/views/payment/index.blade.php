@@ -80,10 +80,10 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a class="btn btn-light btn-sm" href="{{ route('payment.show',$item->payment_id) }}"><i class="fa fa-eye"></i></a>
-                                                @can('payments-edit')
+                                                @can('payment-edit')
                                                 <a class="btn btn-light btn-sm" href="{{ route('payment.edit',$item->payment_id) }}"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('payments-delete')
+                                                @can('payment-delete')
                                                 <a class="btn btn-light btn-sm" href="{{ url('payment/destroy/'.$item->payment_id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>

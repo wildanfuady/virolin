@@ -88,34 +88,44 @@ class DatabaseSeeder extends Seeder
             'updated_at' => Carbon::now(),
         ]);
         DB::table('roles')->insert([
-            'name' => 'Admin',
-            'guard_name' => 'web',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        DB::table('roles')->insert([
+            'id' => 1,
             'name' => 'User Aktif',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         DB::table('roles')->insert([
+            'id' => 2,
             'name' => 'User Expired',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
         DB::table('roles')->insert([
+            'id' => 3,
             'name' => 'User Baru',
             'guard_name' => 'web',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+        DB::table('roles')->insert([
+            'id' => 4,
+            'name' => 'Developer',
+            'guard_name' => 'web',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
         $permissions = [
+            // ADMIN
+            'dashboard-admin',
             'role-list',
             'role-create',
             'role-edit',
             'role-delete',
+            'permission-list',
+            'permission-create',
+            'permission-edit',
+            'permission-delete',
             'user-list',
             'user-create',
             'user-edit',
@@ -152,10 +162,6 @@ class DatabaseSeeder extends Seeder
             'grafik-penjualan',
             'grafik-promo',
             'grafik-user',
-            'campaign-list',
-            'campaign-create',
-            'campaign-edit',
-            'campaign-delete',
             'article-list',
             'article-create',
             'article-edit',
@@ -164,6 +170,12 @@ class DatabaseSeeder extends Seeder
             'notify-create',
             'notify-edit',
             'notify-delete',
+            // USER
+            'dashboard-user',
+            'campaign-list',
+            'campaign-create',
+            'campaign-edit',
+            'campaign-delete',
             'list-subscriber-list',
             'list-subscriber-create',
             'list-subscriber-edit',
@@ -181,9 +193,6 @@ class DatabaseSeeder extends Seeder
             'profile-edit-password',
             'report-user',
             'report-user-detail',
-            'order-user',
-            'dashboard-admin',
-            'dashboard-user',
             'new_user-payment-confirmation',
             'new_user-payment-detail',
          ];
