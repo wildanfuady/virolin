@@ -84,8 +84,8 @@
                                             {{ $subscibe_total }} of {{ $item->product->product_max_db }}
                                         </td>
                                         <td> {{$item->email}} </td>
-                                        <td> {{$item->status}} </td>
-                                        <td> {{ date('d-m-Y', strtotime($item->masa_aktif)) }} </td>
+                                        <td> {{ucfirst($item->status)}} </td>
+                                        <td> <?php echo $item->order_expired == null ? date('d-m-Y - H:i', strtotime($item->order_end)) : date('d-m-Y - H:i', strtotime($item->order_expired)) ?> </td>
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{ route('users.show', $item->id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>

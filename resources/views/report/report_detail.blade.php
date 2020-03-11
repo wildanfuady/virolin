@@ -33,7 +33,7 @@
                     </div>
                     <div class="card-body collapse show" id="collapse1">
                         <div class="clearfix">
-                            <canvas id="chartBar1" height="150"></canvas>
+                            <canvas id="chartCampaign" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="card-body collapse show" id="collapse1">
                         <div class="clearfix">
-                            <canvas id="chartBar1" height="150"></canvas>
+                            <canvas id="chartShare" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="card-body collapse show" id="collapse1">
                         <div class="clearfix">
-                            <canvas id="chartBar1" height="150"></canvas>
+                            <canvas id="chartDetail" height="150"></canvas>
                         </div>
                     </div>
                 </div>
@@ -86,5 +86,88 @@
 <!--================================-->
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/chartjs/chartjs.js"></script>
+
+<script>
+var ctx1 = document.getElementById('chartCampaign').getContext('2d');
+var myChart1 = new Chart(ctx1, {
+    type: 'pie',
+    data: {
+        labels: [
+            @foreach ($campaign_trafik as $data)
+                "{{ $data->trafik_browser }}",
+            @endforeach
+        ],
+        datasets: [{
+            data: [
+                @foreach ($campaign_trafik as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
+            backgroundColor: ['#5D78FF','#63CF72','#C9D5FA','#00a65a', '#00c0ef', '#f56954'],
+            borderWidth: 1,
+            fill: true,
+            label: 'Value1'
+        }]
+    },
+ 
+});
+
+var ctx2 = document.getElementById('chartShare').getContext('2d');
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: [
+            @foreach ($campaign_share as $data)
+                "{{ $data->trafik_browser }}",
+            @endforeach
+        ],
+        datasets: [{
+            data: [
+                @foreach ($campaign_share as $data)
+                    "{{ $data->total }}",
+                @endforeach
+            ],
+            backgroundColor: ['#5D78FF','#63CF72','#C9D5FA','#00a65a', '#00c0ef', '#f56954'],
+            borderWidth: 1,
+            fill: true,
+            label: 'Value1'
+        }]
+    },
+ 
+});
+
+var ctx3 = document.getElementById('chartDetail').getContext('2d');
+var myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November' ,'Desember'],
+        datasets: [{
+            data: [{{$trafik_jan}},{{$trafik_feb}},{{$trafik_mar}},{{$trafik_apr}},{{$trafik_mei}},{{$trafik_jun}},{{$trafik_jul}},{{$trafik_agu}},{{$trafik_sep}},{{$trafik_okt}},{{$trafik_nov}},{{$trafik_des}}],
+            // backgroundColor: ['#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF','#5D78FF'],
+            // borderWidth: 3,
+            borderColor: '#5D78FF',
+            // fill: true,
+            label: 'Total'
+        }]
+    },
+    options: {
+        legend: {
+            display: false,
+            labels: {
+                display: false
+            }
+        },
+        scales: {
+            yAxes: [{
+                stacked: true
+            }],
+            xAxes: [{
+                stacked: true
+            }]
+        }
+    }
+});
+</script>
+
 @endsection
 @include('partials.footer')  

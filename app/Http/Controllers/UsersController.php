@@ -42,11 +42,17 @@ class UsersController extends Controller
         }
 
         if(empty($keyword)) {
-            $users = \App\User::with(['product'])->where('level','<>','admin')->paginate($paginate);
+            $users = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->where('users.level','<>','admin')->paginate($paginate);
         }
         else {
-            $users = \App\User::with(['product'])->where('level','<>','admin')->where($where)->orWhere($orwhere)->paginate($paginate);
+            $users = \App\User::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->join('users', 'orders.user_id', '=', 'users.id')
+            ->where('users.level','admin')->where($where)->orWhere($orwhere)->paginate($paginate);
         }
+
+        // var_dump($users);
 
         $date_expired = Carbon::now()->add(10, 'days');
         $date_now = Carbon::now();
@@ -101,20 +107,21 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $input                      = $request->all();
-        $input['password']          = Hash::make($input['password']);
-        $input['level']             = 'user';
-        $input['status']            = 'invalid';
-        $input['email_verified_at'] = Carbon::now();
-
-        $user                       = User::create($input);
+        $user                       = new User;
+        $user->name                 = $request->name;
+        $user->email                = $request->email;
+        $user->password             = Hash::make($request->password);
+        $user->level                = 'user';
+        $user->status               = 'invalid';
+        $user->email_verified_at    = Carbon::now();
+        $user->save();
 
         $user->assignRole($request->input('roles'));
 
         // orders
         $invoice                    = rand(00000, 99999);
         $order_date                 = Carbon::now();
-        $order_end                  = $order_date->addDays(1);
+        $order_end                  = Carbon::now()->addDays(1);
         $kode_unik                  = rand(000, 999);
 
         $order                      = new \App\Order;
@@ -125,6 +132,7 @@ class UsersController extends Controller
         $order->order_end           = $order_end;
         $order->order_status        = "Pending";
         $order->user_id             = $user->id;
+        $order->order_payment       = 1;
         $order->kode_unik           = $kode_unik;
         $order->save();
 
@@ -206,7 +214,6 @@ class UsersController extends Controller
         $user->name = $request->get('name');
         $user->email = $request->get('email');
         $user->status = $request->get('status');
-        $user->product_id = $request->get('product_id');
         $user->save();
 
         if(!empty($request->input('roles'))){

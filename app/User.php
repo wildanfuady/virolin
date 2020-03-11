@@ -26,12 +26,13 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $table = "users";
     
     protected $fillable = [
-        'name', 'email', 'password', 'gender', 'phone', 'password', 'address', 'product_id', 'email_verified_at','status','level','masa_aktif'
+        'name', 'email', 'password', 'gender', 'phone', 'password', 'address', 'product_id', 'email_verified_at','status','level'
     ];
 
     public function order()
     {
-        return $this->hasMany('App\Order');
+        // return $this->hasMany('App\Order');
+        return $this->belongsTo('App\Order');
     }
 
     public static function avatar()

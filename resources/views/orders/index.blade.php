@@ -79,7 +79,7 @@
                                         <td> {{$item->user->name}} </td>
                                         <td> {{$item->product->product_name}} </td>
                                         <td> {{ date('d-m-Y', strtotime($item->order_date)) }} </td>
-                                        <td> {{ date('d-m-Y', strtotime($item->order_end)) }}</td>
+                                        <td> <?php echo $item->order_expired == null ? date('d-m-Y', strtotime($item->order_end)) : date('d-m-Y', strtotime($item->order_expired)) ?></td>
                                         <td> {{ $item->bank->bank_name }} </td>
                                         <td> 
                                         <?php 
@@ -91,10 +91,10 @@
                                         <td class="text-center">
                                             <div class="btn-group">
                                                 <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
-                                                @can('orders-edit')
+                                                @can('order-edit')
                                                 <a href="{{ route('orders.edit', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan
-                                                @can('orders-delete')
+                                                @can('order-delete')
                                                 <a href="{{ url('orders/destroy/'. $item->order_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan</div>
                                         </td>

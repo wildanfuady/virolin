@@ -22,9 +22,8 @@ class DashboardController extends Controller
     {
         $user_id = Auth::user()->id;
 
-        $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
-            ->join('products', 'products.product_id', '=', 'users.product_id')
-            ->where('user_id', $user_id)->first();
+        $data['product'] = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->where('orders.user_id', $user_id)->first();
 
         $data['total_subscribers'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->count();
 
@@ -78,15 +77,16 @@ class DashboardController extends Controller
                         ->selectRaw($raw_order)
                         ->first();
         $order = \App\Order::where('user_id', $user_id)->where('order_status', 'Success')->first();
-        if(!empty($order)){
-            $expired = $order->order_expired;
-            $now = date('Y-m-d H:i:s');
-            
-            if(!empty($expired) < $now){
+        // dd($order->order_expired);
+        $user = \App\User::find($user_id);
+        if(!empty($order->order_expired)){
+            // $expired = $order->order_expired;
+            // $now = Carbon::now();
+            if(Carbon::parse($order->order_expired) < Carbon::now()){
                 // hapus permission
                 DB::table('model_has_roles')->where('model_id', $user_id)->update(['role_id' => 2]);
-                DB::table('orders')->where('user_id', $user_id)->update(['order_status' => 'Expired']);
-                DB::table('users')->where('id', $user_id)->update(['status' => 'invalid']);
+                $order->setExpired($order);
+                $user->setExpired($user);
                 // return redirect('report');
             }
         }
@@ -102,9 +102,8 @@ class DashboardController extends Controller
             $user_id = Auth::user()->id;
             $time_now = Carbon::now();
             
-            $data['product'] = \App\User::join('subscribers', 'subscribers.user_id', '=', 'users.id')
-                ->join('products', 'products.product_id', '=', 'users.product_id')
-                ->where('user_id', $user_id)->first();
+            $data['product'] = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+                ->where('orders.user_id', $user_id)->first();
 
             $data['activity_log'] = \App\Subscribers::where('user_id', $user_id)->get();
 

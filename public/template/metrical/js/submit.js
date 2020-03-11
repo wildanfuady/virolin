@@ -151,6 +151,26 @@ $(document).ready(function(){
 
     // ======================== MODUL ADMIN =================================
 
+    // CREATE PERMISSION
+
+    $("#btn_create_permission").click(function(){
+      
+      if(cekInput("#permission_name") == false){
+        swal_error_alert("Permission wajib diisi");
+      } else { $("#form_create_permission").submit(); }
+
+    });
+
+    // EDIT PERMISSION
+
+    $("#btn_edit_permission").click(function(){
+      
+      if(cekInput("#edit_permission_name") == false){
+        swal_error_alert("Permission wajib diisi");
+      } else { $("#form_edit_permission").submit(); }
+
+    });
+    
     // CREATE BANK
 
     $("#btn_create_bank").click(function(){

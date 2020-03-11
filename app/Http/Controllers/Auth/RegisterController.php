@@ -86,8 +86,8 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'product_id' => $data['product_id'],
-            'level' => 'user'
+            'level' => 'user',
+            'status' => 'invalid'
         ]);
         \Auth::loginUsingId($user->id);
         $user->userData = Order::create([
@@ -98,6 +98,11 @@ class RegisterController extends Controller
             'user_id' => $user->id,
             'invoice' => $data['invoice'],
             'kode_unik' => $kode_unik,
+        ]);
+        DB::table('model_has_roles')->insert([
+            'role_id' => 3,
+            'model_type' => 'App\User',
+            'model_id' => $user->id
         ]);
         // var_dump($user->id);die();
         $users['user'] = $user;

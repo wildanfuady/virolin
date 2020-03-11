@@ -1,5 +1,6 @@
-@extends('template')
-@section('content')
+@include('partials.header')
+@include('partials.sidebar')
+@include('partials.mainmenu')
 <div class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
@@ -44,7 +45,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Bank Tujuan</label>
                                 <div class="col-md-9">
-                                    {{ Form::text('bank', $payment->bank->bank_name, ['class' => 'form-control border-none', 'readonly']) }}
+                                    {{ Form::text('bank', $payment->bank->bank_name." an. ".$payment->bank->bank_nasabah, ['class' => 'form-control border-none', 'readonly']) }}
                                 </div>
                             </div>
 
@@ -58,7 +59,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Tanggal Transfer</label>
                                 <div class="col-md-9">
-                                    {{ Form::text('tanggal_transfer', date('d-m-Y H:i', strtotime($payment->payment_total_transfer)), ['class' => 'form-control border-none', 'readonly']) }}
+                                    {{ Form::text('tanggal_transfer', date('d-m-Y - H:i', strtotime($payment->payment_tanggal_transfer)), ['class' => 'form-control border-none', 'readonly']) }}
                                 </div>
                             </div>
 
@@ -68,7 +69,7 @@
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">Status</label>
                                 <div class="col-md-9">
-                                    {{ Form::select('status', ['Pending' => 'Pending', 'Active' => 'Active', 'Expired' => 'Expired'], $payment->payment_status, ['class' => 'form-control border-none']) }}
+                                    {{ Form::select('status', ['Pending' => 'Pending', 'Success' => 'Success'], $payment->payment_status, ['class' => 'form-control border-none']) }}
                                 </div>
                             </div>
 
@@ -81,13 +82,17 @@
 
                         </div>
                     </div>
-                </div>
-                <div class="card-footer">
-                    <a href="{{ route('payment.index') }}" class="btn btn-outline-info">Back</a>
-                    <button type="submit" class="btn btn-primary float-right">Update</button>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="{{ route('payment.index') }}" class="btn btn-outline-info">Back</a>
+                            <button type="submit" id="btn_payment_confirmation" class="btn btn-primary float-right">Konfirmasi</button>
+                        </div>
+                    </div>
+
                 </div>
             {{ Form::close() }}
         </div>
     </div>
 </div>
-@endsection
+@include('partials.footer')

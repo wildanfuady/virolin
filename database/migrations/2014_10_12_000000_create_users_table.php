@@ -18,7 +18,6 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('product_id');
             $table->string('status');
             $table->enum('level',['admin', 'user']);
             $table->string('password');

@@ -24,7 +24,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedBigInteger('user_id')->nullable();
             $table->string('payment_status');
             $table->timestamps();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

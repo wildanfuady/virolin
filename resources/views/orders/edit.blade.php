@@ -46,7 +46,7 @@
                                 <div class="form-group">
                                     {{ Form::label('order_status', 'Status') }}
                                     <small class="sidetitle">Edit status customer Anda</small>
-                                    {{ Form::select('order_status', ['Pending' => 'Pending', 'Active' => 'Active', 'Expired' => 'Expired'], $orders->order_status, ['class'=> 'form-control', 'placeholder'=> 'Choose One']) }}
+                                    {{ Form::select('order_status', ['Success' => 'Success', 'Expired' => 'Expired'], $orders->order_status, ['class'=> 'form-control', 'placeholder'=> 'Choose One']) }}
                                 </div>
 
                                 <div class="form-group">
@@ -70,12 +70,6 @@
                                 <div class="form-group">
                                     {{ Form::label('order_date', 'Date') }}
                                     {{ Form::text('order_date', date('d-m-Y', strtotime($orders->order_date)), ['class'=> 'form-control', 'placeholder'=> 'Enter Order Date', 'disabled']) }}
-                                </div>
-
-                                <div class="form-group">
-                                    {{ Form::label('order_expired', 'Expired') }}
-                                    <small class="sidetitle">Format: bulan/tanggal/tahun</small>
-                                    <input type="date" value="{{ $orders->order_end }}" class="form-control" placeholder="Tanggal Mulai" name="order_expired">
                                 </div>
 
                                 <div class="form-group">

@@ -59,8 +59,9 @@
             </div>
             </div>
         </div>
+        <!-- Selesai Konfirmasi Pembayaran -->
         @endcan
-        @can('campaign-list')
+        @can('dashboard-user')
         <div class="row row-xs clearfix">
 
             <div class="col-sm-6 col-xl-3">
