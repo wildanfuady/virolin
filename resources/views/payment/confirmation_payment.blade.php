@@ -73,7 +73,7 @@
                             
                         <div class="row">
                             <div class="col-lg-12">
-
+                                <!--
                                 <h4>Rincian Order Anda</h4>
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -104,11 +104,11 @@
                                             <td>Total Pembayaran</td>
                                             <td id="total_pembayaran"><?php $total = $detail_order->product_price + $detail_order->kode_unik; echo "<span id='total-pembayaran'>Rp. ".number_format($total,0,',','.')."</span>"; ?></td>
                                         </tr>
-                                        <!-- <tr>
+                                        <tr>
                                             <td colspan="4">{{ Session::get('kode_promo') }}</td>
-                                        </tr> -->
+                                        </tr>
                                     </table>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                         <h4>Konfirmasi Pembayaran</h4>

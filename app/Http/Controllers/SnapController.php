@@ -140,7 +140,7 @@ class SnapController extends Controller
             $snap_token = $midtrans->getSnapToken($transaction_data);
             //return redirect($vtweb_url);
             $order->update([
-                'transaction_id' => $snap_token 
+                'id' => $snap_token 
             ]);
             echo $snap_token;
         } 
