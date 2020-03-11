@@ -6,6 +6,7 @@ use App\Products;
 use App\Banks;
 use App\User;
 use App\Subscribers;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
