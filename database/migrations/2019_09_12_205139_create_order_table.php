@@ -23,7 +23,7 @@ class CreateOrderTable extends Migration
             $table->string('order_payment');
             $table->unsignedBigInteger('user_id')->nullable();
             $table->integer('kode_unik');
-            $table->igInteger('promo_id')->unsigned()->nullable();
+            $table->bigInteger('promo_id')->unsigned()->nullable();
             $table->dateTime('order_expired')->nullable();
             $table->timestamps();
             $table->foreign('product_id')->references('product_id')->on('products');

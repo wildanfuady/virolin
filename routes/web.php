@@ -31,7 +31,8 @@ Auth::routes(['verify' => true]);
 Route::group(['middleware' => ['auth']], function () {
     Route::get('finish', 'SnapController@finish')->name('finish');
 
-    Route::get('/dashboard', 'DashboardController@dashboard');
+    Route::get('/dashboard', 'DashboardController@dashboard_admin');
+    Route::get('/homepage', 'DashboardController@dashboard_user');
     Route::get('/home', 'DashboardController@index');
 
     // Konfirmasi Pembayaran
