@@ -6,6 +6,7 @@ use App\Products;
 use App\Banks;
 use App\User;
 use App\Subscribers;
+use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
@@ -87,30 +88,11 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
-        DB::table('roles')->insert([
-            'name' => 'Admin',
-            'guard_name' => 'web',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'User Aktif',
-            'guard_name' => 'web',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'User Expired',
-            'guard_name' => 'web',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        DB::table('roles')->insert([
-            'name' => 'User Baru',
-            'guard_name' => 'web',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
+  
+        Role::create(['name' => 'User Aktif']);
+        Role::create(['name' => 'User Expired']);
+        Role::create(['name' => 'User Baru']);
+        
         $permissions = [
             'role-list',
             'role-create',
