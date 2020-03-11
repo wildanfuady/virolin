@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-
+use DB;
 use App\Veritrans\Midtrans;
 use App\Order;
 use App\Veritrans\Veritrans;
@@ -143,9 +143,9 @@ class SnapController extends Controller
         {
             $snap_token = $midtrans->getSnapToken($transaction_data);
             //return redirect($vtweb_url);
-            $order->update([
-                'id' => $snap_token 
-            ]);
+            // $order->update([
+            //     'id' => $snap_token 
+            // ]);
             echo $snap_token;
         } 
         catch (Exception $e) 
@@ -228,6 +228,7 @@ class SnapController extends Controller
               {
                 $user->setSuccess($user);
                 $data->setSuccess($data);
+                DB::table('model_has_roles')->where('model_id', $user->id)->update(['role_id' => 1]);
                 // Config Email
                 // $status = "Success";
                 // $to = $user->email;
@@ -241,6 +242,7 @@ class SnapController extends Controller
           {
                 $user->setSuccess($user);
                 $data->setSuccess($data);
+                DB::table('model_has_roles')->where('model_id', $user->id)->update(['role_id' => 1]);
                 // Config Email
                 // $status = "Success";
                 // $to = $user->email;

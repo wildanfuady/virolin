@@ -23,7 +23,7 @@ class PaymentController extends Controller
 
     public function showConfirmationPaymentForm()
     {
-        $cekOrder = \App\Order::where('user_id', Auth::user()->id)->where('order_status', 'Pending')->first();
+        $cekOrder = \App\Order::where('user_id', Auth::user()->id)->first();
         if($cekOrder->order_status == "Success")
         {
             return redirect()->route('finish');
@@ -188,9 +188,9 @@ class PaymentController extends Controller
                 // cari model_id
                 $role = DB::table('model_has_roles')->where('model_id', $payment->user_id)->first();
                 if(!empty($role)){
-                    DB::table('model_has_roles')->where('model_id', $payment->user_id)->update(['role_id' => 3]);
+                    DB::table('model_has_roles')->where('model_id', $payment->user_id)->update(['role_id' => 1]);
                 } else {
-                    DB::table('model_has_roles')->insert(['role_id' => 3, 'model_type' => 'App\User', 'model_id'=> $payment->user_id]);
+                    DB::table('model_has_roles')->insert(['role_id' => 1, 'model_type' => 'App\User', 'model_id'=> $payment->user_id]);
                 }
                 $order = \App\Order::with(['product'])->where('orders.user_id', $payment->user_id)->first();
                 $product_id = $order->product_id;

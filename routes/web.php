@@ -14,7 +14,7 @@
 Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm');
 // Route::get('/kirimemail','KirimEmailController@index');
-
+Route::post('notification/handling', 'SnapController@notification')->name('notification.handling');
 Route::post('finish', 'SnapController@finish')->name('payment.finish');
 Route::post('unfinish', 'SnapController@unfinish')->name('payment.unfinish');
 Route::post('error', 'SnapController@error')->name('payment.error');

@@ -1,7 +1,6 @@
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
-@section('content')
 <!--================================-->
 <!-- Page Inner Start -->
 <!--================================-->
@@ -13,21 +12,17 @@
         <!--================================-->
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Renewal</h1>
+            <h1 class="pd-0 mg-0 tx-20">Finish</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
             <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Renewal</a>
+            <a class="breadcrumb-item" href="">Finish</a>
             </div>
         </div>
         <!--/ Breadcrumb End -->
         <!--================================-->
 
         <div class="row row-xs clearfix">
-
-<div class="content">
-    <div class="container-fluid">
-        <div class="card">
            
             <div class="card-body">
                 <div class="row">
@@ -87,6 +82,4 @@
         </div>
     </div>
 </div>
-
-@endsection
 @include('partials.footer')
