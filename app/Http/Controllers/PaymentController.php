@@ -23,7 +23,7 @@ class PaymentController extends Controller
 
     public function showConfirmationPaymentForm()
     {
-        $cekOrder = \App\Order::where('user_id', Auth::user()->id)->where('order_status', 'Pending')->first();
+        $cekOrder = \App\Order::where('user_id', Auth::user()->id)->first();
         if($cekOrder->order_status == "Success")
         {
             return redirect()->route('finish');

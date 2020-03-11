@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Veritrans\Midtrans;
 use App\Order;
 use App\Veritrans\Veritrans;
-
+use DB;
 use Veritrans_Config;
 use Veritrans_Snap;
 use Veritrans_Notification;
@@ -228,6 +228,7 @@ class SnapController extends Controller
               {
                 $user->setSuccess($user);
                 $data->setSuccess($data);
+                // DB::table('model_has_roles')->where('model_id', $user->id)->update(['role_id' => 1]);
                 // Config Email
                 // $status = "Success";
                 // $to = $user->email;
@@ -241,6 +242,7 @@ class SnapController extends Controller
           {
                 $user->setSuccess($user);
                 $data->setSuccess($data);
+                // DB::table('model_has_roles')->where('model_id', $user->id)->update(['role_id' => 1]);
                 // Config Email
                 // $status = "Success";
                 // $to = $user->email;
