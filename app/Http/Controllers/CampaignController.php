@@ -214,7 +214,7 @@ class CampaignController extends Controller
 
         $template = new Template();
 
-        $template->template_id              = $request->template_id;
+        $template->template_id              = $campaign->campaign_template;
         $template->block1_bg                = $request->block1_bg;
         $template->block1_headline1         = $request->block1_headline1;
         $template->block1_headline2         = $request->block1_headline2;

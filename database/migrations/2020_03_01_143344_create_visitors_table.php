@@ -19,7 +19,7 @@ class CreateVisitorsTable extends Migration
             $table->string('visitor_browser');
             $table->unsignedBigInteger('campaign_id')->nullable();
             $table->timestamps();
-            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns')->onDelete('cascade');
         });
     }
 

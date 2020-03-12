@@ -26,8 +26,8 @@ class CreateSubscribersTable extends Migration
             $table->unsignedBigInteger('list_sub_id')->nullable();
             $table->timestamps();
             $table->foreign('list_sub_id')->references('list_sub_id')->on('list_subscribers')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns')->onDelete('cascade');
         });
     }
 

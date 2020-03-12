@@ -64,6 +64,8 @@ class CreateTemplatesTable extends Migration
             $table->text('block8_text_color_button')->nullable();
             $table->text('block8_button_bg_color')->nullable();
 
+            $table->index('template_id');
+
             $table->timestamps();
         });
     }

@@ -20,7 +20,7 @@ class CreateTrafikCampaignTable extends Migration
             $table->string('trafik_medium')->nullable();
             $table->unsignedBigInteger('campaign_id')->nullable();
             $table->timestamps();
-            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns');
+            $table->foreign('campaign_id')->references('campaign_id')->on('campaigns')->onDelete('cascade');
         });
     }
 

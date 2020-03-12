@@ -680,7 +680,7 @@
                         <div class="col-md-12">
                           <div class="btn-group float-right">
                             <button type="button" id="prev4" class="btn btn-secondary btn-lg float-right">Prev</button>
-                            <button type="button" id="submit_edit_campaign" class="btn btn-success btn-lg float-right">Submit</button>
+                            <button type="submit" id="" class="btn btn-success btn-lg float-right">Submit</button>
                           </div>
                         </div>
                       </div>

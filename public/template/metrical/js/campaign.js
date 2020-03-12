@@ -219,9 +219,9 @@ $(document).ready(function(){
     $("#submit_create_campaign").click(function(){
 
       if(cekInput("#campaign_subject_confirm_email") == 0 ||
-      cekInput("#editor1") == false ||
+      cekInput("#editor1") == 0 ||
       cekInput("#campaign_subject_thank_email") == 0 ||
-      cekInput("#editor2") == false){
+      cekInput("#editor2") == 0){
         swal({
           title: "Oops!",
           text: "Terdapat beberapa data yang belum diisi",

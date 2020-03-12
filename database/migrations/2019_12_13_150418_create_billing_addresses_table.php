@@ -15,13 +15,13 @@ class CreateBillingAddressesTable extends Migration
     {
         Schema::create('billing_addresses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('order_id')->unsigned();
-            $table->string('first_name')->nulable();
-            $table->string('last_name')->nulable();
-            $table->text('address')->nulable();
-            $table->string('city')->nulable();
-            $table->string('postal_code')->nulable();
-            $table->string('phone')->nulable();
+            $table->bigInteger('order_id')->unsigned()->nullable();
+            $table->string('first_name')->nullable();
+            $table->string('last_name')->nullable();
+            $table->text('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('phone')->nullable();
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('orders');
