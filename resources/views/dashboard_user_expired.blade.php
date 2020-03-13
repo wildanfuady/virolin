@@ -1,161 +1,107 @@
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
-<!--================================-->
-<!-- Page Inner Start -->
-<!--================================-->
 <div class="page-inner mg-b-100">
-    <!-- Main Wrapper -->
     <div id="main-wrapper" style="heigh: 100%">
-        <!--================================-->
-        <!-- Breadcrumb Start -->
-        <!--================================-->
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
-            <h1 class="pd-0 mg-0 tx-20">Dashboard</h1>
+                <h1 class="pd-0 mg-0 tx-20">Dashboard</h1>
             </div>
             <div class="breadcrumb pd-0 mg-0">
-            <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
-            <a class="breadcrumb-item" href="">Dashboard</a>
+                <a class="breadcrumb-item" href="{{ url('/home') }}"><i class="icon ion-ios-home-outline"></i> Home</a>
+                <a class="breadcrumb-item" href="">Dashboard</a>
             </div>
         </div>
-        <!--/ Breadcrumb End -->
-        <!--================================-->
-
-        @can('new_user-payment-confirmation')
-        <!-- Konfirmasi Pembayaran -->
         <div class="row row-xs clearfix">
-            <!--================================-->
-            <!--  Annual Report Start-->
-            <!--================================-->
-            <div class="col-lg-12">
-            <div class="card mg-b-20">
-                <div class="card-header">
-                    <h4 class="card-header-title">
-                        Welcome
-                    </h4>
-                    <div class="card-header-btn">
-                        <a  href="#" data-toggle="collapse" class="btn card-collapse" data-target="#annualReports" aria-expanded="true"><i class="ion-ios-arrow-down"></i></a>
-                        <a href="#" data-toggle="refresh" class="btn card-refresh"><i class="ion-android-refresh"></i></a>
-                        <a href="#" data-toggle="expand" class="btn card-expand"><i class="ion-android-expand"></i></a>
-                        <a href="#" data-toggle="remove" class="btn card-remove"><i class="ion-ios-trash-outline"></i></a>
-                    </div>
-                </div>
-                <div class="collapse show" id="annualReports">
-                    <div class="card-body pd-t-0 pd-b-20 collapse show">
-                        <div class="alert alert-info alert-dismissible mt-4">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <h5>Selamat datang di Virolin</h5>
-                            Dapatkan akses premium mendapatkan calon pembeli dalam satu website
-                        </div>
-                        Kini Anda akan segera menikmati semua fasilitas Virolin setelah melakukan 2 hal, yaitu:
-                        <ol>
-                            <li>Konfirmasi Pembayaran - <a href="{{ url('konfirmasi-pembayaran') }}">Konfirmasi Sekarang</a></li>
-                            <li>Lengkapi Profile Anda - <a href="{{ url('profile') }}">Klik Di sini</a></li>
-                        </ol>
-                    </div>
-                </div>
-
-            </div>
-            </div>
-        </div>
-        <!-- Selesai Konfirmasi Pembayaran -->
-        @endcan
-        @can('renewal-user')
-        <div class="row row-xs clearfix">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-12">
                 <div class="alert alert-danger">
-                    Selamat datang <strong>{{ Auth::user()->name}}</strong>, akun Anda sudah Expired. Silahkan lakukan <strong>renewal / perpanjangan akun</strong> agar bisa kembali menikmati fasilitas Virolin. Terima kasih.
+                    <p>Akun Anda sudah Expired. Silahkan lakukan <strong>renewal / perpanjangan akun</strong> agar bisa kembali menikmati fasilitas Virolin.</p>
+                    <a href="{{ url('renewal') }}" class="btn btn-danger">Renewal Sekarang</a>
                 </div>
             </div>
         </div>
-        @endcan
-        @can('dashboard-user')
         <div class="row row-xs clearfix">
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Subscriber</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-warning">
-                            <i class="icon-people tx-warning tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscribers }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>User</span>subscribe</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                                <label>Subscriber</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-warning">
+                                <i class="icon-people tx-warning tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_subscribers }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>User</span>subscribe</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Campaign</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-success">
-                            <i class="icon-diamond tx-success tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_landingpage}}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Campaign</span>aktif</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Campaign</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-success">
+                                <i class="icon-diamond tx-success tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_landingpage }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Campaign</span>aktif</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>My Order</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
-                            <i class="icon-paper-plane tx-primary tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">{{ $order->product_name }}</h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>{{ $order->product_max_db }} </span> database</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>My Order</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-primary">
+                                <i class="icon-paper-plane tx-primary tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark">{{ $order->product_name }}</h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>{{ $order->product_max_db }} </span> database</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
             <div class="col-sm-6 col-xl-3">
-            <div class="card mg-b-20">
-                <div class="card-body pd-y-0">
-                    <div class="custom-fieldset mb-4">
-                        <div class="clearfix">
-                        <label>Visitor</label>
-                        </div>
-                        <div class="d-flex align-items-center text-dark">
-                        <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-danger">
-                            <i class="icon-globe tx-danger tx-20"></i>
-                        </div>
-                        <div>
-                            <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_visitors->total_visitor }}</span></h2>
-                            <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Visitor</span>unik</div>
-                        </div>
+                <div class="card mg-b-20">
+                    <div class="card-body pd-y-0">
+                        <div class="custom-fieldset mb-4">
+                            <div class="clearfix">
+                            <label>Visitor</label>
+                            </div>
+                            <div class="d-flex align-items-center text-dark">
+                            <div class="wd-40 wd-md-50 ht-40 ht-md-50 mg-r-10 mg-md-r-10 d-flex align-items-center justify-content-center rounded card-icon-danger">
+                                <i class="icon-globe tx-danger tx-20"></i>
+                            </div>
+                            <div>
+                                <h2 class="tx-20 tx-sm-18 tx-md-24 mb-0 mt-2 mt-sm-0 tx-normal tx-rubik tx-dark"><span class="counter">{{ $total_visitors->total_visitor }}</span></h2>
+                                <div class="d-flex align-items-center tx-gray-500"><span class="text-success mr-2 d-flex align-items-center"><i class="ion-android-arrow-up mr-1"></i>Visitor</span>unik</div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            </div>
-            
-        </div>
-        <!-- Transaction History Start -->
-        <!--================================--> 				  
+            </div> 
+        </div>				  
         <div class="row row-xs clearfix">
             <div class="col-xl-4">
             <div class="card mg-b-20">
@@ -264,14 +210,10 @@
             </div>
             </div>
         </div>
-        <!-- Transaction History End -->
-        @endcan
 
     </div>
-    <!--/ Main Wrapper End -->
 </div>
-<!--/ Page Inner End -->
-<!--================================-->
+@include('partials.footer')  
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/countup/counterup.min.js"></script>		
 <script src="{{ asset('template/metrical') }}/plugins/waypoints/waypoints.min.js"></script>
@@ -281,4 +223,3 @@ $( function() {
 });
 </script>
 @endsection
-@include('partials.footer')  

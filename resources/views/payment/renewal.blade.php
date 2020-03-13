@@ -9,15 +9,8 @@
 @include('partials.header')
 @include('partials.sidebar')
 @include('partials.mainmenu')
-<!--================================-->
-<!-- Page Inner Start -->
-<!--================================-->
 <div class="page-inner">
-    <!-- Main Wrapper -->
     <div id="main-wrapper">
-        <!--================================-->
-        <!-- Breadcrumb Start -->
-        <!--================================-->
         <div class="pageheader pd-t-25 pd-b-35">
             <div class="pd-t-5 pd-b-5">
             <h1 class="pd-0 mg-0 tx-20">Renewal</h1>
@@ -27,22 +20,20 @@
             <a class="breadcrumb-item" href="">Renewal</a>
             </div>
         </div>
-        <!--/ Breadcrumb End -->
-        <!--================================-->
-
+        <div class="row row-xs">
+            <div class="col-lg-12">
+                <div class="alert alert-info alert-dismissible mt-3">
+                    <h5><strong>Informasi:</strong></h5>
+                    <p>Anda dapat membayar via midtrans untuk pilihan aktivasi secara otomatis dan tidak perlu melakukan konfirmasi pembayaran. <br><br><a class="btn btn-info btn-sm" href="#" id="payment-gateway"> Bayar via Midtrans</a></p>
+                </div>
+            </div>
+        </div>
         <div class="row row-xs clearfix">
-            <!--================================-->
-            <!--  Annual Report Start-->
-            <!--================================-->
             <div class="col-lg-12">
             <div class="card mg-b-100">
                 {{ Form::open(['url' => 'konfirmasi-pembayaran/store', 'files' => true, 'id' => 'form_payment_renewal']) }}
                 <div class="collapse show" id="annualReports">
                     <div class="card-body pd-t-10 pd-b-20 collapse show">
-                        <div class="alert alert-info alert-dismissible mt-3">
-                            <strong>Informasi:</strong><br><br>
-                            <p>Anda dapat membayar via midtrans untuk pilihan aktivasi secara otomatis dan tidak perlu melakukan konfirmasi pembayaran. <br><br><a class="btn btn-info btn-sm" href="#" id="payment-gateway"> Bayar via Midtrans</a></p>
-                        </div>
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
                                 <strong>Whoops!</strong> Terjadi kesalahan saat menginput data.<br><br>
@@ -145,10 +136,7 @@
             </div>
         </div>
     </div>
-    <!--/ Main Wrapper End -->
 </div>
-<!--/ Page Inner End -->
-<!--================================-->
 @section('js')
 <script src="{{ asset('template/metrical') }}/plugins/dropify/js/dropify.min.js"></script>
 <script src="{{ asset('template/metrical') }}/plugins/sweet_alert/sweetalert.min.js"></script>

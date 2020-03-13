@@ -94,8 +94,9 @@
                 </div>
             </div>
             <hr>
-            <div class="text-right mg-y-20">
-                <button type="button" class="btn btn-primary mg-t-5" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
+            <div class="mg-y-20">
+                <a href="{{ url('home') }}" class="btn btn-outline-info mg-t-5">Back</a> 
+                <button type="button" class="btn btn-primary mg-t-5 float-right" onclick="javascript:window.print();"><i class="fa fa-print"></i> Print</button>
             </div>
             </div>
         </div>

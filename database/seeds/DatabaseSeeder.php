@@ -172,7 +172,9 @@ class DatabaseSeeder extends Seeder
             'notify-edit',
             'notify-delete',
             // USER
-            'dashboard-user',
+            'dashboard-user-aktif',
+            'dashboard-user-baru',
+            'dashboard-user-expired',
             'campaign-list',
             'campaign-create',
             'campaign-edit',

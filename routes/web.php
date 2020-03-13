@@ -32,7 +32,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('finish', 'SnapController@finish')->name('finish');
 
     Route::get('/dashboard', 'DashboardController@dashboard_admin');
-    Route::get('/homepage', 'DashboardController@dashboard_user');
+    Route::get('/homepage', 'DashboardController@dashboard_user_aktif');
+    Route::get('/homestay', 'DashboardController@dashboard_user_expired');
+    Route::get('/beranda', 'DashboardController@dashboard_user_baru');
     Route::get('/home', 'DashboardController@index');
 
     // Konfirmasi Pembayaran

@@ -32,7 +32,61 @@ $(document).ready(function() {
         };
     };
     
-    
+    // Get Jumlah Konfirmasi Pembayaran
+    $.ajax({
+        type : "GET",
+        url  : '/payment/count_payment',
+        dataType : "json",
+        success: function (data) {
+            $('.count_payment').html(data);
+        }
+    });
+
+    $.ajax({
+        url: '/promo/fetchpromo/',
+        type: 'get',
+        dataType: 'json',
+        success: function(response){
+
+            var len = 0;
+            $('#notificationsBox').empty(); // Empty <tbody>
+            if(response['data'] != null){
+                len = response['data'].length;
+            }
+
+            if(len > 0){
+
+                for(var i=0; i<len; i++){
+                    var promo_id        = response['data'][i].promo_id;
+                    var promo_title     = response['data'][i].promo_title;
+                    var promo_slug      = response['data'][i].promo_slug;
+                    var promo_start     = response['data'][i].promo_start;
+                    var promo_end       = response['data'][i].promo_end;
+                    var promo_content   = response['data'][i].promo_content;
+                    ;
+                    var generate = "<a class='dropdown-item list-group-item' href='{{ url('promo/detail/') }}/"+promo_id+"'>"+
+                        "<div class='d-flex justify-content-between'>" +
+                            "<div class='wd-45 ht-38 mg-r-15 d-flex align-items-center justify-content-center rounded-circle card-icon-success'>"+
+                                "<i class='fa fa-check tx-success tx-16'></i>" +
+                            "</div>" +
+                            "<div>" +
+                                "<span>" + promo_title + "</span>" +
+                                "<div class='tx-gray-600 tx-11'>Klik untuk melihat detail promo ...</div>" +
+                            "</div>" +
+                        "</div>" +
+                    "</a>";
+
+                    $("#notificationsBox").append(generate);
+                }
+
+            } else {
+                var generate = "<div class='text-center pd-l-10 pd-t-10'>Belum ada promo</div>";
+
+                $("#notificationsBox").append(generate);
+            }
+        }
+    });
+
     // Sidebar
     var page_sidebar_init = function() {
         
@@ -251,4 +305,146 @@ $(document).ready(function(){
         return this.href == url;
     }).parentsUntil(".nav-sidebar > .nav-treeview").addClass('menu-open') .prev('a').addClass('active');
    
+});
+
+$(document).ready(function(){
+    
+    $('.datepicker').datepicker({
+        format: "dd-mm-yyyy",
+        todayBtn: "linked",
+        calendarWeeks: true,
+        autoclose: true,
+        todayHighlight: true
+    });
+
+    
+
+    function cekInput(id) {
+      var status;
+      var input_value = $(id).val();
+      var input = $(id);
+      if(input_value == ""){
+        $(input).addClass('is-invalid');
+        status = 0;
+      } else {
+        $(input).removeClass('is-invalid');
+        status = 1;
+      }
+      return status;
+    }
+
+    var hitung_diskon = function(){
+
+        var kode_kupon = $("#input-kupon").val();
+        var kode_produk = $("#input-kode-produk").val();
+
+        const formatter = new Intl.NumberFormat(['ban', 'id']);
+
+        if(cekInput("#input-kupon") == 0){
+            swal({
+                title: "Oops!",
+                text: "Kode kupon wajib diisi",
+                type: "error"
+            });
+        } else {
+            
+            $.ajax({
+                url: '/promo/cekpromo/'+ kode_kupon,
+                type: 'get',
+                data: {kode_kupon:kode_kupon, kode_produk:kode_produk},
+                dataType: 'json',
+                success: function(response){
+
+                    var status = response.success;
+                    var msg = response.message;
+                    var total = response.nilai_kupon;
+                    var diskon = response.diskon;
+                    var status = response.success;
+
+                    if(status == true){
+                        var title = "Success";
+                        var tipe = "success";
+                    } else {
+                        var title = "Maaf";
+                        var tipe = "warning";
+                    }
+
+                    setTimeout(function() {
+                        swal({
+                            title: title,
+                            text: msg,
+                            type: tipe
+                        }, function() {
+                           
+                           if(total != 0){
+                                $("#total_pembayaran").text("Rp. " + formatter.format(total));
+                           }
+                        });
+                    }, 500);
+                },
+                error:function(error){
+                    setTimeout(function() {
+                        swal({
+                            title: "Gagal...",
+                            text: 'Kode promo tidak terdaftar atau sudah expired',
+                            type: "error"
+                        });
+                    }, 500);
+                }
+
+            }); // ajax
+        
+        } // else
+    }
+    $("#apply-kupon").click(function(){
+        
+        hitung_diskon()
+    
+    });
+    
+    $("#input-kupon").keypress(function(event){
+        if(event.keyCode == 13) { // kode enter
+            hitung_diskon();
+        }
+    }); // btn kupon
+
+    $('#payment-gateway').click(function (event) {
+        event.preventDefault();
+        $(this).attr("disabled", "disabled");
+
+        $.ajax({
+            url: './snaptoken',
+            cache: false,
+            success: function(data) {
+        
+                var resultType = document.getElementById('result-type');
+                var resultData = document.getElementById('result-data');
+                function changeResult(type,data){
+                    $("#result-type").val(type);
+                    $("#result-data").val(JSON.stringify(data));
+                }
+                snap.pay(data, {
+                    onSuccess: function(result){
+                        changeResult('success', result);
+                        console.log(result.status_message);
+                        console.log(result);
+                        $("#payment-form").submit();
+                        location.reload();
+                    },
+                    onPending: function(result){
+                        changeResult('pending', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                        location.reload();
+                    },
+                    onError: function(result){
+                        changeResult('error', result);
+                        console.log(result.status_message);
+                        $("#payment-form").submit();
+                        location.reload();
+                    }
+                });
+            }
+        });
+    });
 });

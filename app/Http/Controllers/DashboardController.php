@@ -15,20 +15,133 @@ class DashboardController extends Controller
     {
         $this->middleware(['auth','verified']);
         $this->middleware('permission:dashboard-user', ['only' => ['dashboard_user']]);
+        $this->middleware('permission:dashboard-user-baru', ['only' => ['dashboard_user_baru']]);
         $this->middleware('permission:dashboard-admin', ['only' => ['dashboard_admin']]);
     }
 
     public function index()
     {
-        if (Auth::check() && Auth::user()->level == 'user') {
+        $user_id = Auth::user()->id;
+        $order = \App\Order::where('user_id', $user_id)->first();
+        if (Auth::user()->level == 'user' && Auth::user()->status == "valid" && $order->order_status == "Success") {
             return redirect(url('homepage'));
-        } else { 
+        } else if (Auth::user()->level == 'user' && Auth::user()->status == "invalid" && $order->order_status == "Expired") {
+            return redirect(url('homestay'));
+        } elseif (Auth::user()->level == 'admin' && Auth::user()->status == "valid") { 
             return redirect(url('dashboard'));
+        } else {
+            return redirect(url('beranda'));
         }
         
     }
 
-    public function dashboard_user()
+    public function dashboard_user_expired()
+    {
+        $user_id = Auth::user()->id;
+
+        $data['product'] = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->where('orders.user_id', $user_id)->first();
+
+        $data['total_subscribers'] = \App\Subscribers::join('users', 'subscribers.user_id', '=', 'users.id')->where(['subscribers.user_id' => $user_id, 'subscribers.subscriber_status' => 'valid', 'users.status' => 'valid'])->count();
+
+        $tanggal = date('Y-m-d');
+        // $saat_ini = date('Y-m-d H:i:s');
+        $minggu_lalu = date('Y-m-d', strtotime('-1 week', strtotime($tanggal)));
+
+        $data['total_subscriber_now'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at' ,'>=', $tanggal)->count();
+        
+        $data['total_subscriber_in_week'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at', '>=', $minggu_lalu)->count();
+
+        $data['total_landingpage'] = \App\Campaign::where('user_id', $user_id)->count();
+
+        $query = "SUM(campaign_form_view) as total_visitor";
+        $total_visitors = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+
+        if(empty($total_visitors)){
+            $data['total_visitors'] = 0;
+        } else {
+            $data['total_visitors'] = $total_visitors;
+        }
+
+        $raw_log = "log_activities.created_at as log_created_at, log_activities.status, users.name";
+        $data['activity_log'] = \App\LogActivity::join('users', 'log_activities.user_id', '=', 'users.id')
+            ->where('log_activities.user_id', $user_id)
+            ->selectRaw($raw_log)
+            ->orderBy('log_activities.id', 'desc')
+            ->limit(6)
+            ->get();
+        
+        $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, campaigns.campaign_name as lp_name, subscribers.created_at as sub_created_at";
+        
+        $data['leads'] = \App\Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
+            ->where('subscribers.user_id', $user_id)
+            ->selectRaw($raw_sub)
+            ->orderBy('subscribers.id', 'desc')
+            ->limit(5)
+            ->get();
+        
+        $raw_order = "products.product_name, products.product_max_db";
+        $data['order'] = \App\Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                        ->where('orders.user_id', $user_id)
+                        ->selectRaw($raw_order)
+                        ->first();
+        return view('dashboard_user_expired', $data);
+    }
+    
+    public function dashboard_user_baru()
+    {
+        $user_id = Auth::user()->id;
+
+        $data['product'] = \App\Order::join('products', 'products.product_id', '=', 'orders.product_id')
+            ->where('orders.user_id', $user_id)->first();
+
+        $data['total_subscribers'] = \App\Subscribers::join('users', 'subscribers.user_id', '=', 'users.id')->where(['subscribers.user_id' => $user_id, 'subscribers.subscriber_status' => 'valid', 'users.status' => 'valid'])->count();
+
+        $tanggal = date('Y-m-d');
+        // $saat_ini = date('Y-m-d H:i:s');
+        $minggu_lalu = date('Y-m-d', strtotime('-1 week', strtotime($tanggal)));
+
+        $data['total_subscriber_now'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at' ,'>=', $tanggal)->count();
+        
+        $data['total_subscriber_in_week'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at', '>=', $minggu_lalu)->count();
+
+        $data['total_landingpage'] = \App\Campaign::where('user_id', $user_id)->count();
+
+        $query = "SUM(campaign_form_view) as total_visitor";
+        $total_visitors = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
+
+        if(empty($total_visitors)){
+            $data['total_visitors'] = 0;
+        } else {
+            $data['total_visitors'] = $total_visitors;
+        }
+
+        $raw_log = "log_activities.created_at as log_created_at, log_activities.status, users.name";
+        $data['activity_log'] = \App\LogActivity::join('users', 'log_activities.user_id', '=', 'users.id')
+            ->where('log_activities.user_id', $user_id)
+            ->selectRaw($raw_log)
+            ->orderBy('log_activities.id', 'desc')
+            ->limit(6)
+            ->get();
+        
+        $raw_sub = "subscribers.subscriber_name as name, subscribers.subscriber_email as email, campaigns.campaign_name as lp_name, subscribers.created_at as sub_created_at";
+        
+        $data['leads'] = \App\Subscribers::join('campaigns', 'subscribers.campaign_id', '=', 'campaigns.campaign_id')
+            ->where('subscribers.user_id', $user_id)
+            ->selectRaw($raw_sub)
+            ->orderBy('subscribers.id', 'desc')
+            ->limit(5)
+            ->get();
+        
+        $raw_order = "products.product_name, products.product_max_db";
+        $data['order'] = \App\Order::join('products', 'orders.product_id', '=', 'products.product_id')
+                        ->where('orders.user_id', $user_id)
+                        ->selectRaw($raw_order)
+                        ->first();
+        return view('dashboard_user_baru', $data);
+    }
+
+    public function dashboard_user_aktif()
     {
         $user_id = Auth::user()->id;
 
@@ -46,14 +159,6 @@ class DashboardController extends Controller
         $data['total_subscriber_in_week'] = \App\Subscribers::where(['user_id' => $user_id, 'subscriber_status' => 'valid'])->where('created_at', '>=', $minggu_lalu)->count();
 
         $data['total_landingpage'] = \App\Campaign::where('user_id', $user_id)->count();
-
-        // $query = "SUM(campaign_share) as total";
-        // $total_shares = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
-        // if(empty($total_shares)){
-        //     $data['total_shares'] = 0;
-        // } else {
-        //     $data['total_shares'] = $total_shares;
-        // }
 
         $query = "SUM(campaign_form_view) as total_visitor";
         $total_visitors = \App\Campaign::selectRaw($query)->where('user_id', $user_id)->first();
@@ -100,8 +205,9 @@ class DashboardController extends Controller
                 // return redirect('report');
             }
         }
-        return view('dashboard_user', $data);
+        return view('dashboard_user_aktif', $data);
     }
+
     public function dashboard_admin()
     {
         $user_id = Auth::user()->id;
