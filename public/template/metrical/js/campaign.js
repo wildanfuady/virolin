@@ -10,9 +10,9 @@ $(document).ready(function(){
       return replaceString;
     };
   
-    $("#campaign_lp_name").keyup(function(){
-      var text = $("#campaign_lp_name").val();
-      $("#campaign_lp_name").removeClass('is-invalid');
+    $("#campaign").keyup(function(){
+      var text = $("#campaign").val();
+      $("#campaign").removeClass('is-invalid');
       $("#campaign_group").removeClass('is-invalid');
       var find = [" ", '"', "'"];
       var replace = ["-", "", ""];
@@ -48,9 +48,11 @@ $(document).ready(function(){
   
     $("#next2").click(function(){
       var input_name = $("#campaign_lp_name");
+      var input_camp = $("#campaign");
       var input_list = $("#campaign_group");
       var name = $("#campaign_lp_name").val();
       var list = $("#campaign_group").val();
+      var camp = $("#campaign_group").val();
 
       if(name == ""){
         $(input_name).addClass('is-invalid');
@@ -60,6 +62,13 @@ $(document).ready(function(){
             type: "error"
         });
 
+      } else if(camp == ""){
+        $(input_camp).addClass('is-invalid');
+        swal({
+            title: "Oops!",
+            text: "Campaign wajib diisi",
+            type: "error"
+        });
       } else if(list == ""){
         $(input_list).addClass('is-invalid');
         swal({

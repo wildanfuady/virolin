@@ -26,12 +26,6 @@
 <!-- jQuery File -->
 <script src="{{ asset('template/metrical') }}/plugins/jquery/jquery.min.js"></script>
 <script src="{{ asset('template/metrical') }}/plugins/jquery-ui/jquery-ui.js"></script>
-<script>
-history.pushState(null, null, location.href);
-window.onpopstate = function () {
-   history.go(1);
-};
-</script>
 <style>
    body{
       background:#f7f7fe;

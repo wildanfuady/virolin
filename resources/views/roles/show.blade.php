@@ -57,7 +57,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ url('role') }}" class="btn btn-outline-info">Back</a>
                     </div>
                 </div>
             </div>

@@ -119,7 +119,7 @@
                                 <span class="tx-uppercase tx-10 mg-b-10">User Aktif</span>
                                 <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_aktif}}</span></h3>
 
-                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_aktif}} user aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
+                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_aktif}} user aktif saat ini. <a href="{{ route('user.index') }}">Lihat Selengkapnya</a></p>
 
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 mg-y-20">
@@ -127,7 +127,7 @@
                                 <span class="tx-uppercase tx-10 mg-b-10">User Expired</span>
                                 <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_kadaluarsa}}</span></h3>
 
-                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_kadaluarsa}} user expired saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
+                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat {{$users_kadaluarsa}} user expired saat ini. <a href="{{ route('user.index') }}">Lihat Selengkapnya</a></p>
 
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-12 mg-y-20">
@@ -135,7 +135,7 @@
                                 <span class="tx-uppercase tx-10 mg-b-10">User Non Aktif</span>
                                 <h3 class="tx-20 tx-sm-18 tx-md-24 mg-b-0 tx-normal tx-rubik tx-dark"><span class="counter">{{$users_nonaktif}}</span></h3>
                                 
-                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat user non aktif saat ini. <a href="{{ route('users.index') }}">Lihat Selengkapnya</a></p>
+                                <p class="mg-t-10 mg-b-0 tx-12 tx-gray-600">Terdapat user non aktif saat ini. <a href="{{ route('user.index') }}">Lihat Selengkapnya</a></p>
 
                             </div>
                             </div>

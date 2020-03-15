@@ -23,7 +23,7 @@
         <div class="row row-xs clearfix">
             <div class="col-md-12 col-lg-12">
                 <div class="card mg-b-100">
-                    {{ Form::open(['route' => 'users.store', 'files' => true, 'id' => 'form_create_user']) }}
+                    {{ Form::open(['route' => 'user.store', 'files' => true, 'id' => 'form_create_user']) }}
                     <div class="card-header">
                         <h4 class="card-header-title">
                             Tambah Data User
@@ -77,7 +77,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ route('users.index') }}" class="btn btn-outline-info">Back</a>
+                                <a href="{{ route('user.index') }}" class="btn btn-outline-info">Back</a>
                                 <button type="submit" id="btn_create_user" class="btn btn-primary float-right">Tambah</button>
                             </div>
                         </div>

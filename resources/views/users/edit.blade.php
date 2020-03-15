@@ -20,7 +20,7 @@
         <div class="row row-xs clearfix">
           <div class="col-md-12 col-lg-12">
             <div class="card mg-b-50" style="margin-bottom:20%">
-                {{ Form::model($user, ['method' => 'PATCH','route' => ['users.update', $user->id]]) }}
+                {{ Form::model($user, ['method' => 'PATCH','route' => ['user.update', $user->id]]) }}
                 <div class="card-header">
                     <h4 class="card-header-title">
                         Edit Data User
@@ -79,7 +79,7 @@
                     
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('users.index') }}" class="btn btn-outline-info">Back</a>
+                    <a href="{{ route('user.index') }}" class="btn btn-outline-info">Back</a>
                     &nbsp;
                     &nbsp;
                     <button type="submit" class="btn btn-primary float-right">Update</button>

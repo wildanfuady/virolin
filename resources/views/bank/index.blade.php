@@ -27,7 +27,7 @@
                 <h4 class="card-header-title">
                     List Bank
                     @can('bank-create')
-                        <a class="btn btn-info btn-sm float-right" href="{{ route('banks.create') }}">Tambah Bank</a>
+                        <a class="btn btn-info btn-sm float-right" href="{{ route('bank.create') }}">Tambah Bank</a>
                     @endcan
                 </h4>
               </div>
@@ -81,7 +81,7 @@
                             <td>
                             <div class="btn-group">
                                 @can('bank-edit')
-                                <a class="btn btn-light btn-sm" href="{{ route('banks.edit',$bank->id) }}"><i class="fa fa-edit"></i></a>
+                                <a class="btn btn-light btn-sm" href="{{ route('bank.edit',$bank->id) }}"><i class="fa fa-edit"></i></a>
                                 @endcan
                                 @can('bank-delete')
                                 <a class="btn btn-light btn-sm" onclick="swal_delete_alert('{{ url('banks/destroy/'.$bank->id) }}', 'Apakah Anda yakin ingin menghapus data ini?')"><i class="fa fa-trash"></i></a>

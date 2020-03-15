@@ -136,7 +136,7 @@ class UsersController extends Controller
         $order->kode_unik           = $kode_unik;
         $order->save();
 
-        return redirect('users')->with('success','Created User Successfully');
+        return redirect('user')->with('success','Created User Successfully');
     }
 
     /**
@@ -220,7 +220,7 @@ class UsersController extends Controller
             $user->assignRole($request->input('roles'));
         }
 
-        return redirect()->route('users.index')->with('info','Updated Promo Successfully');
+        return redirect()->route('user.index')->with('info','Updated Promo Successfully');
     }
 
     /**
@@ -233,6 +233,6 @@ class UsersController extends Controller
     {
         $users = \App\User::find($id);
         $users->delete();
-        return redirect()->route('users.index')->with('warning','Deleted Promo Successfully');
+        return redirect()->route('user.index')->with('warning','Deleted Promo Successfully');
     }
 }

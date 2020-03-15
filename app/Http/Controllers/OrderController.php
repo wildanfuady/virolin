@@ -104,7 +104,7 @@ class OrderController extends Controller
             $user->setSuccess($user);
             $order->setSuccess($order);
 
-            return redirect(url('orders'))->with('info', 'Berhasil mengubah data order.');
+            return redirect(url('order'))->with('info', 'Berhasil mengubah data order.');
 
         } else {
 
@@ -121,7 +121,7 @@ class OrderController extends Controller
         $order = \App\Order::find($id);
         $hapus = $order->delete();
         if($hapus){
-            return redirect(url('orders'))->with('warning', 'Berhasil menghapus data order.');
+            return redirect(url('order'))->with('warning', 'Berhasil menghapus data order.');
         }
     }
 }

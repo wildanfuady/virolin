@@ -30,7 +30,7 @@
                             Detail Promo
                         </h4>
                     </div>
-                    {{ Form::model($promo, ['method' => 'PATCH','route' => ['promos.update', $promo->promo_id], 'files' => true, 'id' => 'form_edit_promo']) }}
+                    {{ Form::model($promo, ['method' => 'PATCH','route' => ['promo.update', $promo->promo_id], 'files' => true, 'id' => 'form_edit_promo']) }}
                     <div class="card-body collapse show">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -97,7 +97,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ route('promos.index') }}" class="btn btn-outline-info">Back</a>
+                                <a href="{{ route('promo.index') }}" class="btn btn-outline-info">Back</a>
                                 <button type="button" id="btn_edit_promo" class="btn btn-primary float-right">Update</button>
                             </div>
                         </div>

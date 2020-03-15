@@ -69,7 +69,7 @@ class ProductController extends Controller
 
         $product = Products::create($input);
 
-        return redirect()->route('products.index')->with('success','Created Product Successfully');
+        return redirect()->route('product.index')->with('success','Created Product Successfully');
     }
 
     /**
@@ -121,7 +121,7 @@ class ProductController extends Controller
         $product->product_desc = $request->product_desc;
         $product->save();
 
-        return redirect()->route('products.index')->with('info','Updated Product Successfully');
+        return redirect()->route('product.index')->with('info','Updated Product Successfully');
     }
 
     /**
@@ -134,6 +134,6 @@ class ProductController extends Controller
     {
         $products = Products::where('product_id', $id)->first();
         $products->delete();
-        return redirect()->route('products.index')->with('warning','Deleted Product Successfully');
+        return redirect()->route('product.index')->with('warning','Deleted Product Successfully');
     }
 }

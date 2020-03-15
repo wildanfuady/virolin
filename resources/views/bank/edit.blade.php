@@ -29,7 +29,7 @@
                     Edit Data Bank
                 </h4>
               </div>
-              {{ Form::model($bank, ['method' => 'PATCH','route' => ['banks.update', $bank->id], 'files' => TRUE, 'id' => 'form_edit_bank']) }}
+              {{ Form::model($bank, ['method' => 'PATCH','route' => ['bank.update', $bank->id], 'files' => TRUE, 'id' => 'form_edit_bank']) }}
               <div class="card-body collapse show">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger">
@@ -76,7 +76,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ route('bank.index') }}" class="btn btn-outline-info">Back</a>
                         <button type="button" id="btn_edit_bank" class="btn btn-primary float-right">Update</button>
                     </div>
                 </div>

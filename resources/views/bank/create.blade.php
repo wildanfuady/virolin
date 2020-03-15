@@ -29,7 +29,7 @@
                     Tambah Data Bank Baru
                 </h4>
               </div>
-              {{ Form::open(['route' => 'banks.store', 'files' => TRUE, 'id' => 'form_create_bank']) }}
+              {{ Form::open(['route' => 'bank.store', 'files' => TRUE, 'id' => 'form_create_bank']) }}
               <div class="card-body collapse show">
 
                 @if (count($errors) > 0)
@@ -70,7 +70,7 @@
 
                 <div class="row">
                     <div class="col-md-12">
-                        <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ route('bank.index') }}" class="btn btn-outline-info">Back</a>
                         <button type="button" id="btn_create_bank" class="btn btn-primary float-right">Tambah</button>
                     </div>
                 </div>

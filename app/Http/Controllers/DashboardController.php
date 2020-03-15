@@ -14,8 +14,9 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware(['auth','verified']);
-        $this->middleware('permission:dashboard-user', ['only' => ['dashboard_user']]);
+        $this->middleware('permission:dashboard-user-aktif', ['only' => ['dashboard_user_aktif']]);
         $this->middleware('permission:dashboard-user-baru', ['only' => ['dashboard_user_baru']]);
+        $this->middleware('permission:dashboard-user-expired', ['only' => ['dashboard_user_expired']]);
         $this->middleware('permission:dashboard-admin', ['only' => ['dashboard_admin']]);
     }
 
@@ -199,10 +200,17 @@ class DashboardController extends Controller
             // $now = Carbon::now();
             if(Carbon::parse($order->order_expired) < Carbon::now()){
                 // hapus permission
-                DB::table('model_has_roles')->where('model_id', $user_id)->update(['role_id' => 2]);
-                $order->setExpired($order);
-                $user->setExpired($user);
-                // return redirect('report');
+                $data = \App\Model_has_roles::where('model_id', $user_id)->delete();
+                if($data){
+                    $ins = array(
+                        'model_id' => intval($user_id),
+                        'model_type' => 'App\User',
+                        'role_id' => 2
+                    );
+                    DB::table('model_has_roles')->insert($ins);
+                    $order->setExpired($order);
+                    $user->setExpired($user);
+                }
             }
         }
         return view('dashboard_user_aktif', $data);

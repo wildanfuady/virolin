@@ -24,7 +24,7 @@
                         <h4 class="card-header-title">
                         List Data Role
                             @can('role-create')
-                                <a class="btn btn-info btn-sm float-right" href="{{ route('roles.create') }}"> Tambah Role</a>
+                                <a class="btn btn-info btn-sm float-right" href="{{ route('role.create') }}"> Tambah Role</a>
                             @endcan
                         </h4>
                     </div>
@@ -64,12 +64,12 @@
                                 <td>{{ $role->name }}</td>
                                 <td style="text-align:center">
                                 <div class="btn-group">
-                                    <a class="btn btn-light btn-sm" href="{{ route('roles.show',$role->id) }}"><i class="fa fa-eye"></i></a>
+                                    <a class="btn btn-light btn-sm" href="{{ route('role.show',$role->id) }}"><i class="fa fa-eye"></i></a>
                                     @can('role-edit')
-                                    <a class="btn btn-light btn-sm" href="{{ route('roles.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
+                                    <a class="btn btn-light btn-sm" href="{{ route('role.edit',$role->id) }}"><i class="fa fa-edit"></i></a>
                                     @endcan
                                     @can('role-delete')
-                                    <a class="btn btn-light btn-sm" href="{{ url('roles/destroy/'.$role->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                    <a class="btn btn-light btn-sm" href="{{ url('role/destroy/'.$role->id) }}" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                     @endcan
                                 </div>
                                 </td>

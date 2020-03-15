@@ -17,6 +17,7 @@ class CreateCampaignsTable extends Migration
             $table->bigIncrements('campaign_id');
             $table->string('campaign_slug');
             $table->string('campaign_name');
+            $table->string('campaign');
             $table->unsignedBigInteger('campaign_template')->nullable();
             $table->enum('campaign_form_hp', ['Ya', 'Tidak']);
             $table->enum('campaign_form_address', ['Ya', 'Tidak']);

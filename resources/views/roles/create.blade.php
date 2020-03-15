@@ -25,7 +25,7 @@
                             Tambah Data Role
                         </h4>
                     </div>
-                    {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
+                    {!! Form::open(array('route' => 'role.store','method'=>'POST')) !!}
                     <div class="card-body collapse show">
                         
                         @if (count($errors) > 0)
@@ -70,7 +70,7 @@
                         
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ url('role') }}" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
                         <button type="submit" class="btn btn-primary float-right">Tambah</button>

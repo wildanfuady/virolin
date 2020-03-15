@@ -60,7 +60,7 @@
 
             </div>
             <div class="card-footer">
-                <a href="{{ route('banks.index') }}" class="btn btn-outline-info">Back</a>
+                <a href="{{ route('bank.index') }}" class="btn btn-outline-info">Back</a>
             </div>
         </div>
     </div>

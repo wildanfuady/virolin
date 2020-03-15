@@ -24,7 +24,7 @@
                         <h4 class="card-header-title">
                             List Data Promo
                             @can('promo-create')
-                                <a class="btn btn-info btn-sm float-right" href="{{ route('promos.create') }}"> Tambah Promo</a>
+                                <a class="btn btn-info btn-sm float-right" href="{{ route('promo.create') }}"> Tambah Promo</a>
                             @endcan
                         </h4>
                     </div>
@@ -81,12 +81,12 @@
                                         <td> {{$item->promo_status}} </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ route('promos.show', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('promo.show', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
                                                 @can('promo-edit')
-                                                <a href="{{ route('promos.edit', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('promo.edit', $item->promo_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan
                                                 @can('promo-delete')
-                                                <a href="{{ url('promos/destroy/'. $item->promo_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
+                                                <a href="{{ url('promo/destroy/'. $item->promo_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
                                                 @endcan
                                             </div>
                                         </td>
@@ -106,7 +106,7 @@
         </div>
     </div>
 </div>
-
+@section('js')
 <script>
 
     $(document).ready(function() {
@@ -129,6 +129,6 @@
         }
     });
 
-    </script>
-
+</script>
+@endsection  
 @include('partials.footer')

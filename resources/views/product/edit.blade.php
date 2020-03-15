@@ -28,7 +28,7 @@
                             Edit Product
                         </h4>
                     </div>
-                    {{ Form::model($product, ['method' => 'PATCH','route' => ['products.update', $product->product_id], 'id' => 'form_edit_product']) }}
+                    {{ Form::model($product, ['method' => 'PATCH','route' => ['product.update', $product->product_id], 'id' => 'form_edit_product']) }}
                     <div class="card-body collapse show">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -79,7 +79,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ route('products.index') }}" class="btn btn-outline-info">Back</a>
+                                <a href="{{ route('product.index') }}" class="btn btn-outline-info">Back</a>
                                 <button type="button" id="btn_edit_product" class="btn btn-primary float-right">Update</button>
                             </div>
                         </div>

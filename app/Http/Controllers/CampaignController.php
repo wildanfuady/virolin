@@ -37,6 +37,7 @@ class CampaignController extends Controller
         if(!empty($keyword)) {
             $where[] = ['campaign_name', 'LIKE', "%{$keyword}%"];
             $orwhere[] = ['campaign_slug', 'LIKE', "%{$keyword}%"];
+            $orwhere[] = ['campaign', 'LIKE', "%{$keyword}%"];
         }
 
         if(empty($keyword)) {
@@ -76,7 +77,10 @@ class CampaignController extends Controller
         $messages = [
             'campaign_name.required' => 'Nama Campaign wajib diisi.',
             'campaign_name.regex' => 'Nama Campaign hanya boleh berisi huruf, angka dan spasi.',
-            'campaign_name.max' => 'Nama Campaign maksimal 50 karakter.',
+            'campaign_name.max' => 'Nama Campaign maksimal 100 karakter.',
+            'campaign.required' => 'Campaign wajib diisi.',
+            'campaign.regex' => 'Campaign hanya boleh berisi huruf, angka dan spasi.',
+            'campaign.max' => 'Campaign maksimal 100 karakter.',
             'campaign_group.required' => 'List Subscriber wajib diisi.',
             'campaign_form_telp.required' => 'No Telp wajib diisi.',
             'campaign_form_address.required' => 'Alamat wajib diisi.',
@@ -119,7 +123,8 @@ class CampaignController extends Controller
             'block8_button_bg_color.required' => 'Background Button Block 8 wajib diisi.',
         ];
         $rules = [
-            'campaign_name' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:50',
+            'campaign_name' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:100',
+            'campaign' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:100',
             'campaign_group' => 'required',
             'campaign_form_telp' => 'required',
             'campaign_form_address' => 'required',
@@ -171,7 +176,7 @@ class CampaignController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $name = $request->campaign_name;
+        $name = $request->campaign;
         $char = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
         $del_char = strtolower(str_replace($char, "", $name));
         $slug = strtolower(str_replace(' ', '-', $del_char));
@@ -196,7 +201,8 @@ class CampaignController extends Controller
 
         $campaign = new Campaign();
 
-        $campaign->campaign_name            = $name; 
+        $campaign->campaign_name            = $request->campaign_name; 
+        $campaign->campaign                 = $name; 
         $campaign->campaign_slug            = $slug; 
         $campaign->campaign_form_hp         = $telp; 
         $campaign->campaign_form_address    = $address; 
@@ -332,7 +338,10 @@ class CampaignController extends Controller
         $messages = [
             'campaign_name.required' => 'Nama Campaign wajib diisi.',
             'campaign_name.regex' => 'Nama Campaign hanya boleh berisi huruf, angka dan spasi.',
-            'campaign_name.max' => 'Nama Campaign maksimal 50 karakter.',
+            'campaign_name.max' => 'Nama Campaign maksimal 100 karakter.',
+            'campaign.required' => 'Campaign wajib diisi.',
+            'campaign.regex' => 'Campaign hanya boleh berisi huruf, angka dan spasi.',
+            'campaign.max' => 'Campaign maksimal 100 karakter.',
             'campaign_group.required' => 'List Subscriber wajib diisi.',
             'campaign_form_telp.required' => 'No Telp wajib diisi.',
             'campaign_form_address.required' => 'Alamat wajib diisi.',
@@ -362,6 +371,7 @@ class CampaignController extends Controller
             'block4_bg_headline.required' => 'Background Headline Block 4 wajib diisi.',
             'block4_text_headline.required' => 'Teks Headline Block 4 wajib diisi.',
             'block4_text_headline_desc.required' => 'Teks Deskripsi Headline Block 4 wajib diisi.',
+            'block4_image.required' => 'Gambar Block 4 wajib diisi.',
             'block5_bg.required' => 'Background Block 5 wajib diisi.',
             'block5_text.required' => 'Teks Block 5 wajib diisi.',
             'block6_bg.required' => 'Background Block 6 wajib diisi.',
@@ -374,7 +384,8 @@ class CampaignController extends Controller
             'block8_button_bg_color.required' => 'Background Button Block 8 wajib diisi.',
         ];
         $rules = [
-            'campaign_name' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:50',
+            'campaign_name' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:100',
+            'campaign' => 'required|regex:/^[a-zA-Z0-9 ]+$/u|max:100',
             'campaign_group' => 'required',
             'campaign_form_telp' => 'required',
             'campaign_form_address' => 'required',
@@ -392,6 +403,7 @@ class CampaignController extends Controller
             'block1_btn_text_bg' => 'required',
             'block2_text_edukasi' => 'required',
             'block3_bg' => 'required',
+            'block3_image' => 'required',
             'block3_headline' => 'required',
             'block3_alasan1_icon' => 'required',
             'block3_alasan1_text' => 'required',
@@ -401,9 +413,15 @@ class CampaignController extends Controller
             'block3_alasan3_text' => 'required',
             'block3_alasan4_icon' => 'required',
             'block3_alasan4_text' => 'required',
+            'block4_bg' => 'required',
+            'block4_bg_headline' => 'required',
+            'block4_text_headline' => 'required',
+            'block4_text_headline_desc' => 'required',
+            'block4_image' => 'required',
             'block5_bg' => 'required',
             'block5_text' => 'required',
             'block6_bg' => 'required',
+            'block6_image' => 'required',
             'block6_text_headline' => 'required',
             'block7_faq' => 'required',
             'block8_bg' => 'required',
@@ -419,7 +437,7 @@ class CampaignController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
-        $name = $request->campaign_name;
+        $name = $request->campaign;
         $char = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
         $del_char = strtolower(str_replace($char, "", $name));
         $slug = strtolower(str_replace(' ', '-', $del_char));
@@ -444,8 +462,9 @@ class CampaignController extends Controller
 
         $campaign = Campaign::find($id);
 
-        $campaign->campaign_name            = $name; 
-        $campaign->campaign_slug            = $slug; 
+        $campaign->campaign_name            = $request->campaign_name; 
+        $campaign->campaign                 = $name; 
+        $campaign->campaign_slug            = $slug;  
         $campaign->campaign_form_hp         = $telp; 
         $campaign->campaign_form_address    = $address; 
         $campaign->campaign_template        = $request->template_id;

@@ -47,11 +47,11 @@ Route::group(['middleware' => ['auth']], function () {
 	Route::get('snaptoken', 'SnapController@token');
     
     // Module Admin
-    Route::resource('users','UsersController');
-    Route::get('users/destroy/{id}','UsersController@destroy');
+    Route::resource('user','UsersController');
+    Route::get('user/destroy/{id}','UsersController@destroy');
 
-    Route::resource('roles','RoleController');
-    Route::get('roles/destroy/{id}','RoleController@destroy');
+    Route::resource('role','RoleController');
+    Route::get('role/destroy/{id}','RoleController@destroy');
 
     Route::resource('permission','PermissionController');
     Route::get('permission/destroy/{id}','PermissionController@destroy');
@@ -59,25 +59,25 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('subscribers','SubscribersController');
     Route::get('subscribers/destroy/{id}','SubscribersController@destroy');
 
-    Route::resource('banks','BankController');
-    Route::get('banks/destroy/{id}','BankController@destroy');
+    Route::resource('bank','BankController');
+    Route::get('bank/destroy/{id}','BankController@destroy');
 
-    Route::resource('promos','PromoController');
-    Route::get('promos/destroy/{id}','PromoController@destroy');
+    Route::resource('promo','PromoController');
+    Route::get('promo/destroy/{id}','PromoController@destroy');
 
-    Route::resource('orders','OrderController');
-    Route::get('orders/destroy/{id}','OrderController@destroy');
+    Route::resource('order','OrderController');
+    Route::get('order/destroy/{id}','OrderController@destroy');
 
-    Route::resource('products','ProductController');
-    Route::get('products/destroy/{id}','ProductController@destroy');
+    Route::resource('product','ProductController');
+    Route::get('product/destroy/{id}','ProductController@destroy');
 
-    Route::get('reports/destroy/{id}','ReportController@destroy');
+    Route::get('report/destroy/{id}','ReportController@destroy');
 
-    Route::get('reports/pengunjung','ReportController@pengunjung');
-    Route::get('reports/penjualan','ReportController@penjualan');
-    Route::get('reports/promo','ReportController@promo');
-    Route::get('reports/user','ReportController@user');
-    Route::get('reports/user/{id}','ReportController@user');
+    Route::get('report/pengunjung','ReportController@pengunjung');
+    Route::get('report/penjualan','ReportController@penjualan');
+    Route::get('report/promo','ReportController@promo');
+    Route::get('report/user','ReportController@user');
+    Route::get('report/user/{id}','ReportController@user');
 
     Route::resource('setting','SettingController');
     Route::get('setting/destroy/{id}','SettingController@destroy');
@@ -108,7 +108,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('renewal','RenewalController@index');
     Route::post('renewal/store','RenewalController@store');
 
-    Route::get('promo','UserPromoController@index');
+    Route::get('promos','UserPromoController@index');
     Route::get('promo/detail/{id}','UserPromoController@show')->where('id', '[0-9]+');
     Route::get('promo/fetchpromo','UserPromoController@fetch_promo');
     Route::get('promo/cekpromo/{id}','UserPromoController@cek_promo');

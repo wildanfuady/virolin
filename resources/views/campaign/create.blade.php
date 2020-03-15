@@ -74,9 +74,19 @@
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group">
-                            <label class="form-control-label">Nama Landing Page:</label>
-                            <small class="sidetitle">Hanya boleh diisi dengan huruf, angka dan spasi</small>
-                            {{ Form::text('campaign_name', '', ['class'=> 'form-control', 'id' => 'campaign_lp_name', 'placeholder' => 'Masukan Nama / Judul Landing Page', 'autocomplete' => 'off', 'autocomplete' => 'off']) }}
+                            <label class="form-control-label">Nama Campaign:</label>
+                            <small class="sidetitle">Hanya boleh diisi dengan huruf, angka dan spasi. Kalimat yang Anda inputkan di sini hanya akan tampil di list campaign Anda. Contoh: Cari Leads Buat Seminar</small>
+                            {{ Form::text('campaign_name', '', ['class'=> 'form-control', 'id' => 'campaign_lp_name', 'placeholder' => 'Masukan Nama / Judul Campaign', 'autocomplete' => 'off', 'autocomplete' => 'off']) }}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                            <label class="form-control-label">Campaign:</label>
+                            <small class="sidetitle">Hanya boleh diisi dengan huruf, angka dan spasi. Kalimat yang Anda ketik di sini akan digunakan pada URL campaign, landingpage, share wa dan email. Contoh: Bonus Ebook Akhir Tahun</small>
+                            {{ Form::text('campaign', '', ['class'=> 'form-control', 'id' => 'campaign', 'placeholder' => 'Campaign', 'autocomplete' => 'off', 'autocomplete' => 'off']) }}
                             <br>
                             URL: <span id="campaign_slug_text">https://virolin.ilmucoding.com/</span>
                           </div>

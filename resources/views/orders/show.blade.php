@@ -76,7 +76,7 @@
                         
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url('orders') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ route('order.index') }}" class="btn btn-outline-info">Back</a>
                     </div>
                 </div>
             </div>

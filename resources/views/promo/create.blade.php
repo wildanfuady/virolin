@@ -30,7 +30,7 @@
                             Tambah Data Promo
                         </h4>
                     </div>
-                    {{ Form::open(['route' => 'promos.store', 'files' => true, 'id' => 'form_create_promo']) }}
+                    {{ Form::open(['route' => 'promo.store', 'files' => true, 'id' => 'form_create_promo']) }}
                     <div class="card-body collapse show">
 
                         @if (count($errors) > 0)
@@ -98,7 +98,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="{{ route('promos.index') }}" class="btn btn-outline-info">Back</a>
+                                <a href="{{ route('promo.index') }}" class="btn btn-outline-info">Back</a>
                                 <button type="button" id="btn_create_promo" class="btn btn-primary float-right">Tambah</button>
                             </div>
                         </div>

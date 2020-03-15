@@ -64,37 +64,37 @@
                 @endcan
                 @can('bank-list')
                 <li>
-                <a href="{{ route('banks.index') }}"><i data-feather="dollar-sign"></i>
+                <a href="{{ route('bank.index') }}"><i data-feather="dollar-sign"></i>
                 <span>Manajemen Bank</span></a>
                 </li>
                 @endcan
                 @can('order-list')
                 <li>
-                <a href="{{ route('orders.index') }}"><i data-feather="shopping-cart"></i>
+                <a href="{{ route('order.index') }}"><i data-feather="shopping-cart"></i>
                 <span>Manajemen Order</span></a>
                 </li>
                 @endcan
                 @can('product-list')
                 <li>
-                <a href="{{ route('products.index') }}"><i data-feather="folder"></i>
+                <a href="{{ route('product.index') }}"><i data-feather="folder"></i>
                 <span>Manajemen Produk</span></a>
                 </li>
                 @endcan
                 @can('promo-list')
                 <li>
-                <a href="{{ route('promos.index') }}"><i data-feather="percent"></i>
+                <a href="{{ route('promo.index') }}"><i data-feather="percent"></i>
                 <span>Manajemen Promo</span></a>
                 </li>
                 @endcan
                 @can('user-list')
                 <li>
-                <a href="{{ route('users.index') }}"><i data-feather="users"></i>
+                <a href="{{ route('user.index') }}"><i data-feather="users"></i>
                 <span>Manajemen User</span></a>
                 </li>
                 @endcan
                 @can('role-list')
                 <li>
-                <a href="{{ route('roles.index') }}"><i data-feather="key"></i>
+                <a href="{{ route('role.index') }}"><i data-feather="key"></i>
                 <span>Manajemen Role</span></a>
                 </li>
                 @endcan

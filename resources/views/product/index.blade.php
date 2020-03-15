@@ -27,7 +27,7 @@
                         <h4 class="card-header-title">
                             List Produk
                             @can('product-create')
-                                <a class="btn btn-info btn-sm float-right" href="{{ route('products.create') }}"> Tambah Produk</a>
+                                <a class="btn btn-info btn-sm float-right" href="{{ route('product.create') }}"> Tambah Produk</a>
                             @endcan
                         </h4>
                     </div>
@@ -85,9 +85,9 @@
                                     <td>{{ $product->product_status }}</td>
                                     <td style="text-align:center">
                                     <div class="btn-group">
-                                        <a class="btn btn-light btn-sm" href="{{ route('products.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
+                                        <a class="btn btn-light btn-sm" href="{{ route('product.show',$product->product_id) }}"><i class="fa fa-eye"></i></a>
                                         @can('product-edit')
-                                        <a class="btn btn-light btn-sm" href="{{ route('products.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
+                                        <a class="btn btn-light btn-sm" href="{{ route('product.edit',$product->product_id) }}"><i class="fa fa-edit"></i></a>
                                         @endcan
                                         @can('product-delete')
                                         <a class="btn btn-light btn-sm" onclick="swal_delete_alert('{{ url('products/destroy/'.$product->product_id) }}', 'Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>

@@ -66,7 +66,7 @@ class SnapController extends Controller
                 'id'        => $order->product->product_id,
                 'price'     => $total,
                 'quantity'  => 1,
-                'name'      => $order->product->product_name
+                'name'      => $order->product->product_max_db." database",
             ),
         ];
 

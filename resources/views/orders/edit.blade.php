@@ -23,7 +23,7 @@
                             Edit Data Order
                         </h4>
                     </div>
-                    {{ Form::model($orders, ['method' => 'PATCH','route' => ['orders.update', $orders->order_id]]) }}
+                    {{ Form::model($orders, ['method' => 'PATCH','route' => ['order.update', $orders->order_id]]) }}
                     <div class="card-body collapse show">
                         @if (count($errors) > 0)
                             <div class="alert alert-danger">
@@ -82,7 +82,7 @@
                         
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url('orders') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ url('order') }}" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
                         <button type="submit" class="btn btn-primary float-right">Update</button>

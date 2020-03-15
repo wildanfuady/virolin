@@ -22,16 +22,6 @@
             </div>
         </div>
         @endif
-        @can('renewal-user')
-        <div class="row">
-            <div class="col-md-12">
-                <div class="alert alert-danger">
-                    <p>Akun Anda sudah Expired. Silahkan lakukan <strong>renewal / perpanjangan akun</strong> agar bisa kembali menikmati fasilitas Virolin.</p>
-                    <a href="{{ url('renewal') }}" class="btn btn-danger">Renewal Sekarang</a>
-                </div>
-            </div>
-        </div>
-        @endcan
         <div class="row row-xs clearfix">
             <div class="col-sm-6 col-xl-3">
                 <div class="card mg-b-20">

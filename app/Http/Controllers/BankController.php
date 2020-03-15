@@ -87,7 +87,7 @@ class BankController extends Controller
         $simpan = $bank->save();
 
         if($simpan){
-            return redirect(route('banks.index'))->with('success', 'Created Bank Successfully');
+            return redirect(route('bank.index'))->with('success', 'Created Bank Successfully');
         }
     }
 
@@ -172,7 +172,7 @@ class BankController extends Controller
         $simpan = $bank->save();
 
         if($simpan){
-            return redirect(route('banks.index'))->with('info', 'Updated Bank Successfully');
+            return redirect(route('bank.index'))->with('info', 'Updated Bank Successfully');
         }
     }
 
@@ -187,7 +187,7 @@ class BankController extends Controller
         $bank = \App\Banks::find($id);
         $hapus = $bank->delete();
         if($hapus){
-            return redirect()->route('banks.index')->with('warning', 'Deleted Bank Successfully');
+            return redirect()->route('bank.index')->with('warning', 'Deleted Bank Successfully');
         }
     }
 }

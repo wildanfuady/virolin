@@ -25,7 +25,7 @@
                             Edit Data Role
                         </h4>
                     </div>
-                    {!! Form::model($role, ['method' => 'PATCH','route' => ['roles.update', $role->id]]) !!}
+                    {!! Form::model($role, ['method' => 'PATCH','route' => ['role.update', $role->id]]) !!}
                     <div class="card-body collapse show">
                     
                         @if (count($errors) > 0)
@@ -71,7 +71,7 @@
 
                     </div>
                     <div class="card-footer">
-                        <a href="{{ url('roles') }}" class="btn btn-outline-info">Back</a>
+                        <a href="{{ url('role') }}" class="btn btn-outline-info">Back</a>
                         &nbsp;
                         &nbsp;
                         <button type="submit" class="btn btn-primary float-right">Update</button>

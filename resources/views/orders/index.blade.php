@@ -90,9 +90,9 @@
                                         {{ $item->order_status }} </td>
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ route('orders.show', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('order.show', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-eye"></i></a>
                                                 @can('order-edit')
-                                                <a href="{{ route('orders.edit', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
+                                                <a href="{{ route('order.edit', $item->order_id) }}" class="btn btn-light btn-sm"><i class="fa fa-edit"></i></a>
                                                 @endcan
                                                 @can('order-delete')
                                                 <a href="{{ url('orders/destroy/'. $item->order_id) }}" class="btn btn-light btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?');"><i class="fa fa-trash"></i></a>
