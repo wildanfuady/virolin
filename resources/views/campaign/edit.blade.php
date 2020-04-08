@@ -174,6 +174,14 @@
                             </div>
                             <div class="form-group">
                               <div class="row">
+                                <div class="col-md-4"><label class="form-control-label">Warna Text Headline 1:</label></div>
+                                <div class="col-md-8">
+                                  {{ Form::text('block1_headline1_color', $campaign->block1_headline1_color, ['class'=> 'form-control cp2', 'placeholder' => '#000000', 'id' => 'block1_headline1_color', 'autocomplete' => 'off']) }}
+                                </div>
+                              </div>
+                            </div>
+                            <div class="form-group">
+                              <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Warna Text Headline 2:</label></div>
                                 <div class="col-md-8">
                                   {{ Form::text('block1_headline2_color', $campaign->block1_headline2_color, ['class'=> 'form-control cp2', 'placeholder' => '#000000', 'id' => 'block1_headline2_color', 'autocomplete' => 'off']) }}
@@ -344,14 +352,6 @@
                             </div>
                             <div class="form-group">
                               <div class="row">
-                                <div class="col-md-4"><label class="form-control-label">Headline Utama:</label></div>
-                                <div class="col-md-8">
-                                  {{ Form::textarea('block4_text_headline', $campaign->block4_text_headline_desc, ['class' => 'form-control textarea', 'placeholder' => 'Headline Utama']) }}
-                                </div>
-                              </div>
-                            </div>
-                            <div class="form-group">
-                              <div class="row">
                                 <div class="col-md-4"><label class="form-control-label">Text Headline Utama:</label></div>
                                 <div class="col-md-8">
                                   {{ Form::textarea('block4_text_headline', $campaign->block4_text_headline, ['class' => 'form-control', 'placeholder' => 'Dapatkan 7 Hari Free Ecourse ...', 'autocomplete' => 'off', 'id' => 'block4_text_headline']) }}
@@ -415,6 +415,14 @@
                             <div class="form-group">
                               <label class="form-control-label">Text Bikin Ngiler:</label>
                               {{ Form::textarea('block5_text', $campaign->block5_text, ['class' => 'form-control textarea', 'placeholder' => 'Text Bikin Ngiler', 'autocomplete' => 'off', 'id' => 'block5_text']) }}
+                            </div>
+                            <div class="form-group">
+                              <div class="row">
+                                <div class="col-md-4"><label class="form-control-label">Warna Text Bikin Ngiler:</label></div>
+                                <div class="col-md-8">
+                                  {{ Form::text('block5_text_color', $campaign->block5_text_color, ['class'=> 'form-control cp2', 'placeholder' => '#000000', 'autocomplete' => 'off', 'id' => 'block5_text_color']) }}
+                                </div>
+                              </div>
                             </div>
                           </div>
                           <div class="col-md-5 col-sm-5 col-xs-5">

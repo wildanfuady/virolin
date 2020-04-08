@@ -23,6 +23,7 @@ class CreateTemplatesTable extends Migration
             $table->text('block1_btn_text')->nullable();
             $table->text('block1_btn_text_color')->nullable();
             $table->text('block1_btn_text_bg')->nullable();
+            $table->text('block1_headline1_color')->nullable();
             $table->text('block1_headline2_color')->nullable();
 
             $table->text('block2_text_edukasi')->nullable();
@@ -47,9 +48,11 @@ class CreateTemplatesTable extends Migration
             $table->text('block4_text_headline_desc')->nullable();
             $table->text('block4_image')->nullable();
             $table->text('block4_text_headline_color')->nullable();
+            $table->text('block4_text_headline_desc_color')->nullable();
 
             $table->text('block5_bg')->nullable();
             $table->text('block5_text')->nullable();
+            $table->text('block5_text_color')->nullable();
 
             $table->text('block6_bg')->nullable();
             $table->text('block6_text_headline')->nullable();

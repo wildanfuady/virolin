@@ -107,6 +107,7 @@ $(document).ready(function(){
       if(cekInput("#block1_bg") == 0 || 
           cekInput("#block1_headline1") == 0 ||
           cekInput("#block1_headline2") == 0 ||
+          cekInput("#block1_headline1_color") == 0 ||
           cekInput("#block1_headline2_color") == 0 ||
           cekInput("#block1_btn_text_bg") == 0 ||
           cekInput("#block1_btn_text") == 0 ||
@@ -134,6 +135,7 @@ $(document).ready(function(){
           cekInput("#block4_image") == 0 ||
           cekInput("#block5_bg") == 0 ||
           cekInput("#block5_text") == 0 ||
+          cekInput("#block5_text_color") == 0 ||
           cekInput("#block6_bg") == 0 ||
           cekInput("#block6_text_headline_color") == 0 ||
           cekInput("#block6_text_headline") == 0 ||
@@ -160,6 +162,7 @@ $(document).ready(function(){
       if(cekInput("#block1_bg") == 0 || 
           cekInput("#block1_headline1") == 0 ||
           cekInput("#block1_headline2") == 0 ||
+          cekInput("#block1_headline1_color") == 0 ||
           cekInput("#block1_headline2_color") == 0 ||
           cekInput("#block1_btn_text_bg") == 0 ||
           cekInput("#block1_btn_text") == 0 ||
@@ -184,6 +187,7 @@ $(document).ready(function(){
           cekInput("#block4_text_headline_desc") == 0 ||
           cekInput("#block5_bg") == 0 ||
           cekInput("#block5_text") == 0 ||
+          cekInput("#block5_text_color") == 0 ||
           cekInput("#block6_bg") == 0 ||
           cekInput("#block6_text_headline_color") == 0 ||
           cekInput("#block6_text_headline") == 0 ||

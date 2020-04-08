@@ -113,6 +113,7 @@ class CampaignController extends Controller
             'block4_image.required' => 'Gambar Block 4 wajib diisi.',
             'block5_bg.required' => 'Background Block 5 wajib diisi.',
             'block5_text.required' => 'Teks Block 5 wajib diisi.',
+            'block5_text_color.required' => 'Warna Teks Block 5 wajib diisi.',
             'block6_bg.required' => 'Background Block 6 wajib diisi.',
             'block6_text_headline.required' => 'Headline Block 6 wajib diisi.',
             'block7_faq.required' => 'Faq Block 7 wajib diisi.',
@@ -159,6 +160,7 @@ class CampaignController extends Controller
             'block4_image' => 'required',
             'block5_bg' => 'required',
             'block5_text' => 'required',
+            'block5_text_color' => 'required',
             'block6_bg' => 'required',
             'block6_image' => 'required',
             'block6_text_headline' => 'required',
@@ -227,6 +229,7 @@ class CampaignController extends Controller
         $template->block1_btn_text          = $request->block1_btn_text;
         $template->block1_btn_text_color    = $request->block1_btn_text_color;
         $template->block1_btn_text_bg       = $request->block1_btn_text_bg;
+        $template->block1_headline1_color   = $request->block1_headline1_color;
         $template->block1_headline2_color   = $request->block1_headline2_color;
 
         $template->block2_text_edukasi      = $request->block2_text_edukasi;
@@ -257,9 +260,11 @@ class CampaignController extends Controller
         $template->block4_text_headline_desc= $request->block4_text_headline_desc;
         $template->block4_image             = $image4;
         $template->block4_text_headline_color= $request->block4_text_headline_color;
+        $template->block4_text_headline_desc_color= $request->block4_text_headline_desc_color;
 
         $template->block5_bg                = $request->block5_bg;
         $template->block5_text              = $request->block5_text;
+        $template->block5_text_color        = $request->block5_text_color;
 
         $image6 = $request->file('block6_image')
                 ->store('block6', 'public');
@@ -374,6 +379,7 @@ class CampaignController extends Controller
             'block4_image.required' => 'Gambar Block 4 wajib diisi.',
             'block5_bg.required' => 'Background Block 5 wajib diisi.',
             'block5_text.required' => 'Teks Block 5 wajib diisi.',
+            'block5_text_color.required' => 'Warna Teks Block 5 wajib diisi.',
             'block6_bg.required' => 'Background Block 6 wajib diisi.',
             'block6_text_headline.required' => 'Headline Block 6 wajib diisi.',
             'block7_faq.required' => 'Faq Block 7 wajib diisi.',
@@ -420,6 +426,7 @@ class CampaignController extends Controller
             'block4_image' => 'required',
             'block5_bg' => 'required',
             'block5_text' => 'required',
+            'block5_text_color' => 'required',
             'block6_bg' => 'required',
             'block6_image' => 'required',
             'block6_text_headline' => 'required',
@@ -486,6 +493,7 @@ class CampaignController extends Controller
         $template->block1_btn_text          = $request->block1_btn_text;
         $template->block1_btn_text_color    = $request->block1_btn_text_color;
         $template->block1_btn_text_bg       = $request->block1_btn_text_bg;
+        $template->block1_headline1_color   = $request->block1_headline1_color;
         $template->block1_headline2_color   = $request->block1_headline2_color;
 
         $template->block2_text_edukasi      = $request->block2_text_edukasi;
@@ -523,6 +531,7 @@ class CampaignController extends Controller
 
         $template->block5_bg                = $request->block5_bg;
         $template->block5_text              = $request->block5_text;
+        $template->block5_text_color        = $request->block5_text_color;
 
         if(!empty($request->file('block3_image'))){
             $image6 = $request->file('block6_image')

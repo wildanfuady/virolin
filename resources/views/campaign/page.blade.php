@@ -35,7 +35,7 @@
             <div class="clearfix"></div>
           
             <div class="col-md-10 col-md-offset-1 text-center">
-                <h1 class="md45 sm30 xs25 lh120 yellow w600">
+                <h1 class="md45 sm30 xs25 lh120 w600" style="color: {{ $campaign->block1_headline2_color }}">
                     <?= $campaign->block1_headline2 ?>
                 </h1>
             </div>
@@ -72,7 +72,7 @@
         <div class="container mycontainer">
             <div class="row white">
                 <div class="col-md-10 col-md-offset-1 col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 mt2">                 
-                    <h2 class="text-center md47 sm41 xs35 w600 lh120 yellow">{{ $campaign->block3_headline }}</h2>
+                    <h2 class="text-center md47 sm41 xs35 w600 lh120" style="color {{ $campaign->block3_headline_color }}">{{ $campaign->block3_headline }}</h2>
                     
                 </div>
 
@@ -85,19 +85,19 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 padding0">
                         <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan1_icon }}.png" class="center-block img-responsive"></div>
                         <div class="col-md-9 col-sm-9 col-xs-9 padding0">
-                            <p class="md20 sm19 xs18 white lh130 lmt2 xsmt2">{{ $campaign->block3_alasan1_text }}</p>
+                            <p class="md20 sm19 xs18 lh130 lmt2 xsmt2" style="color: {{ $campaign->block3_text_alasan_color }}">{{ $campaign->block3_alasan1_text }}</p>
                             <div class="hidden-xs">&nbsp;</div>
                         </div>
                         <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan2_icon }}.png" class="center-block img-responsive"></div>
-                        <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan2_text }}</p></div>
+                        <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 lh130 lmt0 xsmt2" style="color: {{ $campaign->block3_text_alasan_color }}">{{ $campaign->block3_alasan2_text }}</p></div>
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-12 padding0 lmt0 xsmt2">
                         <div class="col-md-3 col-sm-3 col-xs-3 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan3_icon }}.png" class="center-block img-responsive"></div>
-                        <div class="col-md-9 col-sm-9 col-xs-9 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan3_text }}</p></div>
+                        <div class="col-md-9 col-sm-9 col-xs-9 padding0"><p class="md20 sm19 xs18 lh130 lmt0 xsmt2" style="color: {{ $campaign->block3_text_alasan_color }}">{{ $campaign->block3_alasan3_text }}</p></div>
 
                         <div class="col-md-3 col-sm-3 col-xs-3 lmt8 xsmt2 clear"><img src="{{ asset('landingpage/content') }}/img/{{ $campaign->block3_alasan4_icon }}.png" class="center-block img-responsive"></div>
-                        <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 white lh130 lmt0 xsmt2">{{ $campaign->block3_alasan4_text }}</p></div>
+                        <div class="col-md-9 col-sm-9 col-xs-9 lmt8 xsmt2 padding0"><p class="md20 sm19 xs18 lh130 lmt0 xsmt2" style="color: {{ $campaign->block3_text_alasan_color }}">{{ $campaign->block3_alasan4_text }}</p></div>
                     </div>
 
                 </div> 
@@ -123,7 +123,7 @@
             <div class="col-md-10 col-md-push-1 col-xs-12">
                 <h1 class="text-center md43 sm37 xs31  mt1 ls-1 lh130 w700">
                 
-				<p class="md25 sm20 xs20 lh120  mt2 w600 mb-1">
+				<p class="md25 sm20 xs20 lh120 mt2 w600 mb-1"style="color: {{ $campaign->block4_text_headline_desc_color }} !important">
                  <?= $campaign->block4_text_headline_desc ?>
                 </p>
 
@@ -153,8 +153,8 @@
     <div class="banner11" style="background: {{ $campaign->block6_bg }} !important">
         <div class="container">
            
-            <div class="col-md-8 col-md-offset-2 text-center white">
-                <h1 class="md40 sm38 xs26 lh120 w600">
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h1 class="md40 sm38 xs26 lh120 w600" style="color: {{ $campaign->block6_text_headline_color }}">
                     <?= $campaign->block6_text_headline ?>
                 </h1>
             </div>
