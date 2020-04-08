@@ -69,6 +69,12 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Status</label>
+                            <div class="col-sm-10">
+                                {{ Form::select('status', ['Pending' => 'Pending', 'Success' => 'Success', 'Expired' => 'Expired'], null, ['class'=> 'form-control', 'placeholder'=> 'Pilih Status', 'id' => 'status', 'autocomplete' => 'off']) }} 
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="">Role</label>
                             <span class="sidetitle">Kosongkan role jika tidak ingin menambahkan data.</span>

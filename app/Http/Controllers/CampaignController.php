@@ -571,10 +571,16 @@ class CampaignController extends Controller
         $template_id = $campaign->campaign_template;
 
         $template = Template::find($template_id);
-        $hapus_template = $template->delete();
 
-        if($hapus_template){
+        if(!empty($template) && !empty($campaign)){
+            $template->delete();
             $campaign->delete();
+            $trafik_campaign = \App\TrafikCampaign::where('campaign_id', $id)->first();
+            $trafik_share = \App\TrafikShare::where('campaign_id', $id)->first();
+            if(!empty($trafik_campaign) && !empty($trafik_share)){
+                $trafik_campaign->delete();
+                $trafik_share->delete();
+            }
             return redirect()->route('campaign.index')->with('warning', 'Deleted Campaign Successfully');
         }
         

@@ -84,6 +84,7 @@ class UsersController extends Controller
         $rules = [
             'name' => 'required|min:5|max:50|regex:/^[a-zA-Z ]+$/u',
             'email' => 'required|email',
+            'status' => 'required',
             'product_id' => 'required',
             'password' => 'required|string|min:8|max:80'
         ];
@@ -98,7 +99,8 @@ class UsersController extends Controller
             'product_id.required' => 'Produk wajib diisi',
             'password.required' => 'Password wajib diisi',
             'password.min' => 'Password minimal 8 karakter',
-            'password.max' => 'Password wajib maksimal 50 karakter'
+            'password.max' => 'Password wajib maksimal 50 karakter',
+            'status.required' => 'Status wajib diisi'
         ];
 
         $validator = Validator::make($request->all(), $rules, $messages);
@@ -107,30 +109,65 @@ class UsersController extends Controller
             return redirect()->back()->withErrors($validator)->withInput($request->all());
         }
 
+        $status = $request->status;
+
         $user                       = new User;
+
+        if($status == "Pending"){
+            $user->status               = 'invalid';
+        } else if($status == "Success"){
+            $user->status               = 'valid';
+            $user->email_verified_at    = Carbon::now();
+        } else {
+            $user->status               = 'invalid';
+            $user->email_verified_at    = Carbon::now();
+        }
+
         $user->name                 = $request->name;
         $user->email                = $request->email;
         $user->password             = Hash::make($request->password);
         $user->level                = 'user';
-        $user->status               = 'invalid';
-        $user->email_verified_at    = Carbon::now();
         $user->save();
 
         $user->assignRole($request->input('roles'));
 
+        // get product
+        $product = \App\Products::where('product_id', $request->get('product_id'))->first();
+        if(!empty($product)){
+            $type = $product->product_type;
+            if($type == "bulanan"){
+                $end = Carbon::now()->addDays(30);
+            } else if($type == "tahunan"){
+                $end =  Carbon::now()->addDays(365);
+            } else if($type == "tiga_bulan"){
+                $end = Carbon::now()->addDays(90);
+            } else if($type == "enam_bulan"){
+                $end = Carbon::now()->addDays(180);
+            } else {
+                $end = Carbon::now()->addDays(1);
+            }
+        }
         // orders
         $invoice                    = rand(00000, 99999);
         $order_date                 = Carbon::now();
-        $order_end                  = Carbon::now()->addDays(1);
+        $order_end                  = Carbon::now()->addDays(7);
         $kode_unik                  = rand(000, 999);
 
         $order                      = new \App\Order;
-        
-        $order->product_id          = $request->get('product_id');
+    
+        $order->product_id          = $product->product_id;
         $order->invoice             = $invoice;
         $order->order_date          = $order_date;
-        $order->order_end           = $order_end;
-        $order->order_status        = "Pending";
+
+        if($status == "Pending"){
+            $order->order_end           = $order_end;
+        } else if($status == "Success"){
+            $order->order_end           = $end;
+        } else {
+            $order->order_end           = Carbon::now();
+        }
+
+        $order->order_status        = $status;
         $order->user_id             = $user->id;
         $order->order_payment       = 1;
         $order->kode_unik           = $kode_unik;
